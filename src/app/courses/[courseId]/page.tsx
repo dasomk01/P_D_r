@@ -82,7 +82,7 @@ export default function CourseDetailPage() {
       });
       const body = await res.json();
       if (!res.ok) throw new Error(body.error ?? "삭제에 실패했습니다.");
-      router.push("/summary");
+      router.push("/");
     } catch (err) {
       setActionError(err instanceof Error ? err.message : "삭제에 실패했습니다.");
       setActionSubmitting(false);
@@ -92,7 +92,7 @@ export default function CourseDetailPage() {
   if (loadError) {
     return (
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-4 px-6 py-12">
-        <Link href="/summary" className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400">
+        <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400">
           ← 강의 목록
         </Link>
         <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-700 dark:bg-amber-950 dark:text-amber-300">
@@ -113,7 +113,7 @@ export default function CourseDetailPage() {
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-8 px-6 py-12">
       <div>
-        <Link href="/summary" className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400">
+        <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400">
           ← 강의 목록
         </Link>
 
@@ -185,10 +185,25 @@ export default function CourseDetailPage() {
 
       <section className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
         <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">🧠 학습</h2>
-        <div className="mt-3 flex flex-col gap-2 text-sm text-zinc-400 dark:text-zinc-600">
-          <span>📝 정리본 — Phase E</span>
-          <span>🧩 문제풀이 — Phase F</span>
-          <span>👩🏻‍🏫 과외 — Phase G</span>
+        <div className="mt-3 flex flex-col gap-2 text-sm">
+          <Link
+            href={`/courses/${course.id}/summary`}
+            className="text-zinc-600 hover:text-zinc-900 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
+          >
+            📝 정리본
+          </Link>
+          <Link
+            href={`/courses/${course.id}/questions`}
+            className="text-zinc-600 hover:text-zinc-900 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
+          >
+            🧩 문제풀이
+          </Link>
+          <Link
+            href={`/courses/${course.id}/tutor`}
+            className="text-zinc-600 hover:text-zinc-900 hover:underline dark:text-zinc-300 dark:hover:text-zinc-50"
+          >
+            👩🏻‍🏫 과외
+          </Link>
         </div>
       </section>
 
