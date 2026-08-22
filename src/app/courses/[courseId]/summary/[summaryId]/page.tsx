@@ -10,11 +10,18 @@ import { ConfirmDialog } from "@/components/confirm-dialog";
 interface SummaryDetail {
   id: string;
   version: number;
-  content: string;
+  status: "pending" | "generating" | "done" | "error";
+  error_message: string | null;
+  content: string | null;
   docx_url: string | null;
   pdf_url: string | null;
   lecture_session: { date: string; period: number; part_name: string | null; professor: string | null } | null;
 }
+
+// If generation hasn't finished after this long, the background job most
+// likely got killed by the platform's function duration limit (see README —
+// Vercel Hobby caps this at 60s) rather than genuinely still working.
+const STALE_GENERATION_MS = 90_000;
 
 export default function IndividualSummaryPage() {
   const { courseId, summaryId } = useParams<{ courseId: string; summaryId: string }>();
@@ -24,16 +31,36 @@ export default function IndividualSummaryPage() {
   const [error, setError] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [stale, setStale] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/summaries/${summaryId}`)
-      .then(async (res) => {
-        const body = await res.json();
-        if (!res.ok) throw new Error(body.error ?? "정리본을 불러오지 못했습니다.");
-        return body as { summary: SummaryDetail };
-      })
-      .then((body) => setSummary(body.summary))
-      .catch((err) => setError(err instanceof Error ? err.message : "정리본을 불러오지 못했습니다."));
+    let cancelled = false;
+    const startedAt = Date.now();
+
+    function load() {
+      fetch(`/api/summaries/${summaryId}`)
+        .then(async (res) => {
+          const body = await res.json();
+          if (!res.ok) throw new Error(body.error ?? "정리본을 불러오지 못했습니다.");
+          return body as { summary: SummaryDetail };
+        })
+        .then((body) => {
+          if (cancelled) return;
+          setSummary(body.summary);
+          if (body.summary.status === "generating") {
+            if (Date.now() - startedAt > STALE_GENERATION_MS) setStale(true);
+            else setTimeout(load, 3000);
+          }
+        })
+        .catch((err) => {
+          if (!cancelled) setError(err instanceof Error ? err.message : "정리본을 불러오지 못했습니다.");
+        });
+    }
+
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, [summaryId]);
 
   async function handleDelete() {
@@ -70,7 +97,7 @@ export default function IndividualSummaryPage() {
     );
   }
 
-  const blocks = parseSummaryText(summary.content);
+  const blocks = summary.status === "done" && summary.content ? parseSummaryText(summary.content) : null;
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col gap-6 px-6 py-12">
@@ -94,23 +121,45 @@ export default function IndividualSummaryPage() {
           </button>
         </div>
 
-        <div className="mt-3 flex gap-3 text-sm">
-          {summary.docx_url && (
-            <a href={summary.docx_url} className="text-zinc-600 underline dark:text-zinc-300">
-              Word 다운로드
-            </a>
-          )}
-          {summary.pdf_url && (
-            <a href={summary.pdf_url} className="text-zinc-600 underline dark:text-zinc-300">
-              PDF 다운로드
-            </a>
-          )}
-        </div>
+        {summary.status === "done" && (
+          <div className="mt-3 flex gap-3 text-sm">
+            {summary.docx_url && (
+              <a href={summary.docx_url} className="text-zinc-600 underline dark:text-zinc-300">
+                Word 다운로드
+              </a>
+            )}
+            {summary.pdf_url && (
+              <a href={summary.pdf_url} className="text-zinc-600 underline dark:text-zinc-300">
+                PDF 다운로드
+              </a>
+            )}
+          </div>
+        )}
       </div>
 
-      <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <SummaryViewer blocks={blocks} />
-      </div>
+      {summary.status === "generating" && !stale && (
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+          ⏳ 정리본을 생성하고 있습니다. 자료 분량에 따라 1~2분 정도 걸릴 수 있어요. 이 화면을 열어둔 채로 기다리면 완성되는 대로 자동으로 표시됩니다.
+        </div>
+      )}
+
+      {summary.status === "generating" && stale && (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm text-amber-700 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-300">
+          생성이 예상보다 오래 걸리고 있습니다. 서버 쪽에서 시간 제한에 걸렸을 가능성이 있어요 — 자료 분량을 줄이거나 잠시 후 다시 시도해 주세요.
+        </div>
+      )}
+
+      {summary.status === "error" && (
+        <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-sm text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300">
+          정리본 생성에 실패했습니다{summary.error_message ? `: ${summary.error_message}` : "."}
+        </div>
+      )}
+
+      {blocks && (
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
+          <SummaryViewer blocks={blocks} />
+        </div>
+      )}
 
       <ConfirmDialog
         open={confirmDelete}

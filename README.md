@@ -56,6 +56,13 @@
 - `ANTHROPIC_API_KEY`가 없으면 생성 버튼을 눌렀을 때 "Claude API 키가 설정되지 않았습니다"라는 명확한 에러를 보여줍니다 (다른 기능처럼 조용히 건너뛰지 않음 — 정리본 생성은 사용자가 명시적으로 누른 액션이라 결과가 있어야 하므로).
 - 참고: 정리본 생성은 PDF를 문서로 직접 첨부해야 해서, `src/lib/ai`의 범용 provider 추상화(`SUMMARY_PROVIDER`) 대신 Anthropic SDK를 직접 호출합니다. 학습지 목차 분석도 마찬가지입니다 — 둘 다 스펙상 항상 Claude를 쓰기로 되어 있어 당장은 문제 없지만, `SUMMARY_PROVIDER`를 바꿔도 이 두 기능에는 반영되지 않습니다.
 
+**Phase E-1 — 정리본 생성 안정화 (실사용 피드백 반영)**
+- 실제 강의로 돌려보니 두 가지 문제가 있었습니다: (1) `max_tokens` 고정값(8192) 탓에 본문 중간에서 응답이 끊겨 마인드맵/출제경향/총평까지 도달하지 못함, (2) Claude가 태그 스펙과 다른 형식([H1]/[H2], "이미지:" 등)을 즉흥적으로 섞어써서 파서가 못 읽고 원문 그대로 노출됨. `src/lib/ai/summary-prompt.ts`(어댑터 노트만 보정, v3.6 원문은 그대로), `src/lib/summary/parse.ts`, `src/lib/ai/generate-summary.ts`에서 고쳤습니다.
+- **생성 요청을 스트리밍 + 최대 `max_tokens` 경계에서 자동 이어쓰기**로 바꿨습니다. 한 번에 8192토큰이 아니라, 응답이 `max_tokens`로 끊기면 "계속 이어서 작성" 메시지로 재요청해 최대 4회까지 이어붙입니다. 원본 문서와 시스템 프롬프트는 prompt caching(`cache_control`)으로 캐싱해 이어쓰기 비용을 낮췄습니다.
+- **정리본 생성을 동기 요청에서 백그라운드 작업으로 전환**했습니다 — Vercel Hobby 플랜은 함수 실행 시간이 요청당 최대 60초라, 실제 완성된 정리본(마인드맵+출제경향+총평 포함)은 그 안에 못 끝날 수 있습니다. 이제 `POST /api/lecture-sessions/[id]/summary` · `POST /api/courses/[id]/combined-summary`는 `status: "generating"` 행을 즉시 만들어 응답하고(202), 실제 생성은 Next.js `after()`(Vercel `waitUntil` 기반)로 응답 이후 계속 진행합니다. 상세 페이지는 3초 간격으로 폴링해 완료되면 자동으로 결과를 표시합니다.
+  - ⚠️ **남은 한계**: `after()`도 여전히 같은 `maxDuration`(Hobby 기준 60초) 안에서 끝나야 합니다 — 백그라운드로 돌려도 시간 제한 자체가 없어지는 건 아니라, 자료가 매우 많은 통합 정리본은 여전히 60초를 넘겨 중간에 죽을 수 있습니다(그 경우 상태가 `generating`에 멈춰 있고, UI는 90초 후 "시간 제한 가능성" 안내를 띄웁니다). 이 한계를 완전히 없애려면 Vercel Pro(월 $20, 함수 실행 300초)로 업그레이드가 필요합니다.
+- `summaries`/`combined_summaries`에 `status`(`pending`/`generating`/`done`/`error`) · `error_message` 컬럼 추가 (`supabase/migrations/0002_summary_status.sql` — SQL Editor에서 실행 필요).
+
 ## 다음 Phase
 
 | Phase | 내용 |
@@ -76,7 +83,7 @@ npm run dev
 ## Supabase 설정
 
 1. [supabase.com](https://supabase.com) 에서 새 프로젝트 생성 (무료 플랜)
-2. SQL Editor에서 `supabase/migrations/0001_init.sql` 내용을 실행해 테이블 생성
+2. SQL Editor에서 `supabase/migrations/` 아래 파일들을 번호 순서대로(`0001_init.sql` → `0002_summary_status.sql`) 실행해 테이블 생성/갱신
 3. Storage에서 아래 버킷 생성 (모두 private):
    - `lecture-pdf`
    - `stt-txt`
