@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { StudyMaterial, StudyMaterialMapping } from "@/lib/study-materials";
+import { STUDY_MATERIAL_BUCKET, type StudyMaterial, type StudyMaterialMapping } from "@/lib/study-materials";
+import { createClient } from "@/lib/supabase/client";
 import { MappingRow, type MappingFormValues } from "@/components/mapping-row";
 
 export function StudyMaterialSection({ courseId }: { courseId: string }) {
@@ -34,11 +35,30 @@ export function StudyMaterialSection({ courseId }: { courseId: string }) {
     setError(null);
     setNote(null);
     try {
-      const form = new FormData();
-      form.set("file", file);
-      const res = await fetch(`/api/courses/${courseId}/study-material`, { method: "POST", body: form });
-      const body = await res.json();
-      if (!res.ok) throw new Error(body.error ?? "업로드에 실패했습니다.");
+      // Step 1: ask our server for a place to upload — this request carries
+      // no file bytes, so it's unaffected by Vercel's ~4.5MB function body
+      // limit that broke large (e.g. 800-page) PDFs going through the API.
+      const initRes = await fetch(`/api/courses/${courseId}/study-material/init`, { method: "POST" });
+      const initBody = await initRes.json();
+      if (!initRes.ok) throw new Error(initBody.error ?? "업로드 준비에 실패했습니다.");
+
+      // Step 2: upload the file straight from the browser to Supabase
+      // Storage using the signed URL — never passes through our server.
+      const supabase = createClient();
+      const { error: uploadError } = await supabase.storage
+        .from(STUDY_MATERIAL_BUCKET)
+        .uploadToSignedUrl(initBody.path, initBody.token, file, { contentType: "application/pdf" });
+      if (uploadError) throw new Error(uploadError.message ?? "업로드에 실패했습니다.");
+
+      // Step 3: tell our server the upload finished so it can activate the
+      // new version and (if an AI key is configured) analyze it.
+      const completeRes = await fetch(`/api/courses/${courseId}/study-material/complete`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ studyMaterialId: initBody.studyMaterialId }),
+      });
+      const body = await completeRes.json();
+      if (!completeRes.ok) throw new Error(body.error ?? "업로드 마무리에 실패했습니다.");
 
       setMaterial(body.material as StudyMaterial);
       setMappings((body.mappings ?? []) as StudyMaterialMapping[]);
