@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import type { Course } from "@/lib/courses";
 import { CourseFormDialog, type CourseFormValues } from "@/components/course-form-dialog";
 import { ConfirmDialog } from "@/components/confirm-dialog";
+import { StudyMaterialSection } from "@/components/study-material-section";
 
 type DialogState = "edit" | "archive" | "restore" | "delete" | null;
 
@@ -170,10 +171,8 @@ export default function CourseDetailPage() {
       </div>
 
       <section className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
-        <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">📖 학습지</h2>
-        <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-600">
-          학습지 업로드 및 목차 분석은 Phase B에서 구현됩니다.
-        </p>
+        <h2 className="mb-3 text-base font-semibold text-zinc-900 dark:text-zinc-50">📖 학습지</h2>
+        <StudyMaterialSection courseId={course.id} />
       </section>
 
       <section className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900">
