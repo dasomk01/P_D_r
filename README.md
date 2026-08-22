@@ -16,7 +16,7 @@
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase B 완료 (학습지 관리)
+## 현재 상태 — Phase C 완료 (수업 세션 관리)
 
 **Phase A — 강의 관리**
 - **DB 스키마를 강의(Course) 중심으로 전면 재설계**했습니다 (`supabase/migrations/0001_init.sql`): `courses`, `study_materials`, `study_material_mappings`, `lecture_sessions`, `summaries`, `combined_summaries`, `combined_summary_sessions`, `questions`, `question_lecture_sessions`, `attempts`, `tutor_sessions`, `tutor_messages`. 이전의 날짜 중심 `lectures`/`lecture_files` 테이블은 제거했습니다 (아직 실제 배포 데이터가 없어 무중단 마이그레이션 없이 교체).
@@ -29,16 +29,22 @@
 
 **Phase B — 학습지 관리**
 - 강의 상세 페이지의 📖 학습지 섹션에서 PDF 업로드 → `study_materials`(버전 관리, 교체해도 이전 버전+매핑 보존) → `worksheet-pdf` 버킷에 저장
-- `ANTHROPIC_API_KEY`가 설정되어 있으면 업로드 즉시 Claude가 PDF를 훑어 교수/파트/페이지/문제 구간을 분석해 `study_material_mappings`에 저장 (AI 키가 없으면 조용히 건너뛰고 안내 문구만 표시 — 수동 입력으로 대체 가능)
+- **업로드는 브라우저에서 Supabase Storage로 직접**(signed upload URL) 이루어집니다 — 처음엔 파일을 우리 서버로 통째로 보내는 방식이었는데, Vercel 서버리스 함수의 요청 본문 크기 제한(~4.5MB) 때문에 800페이지짜리 같은 큰 학습지가 실패했습니다. `/api/courses/[id]/study-material/init`(업로드 자리 마련) → 브라우저가 Supabase로 직접 PUT → `/complete`(활성화 + 분석 트리거) 3단계로 우회.
+- `ANTHROPIC_API_KEY`가 설정되어 있으면 업로드 완료 시 Claude가 목차 부분(앞 10페이지, `pdf-lib`으로 추출)만 읽어 교수/파트/페이지/문제 구간을 분석해 `study_material_mappings`에 저장 — Claude PDF 입력은 100페이지 제한이 있어서 전체를 보내지 않고, 어차피 구조 정보가 목차에 다 있음 (AI 키가 없으면 조용히 건너뛰고 안내 문구만 표시 — 수동 입력으로 대체 가능)
 - 매핑 표에서 파트별로 편집/삭제/검수 체크(`confirmed`) 가능, "＋ 파트 추가"로 수동 입력도 가능
-- `/api/courses/[id]/study-material` (GET/POST/DELETE), `/api/study-material-mappings` (POST), `/api/study-material-mappings/[id]` (PATCH/DELETE)
+- `/api/courses/[id]/study-material` (GET/DELETE), `/study-material/init`+`/complete` (POST, 업로드), `/api/study-material-mappings` (POST), `/api/study-material-mappings/[id]` (PATCH/DELETE)
+
+**Phase C — 수업 세션 관리**
+- 강의 상세 페이지의 📅 수업 기록 섹션 — 날짜별로 그룹핑되어 교시 목록 표시, "＋ 수업 추가"로 날짜/교시/교수/강의 파트 입력 (같은 날짜+교시는 전체에서 유일해야 함)
+- `/courses/[courseId]/sessions/[sessionId]` — 수업 상세: 교수/파트 편집, 삭제, 📄 강의록 + 📝 STT 업로드/교체/삭제 (학습지와 동일하게 브라우저→Supabase 직접 업로드 방식), 🧠 이 수업으로 학습(정리본/문제풀이/과외, 강의 전체 자료를 쓰므로 강의 레벨 페이지로 연결)
+- 동일 강의록을 여러 날짜에 나눠 듣거나 같은 파트를 여러 날 반복해도 각 세션은 독립 행으로 저장 (통합 정리본은 Phase E에서 여러 세션을 선택해 생성)
+- `/api/lecture-sessions` (POST), `/api/courses/[id]/lecture-sessions` (GET 목록), `/api/lecture-sessions/[id]` (GET/PATCH/DELETE), `/api/lecture-sessions/[id]/files/init`+`/complete` (업로드), `/api/lecture-sessions/[id]/files` (DELETE `?type=`)
 - Supabase/AI 환경변수가 없어도 UI는 전부 렌더링되고, 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
 
 ## 다음 Phase
 
 | Phase | 내용 |
 |---|---|
-| C | 수업 세션 관리(날짜/1~8교시/교수/파트/강의록·STT 업로드) |
 | D | 달력 View (월 이동, 날짜 선택 시 해당 날짜 수업 확인) |
 | E | 정리본 — 개별/통합, Claude API (기존 정리본 프롬프트 적용 예정, 구현 시점에 요청) |
 | F | 문제풀이 — 야마그대로/야마변형/티야/탈야, Gemini API, 즉시 채점 + 오답노트 |
@@ -101,22 +107,28 @@ src/
       summary/page.tsx                  # 정리본 (Phase E placeholder)
       questions/page.tsx                # 문제풀이 (Phase F placeholder)
       tutor/page.tsx                    # 과외 (Phase G placeholder)
+      sessions/[sessionId]/page.tsx     # 수업 상세 (강의록/STT, 이 수업으로 학습)
     api/
       health/                           # Supabase 연결 확인
       courses/                          # 강의 CRUD (GET/POST, GET/PATCH/DELETE [id])
-      courses/[id]/study-material/      # 학습지 업로드/조회/삭제 (AI 분석 트리거)
+      courses/[id]/study-material/      # 학습지 조회/삭제 + init/complete 업로드
+      courses/[id]/lecture-sessions/    # 강의의 수업 세션 목록 (GET)
       study-material-mappings/          # 매핑 수동 추가/편집/삭제
+      lecture-sessions/                 # 수업 세션 CRUD + files/init·complete 업로드
   components/
     course-card.tsx                     # 강의 카드 (열기/편집/보관·복원/삭제 메뉴)
     course-form-dialog.tsx              # 강의 추가/편집 폼 모달
+    session-form-dialog.tsx             # 수업 추가/편집 폼 모달
     confirm-dialog.tsx                  # 보관/복원/삭제 확인 모달
     coming-soon.tsx                     # placeholder 화면 (backHref로 강의로 돌아가기 지원)
     study-material-section.tsx          # 학습지 업로드/교체/삭제 + 매핑 표
     mapping-row.tsx                     # 매핑 표 한 행(읽기/인라인 편집)
+    lecture-sessions-section.tsx        # 수업 기록 목록(날짜별 그룹) + 수업 추가
   lib/
-    supabase/                           # 브라우저/서버 Supabase 클라이언트
-    ai/                                 # Claude/Gemini/OpenAI provider 추상화 + 학습지 분석
+    supabase/                           # 브라우저/서버 Supabase 클라이언트 + upload-client(직접 업로드 헬퍼)
+    ai/                                 # Claude/Gemini/OpenAI provider 추상화 + 학습지 목차 분석
     courses.ts                          # Course 타입/상태
+    lecture-sessions.ts                 # LectureSession 타입/검증/파일 설정
     study-materials.ts                  # StudyMaterial/Mapping 타입
 supabase/
   migrations/                           # DB 스키마 (강의 중심)
