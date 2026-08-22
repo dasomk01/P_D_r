@@ -6,29 +6,34 @@
 
 첫 화면 3개 카드: 📚 정리본 / 🧠 문제풀이 / 👩🏻‍🏫 과외 — 서로 데이터 공유.
 
+**자료 관리는 "강의(Course)" 중심**으로 이루어집니다: 강의 → 학습지(강의당 1개) / 수업 기록(날짜·교시별 세션, 각각 강의록+STT) → 정리본·문제풀이·과외. 날짜 기준 달력 View는 전체 수업을 빠르게 훑어보는 보조 화면으로 별도 제공될 예정입니다(Phase D).
+
 ## 기술 스택
 
 - **Next.js** (App Router, TypeScript, Tailwind CSS) — GitHub + Vercel
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase 2 완료
+## 현재 상태 — Phase A 완료 (강의 관리)
 
-**Phase 1**
+- **DB 스키마를 강의(Course) 중심으로 전면 재설계**했습니다 (`supabase/migrations/0001_init.sql`): `courses`, `study_materials`, `study_material_mappings`, `lecture_sessions`, `summaries`, `combined_summaries`, `combined_summary_sessions`, `questions`, `question_lecture_sessions`, `attempts`, `tutor_sessions`, `tutor_messages`. 이전의 날짜 중심 `lectures`/`lecture_files` 테이블은 제거했습니다 (아직 실제 배포 데이터가 없어 무중단 마이그레이션 없이 교체).
+- **"야첵" 개념은 완전히 제거**했습니다 — 파일 타입, 라벨, DB 구조 어디에도 없습니다. 학습지는 강의당 1개(`study_materials`, 교체 시 이전 버전 보존), 수업 세션 파일은 강의록 PDF + STT 텍스트 2개뿐입니다.
+- `/summary` — 현재 진행 중인 강의 카드 목록 + `＋ 강의 추가` + `📦 보관된 강의` 섹션
+- `/summary/[courseId]` — 강의 상세 페이지 (편집/보관·복원/영구 삭제, 학습지·수업 기록·학습 섹션은 이후 Phase에서 채울 placeholder)
+- `/api/courses` (GET `?status=active|archived`, POST 생성), `/api/courses/[id]` (GET/PATCH/DELETE) — 영구 삭제는 `confirm:true` 필수 + 관련 Storage 파일(학습지/강의록/STT/정리본)을 먼저 정리한 뒤 DB row를 cascade 삭제
+- 재사용 가능한 컴포넌트: `CourseCard`, `CourseFormDialog`, `ConfirmDialog`
+- Supabase 환경변수가 없어도 UI는 전부 렌더링되고, DB 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
 
-- Next.js 앱 기본 골격, 홈 화면 3개 카드(정리본/문제풀이/과외) + 각 라우트 placeholder 페이지
-- Supabase 클라이언트 헬퍼(`src/lib/supabase`) — 브라우저용 anon 클라이언트, 서버 전용 service-role 클라이언트
-- Supabase DB 스키마 마이그레이션(`supabase/migrations/0001_init.sql`) — `lectures`, `lecture_files`, `summaries`, `questions`, `attempts`, `tutor_sessions`, `tutor_messages`
-- AI provider 추상화(`src/lib/ai`) — Claude/Gemini/OpenAI 구현체 + `SUMMARY_PROVIDER`/`QUESTION_PROVIDER`/`TUTOR_PROVIDER` 환경변수로 역할별 벤더 교체 가능
-- `/api/health` — Supabase 연결 확인용 헬스체크
+## 다음 Phase
 
-**Phase 2**
-
-- `/summary` 달력 (월 이동, 정리본이 있는 날짜에 점 표시) → 날짜 선택 시 `/summary/[date]`에서 1~8교시 표시 → 교시 선택 시 `/summary/[date]/[period]`에서 과목/강의명 저장 + 파일(야첵/강의록/STT 텍스트/학습지) 업로드
-- `/api/lectures` (GET `?month=`/`?date=`, POST로 과목/강의명 upsert), `/api/upload` (POST로 Storage 업로드 + `lecture_files` upsert, DELETE로 삭제)
-- Supabase 환경변수가 없어도 UI는 전부 렌더링되고, DB/Storage 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
-
-다음 Phase(3~8)는 프로젝트 문서의 개발 순서를 따릅니다: Claude 정리본 → Word/PDF 생성 → Gemini 문제 생성+검수 → 문제풀이 UI → 오답노트 → AI 과외.
+| Phase | 내용 |
+|---|---|
+| B | 강의별 학습지 1회 업로드 + AI 목차 분석(교수/파트/페이지/문제 mapping) + 사용자 검수 |
+| C | 수업 세션 관리(날짜/1~8교시/교수/파트/강의록·STT 업로드) |
+| D | 달력 View (월 이동, 날짜 선택 시 해당 날짜 수업 확인) |
+| E | 정리본 — 개별/통합, Claude API (기존 정리본 프롬프트 적용 예정, 구현 시점에 요청) |
+| F | 문제풀이 — 야마그대로/야마변형/티야/탈야, Gemini API, 즉시 채점 + 오답노트 |
+| G | 과외 — 채팅형 1:1, OpenAI API (기존 과외 프롬프트 적용 예정, 구현 시점에 요청) |
 
 ## 로컬 개발
 
@@ -81,15 +86,23 @@ npm run dev
 ```
 src/
   app/
-    page.tsx            # 홈 (3개 카드)
-    summary/            # 정리본 (Phase 2~4)
-    questions/          # 문제풀이 (Phase 5~6)
-    tutor/              # 과외 (Phase 8)
+    page.tsx                    # 홈 (3개 카드)
+    summary/                    # 정리본 — 강의 목록/상세 (Phase A 완료, E는 예정)
+      page.tsx                  # 현재 진행 중인 강의 / 보관된 강의
+      [courseId]/page.tsx       # 강의 상세 (학습지/수업 기록/학습 섹션)
+    questions/                  # 문제풀이 (Phase F)
+    tutor/                      # 과외 (Phase G)
     api/
-      health/           # Supabase 연결 확인
+      health/                   # Supabase 연결 확인
+      courses/                  # 강의 CRUD (GET/POST, GET/PATCH/DELETE [id])
+  components/
+    course-card.tsx             # 강의 카드 (열기/편집/보관·복원/삭제 메뉴)
+    course-form-dialog.tsx      # 강의 추가/편집 폼 모달
+    confirm-dialog.tsx          # 보관/복원/삭제 확인 모달
   lib/
-    supabase/           # 브라우저/서버 Supabase 클라이언트
-    ai/                 # Claude/Gemini/OpenAI provider 추상화
+    supabase/                   # 브라우저/서버 Supabase 클라이언트
+    ai/                         # Claude/Gemini/OpenAI provider 추상화
+    courses.ts                  # Course 타입/상태
 supabase/
-  migrations/           # DB 스키마
+  migrations/                   # DB 스키마 (강의 중심)
 ```

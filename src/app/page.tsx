@@ -5,7 +5,7 @@ const CARDS = [
     href: "/summary",
     emoji: "📚",
     title: "정리본",
-    description: "야첵/강의록 + STT로 시험 대비 정리본을 만들고 봅니다.",
+    description: "강의별 강의록 + STT로 시험 대비 정리본을 만들고 봅니다.",
   },
   {
     href: "/questions",

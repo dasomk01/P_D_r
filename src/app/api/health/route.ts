@@ -15,7 +15,7 @@ export async function GET() {
 
   try {
     const supabase = createServiceClient();
-    const { error } = await supabase.from("lectures").select("id").limit(1);
+    const { error } = await supabase.from("courses").select("id").limit(1);
 
     if (error) {
       return NextResponse.json({ ok: false, supabase: error.message }, { status: 200 });
