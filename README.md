@@ -16,7 +16,7 @@
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase C 완료 (수업 세션 관리)
+## 현재 상태 — Phase D 완료 (달력 View)
 
 **Phase A — 강의 관리**
 - **DB 스키마를 강의(Course) 중심으로 전면 재설계**했습니다 (`supabase/migrations/0001_init.sql`): `courses`, `study_materials`, `study_material_mappings`, `lecture_sessions`, `summaries`, `combined_summaries`, `combined_summary_sessions`, `questions`, `question_lecture_sessions`, `attempts`, `tutor_sessions`, `tutor_messages`. 이전의 날짜 중심 `lectures`/`lecture_files` 테이블은 제거했습니다 (아직 실제 배포 데이터가 없어 무중단 마이그레이션 없이 교체).
@@ -41,14 +41,19 @@
 - `/api/lecture-sessions` (POST), `/api/courses/[id]/lecture-sessions` (GET 목록), `/api/lecture-sessions/[id]` (GET/PATCH/DELETE), `/api/lecture-sessions/[id]/files/init`+`/complete` (업로드), `/api/lecture-sessions/[id]/files` (DELETE `?type=`)
 - Supabase/AI 환경변수가 없어도 UI는 전부 렌더링되고, 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
 
+**Phase D — 달력 View**
+- `/calendar` — 월 이동 가능한 달력, 수업이 있는 날짜에 점 표시. 강의별 View(기본 자료 관리)와 달리 이건 전체 강의를 가로질러 날짜 기준으로 훑어보는 보조 화면
+- `/calendar/[date]` — 그 날짜의 모든 수업을 "N교시 — 강의명 · 파트명" 형태로 나열, 각 항목이 해당 수업 상세로 연결
+- 홈(강의 목록) 우상단에 "📅 달력 보기" 링크로만 연결 — 최상위 navigation은 여전히 "강의"뿐
+- `/api/calendar` (GET `?month=` 날짜별 카운트, `?date=` 그 날짜 수업 목록 + 강의명 join)
+
 ## 다음 Phase
 
 | Phase | 내용 |
 |---|---|
-| D | 달력 View (월 이동, 날짜 선택 시 해당 날짜 수업 확인) |
-| E | 정리본 — 개별/통합, Claude API (기존 정리본 프롬프트 적용 예정, 구현 시점에 요청) |
+| E | 정리본 — 개별/통합, Claude API, v3.6 프롬프트 적용 |
 | F | 문제풀이 — 야마그대로/야마변형/티야/탈야, Gemini API, 즉시 채점 + 오답노트 |
-| G | 과외 — 채팅형 1:1, OpenAI API (기존 과외 프롬프트 적용 예정, 구현 시점에 요청) |
+| G | 과외 — 채팅형 1:1, OpenAI API, 기존 과외 프롬프트 적용 |
 
 ## 로컬 개발
 
@@ -102,6 +107,9 @@ npm run dev
 src/
   app/
     page.tsx                            # 홈 = 📚 현재 진행 중인 강의 목록 (최상위 navigation)
+    calendar/
+      page.tsx                          # 월 달력 (보조 View)
+      [date]/page.tsx                   # 그 날짜의 전체 강의 수업 목록
     courses/[courseId]/
       page.tsx                          # 강의 상세 (학습지/수업 기록/학습)
       summary/page.tsx                  # 정리본 (Phase E placeholder)
@@ -110,6 +118,7 @@ src/
       sessions/[sessionId]/page.tsx     # 수업 상세 (강의록/STT, 이 수업으로 학습)
     api/
       health/                           # Supabase 연결 확인
+      calendar/                         # 달력용 월별 카운트 / 날짜별 수업 목록
       courses/                          # 강의 CRUD (GET/POST, GET/PATCH/DELETE [id])
       courses/[id]/study-material/      # 학습지 조회/삭제 + init/complete 업로드
       courses/[id]/lecture-sessions/    # 강의의 수업 세션 목록 (GET)

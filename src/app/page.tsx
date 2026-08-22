@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { Course } from "@/lib/courses";
 import { CourseCard } from "@/components/course-card";
@@ -113,7 +114,13 @@ export default function Home() {
 
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col gap-10 px-6 py-12">
-      <div className="text-center">
+      <div className="relative text-center">
+        <Link
+          href="/calendar"
+          className="absolute right-0 top-1 text-sm text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+        >
+          📅 달력 보기
+        </Link>
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
           📚 현재 진행 중인 강의
         </h1>
