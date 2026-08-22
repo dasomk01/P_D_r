@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { STUDY_MATERIAL_BUCKET, type StudyMaterial, type StudyMaterialMapping } from "@/lib/study-materials";
-import { createClient } from "@/lib/supabase/client";
+import { uploadFileDirect } from "@/lib/supabase/upload-client";
 import { MappingRow, type MappingFormValues } from "@/components/mapping-row";
 
 export function StudyMaterialSection({ courseId }: { courseId: string }) {
@@ -44,10 +44,13 @@ export function StudyMaterialSection({ courseId }: { courseId: string }) {
 
       // Step 2: upload the file straight from the browser to Supabase
       // Storage using the signed URL — never passes through our server.
-      const supabase = createClient();
-      const { error: uploadError } = await supabase.storage
-        .from(STUDY_MATERIAL_BUCKET)
-        .uploadToSignedUrl(initBody.path, initBody.token, file, { contentType: "application/pdf" });
+      const { error: uploadError } = await uploadFileDirect(
+        STUDY_MATERIAL_BUCKET,
+        initBody.path,
+        initBody.token,
+        file,
+        "application/pdf",
+      );
       if (uploadError) throw new Error(uploadError.message ?? "업로드에 실패했습니다.");
 
       // Step 3: tell our server the upload finished so it can activate the
