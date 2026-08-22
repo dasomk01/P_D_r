@@ -1,6 +1,7 @@
 import "server-only";
 
 import Anthropic from "@anthropic-ai/sdk";
+import { PDFDocument } from "pdf-lib";
 
 export interface StudyMaterialMappingDraft {
   professor: string | null;
@@ -12,29 +13,53 @@ export interface StudyMaterialMappingDraft {
   order_index: number;
 }
 
-const ANALYSIS_PROMPT = `이 PDF는 의과대학 과목의 학습지(기출문제 모음집)입니다.
-하나의 학습지 안에 교수님별 또는 강의(파트)별로 목차/구간이 나뉘어 있습니다.
+// The professor/page breakdown lives in the table of contents at the front
+// of the study material, not spread across the whole document — so we only
+// ever need to show Claude the first few pages. This also keeps every
+// analysis well under the Claude API's 100-page PDF input limit regardless
+// of how long the full study material is (some run 800+ pages).
+const TOC_PAGE_COUNT = 10;
 
-문서를 훑어보고, 구분되는 교수/파트 구간마다 아래 정보를 추출하세요:
-- professor: 교수명 (파악 안 되면 null)
-- part_name: 강의/파트명 (예: "AKI", "CKD")
-- page_start / page_end: 해당 구간의 PDF 페이지 범위 (숫자, 모르면 null)
-- problem_start / problem_end: 해당 구간의 문제 번호 범위 (숫자, 모르면 null)
+const ANALYSIS_PROMPT = `이 PDF는 의과대학 과목 학습지(기출문제 모음집)의 앞부분(목차/색인 페이지)입니다.
+전체 문서가 아니라 목차만 보고 있다는 점을 감안하세요.
+
+목차에는 보통 "OOO 교수님 - 4~109페이지"처럼 교수님별(또는 파트별) 페이지 범위가 나열되어 있습니다.
+목차에 적힌 항목마다 아래 정보를 추출하세요:
+
+- professor: 교수명
+- part_name: 강의/파트명. 목차에 별도 파트명이 없고 교수명만 있으면 professor와 동일한 값을 사용하세요.
+- page_start / page_end: 그 교수/파트가 시작·끝나는 PDF 페이지 번호
+- problem_start / problem_end: 문제 번호 범위 (목차에 없으면 null)
 
 다른 설명 없이 아래 형식의 JSON 배열만 응답하세요:
-[{"professor": "홍길동", "part_name": "AKI", "page_start": 1, "page_end": 20, "problem_start": 1, "problem_end": 15}]
+[{"professor": "홍길동", "part_name": "홍길동", "page_start": 4, "page_end": 109, "problem_start": null, "problem_end": null}]
 
-구간을 전혀 구분할 수 없으면 빈 배열 []만 응답하세요.`;
+목차를 찾을 수 없거나 항목을 구분할 수 없으면 빈 배열 []만 응답하세요.`;
+
+/** Copies just the first `pageCount` pages into a new, much smaller PDF. */
+async function extractLeadingPages(pdfBuffer: Buffer, pageCount: number): Promise<Buffer> {
+  const source = await PDFDocument.load(pdfBuffer);
+  const pagesToCopy = Math.min(pageCount, source.getPageCount());
+
+  const excerpt = await PDFDocument.create();
+  const copiedPages = await excerpt.copyPages(source, [...Array(pagesToCopy).keys()]);
+  copiedPages.forEach((page) => excerpt.addPage(page));
+
+  return Buffer.from(await excerpt.save());
+}
 
 /**
- * Best-effort structural analysis of a study material PDF. Returns an empty
- * array (never throws) when no API key is configured or the model output
- * can't be parsed — the user can always add/edit mappings by hand.
+ * Best-effort structural analysis of a study material PDF's table of
+ * contents. Returns an empty array (never throws) when no API key is
+ * configured, the PDF can't be read, or the model output can't be parsed —
+ * the user can always add/edit mappings by hand.
  */
 export async function analyzeStudyMaterial(pdfBuffer: Buffer): Promise<StudyMaterialMappingDraft[]> {
   if (!process.env.ANTHROPIC_API_KEY) return [];
 
   try {
+    const tocExcerpt = await extractLeadingPages(pdfBuffer, TOC_PAGE_COUNT);
+
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
     const response = await client.messages.create({
@@ -49,7 +74,7 @@ export async function analyzeStudyMaterial(pdfBuffer: Buffer): Promise<StudyMate
               source: {
                 type: "base64",
                 media_type: "application/pdf",
-                data: pdfBuffer.toString("base64"),
+                data: tocExcerpt.toString("base64"),
               },
             },
             { type: "text", text: ANALYSIS_PROMPT },
@@ -71,12 +96,13 @@ export async function analyzeStudyMaterial(pdfBuffer: Buffer): Promise<StudyMate
 
     return parsed
       .map((item, index): StudyMaterialMappingDraft | null => {
+        const professor = typeof item?.professor === "string" ? item.professor.trim() || null : null;
         const partName = typeof item?.part_name === "string" ? item.part_name.trim() : "";
-        if (!partName) return null;
+        if (!partName && !professor) return null;
 
         return {
-          professor: typeof item?.professor === "string" ? item.professor.trim() || null : null,
-          part_name: partName,
+          professor,
+          part_name: partName || professor!,
           page_start: Number.isInteger(item?.page_start) ? item.page_start : null,
           page_end: Number.isInteger(item?.page_end) ? item.page_end : null,
           problem_start: Number.isInteger(item?.problem_start) ? item.problem_start : null,
