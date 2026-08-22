@@ -8,28 +8,36 @@
 
 **자료 관리는 "강의(Course)" 중심**으로 이루어집니다: 강의 → 학습지(강의당 1개) / 수업 기록(날짜·교시별 세션, 각각 강의록+STT) → 정리본·문제풀이·과외. 날짜 기준 달력 View는 전체 수업을 빠르게 훑어보는 보조 화면으로 별도 제공될 예정입니다(Phase D).
 
+**배포**: https://p-d-r.vercel.app (Vercel, `main` 브랜치 자동배포 + Supabase 연결 완료)
+
 ## 기술 스택
 
 - **Next.js** (App Router, TypeScript, Tailwind CSS) — GitHub + Vercel
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase A 완료 (강의 관리)
+## 현재 상태 — Phase B 완료 (학습지 관리)
 
+**Phase A — 강의 관리**
 - **DB 스키마를 강의(Course) 중심으로 전면 재설계**했습니다 (`supabase/migrations/0001_init.sql`): `courses`, `study_materials`, `study_material_mappings`, `lecture_sessions`, `summaries`, `combined_summaries`, `combined_summary_sessions`, `questions`, `question_lecture_sessions`, `attempts`, `tutor_sessions`, `tutor_messages`. 이전의 날짜 중심 `lectures`/`lecture_files` 테이블은 제거했습니다 (아직 실제 배포 데이터가 없어 무중단 마이그레이션 없이 교체).
 - **"야첵" 개념은 완전히 제거**했습니다 — 파일 타입, 라벨, DB 구조 어디에도 없습니다. 학습지는 강의당 1개(`study_materials`, 교체 시 이전 버전 보존), 수업 세션 파일은 강의록 PDF + STT 텍스트 2개뿐입니다.
 - `/` (홈) — 현재 진행 중인 강의 카드 목록 + `＋ 강의 추가` + `📦 보관된 강의` 섹션 (최상위 navigation은 "강의"뿐, 정리본/문제풀이/과외는 여기 없음)
-- `/courses/[courseId]` — 강의 상세 페이지 (편집/보관·복원/영구 삭제, 학습지·수업 기록 섹션은 이후 Phase의 placeholder, 🧠 학습 섹션은 아래 세 경로로 연결되는 실제 링크)
+- `/courses/[courseId]` — 강의 상세 페이지 (편집/보관·복원/영구 삭제, 🧠 학습 섹션은 아래 세 경로로 연결되는 실제 링크)
 - `/courses/[courseId]/summary`, `/questions`, `/tutor` — 정리본/문제풀이/과외는 강의 안에서만 접근 가능 (지금은 Phase E/F/G placeholder)
-- `/api/courses` (GET `?status=active|archived`, POST 생성), `/api/courses/[id]` (GET/PATCH/DELETE) — 영구 삭제는 `confirm:true` 필수 + 관련 Storage 파일(학습지/강의록/STT/정리본)을 먼저 정리한 뒤 DB row를 cascade 삭제
+- `/api/courses` (GET `?status=active|archived`, POST 생성), `/api/courses/[id]` (GET/PATCH/DELETE) — 영구 삭제는 `confirm:true` 필수 + 관련 Storage 파일을 먼저 정리한 뒤 DB row를 cascade 삭제
 - 재사용 가능한 컴포넌트: `CourseCard`, `CourseFormDialog`, `ConfirmDialog`
-- Supabase 환경변수가 없어도 UI는 전부 렌더링되고, DB 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
+
+**Phase B — 학습지 관리**
+- 강의 상세 페이지의 📖 학습지 섹션에서 PDF 업로드 → `study_materials`(버전 관리, 교체해도 이전 버전+매핑 보존) → `worksheet-pdf` 버킷에 저장
+- `ANTHROPIC_API_KEY`가 설정되어 있으면 업로드 즉시 Claude가 PDF를 훑어 교수/파트/페이지/문제 구간을 분석해 `study_material_mappings`에 저장 (AI 키가 없으면 조용히 건너뛰고 안내 문구만 표시 — 수동 입력으로 대체 가능)
+- 매핑 표에서 파트별로 편집/삭제/검수 체크(`confirmed`) 가능, "＋ 파트 추가"로 수동 입력도 가능
+- `/api/courses/[id]/study-material` (GET/POST/DELETE), `/api/study-material-mappings` (POST), `/api/study-material-mappings/[id]` (PATCH/DELETE)
+- Supabase/AI 환경변수가 없어도 UI는 전부 렌더링되고, 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
 
 ## 다음 Phase
 
 | Phase | 내용 |
 |---|---|
-| B | 강의별 학습지 1회 업로드 + AI 목차 분석(교수/파트/페이지/문제 mapping) + 사용자 검수 |
 | C | 수업 세션 관리(날짜/1~8교시/교수/파트/강의록·STT 업로드) |
 | D | 달력 View (월 이동, 날짜 선택 시 해당 날짜 수업 확인) |
 | E | 정리본 — 개별/통합, Claude API (기존 정리본 프롬프트 적용 예정, 구현 시점에 요청) |
@@ -96,15 +104,20 @@ src/
     api/
       health/                           # Supabase 연결 확인
       courses/                          # 강의 CRUD (GET/POST, GET/PATCH/DELETE [id])
+      courses/[id]/study-material/      # 학습지 업로드/조회/삭제 (AI 분석 트리거)
+      study-material-mappings/          # 매핑 수동 추가/편집/삭제
   components/
     course-card.tsx                     # 강의 카드 (열기/편집/보관·복원/삭제 메뉴)
     course-form-dialog.tsx              # 강의 추가/편집 폼 모달
     confirm-dialog.tsx                  # 보관/복원/삭제 확인 모달
     coming-soon.tsx                     # placeholder 화면 (backHref로 강의로 돌아가기 지원)
+    study-material-section.tsx          # 학습지 업로드/교체/삭제 + 매핑 표
+    mapping-row.tsx                     # 매핑 표 한 행(읽기/인라인 편집)
   lib/
     supabase/                           # 브라우저/서버 Supabase 클라이언트
-    ai/                                 # Claude/Gemini/OpenAI provider 추상화
+    ai/                                 # Claude/Gemini/OpenAI provider 추상화 + 학습지 분석
     courses.ts                          # Course 타입/상태
+    study-materials.ts                  # StudyMaterial/Mapping 타입
 supabase/
   migrations/                           # DB 스키마 (강의 중심)
 ```
