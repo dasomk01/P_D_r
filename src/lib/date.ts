@@ -16,6 +16,12 @@ export function parseDateKey(key: string): Date {
   return new Date(y, m - 1, d);
 }
 
+const MONTH_KEY_RE = /^\d{4}-\d{2}$/;
+
+export function isValidMonthKey(value: string): boolean {
+  return MONTH_KEY_RE.test(value);
+}
+
 const WEEKDAY_LABELS_KO = ["일", "월", "화", "수", "목", "금", "토"];
 
 /** Weeks (arrays of 7 dates, Sunday-first) covering the full calendar grid for a month. */
