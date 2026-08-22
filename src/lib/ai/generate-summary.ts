@@ -99,11 +99,17 @@ function sessionLabel(session: SessionMaterial["session"]): string {
   return parts.join(" · ");
 }
 
-function buildContentBlocks(materials: SessionMaterial[]) {
-  const blocks: Array<
-    | { type: "text"; text: string }
-    | { type: "document"; source: { type: "base64"; media_type: "application/pdf"; data: string }; title: string }
-  > = [];
+type ContentBlock =
+  | { type: "text"; text: string; cache_control?: { type: "ephemeral" } }
+  | {
+      type: "document";
+      source: { type: "base64"; media_type: "application/pdf"; data: string };
+      title: string;
+      cache_control?: { type: "ephemeral" };
+    };
+
+function buildContentBlocks(materials: SessionMaterial[]): ContentBlock[] {
+  const blocks: ContentBlock[] = [];
 
   let truncated = false;
 
@@ -148,10 +154,21 @@ export interface GenerateSummaryOptions {
   combined: boolean;
 }
 
+// A complete v3.6-style summary (본문 + 계층적 마인드맵 + 출제경향 + 총평) for a
+// real lecture routinely runs past one 8K-output-token response. Rather than
+// silently truncating mid-document, we cap each call's output and, if Claude
+// stopped only because it hit that cap (not because it finished), resend the
+// conversation asking it to continue exactly where it left off — mirroring
+// how this prompt was actually used interactively ("계속") before this app
+// existed. MAX_CONTINUATION_ROUNDS bounds worst-case latency/cost.
+const MAX_TOKENS_PER_CALL = 16000;
+const MAX_CONTINUATION_ROUNDS = 4;
+
 /**
  * Calls Claude with the v3.6 prompt and the gathered source materials for
  * one or more lecture sessions, returning the tagged plain text it produces
- * (see src/lib/summary/parse.ts for the tag grammar).
+ * (see src/lib/summary/parse.ts for the tag grammar). Streams internally and
+ * continues automatically across the max_tokens boundary if needed.
  */
 export async function generateSummaryText(
   supabase: SupabaseClient,
@@ -181,20 +198,52 @@ export async function generateSummaryText(
 
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-  const response = await client.messages.create({
-    model: "claude-sonnet-5",
-    max_tokens: 8192,
-    system: `${SUMMARY_PROMPT_ADAPTER_NOTE}\n\n${SUMMARY_PROMPT_V3_6}`,
-    messages: [
+  const contentBlocks = buildContentBlocks(materials);
+  // Cache the (large, unchanging) source documents so a continuation round
+  // only pays full price for the small "계속해줘" nudge, not the whole PDF
+  // set again.
+  const lastBlock = contentBlocks[contentBlocks.length - 1];
+  if (lastBlock) lastBlock.cache_control = { type: "ephemeral" };
+
+  const messages: Anthropic.MessageParam[] = [
+    { role: "user", content: [...contentBlocks, { type: "text", text: directive }] },
+  ];
+
+  // The system prompt (adapter note + full v3.6 text) is identical across
+  // every summary generation call the app ever makes, not just within one
+  // generation's continuation rounds — cache it so repeat use within the
+  // TTL skips reprocessing it.
+  const system: Anthropic.MessageCreateParams["system"] = [
+    { type: "text", text: `${SUMMARY_PROMPT_ADAPTER_NOTE}\n\n${SUMMARY_PROMPT_V3_6}`, cache_control: { type: "ephemeral" } },
+  ];
+
+  let fullText = "";
+  for (let round = 0; round <= MAX_CONTINUATION_ROUNDS; round++) {
+    const stream = client.messages.stream({
+      model: "claude-sonnet-5",
+      max_tokens: MAX_TOKENS_PER_CALL,
+      system,
+      messages,
+    });
+    const response = await stream.finalMessage();
+    const chunkText = response.content
+      .filter((block) => block.type === "text")
+      .map((block) => block.text)
+      .join("\n");
+
+    fullText += chunkText;
+
+    if (response.stop_reason !== "max_tokens" || round === MAX_CONTINUATION_ROUNDS) break;
+
+    messages.push(
+      { role: "assistant", content: chunkText },
       {
         role: "user",
-        content: [...buildContentBlocks(materials), { type: "text", text: directive }],
+        content:
+          "계속 이어서 작성하세요. 처음부터 다시 쓰지 말고 방금 멈춘 지점 바로 다음부터 자연스럽게 이어가세요. 아직 못 쓴 본문/계층적 마인드맵/출제경향/총평을 끝까지 완성하세요.",
       },
-    ],
-  });
+    );
+  }
 
-  return response.content
-    .filter((block) => block.type === "text")
-    .map((block) => block.text)
-    .join("\n");
+  return fullText;
 }

@@ -75,9 +75,40 @@ const LINE_MARKERS: Array<{
 ];
 
 const TY_QUOTE_RE = /^"([^"]*)"\s*-\s*([\s\S]*)$/;
-const IMAGE_RE = /^\[IMAGE:\s*(.+?)\]$/;
+// Accept the spec'd English "IMAGE" tag and the Korean "이미지" the model
+// sometimes drifts to despite instructions — never drop image references
+// just because the model didn't use the exact documented keyword.
+const IMAGE_RE = /^\[(?:IMAGE|이미지)\s*[:：]\s*(.+?)\]$/;
 const BRACKET_HEADING_RE = /^\[\s*([^[\]]+?)\s*\]$/;
 const MARKDOWN_HEADING_RE = /^#{1,3}\s+(.+)$/;
+// Defensive fallback: the model occasionally invents HTML-style [H1]/[H2]
+// heading tags instead of the instructed markdown headings. Salvage them
+// rather than letting the raw tags leak into the rendered output.
+const HTML_HEADING_RE = /^\[H[1-3]\]\s*(.+?)\s*(?:\[\/H[1-3]\])?$/;
+
+interface BlockMarkerSpec {
+  open: RegExp;
+  close: RegExp;
+  type: "tyBox" | "case" | "example";
+}
+
+// Multi-line form of the box markers: an opening tag alone on its own line,
+// free-flowing content, then a closing tag alone on its own line. Used when
+// the box content spans more than one sentence/paragraph and can't fit the
+// single-line `[TY!!] "quote" - content` shorthand.
+const BLOCK_MARKERS: BlockMarkerSpec[] = [
+  { open: /^\[TY!!\]$/, close: /^(\[\/TY!!\]|\/TY!!)$/, type: "tyBox" },
+  { open: /^\[증례\]$/, close: /^(\[\/증례\]|\/증례)$/, type: "case" },
+  { open: /^\[예시\]$/, close: /^(\[\/예시\]|\/예시)$/, type: "example" },
+];
+
+function isBlockBoundary(line: string): boolean {
+  if (!line) return false;
+  if (line === "[YAMA_ONLY_START]" || line === "[YAMA_ONLY_END]") return true;
+  if (IMAGE_RE.test(line) || MARKDOWN_HEADING_RE.test(line) || HTML_HEADING_RE.test(line)) return true;
+  if (BLOCK_MARKERS.some((m) => m.open.test(line) || m.close.test(line))) return true;
+  return false;
+}
 
 /**
  * Parses the tagged plain text Claude produces from the v3.6 summary prompt
@@ -115,7 +146,37 @@ export function parseSummaryText(text: string): SummaryBlock[] {
       continue;
     }
 
-    const headingMatch = line.match(MARKDOWN_HEADING_RE) ?? line.match(BRACKET_HEADING_RE);
+    // Must run before the bracket-heading check below — a bare "[증례]"
+    // marker line would otherwise match BRACKET_HEADING_RE (any single
+    // "[...]" line with no nested brackets) and get misread as a heading.
+    const blockMarker = BLOCK_MARKERS.find((m) => m.open.test(line));
+    if (blockMarker) {
+      const contentLines: string[] = [];
+      while (i < lines.length) {
+        const inner = lines[i].trim();
+        if (blockMarker.close.test(inner)) {
+          i++; // consume the closing tag
+          break;
+        }
+        if (isBlockBoundary(inner)) break; // model forgot to close — auto-close without consuming
+        if (inner) contentLines.push(inner);
+        i++;
+      }
+      const combined = contentLines.join(" ");
+      if (blockMarker.type === "tyBox") {
+        const quoteMatch = combined.match(TY_QUOTE_RE);
+        if (quoteMatch) {
+          blocks.push({ type: "tyBox", quote: quoteMatch[1], runs: parseInline(quoteMatch[2]) });
+        } else {
+          blocks.push({ type: "tyBox", runs: parseInline(combined) });
+        }
+      } else {
+        blocks.push({ type: blockMarker.type, runs: parseInline(combined) });
+      }
+      continue;
+    }
+
+    const headingMatch = line.match(MARKDOWN_HEADING_RE) ?? line.match(HTML_HEADING_RE) ?? line.match(BRACKET_HEADING_RE);
     if (headingMatch) {
       blocks.push({ type: "heading", text: headingMatch[1] });
       continue;

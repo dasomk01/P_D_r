@@ -4,6 +4,11 @@ import { generateSummaryText } from "@/lib/ai/generate-summary";
 import { renderAndUploadSummary } from "@/lib/summary/generate-and-store";
 import { combinedSummaryPath } from "@/lib/summary/storage";
 
+// Summary generation can stream for a while (large PDFs + long output, with
+// automatic continuation past Claude's max_tokens boundary). Use the longest
+// duration the current Vercel plan allows — see README for the plan caveat.
+export const maxDuration = 60;
+
 function supabaseNotConfiguredResponse() {
   return NextResponse.json(
     { error: "Supabase 환경변수가 설정되지 않았습니다. .env.local을 확인하세요." },
