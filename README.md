@@ -12,7 +12,9 @@
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase 1 완료
+## 현재 상태 — Phase 2 완료
+
+**Phase 1**
 
 - Next.js 앱 기본 골격, 홈 화면 3개 카드(정리본/문제풀이/과외) + 각 라우트 placeholder 페이지
 - Supabase 클라이언트 헬퍼(`src/lib/supabase`) — 브라우저용 anon 클라이언트, 서버 전용 service-role 클라이언트
@@ -20,7 +22,13 @@
 - AI provider 추상화(`src/lib/ai`) — Claude/Gemini/OpenAI 구현체 + `SUMMARY_PROVIDER`/`QUESTION_PROVIDER`/`TUTOR_PROVIDER` 환경변수로 역할별 벤더 교체 가능
 - `/api/health` — Supabase 연결 확인용 헬스체크
 
-다음 Phase(2~8)는 프로젝트 문서의 개발 순서를 따릅니다: 달력+업로드 → Claude 정리본 → Word/PDF 생성 → Gemini 문제 생성+검수 → 문제풀이 UI → 오답노트 → AI 과외.
+**Phase 2**
+
+- `/summary` 달력 (월 이동, 정리본이 있는 날짜에 점 표시) → 날짜 선택 시 `/summary/[date]`에서 1~8교시 표시 → 교시 선택 시 `/summary/[date]/[period]`에서 과목/강의명 저장 + 파일(야첵/강의록/STT 텍스트/학습지) 업로드
+- `/api/lectures` (GET `?month=`/`?date=`, POST로 과목/강의명 upsert), `/api/upload` (POST로 Storage 업로드 + `lecture_files` upsert, DELETE로 삭제)
+- Supabase 환경변수가 없어도 UI는 전부 렌더링되고, DB/Storage 호출 시에만 안내 메시지를 보여줌 — 환경변수만 연결하면 바로 동작
+
+다음 Phase(3~8)는 프로젝트 문서의 개발 순서를 따릅니다: Claude 정리본 → Word/PDF 생성 → Gemini 문제 생성+검수 → 문제풀이 UI → 오답노트 → AI 과외.
 
 ## 로컬 개발
 
