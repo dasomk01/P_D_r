@@ -17,12 +17,14 @@ export async function GET(_request: NextRequest, ctx: RouteContext<"/api/courses
   const [individualRes, combinedRes] = await Promise.all([
     supabase
       .from("summaries")
-      .select("id, version, created_at, lecture_session:lecture_sessions(id, date, period, part_name)")
+      .select("id, version, status, created_at, lecture_session:lecture_sessions(id, date, period, part_name)")
       .eq("course_id", courseId)
       .order("created_at", { ascending: false }),
     supabase
       .from("combined_summaries")
-      .select("id, version, created_at, combined_summary_sessions(lecture_session:lecture_sessions(id, date, period, part_name))")
+      .select(
+        "id, version, status, created_at, combined_summary_sessions(lecture_session:lecture_sessions(id, date, period, part_name))",
+      )
       .eq("course_id", courseId)
       .order("created_at", { ascending: false }),
   ]);

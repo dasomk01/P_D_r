@@ -5,9 +5,12 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import type { LectureSession } from "@/lib/lecture-sessions";
 
+type SummaryStatus = "pending" | "generating" | "done" | "error";
+
 interface SummaryListItem {
   id: string;
   version: number;
+  status: SummaryStatus;
   created_at: string;
   lecture_session: { id: string; date: string; period: number; part_name: string | null } | null;
 }
@@ -15,10 +18,21 @@ interface SummaryListItem {
 interface CombinedSummaryListItem {
   id: string;
   version: number;
+  status: SummaryStatus;
   created_at: string;
   combined_summary_sessions: {
     lecture_session: { id: string; date: string; period: number; part_name: string | null } | null;
   }[];
+}
+
+function StatusBadge({ status }: { status: SummaryStatus }) {
+  if (status === "generating") {
+    return <span className="ml-2 text-xs font-medium text-amber-600 dark:text-amber-400">⏳ 생성 중</span>;
+  }
+  if (status === "error") {
+    return <span className="ml-2 text-xs font-medium text-red-600 dark:text-red-400">⚠ 실패</span>;
+  }
+  return null;
 }
 
 function sessionLabel(s: { date: string; period: number; part_name: string | null }) {
@@ -192,6 +206,7 @@ export default function CourseSummaryHubPage() {
                   .filter(Boolean)
                   .join(" + ")}
               </span>
+              <StatusBadge status={c.status} />
             </Link>
           ))}
           {individual.map((s) => (
@@ -205,6 +220,7 @@ export default function CourseSummaryHubPage() {
                 {s.lecture_session ? sessionLabel(s.lecture_session) : "삭제된 수업"}
               </span>
               <span className="ml-2 text-zinc-400 dark:text-zinc-600">v{s.version}</span>
+              <StatusBadge status={s.status} />
             </Link>
           ))}
         </div>
