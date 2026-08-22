@@ -16,7 +16,7 @@
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase D 완료 (달력 View)
+## 현재 상태 — Phase E 완료 (정리본)
 
 **Phase A — 강의 관리**
 - **DB 스키마를 강의(Course) 중심으로 전면 재설계**했습니다 (`supabase/migrations/0001_init.sql`): `courses`, `study_materials`, `study_material_mappings`, `lecture_sessions`, `summaries`, `combined_summaries`, `combined_summary_sessions`, `questions`, `question_lecture_sessions`, `attempts`, `tutor_sessions`, `tutor_messages`. 이전의 날짜 중심 `lectures`/`lecture_files` 테이블은 제거했습니다 (아직 실제 배포 데이터가 없어 무중단 마이그레이션 없이 교체).
@@ -47,11 +47,19 @@
 - 홈(강의 목록) 우상단에 "📅 달력 보기" 링크로만 연결 — 최상위 navigation은 여전히 "강의"뿐
 - `/api/calendar` (GET `?month=` 날짜별 카운트, `?date=` 그 날짜 수업 목록 + 강의명 join)
 
+**Phase E — 정리본**
+- 강의 상세 → 🧠 학습 → 📝 정리본 → `/courses/[courseId]/summary`: 수업 목록에서 체크박스로 선택해 **통합 정리본**을 만들거나, 각 수업 옆 버튼으로 **개별 정리본**을 만듭니다. 개별 정리본을 먼저 만들어야 통합을 만들 수 있는 게 아니라, 통합도 항상 원본 자료(강의록+STT+학습지 발췌)에서 직접 생성합니다 (비용 최소화 원칙 그대로 구현).
+- **v3.6 프롬프트를 원문 그대로 사용**합니다(`src/lib/ai/summary-prompt.ts`). 다만 이 앱은 대화형이 아니라 API 자동 파이프라인이라, "STT 불명확 시 솜솜에게 질문" 같은 대화형 전제만 짧은 안내문으로 보정했습니다(질문 대신 `[확인필요]` 태그 사용, 야첵 없음, 최종 출력은 태그 텍스트) — 프롬프트 본문 자체는 수정하지 않았습니다.
+- Claude에게는 원본 PDF를 통째로 보내지 않습니다: 강의록은 세션에 업로드된 파일 그대로, 학습지는 수업의 강의 파트명과 일치하는 `study_material_mappings` 페이지 범위만 잘라서(`pdf-lib`) 보냅니다. 한 요청에 포함되는 전체 페이지가 Claude의 PDF 100페이지 제한을 넘지 않도록 예산을 두고 넘으면 안내 문구와 함께 자릅니다.
+- Claude가 만든 태그(`[YAMA]`, `[TY!!]`, `[증례]` 등) 텍스트를 공통 파서(`src/lib/summary/parse.ts`)로 구조화한 뒤, 세 가지로 렌더링합니다: 웹 뷰어(`SummaryViewer`, 즉시 확인), `.docx`(`docx` 패키지, 마킹표의 색상/박스 그대로), `.pdf`(`pdf-lib` + Pretendard 폰트 임베딩, 색상은 동일하지만 박스는 배경색만 — Word보다는 단순한 스타일).
+- `/api/lecture-sessions/[id]/summary`(개별 생성), `/api/courses/[id]/combined-summary`(통합 생성, body `lectureSessionIds`), `/api/courses/[id]/summaries`(목록), `/api/summaries/[id]` · `/api/combined-summaries/[id]`(조회/삭제 — 삭제 시 Storage의 docx/pdf도 함께 정리)
+- `ANTHROPIC_API_KEY`가 없으면 생성 버튼을 눌렀을 때 "Claude API 키가 설정되지 않았습니다"라는 명확한 에러를 보여줍니다 (다른 기능처럼 조용히 건너뛰지 않음 — 정리본 생성은 사용자가 명시적으로 누른 액션이라 결과가 있어야 하므로).
+- 참고: 정리본 생성은 PDF를 문서로 직접 첨부해야 해서, `src/lib/ai`의 범용 provider 추상화(`SUMMARY_PROVIDER`) 대신 Anthropic SDK를 직접 호출합니다. 학습지 목차 분석도 마찬가지입니다 — 둘 다 스펙상 항상 Claude를 쓰기로 되어 있어 당장은 문제 없지만, `SUMMARY_PROVIDER`를 바꿔도 이 두 기능에는 반영되지 않습니다.
+
 ## 다음 Phase
 
 | Phase | 내용 |
 |---|---|
-| E | 정리본 — 개별/통합, Claude API, v3.6 프롬프트 적용 |
 | F | 문제풀이 — 야마그대로/야마변형/티야/탈야, Gemini API, 즉시 채점 + 오답노트 |
 | G | 과외 — 채팅형 1:1, OpenAI API, 기존 과외 프롬프트 적용 |
 
@@ -112,7 +120,9 @@ src/
       [date]/page.tsx                   # 그 날짜의 전체 강의 수업 목록
     courses/[courseId]/
       page.tsx                          # 강의 상세 (학습지/수업 기록/학습)
-      summary/page.tsx                  # 정리본 (Phase E placeholder)
+      summary/page.tsx                  # 정리본 허브 (수업 선택 → 개별/통합 생성, 목록)
+      summary/[summaryId]/page.tsx      # 개별 정리본 뷰어
+      summary/combined/[combinedId]/    # 통합 정리본 뷰어
       questions/page.tsx                # 문제풀이 (Phase F placeholder)
       tutor/page.tsx                    # 과외 (Phase G placeholder)
       sessions/[sessionId]/page.tsx     # 수업 상세 (강의록/STT, 이 수업으로 학습)
@@ -122,8 +132,11 @@ src/
       courses/                          # 강의 CRUD (GET/POST, GET/PATCH/DELETE [id])
       courses/[id]/study-material/      # 학습지 조회/삭제 + init/complete 업로드
       courses/[id]/lecture-sessions/    # 강의의 수업 세션 목록 (GET)
+      courses/[id]/combined-summary/    # 통합 정리본 생성 (POST)
+      courses/[id]/summaries/           # 강의의 정리본 목록 (개별+통합, GET)
       study-material-mappings/          # 매핑 수동 추가/편집/삭제
-      lecture-sessions/                 # 수업 세션 CRUD + files/init·complete 업로드
+      lecture-sessions/                 # 수업 세션 CRUD + files/init·complete 업로드 + summary(개별 생성)
+      summaries/, combined-summaries/   # 정리본 조회/삭제
   components/
     course-card.tsx                     # 강의 카드 (열기/편집/보관·복원/삭제 메뉴)
     course-form-dialog.tsx              # 강의 추가/편집 폼 모달
@@ -133,9 +146,12 @@ src/
     study-material-section.tsx          # 학습지 업로드/교체/삭제 + 매핑 표
     mapping-row.tsx                     # 매핑 표 한 행(읽기/인라인 편집)
     lecture-sessions-section.tsx        # 수업 기록 목록(날짜별 그룹) + 수업 추가
+    summary-viewer.tsx                  # 정리본 태그를 마킹표 색상/박스로 렌더링하는 웹 뷰어
   lib/
     supabase/                           # 브라우저/서버 Supabase 클라이언트 + upload-client(직접 업로드 헬퍼)
-    ai/                                 # Claude/Gemini/OpenAI provider 추상화 + 학습지 목차 분석
+    ai/                                 # provider 추상화 + 학습지 목차 분석 + v3.6 프롬프트/정리본 생성
+    summary/                            # 태그 파서, docx/pdf 생성기, Storage 경로, 생성+업로드 orchestration
+    pdf-utils.ts                        # PDF 페이지 범위 추출 (pdf-lib)
     courses.ts                          # Course 타입/상태
     lecture-sessions.ts                 # LectureSession 타입/검증/파일 설정
     study-materials.ts                  # StudyMaterial/Mapping 타입

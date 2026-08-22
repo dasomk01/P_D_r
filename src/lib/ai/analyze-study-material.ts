@@ -1,7 +1,7 @@
 import "server-only";
 
 import Anthropic from "@anthropic-ai/sdk";
-import { PDFDocument } from "pdf-lib";
+import { extractLeadingPages } from "@/lib/pdf-utils";
 
 export interface StudyMaterialMappingDraft {
   professor: string | null;
@@ -35,18 +35,6 @@ const ANALYSIS_PROMPT = `이 PDF는 의과대학 과목 학습지(기출문제 �
 [{"professor": "홍길동", "part_name": "홍길동", "page_start": 4, "page_end": 109, "problem_start": null, "problem_end": null}]
 
 목차를 찾을 수 없거나 항목을 구분할 수 없으면 빈 배열 []만 응답하세요.`;
-
-/** Copies just the first `pageCount` pages into a new, much smaller PDF. */
-async function extractLeadingPages(pdfBuffer: Buffer, pageCount: number): Promise<Buffer> {
-  const source = await PDFDocument.load(pdfBuffer);
-  const pagesToCopy = Math.min(pageCount, source.getPageCount());
-
-  const excerpt = await PDFDocument.create();
-  const copiedPages = await excerpt.copyPages(source, [...Array(pagesToCopy).keys()]);
-  copiedPages.forEach((page) => excerpt.addPage(page));
-
-  return Buffer.from(await excerpt.save());
-}
 
 /**
  * Best-effort structural analysis of a study material PDF's table of
