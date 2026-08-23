@@ -25,10 +25,11 @@ function sessionLabel(s: { date: string; period: number; part_name: string | nul
   return `${m}/${d} ${s.period}교시${s.part_name ? ` · ${s.part_name}` : ""}`;
 }
 
-// If generation hasn't finished after this long, the background job most
-// likely got killed by the platform's function duration limit (see README —
-// Vercel Hobby caps this at 60s) rather than genuinely still working.
-const STALE_GENERATION_MS = 90_000;
+// Generation now runs as a chain of ~60s-bounded rounds (see
+// src/lib/summary/run-round.ts), so a legitimately-still-working summary can
+// take a few minutes end to end. Only flag it as possibly stuck well past
+// what even a large combined summary should reasonably need.
+const STALE_GENERATION_MS = 240_000;
 
 export default function CombinedSummaryPage() {
   const { courseId, combinedId } = useParams<{ courseId: string; combinedId: string }>();
@@ -147,13 +148,13 @@ export default function CombinedSummaryPage() {
 
       {summary.status === "generating" && !stale && (
         <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-          ⏳ 통합 정리본을 생성하고 있습니다. 수업 여러 개를 합치는 작업이라 몇 분 걸릴 수 있어요. 이 화면을 열어둔 채로 기다리면 완성되는 대로 자동으로 표시됩니다.
+          ⏳ 통합 정리본을 생성하고 있습니다. 여러 단계로 나눠 이어서 작성하는 방식이라 수업 개수/분량에 따라 몇 분 정도 걸릴 수 있어요. 이 화면을 닫아도 서버에서 계속 진행되며, 다시 열면 이어서 표시됩니다.
         </div>
       )}
 
       {summary.status === "generating" && stale && (
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm text-amber-700 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-300">
-          생성이 예상보다 오래 걸리고 있습니다. 서버 쪽에서 시간 제한에 걸렸을 가능성이 있어요 — 수업 개수를 줄여서 다시 시도해 주세요.
+          생성이 예상보다 오래 걸리고 있습니다. 이어서 진행 중인 작업이 중간에 끊겼을 가능성이 있어요 — 잠시 더 기다려보고, 계속 이 상태면 삭제 후 다시 시도해 주세요.
         </div>
       )}
 

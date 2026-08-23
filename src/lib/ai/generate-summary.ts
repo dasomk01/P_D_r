@@ -154,27 +154,39 @@ export interface GenerateSummaryOptions {
   combined: boolean;
 }
 
-// A complete v3.6-style summary (본문 + 계층적 마인드맵 + 출제경향 + 총평) for a
-// real lecture routinely runs past one 8K-output-token response. Rather than
-// silently truncating mid-document, we cap each call's output and, if Claude
-// stopped only because it hit that cap (not because it finished), resend the
-// conversation asking it to continue exactly where it left off — mirroring
-// how this prompt was actually used interactively ("계속") before this app
-// existed. MAX_CONTINUATION_ROUNDS bounds worst-case latency/cost.
-const MAX_TOKENS_PER_CALL = 16000;
-const MAX_CONTINUATION_ROUNDS = 4;
+export interface SummaryRoundResult {
+  /** Text produced in this round only — caller appends it to prior rounds' text. */
+  chunkText: string;
+  /** True if Claude actually finished the summary (not just this round's budget). */
+  done: boolean;
+}
+
+// Vercel Hobby caps a single function invocation (including background
+// after() work) at ~60s total. A full v3.6-style summary (본문 + 마인드맵 +
+// 출제경향 + 총평) routinely needs several times that much generation time,
+// so one round can never be the whole summary — see src/lib/summary/run-round.ts
+// for the chain that calls this repeatedly across separate invocations,
+// persisting accumulated text in the DB between rounds.
+//
+// ROUND_WALL_CLOCK_BUDGET_MS bounds this round's own Claude call by elapsed
+// time (not just token count) — generation throughput isn't guaranteed, so a
+// token cap alone could still blow through the invocation's time limit.
+const ROUND_WALL_CLOCK_BUDGET_MS = 35_000;
+const ROUND_MAX_TOKENS = 4096;
 
 /**
- * Calls Claude with the v3.6 prompt and the gathered source materials for
- * one or more lecture sessions, returning the tagged plain text it produces
- * (see src/lib/summary/parse.ts for the tag grammar). Streams internally and
- * continues automatically across the max_tokens boundary if needed.
+ * Runs ONE bounded round of summary generation against the v3.6 prompt and
+ * the gathered source materials for one or more lecture sessions. Streams
+ * internally and force-stops at ROUND_WALL_CLOCK_BUDGET_MS regardless of
+ * whether Claude was still mid-sentence — the caller treats `done: false`
+ * as "needs another round" and resends `priorText` next time.
  */
-export async function generateSummaryText(
+export async function generateSummaryRound(
   supabase: SupabaseClient,
   sessions: LectureSession[],
   options: GenerateSummaryOptions,
-): Promise<string> {
+  priorText: string,
+): Promise<SummaryRoundResult> {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw new Error("ANTHROPIC_API_KEY가 설정되지 않았습니다.");
   }
@@ -199,44 +211,18 @@ export async function generateSummaryText(
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
   const contentBlocks = buildContentBlocks(materials);
-  // Cache the (large, unchanging) source documents so a continuation round
-  // only pays full price for the small "계속해줘" nudge, not the whole PDF
-  // set again.
+  // Cache the (large, unchanging) source documents so every later round —
+  // each a fresh invocation that re-gathers and resends the same materials —
+  // only pays full price once; subsequent rounds mostly hit the cache.
   const lastBlock = contentBlocks[contentBlocks.length - 1];
   if (lastBlock) lastBlock.cache_control = { type: "ephemeral" };
 
   const messages: Anthropic.MessageParam[] = [
     { role: "user", content: [...contentBlocks, { type: "text", text: directive }] },
   ];
-
-  // The system prompt (adapter note + full v3.6 text) is identical across
-  // every summary generation call the app ever makes, not just within one
-  // generation's continuation rounds — cache it so repeat use within the
-  // TTL skips reprocessing it.
-  const system: Anthropic.MessageCreateParams["system"] = [
-    { type: "text", text: `${SUMMARY_PROMPT_ADAPTER_NOTE}\n\n${SUMMARY_PROMPT_V3_6}`, cache_control: { type: "ephemeral" } },
-  ];
-
-  let fullText = "";
-  for (let round = 0; round <= MAX_CONTINUATION_ROUNDS; round++) {
-    const stream = client.messages.stream({
-      model: "claude-sonnet-5",
-      max_tokens: MAX_TOKENS_PER_CALL,
-      system,
-      messages,
-    });
-    const response = await stream.finalMessage();
-    const chunkText = response.content
-      .filter((block) => block.type === "text")
-      .map((block) => block.text)
-      .join("\n");
-
-    fullText += chunkText;
-
-    if (response.stop_reason !== "max_tokens" || round === MAX_CONTINUATION_ROUNDS) break;
-
+  if (priorText) {
     messages.push(
-      { role: "assistant", content: chunkText },
+      { role: "assistant", content: priorText },
       {
         role: "user",
         content:
@@ -245,5 +231,34 @@ export async function generateSummaryText(
     );
   }
 
-  return fullText;
+  // The system prompt (adapter note + full v3.6 text) is identical across
+  // every summary generation call the app ever makes — cache it so repeat
+  // use within the TTL skips reprocessing it.
+  const system: Anthropic.MessageCreateParams["system"] = [
+    { type: "text", text: `${SUMMARY_PROMPT_ADAPTER_NOTE}\n\n${SUMMARY_PROMPT_V3_6}`, cache_control: { type: "ephemeral" } },
+  ];
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ROUND_WALL_CLOCK_BUDGET_MS);
+
+  let chunkText = "";
+  let done = false;
+  try {
+    const stream = client.messages.stream({ model: "claude-sonnet-5", max_tokens: ROUND_MAX_TOKENS, system, messages }, {
+      signal: controller.signal,
+    });
+    stream.on("text", (delta) => {
+      chunkText += delta;
+    });
+    const response = await stream.finalMessage();
+    done = response.stop_reason !== "max_tokens";
+  } catch (err) {
+    if (!controller.signal.aborted) throw err;
+    // Our own wall-clock budget fired mid-stream — `chunkText` already has
+    // whatever text arrived before the abort via the "text" listener above.
+  } finally {
+    clearTimeout(timer);
+  }
+
+  return { chunkText, done };
 }

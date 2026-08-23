@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
-import { generateSummaryText } from "@/lib/ai/generate-summary";
-import { renderAndUploadSummary } from "@/lib/summary/generate-and-store";
-import { individualSummaryPath } from "@/lib/summary/storage";
+import { runSummaryRound } from "@/lib/summary/run-round";
 
-// Generation itself happens in `after()`, past the point this handler
-// returns its response — but on Vercel that background work is still
-// bounded by the same maxDuration as the request. Use the longest duration
-// the current plan allows (see README for the Hobby-plan caveat: long
-// combined summaries can still exceed this and leave a row stuck at
-// status "generating").
+// The first round runs in this invocation's after(); if it doesn't finish,
+// run-round.ts chains further rounds as separate invocations, each getting
+// this same budget — see that file for why one invocation can't just loop.
 export const maxDuration = 60;
 
 function supabaseNotConfiguredResponse() {
@@ -27,7 +22,7 @@ function supabaseNotConfiguredResponse() {
  * on. The client polls GET /api/summaries/[id] until status flips to
  * "done" or "error".
  */
-export async function POST(_request: NextRequest, ctx: RouteContext<"/api/lecture-sessions/[id]/summary">) {
+export async function POST(request: NextRequest, ctx: RouteContext<"/api/lecture-sessions/[id]/summary">) {
   if (!isSupabaseConfigured()) return supabaseNotConfiguredResponse();
   const { id: sessionId } = await ctx.params;
 
@@ -61,23 +56,8 @@ export async function POST(_request: NextRequest, ctx: RouteContext<"/api/lectur
     .single();
   if (insertError) return NextResponse.json({ error: insertError.message }, { status: 500 });
 
-  after(async () => {
-    try {
-      const taggedText = await generateSummaryText(supabase, [session], { subject: course.subject, combined: false });
-
-      const docxPath = individualSummaryPath(course.id, inserted.id, "docx");
-      const pdfPath = individualSummaryPath(course.id, inserted.id, "pdf");
-      await renderAndUploadSummary(supabase, taggedText, `${course.subject}_솜리본`, docxPath, pdfPath);
-
-      await supabase
-        .from("summaries")
-        .update({ content: taggedText, docx_path: docxPath, pdf_path: pdfPath, status: "done" })
-        .eq("id", inserted.id);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "정리본 생성에 실패했습니다.";
-      await supabase.from("summaries").update({ status: "error", error_message: message }).eq("id", inserted.id);
-    }
-  });
+  const baseUrl = new URL(request.url).origin;
+  after(() => runSummaryRound("individual", inserted.id, baseUrl));
 
   return NextResponse.json({ summary: inserted }, { status: 202 });
 }
