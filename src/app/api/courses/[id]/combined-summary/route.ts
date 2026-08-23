@@ -1,15 +1,10 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
-import { generateSummaryText } from "@/lib/ai/generate-summary";
-import { renderAndUploadSummary } from "@/lib/summary/generate-and-store";
-import { combinedSummaryPath } from "@/lib/summary/storage";
+import { runSummaryRound } from "@/lib/summary/run-round";
 
-// Generation itself happens in `after()`, past the point this handler
-// returns its response — but on Vercel that background work is still
-// bounded by the same maxDuration as the request. Use the longest duration
-// the current plan allows (see README for the Hobby-plan caveat: long
-// combined summaries can still exceed this and leave a row stuck at
-// status "generating").
+// The first round runs in this invocation's after(); if it doesn't finish,
+// run-round.ts chains further rounds as separate invocations, each getting
+// this same budget — see that file for why one invocation can't just loop.
 export const maxDuration = 60;
 
 function supabaseNotConfiguredResponse() {
@@ -68,23 +63,8 @@ export async function POST(request: NextRequest, ctx: RouteContext<"/api/courses
     .insert(sessionIds.map((lectureSessionId) => ({ combined_summary_id: inserted.id, lecture_session_id: lectureSessionId })));
   if (linkError) return NextResponse.json({ error: linkError.message }, { status: 500 });
 
-  after(async () => {
-    try {
-      const taggedText = await generateSummaryText(supabase, sessions, { subject: course.subject, combined: true });
-
-      const docxPath = combinedSummaryPath(courseId, inserted.id, "docx");
-      const pdfPath = combinedSummaryPath(courseId, inserted.id, "pdf");
-      await renderAndUploadSummary(supabase, taggedText, `${course.subject}_통합솜리본`, docxPath, pdfPath);
-
-      await supabase
-        .from("combined_summaries")
-        .update({ content: taggedText, docx_path: docxPath, pdf_path: pdfPath, status: "done" })
-        .eq("id", inserted.id);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "정리본 생성에 실패했습니다.";
-      await supabase.from("combined_summaries").update({ status: "error", error_message: message }).eq("id", inserted.id);
-    }
-  });
+  const baseUrl = new URL(request.url).origin;
+  after(() => runSummaryRound("combined", inserted.id, baseUrl));
 
   return NextResponse.json({ combinedSummary: inserted }, { status: 202 });
 }

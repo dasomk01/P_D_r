@@ -58,10 +58,9 @@
 
 **Phase E-1 — 정리본 생성 안정화 (실사용 피드백 반영)**
 - 실제 강의로 돌려보니 두 가지 문제가 있었습니다: (1) `max_tokens` 고정값(8192) 탓에 본문 중간에서 응답이 끊겨 마인드맵/출제경향/총평까지 도달하지 못함, (2) Claude가 태그 스펙과 다른 형식([H1]/[H2], "이미지:" 등)을 즉흥적으로 섞어써서 파서가 못 읽고 원문 그대로 노출됨. `src/lib/ai/summary-prompt.ts`(어댑터 노트만 보정, v3.6 원문은 그대로), `src/lib/summary/parse.ts`, `src/lib/ai/generate-summary.ts`에서 고쳤습니다.
-- **생성 요청을 스트리밍 + 최대 `max_tokens` 경계에서 자동 이어쓰기**로 바꿨습니다. 한 번에 8192토큰이 아니라, 응답이 `max_tokens`로 끊기면 "계속 이어서 작성" 메시지로 재요청해 최대 4회까지 이어붙입니다. 원본 문서와 시스템 프롬프트는 prompt caching(`cache_control`)으로 캐싱해 이어쓰기 비용을 낮췄습니다.
-- **정리본 생성을 동기 요청에서 백그라운드 작업으로 전환**했습니다 — Vercel Hobby 플랜은 함수 실행 시간이 요청당 최대 60초라, 실제 완성된 정리본(마인드맵+출제경향+총평 포함)은 그 안에 못 끝날 수 있습니다. 이제 `POST /api/lecture-sessions/[id]/summary` · `POST /api/courses/[id]/combined-summary`는 `status: "generating"` 행을 즉시 만들어 응답하고(202), 실제 생성은 Next.js `after()`(Vercel `waitUntil` 기반)로 응답 이후 계속 진행합니다. 상세 페이지는 3초 간격으로 폴링해 완료되면 자동으로 결과를 표시합니다.
-  - ⚠️ **남은 한계**: `after()`도 여전히 같은 `maxDuration`(Hobby 기준 60초) 안에서 끝나야 합니다 — 백그라운드로 돌려도 시간 제한 자체가 없어지는 건 아니라, 자료가 매우 많은 통합 정리본은 여전히 60초를 넘겨 중간에 죽을 수 있습니다(그 경우 상태가 `generating`에 멈춰 있고, UI는 90초 후 "시간 제한 가능성" 안내를 띄웁니다). 이 한계를 완전히 없애려면 Vercel Pro(월 $20, 함수 실행 300초)로 업그레이드가 필요합니다.
-- `summaries`/`combined_summaries`에 `status`(`pending`/`generating`/`done`/`error`) · `error_message` 컬럼 추가 (`supabase/migrations/0002_summary_status.sql` — SQL Editor에서 실행 필요).
+- **생성을 "60초 안에 끝나는 라운드"로 쪼개고, 각 라운드가 스스로 다음 라운드를 호출하는 체인 구조**로 재설계했습니다 (`src/lib/summary/run-round.ts`, `src/app/api/internal/summary-round/route.ts`). 처음엔 백그라운드(`after()`)로만 전환했는데, 실제로 돌려보니 `after()`도 같은 함수 호출 안에서 도는 거라 Vercel Hobby의 60초 실행 제한을 그대로 물려받아 여전히 중간에 죽는 게 로그로 확인됐습니다 — Runtime 시간 초과 에러. 그래서 한 라운드(최대 35초, `ROUND_WALL_CLOCK_BUDGET_MS`)가 끝나면 결과를 DB에 저장하고, 아직 안 끝났으면(`stop_reason`이 `max_tokens`거나 우리가 직접 abort) **자기 자신을 새 HTTP 요청으로 재호출**해 완전히 새로운 함수 실행에서 이어가도록 바꿨습니다. 각 라운드는 독립된 60초 예산을 받기 때문에, 전체 생성 시간에는 이제 상한이 없습니다(대신 총 20라운드 안전장치 有). 원본 문서와 시스템 프롬프트는 prompt caching(`cache_control`)으로 캐싱해 매 라운드 자료를 다시 보내는 비용을 낮췄습니다.
+- `POST /api/lecture-sessions/[id]/summary` · `POST /api/courses/[id]/combined-summary`는 `status: "generating"` 행을 즉시 만들어 응답하고(202), 첫 라운드부터 위 체인이 시작됩니다. 상세 페이지는 3초 간격으로 폴링해 완료되면 자동으로 결과를 표시하고, 브라우저 탭을 닫아도 서버 쪽 체인은 계속 진행됩니다.
+- `summaries`/`combined_summaries`에 `status`(`pending`/`generating`/`done`/`error`) · `error_message` · `round`(진행된 라운드 수) 컬럼 추가 (`supabase/migrations/0002_summary_status.sql`, `0003_summary_round.sql` — SQL Editor에서 순서대로 실행 필요).
 
 ## 다음 Phase
 
@@ -83,7 +82,7 @@ npm run dev
 ## Supabase 설정
 
 1. [supabase.com](https://supabase.com) 에서 새 프로젝트 생성 (무료 플랜)
-2. SQL Editor에서 `supabase/migrations/` 아래 파일들을 번호 순서대로(`0001_init.sql` → `0002_summary_status.sql`) 실행해 테이블 생성/갱신
+2. SQL Editor에서 `supabase/migrations/` 아래 파일들을 번호 순서대로(`0001_init.sql` → `0002_summary_status.sql` → `0003_summary_round.sql`) 실행해 테이블 생성/갱신
 3. Storage에서 아래 버킷 생성 (모두 private):
    - `lecture-pdf`
    - `stt-txt`
