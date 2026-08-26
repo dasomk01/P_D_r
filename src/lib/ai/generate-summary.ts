@@ -171,8 +171,12 @@ export interface SummaryRoundResult {
 // ROUND_WALL_CLOCK_BUDGET_MS bounds this round's own Claude call by elapsed
 // time (not just token count) — generation throughput isn't guaranteed, so a
 // token cap alone could still blow through the invocation's time limit.
-const ROUND_WALL_CLOCK_BUDGET_MS = 35_000;
-const ROUND_MAX_TOKENS = 4096;
+// ROUND_MAX_TOKENS is set high enough that the wall-clock timer is always
+// what actually ends a round, not the token count — a low token cap here
+// just cuts a round short before its time budget is used, forcing more
+// rounds (and more redundant material re-gathering) than necessary.
+const ROUND_WALL_CLOCK_BUDGET_MS = 40_000;
+const ROUND_MAX_TOKENS = 16_000;
 
 /**
  * Runs ONE bounded round of summary generation against the v3.6 prompt and

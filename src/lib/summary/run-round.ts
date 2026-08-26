@@ -13,7 +13,7 @@ import { individualSummaryPath, combinedSummaryPath } from "./storage";
 // (see /api/summary-round and the detail pages' tick loop) instead of by
 // the server. MAX_ROUNDS is a safety ceiling on total cost/latency if
 // Claude somehow never reaches a natural stop.
-const MAX_ROUNDS = 20;
+const MAX_ROUNDS = 30;
 
 export type SummaryKind = "individual" | "combined";
 
