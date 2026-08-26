@@ -32,7 +32,13 @@ function sessionLabel(s: { date: string; period: number; part_name: string | nul
 // re-fetching state, in a loop. That means generation only progresses while
 // this page is open; closing the tab just pauses it (progress so far is
 // saved), and reopening resumes from where it left off.
-const STALE_GENERATION_MS = 240_000;
+//
+// A large summary can legitimately need many rounds (each up to ~40s), so
+// total elapsed time isn't a reliable "is this stuck" signal on its own —
+// flag it only once the round counter itself stops advancing, since any
+// real failure (a tick request erroring) already surfaces as `error`
+// instead of a silent hang.
+const STALL_THRESHOLD_MS = 90_000;
 
 export default function CombinedSummaryPage() {
   const { courseId, combinedId } = useParams<{ courseId: string; combinedId: string }>();
@@ -46,7 +52,6 @@ export default function CombinedSummaryPage() {
 
   useEffect(() => {
     let cancelled = false;
-    const startedAt = Date.now();
 
     async function loadFull(): Promise<CombinedSummaryDetail> {
       const res = await fetch(`/api/combined-summaries/${combinedId}`);
@@ -71,8 +76,11 @@ export default function CombinedSummaryPage() {
         if (cancelled) return;
         setSummary(current);
 
+        let lastRound = current.round;
+        let lastProgressAt = Date.now();
+
         while (!cancelled && current.status === "generating") {
-          if (Date.now() - startedAt > STALE_GENERATION_MS) {
+          if (Date.now() - lastProgressAt > STALL_THRESHOLD_MS) {
             setStale(true);
             break;
           }
@@ -81,6 +89,10 @@ export default function CombinedSummaryPage() {
           current = await loadFull();
           if (cancelled) return;
           setSummary(current);
+          if (current.round !== lastRound) {
+            lastRound = current.round;
+            lastProgressAt = Date.now();
+          }
         }
       } catch (err) {
         if (!cancelled) setError(err instanceof Error ? err.message : "통합 정리본을 불러오지 못했습니다.");
