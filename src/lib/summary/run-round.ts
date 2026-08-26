@@ -125,14 +125,29 @@ export async function runSummaryRound(kind: SummaryKind, id: string, baseUrl: st
 
   // Fire the next round as a genuinely separate invocation — awaiting only
   // its fast 202 ack (its own after() carries the real work), so this
-  // invocation can exit well within the time limit.
-  await fetch(`${baseUrl}${INTERNAL_ROUND_PATH}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ kind, id }),
-  }).catch(() => {
-    // Best-effort: if this fails, the row is left stuck at "generating"
-    // (same residual risk the polling UI's stale-timeout warning covers),
-    // but a genuinely lost hop here should be rare.
-  });
+  // invocation can exit well within the time limit. A silently-lost hop
+  // here previously left rows stuck at "generating" forever with no
+  // visible error — a fetch() promise only rejects on network failure, it
+  // resolves normally even for a 401/500 response, so the status must be
+  // checked explicitly, not just whether the call threw.
+  let chainOk = false;
+  let chainDetail = "";
+  try {
+    const chainRes = await fetch(`${baseUrl}${INTERNAL_ROUND_PATH}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kind, id }),
+    });
+    chainOk = chainRes.ok;
+    if (!chainOk) chainDetail = `HTTP ${chainRes.status}`;
+  } catch (err) {
+    chainDetail = err instanceof Error ? err.message : "네트워크 오류";
+  }
+
+  if (!chainOk) {
+    await supabase
+      .from(table)
+      .update({ status: "error", error_message: `다음 라운드 호출에 실패했습니다 (${chainDetail}).` })
+      .eq("id", id);
+  }
 }
