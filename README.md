@@ -16,7 +16,7 @@
 - **Supabase**: DB(Postgres) + Storage
 - **AI**: Claude(정리본) / Gemini(문제 생성) / OpenAI(과외) — 모두 서버사이드에서만 호출
 
-## 현재 상태 — Phase E 완료 (정리본)
+## 현재 상태 — Phase F 완료 (문제풀이)
 
 **Phase A — 강의 관리**
 - **DB 스키마를 강의(Course) 중심으로 전면 재설계**했습니다 (`supabase/migrations/0001_init.sql`): `courses`, `study_materials`, `study_material_mappings`, `lecture_sessions`, `summaries`, `combined_summaries`, `combined_summary_sessions`, `questions`, `question_lecture_sessions`, `attempts`, `tutor_sessions`, `tutor_messages`. 이전의 날짜 중심 `lectures`/`lecture_files` 테이블은 제거했습니다 (아직 실제 배포 데이터가 없어 무중단 마이그레이션 없이 교체).
@@ -66,11 +66,26 @@
 - `POST /api/lecture-sessions/[id]/summary` · `POST /api/courses/[id]/combined-summary`는 이제 `status: "generating"` 행만 즉시 만들고(202) 생성은 전혀 시작하지 않습니다 — 상세 페이지가 열리는 순간부터 위 브라우저 주도 루프가 라운드 1부터 시작합니다.
 - `summaries`/`combined_summaries`에 `status`(`pending`/`generating`/`done`/`error`) · `error_message` · `round`(진행된 라운드 수) 컬럼 추가 (`supabase/migrations/0002_summary_status.sql`, `0003_summary_round.sql` — SQL Editor에서 순서대로 실행 필요).
 
+**Phase F — 문제풀이**
+- 강의 상세 → 🧠 학습 → 🧩 문제풀이 → `/courses/[courseId]/questions`: 정리본과 같은 방식으로 수업을 체크하고 한 번에 4개 카테고리(야마그대로/야마변형/티야/탈야) 문제를 전부 생성합니다.
+- 카테고리 규칙(사용자 스펙 그대로, `src/lib/ai/question-prompt.ts`):
+  - **야마그대로**: 학습지(선배 기출 복기) 발췌에서 찾은 야마를 전부, 개수 제한 없이 원문 그대로 문제화. 이번 수업 범위와 안 맞는 야마도 버리지 않고 `범위밖` 표시만. 복기가 불완전하거나 정답이 의심스러우면 `확인필요` + 사유를 남김 — 대화형이 아닌 자동 파이프라인이라 실시간으로 되물을 수 없어서, "먼저 물어보라"는 요청을 이 표시로 대신합니다(정리본의 `[확인필요]` 태그와 같은 방식).
+  - **야마변형**: 범위 안 야마만 재료로 삼아 변형, 개수는 범위 안 야마 개수와 동일.
+  - **티야**: STT에서 조금이라도 강조된 내용은 전부 — 개수 제한 없음, 이 카테고리가 가장 중요하다는 요구를 그대로 반영.
+  - **탈야대비**: 범위 안 야마에 없는 내용만, 약간 심화, 개수는 범위 안 야마 개수와 동일.
+  - 2·3·4번 공통: 정답 선지만 눈에 띄게 길지 않도록 길이를 맞추고, 오답 선지도 매력적으로(그럴듯하게) 구성.
+- **정리본과 동일한 생성 아키텍처를 그대로 재사용**합니다 — Gemini 응답도 `[Q]...[/Q]` 태그 텍스트로 받아 파싱하고(`src/lib/questions/parse.ts`), 60초 함수 실행 제한 때문에 브라우저가 라운드를 하나씩 호출하는 구조(`POST /api/question-round`)를 그대로 씁니다. 완성되면 그제서야 파싱해서 `questions` 행으로 저장합니다(도중에 잘린 마지막 `[Q]` 블록은 버리고 다음 라운드에서 다시 요청).
+- 강의록/STT/학습지 발췌를 모으는 로직(`src/lib/ai/session-materials.ts`)은 정리본(Claude)과 문제풀이(Gemini)가 공유합니다.
+- 문제 저장: `content_json`에 `{stem, choices, answerIndex, explanation, sourceNote, outOfScope}`. `확인필요`로 표시된 문제는 기존 스키마의 `review_status: "pending"` + `review_notes`를 그대로 사용(별도 컬럼 추가 없이 처음부터 이 용도로 설계돼 있었음). 정답 파싱에 실패한 문제도 자동으로 `pending` 처리.
+- 채점(`POST /api/attempts`)마다 `attempts`에 기록하고, 오답노트(`/courses/[courseId]/questions/wrong`)는 **가장 최근 시도가 오답인 문제만** 보여줍니다 — 다시 맞히면 목록에서 빠집니다.
+- `/api/courses/[id]/question-batches` (POST 생성/GET 목록), `/api/question-batches/[id]` (GET 상태/DELETE), `/api/question-round` (라운드 진행), `/api/courses/[id]/questions` (GET, `?category=`), `/api/courses/[id]/questions/wrong` (GET), `/api/attempts` (POST)
+- `GEMINI_API_KEY`가 없으면 생성 시 명확한 에러를 보여줍니다 (정리본과 동일한 원칙).
+- 새 마이그레이션 `0004_question_batches.sql` — `question_batches`/`question_batch_sessions` 테이블 추가 + `questions.question_batch_id` 컬럼 (SQL Editor에서 0001~0004 순서대로 실행).
+
 ## 다음 Phase
 
 | Phase | 내용 |
 |---|---|
-| F | 문제풀이 — 야마그대로/야마변형/티야/탈야, Gemini API, 즉시 채점 + 오답노트 |
 | G | 과외 — 채팅형 1:1, OpenAI API, 기존 과외 프롬프트 적용 |
 
 ## 로컬 개발
@@ -86,7 +101,7 @@ npm run dev
 ## Supabase 설정
 
 1. [supabase.com](https://supabase.com) 에서 새 프로젝트 생성 (무료 플랜)
-2. SQL Editor에서 `supabase/migrations/` 아래 파일들을 번호 순서대로(`0001_init.sql` → `0002_summary_status.sql` → `0003_summary_round.sql`) 실행해 테이블 생성/갱신
+2. SQL Editor에서 `supabase/migrations/` 아래 파일들을 번호 순서대로(`0001_init.sql` → `0002_summary_status.sql` → `0003_summary_round.sql` → `0004_question_batches.sql`) 실행해 테이블 생성/갱신
 3. Storage에서 아래 버킷 생성 (모두 private):
    - `lecture-pdf`
    - `stt-txt`
@@ -133,7 +148,9 @@ src/
       summary/page.tsx                  # 정리본 허브 (수업 선택 → 개별/통합 생성, 목록)
       summary/[summaryId]/page.tsx      # 개별 정리본 뷰어
       summary/combined/[combinedId]/    # 통합 정리본 뷰어
-      questions/page.tsx                # 문제풀이 (Phase F placeholder)
+      questions/page.tsx                # 문제풀이 허브 (수업 선택 + 생성 + 카테고리별 진입)
+      questions/[category]/page.tsx     # 카테고리별 문제풀이
+      questions/wrong/page.tsx          # 오답노트
       tutor/page.tsx                    # 과외 (Phase G placeholder)
       sessions/[sessionId]/page.tsx     # 수업 상세 (강의록/STT, 이 수업으로 학습)
     api/
