@@ -6,13 +6,14 @@ import { generateSummaryRound } from "@/lib/ai/generate-summary";
 import { renderAndUploadSummary } from "./generate-and-store";
 import { individualSummaryPath, combinedSummaryPath } from "./storage";
 
-// Vercel Hobby caps one function invocation (including background after()
-// work) at ~60s, so a full v3.6-style summary is built one bounded round at
-// a time across many separate invocations, chained by each round firing an
-// HTTP call to the next before it exits. MAX_ROUNDS is a safety ceiling on
-// total cost/latency if Claude somehow never reaches a natural stop.
+// Vercel caps one function invocation at ~60s, so a full v3.6-style summary
+// is built one bounded round at a time. Rounds can't chain by having the
+// server call itself, either — Vercel's own infra detects that as a request
+// loop and blocks it with a 508. So each round is triggered by the browser
+// (see /api/summary-round and the detail pages' tick loop) instead of by
+// the server. MAX_ROUNDS is a safety ceiling on total cost/latency if
+// Claude somehow never reaches a natural stop.
 const MAX_ROUNDS = 20;
-const INTERNAL_ROUND_PATH = "/api/internal/summary-round";
 
 export type SummaryKind = "individual" | "combined";
 
@@ -73,15 +74,15 @@ async function loadContext(
 }
 
 /**
- * Runs one bounded round of generation for the given summary/combined-summary
- * row. If Claude hasn't actually finished (and MAX_ROUNDS hasn't been hit),
- * persists the accumulated text and fires an HTTP call to this same logic
- * running in a fresh invocation — see docs/README for why a fresh HTTP call
- * (not an in-process loop) is required to escape the per-invocation time cap.
- * If the row was deleted or already left "generating" (finished/failed by
- * another path), this is a silent no-op.
+ * Runs exactly one bounded round of generation for the given
+ * summary/combined-summary row, then returns — it does not chain to the
+ * next round itself (see the note above on why). If Claude hasn't actually
+ * finished and MAX_ROUNDS hasn't been hit, persists the accumulated text
+ * and leaves status "generating" for the caller (the browser's tick loop)
+ * to invoke again. If the row was deleted or already left "generating"
+ * (finished/failed by another path), this is a silent no-op.
  */
-export async function runSummaryRound(kind: SummaryKind, id: string, baseUrl: string): Promise<void> {
+export async function runOneRound(kind: SummaryKind, id: string): Promise<void> {
   const supabase = createServiceClient();
   const table = kind === "individual" ? "summaries" : "combined_summaries";
 
@@ -122,32 +123,4 @@ export async function runSummaryRound(kind: SummaryKind, id: string, baseUrl: st
   }
 
   await supabase.from(table).update({ content: newText, round: newRound }).eq("id", id);
-
-  // Fire the next round as a genuinely separate invocation — awaiting only
-  // its fast 202 ack (its own after() carries the real work), so this
-  // invocation can exit well within the time limit. A silently-lost hop
-  // here previously left rows stuck at "generating" forever with no
-  // visible error — a fetch() promise only rejects on network failure, it
-  // resolves normally even for a 401/500 response, so the status must be
-  // checked explicitly, not just whether the call threw.
-  let chainOk = false;
-  let chainDetail = "";
-  try {
-    const chainRes = await fetch(`${baseUrl}${INTERNAL_ROUND_PATH}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ kind, id }),
-    });
-    chainOk = chainRes.ok;
-    if (!chainOk) chainDetail = `HTTP ${chainRes.status}`;
-  } catch (err) {
-    chainDetail = err instanceof Error ? err.message : "네트워크 오류";
-  }
-
-  if (!chainOk) {
-    await supabase
-      .from(table)
-      .update({ status: "error", error_message: `다음 라운드 호출에 실패했습니다 (${chainDetail}).` })
-      .eq("id", id);
-  }
 }

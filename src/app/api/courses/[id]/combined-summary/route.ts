@@ -1,11 +1,5 @@
-import { NextRequest, NextResponse, after } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
-import { runSummaryRound } from "@/lib/summary/run-round";
-
-// The first round runs in this invocation's after(); if it doesn't finish,
-// run-round.ts chains further rounds as separate invocations, each getting
-// this same budget — see that file for why one invocation can't just loop.
-export const maxDuration = 60;
 
 function supabaseNotConfiguredResponse() {
   return NextResponse.json(
@@ -15,11 +9,12 @@ function supabaseNotConfiguredResponse() {
 }
 
 /**
- * Generates one combined summary directly from the selected sessions' raw
- * materials (never from their individual summaries, even if those exist —
- * keeps cost down and avoids compounding errors across regenerations).
- * Returns immediately with a "generating" row; the client polls
- * GET /api/combined-summaries/[id] until status flips to "done" or "error".
+ * Creates a combined-summary row (directly from the selected sessions' raw
+ * materials, never from their individual summaries — keeps cost down and
+ * avoids compounding errors across regenerations) in "generating" status
+ * and returns immediately — it does not run any generation itself. The
+ * detail page's tick loop drives every round via POST /api/summary-round
+ * (see run-round.ts for why rounds can't be chained server-side on Vercel).
  */
 export async function POST(request: NextRequest, ctx: RouteContext<"/api/courses/[id]/combined-summary">) {
   if (!isSupabaseConfigured()) return supabaseNotConfiguredResponse();
@@ -62,9 +57,6 @@ export async function POST(request: NextRequest, ctx: RouteContext<"/api/courses
     .from("combined_summary_sessions")
     .insert(sessionIds.map((lectureSessionId) => ({ combined_summary_id: inserted.id, lecture_session_id: lectureSessionId })));
   if (linkError) return NextResponse.json({ error: linkError.message }, { status: 500 });
-
-  const baseUrl = new URL(request.url).origin;
-  after(() => runSummaryRound("combined", inserted.id, baseUrl));
 
   return NextResponse.json({ combinedSummary: inserted }, { status: 202 });
 }
