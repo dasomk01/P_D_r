@@ -81,7 +81,7 @@ export async function generateQuestionsRound(
   }
 
   const client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  const model = client.getGenerativeModel({ model: "gemini-2.5-pro", systemInstruction: QUESTION_PROMPT });
+  const model = client.getGenerativeModel({ model: "gemini-3.1-pro-preview", systemInstruction: QUESTION_PROMPT });
 
   const contents: Content[] = [{ role: "user", parts: buildParts(materials) }];
   if (priorText) {
