@@ -2,102 +2,9 @@ import "server-only";
 
 import Anthropic from "@anthropic-ai/sdk";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { STUDY_MATERIAL_BUCKET } from "@/lib/study-materials";
-import { SESSION_FILE_CONFIG, type LectureSession } from "@/lib/lecture-sessions";
-import { extractPdfPageRange, getPdfPageCount } from "@/lib/pdf-utils";
+import type { LectureSession } from "@/lib/lecture-sessions";
+import { gatherAllSessionMaterials, sessionLabel, type SessionMaterial } from "./session-materials";
 import { SUMMARY_PROMPT_ADAPTER_NOTE, SUMMARY_PROMPT_V3_6 } from "./summary-prompt";
-
-// Stay safely under Claude's 100-page-per-request PDF limit, shared across
-// every document (lecture PDFs + worksheet excerpts) in one call — a
-// combined summary can pull in several sessions at once.
-const TOTAL_PAGE_BUDGET = 90;
-
-interface SessionMaterial {
-  session: Pick<LectureSession, "id" | "date" | "period" | "professor" | "part_name">;
-  lecturePdf?: Buffer;
-  sttText?: string;
-  worksheetExcerpt?: Buffer;
-}
-
-async function gatherSessionMaterial(
-  supabase: SupabaseClient,
-  session: LectureSession,
-  pageBudget: { remaining: number },
-): Promise<SessionMaterial> {
-  const material: SessionMaterial = { session };
-
-  if (session.lecture_pdf_path && pageBudget.remaining > 0) {
-    const { data } = await supabase.storage
-      .from(SESSION_FILE_CONFIG.lecture_pdf.bucket)
-      .download(session.lecture_pdf_path);
-    if (data) {
-      const buf = Buffer.from(await data.arrayBuffer());
-      const pageCount = await getPdfPageCount(buf).catch(() => 0);
-      if (pageCount > pageBudget.remaining) {
-        material.lecturePdf = await extractPdfPageRange(buf, 1, pageBudget.remaining);
-        pageBudget.remaining = 0;
-      } else {
-        material.lecturePdf = buf;
-        pageBudget.remaining -= pageCount;
-      }
-    }
-  }
-
-  if (session.stt_path) {
-    const { data } = await supabase.storage.from(SESSION_FILE_CONFIG.stt_txt.bucket).download(session.stt_path);
-    if (data) material.sttText = await data.text();
-  }
-
-  if (session.part_name && pageBudget.remaining > 0) {
-    const { data: activeMaterial } = await supabase
-      .from("study_materials")
-      .select("id, storage_path")
-      .eq("course_id", session.course_id)
-      .eq("is_active", true)
-      .maybeSingle();
-
-    if (activeMaterial) {
-      const { data: mapping } = await supabase
-        .from("study_material_mappings")
-        .select("page_start, page_end")
-        .eq("study_material_id", activeMaterial.id)
-        .ilike("part_name", session.part_name)
-        .maybeSingle();
-
-      if (mapping?.page_start != null && mapping?.page_end != null) {
-        const { data: fileData } = await supabase.storage
-          .from(STUDY_MATERIAL_BUCKET)
-          .download(activeMaterial.storage_path);
-        if (fileData) {
-          const buf = Buffer.from(await fileData.arrayBuffer());
-          const rangePages = mapping.page_end - mapping.page_start + 1;
-          const pagesToUse = Math.min(rangePages, pageBudget.remaining);
-          if (pagesToUse > 0) {
-            try {
-              material.worksheetExcerpt = await extractPdfPageRange(
-                buf,
-                mapping.page_start,
-                mapping.page_start + pagesToUse - 1,
-              );
-              pageBudget.remaining -= pagesToUse;
-            } catch {
-              // malformed page range on the mapping — skip the excerpt, summary still works without it
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return material;
-}
-
-function sessionLabel(session: SessionMaterial["session"]): string {
-  const parts = [`${session.date} ${session.period}교시`];
-  if (session.professor) parts.push(session.professor);
-  if (session.part_name) parts.push(session.part_name);
-  return parts.join(" · ");
-}
 
 type ContentBlock =
   | { type: "text"; text: string; cache_control?: { type: "ephemeral" } }
@@ -198,11 +105,7 @@ export async function generateSummaryRound(
     throw new Error("정리본을 생성할 수업이 없습니다.");
   }
 
-  const pageBudget = { remaining: TOTAL_PAGE_BUDGET };
-  const materials: SessionMaterial[] = [];
-  for (const session of sessions) {
-    materials.push(await gatherSessionMaterial(supabase, session, pageBudget));
-  }
+  const materials: SessionMaterial[] = await gatherAllSessionMaterials(supabase, sessions);
 
   if (materials.every((m) => !m.lecturePdf && !m.sttText)) {
     throw new Error("강의록 또는 STT가 하나도 업로드되지 않았습니다. 먼저 자료를 업로드하세요.");
