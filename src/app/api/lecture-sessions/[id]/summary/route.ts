@@ -1,11 +1,5 @@
-import { NextRequest, NextResponse, after } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient, isSupabaseConfigured } from "@/lib/supabase/server";
-import { runSummaryRound } from "@/lib/summary/run-round";
-
-// The first round runs in this invocation's after(); if it doesn't finish,
-// run-round.ts chains further rounds as separate invocations, each getting
-// this same budget — see that file for why one invocation can't just loop.
-export const maxDuration = 60;
 
 function supabaseNotConfiguredResponse() {
   return NextResponse.json(
@@ -15,14 +9,13 @@ function supabaseNotConfiguredResponse() {
 }
 
 /**
- * Generates an individual summary for one lecture session (uses only that
- * session's materials). Returns immediately with a "generating" row and
- * does the actual Claude call + rendering in the background — a full
- * summary routinely takes longer than a synchronous request should block
- * on. The client polls GET /api/summaries/[id] until status flips to
- * "done" or "error".
+ * Creates an individual summary row for one lecture session in "generating"
+ * status and returns immediately — it does not run any generation itself.
+ * The detail page's tick loop drives every round via POST
+ * /api/summary-round (see run-round.ts for why rounds can't be chained
+ * server-side on Vercel).
  */
-export async function POST(request: NextRequest, ctx: RouteContext<"/api/lecture-sessions/[id]/summary">) {
+export async function POST(_request: NextRequest, ctx: RouteContext<"/api/lecture-sessions/[id]/summary">) {
   if (!isSupabaseConfigured()) return supabaseNotConfiguredResponse();
   const { id: sessionId } = await ctx.params;
 
@@ -55,9 +48,6 @@ export async function POST(request: NextRequest, ctx: RouteContext<"/api/lecture
     .select("*")
     .single();
   if (insertError) return NextResponse.json({ error: insertError.message }, { status: 500 });
-
-  const baseUrl = new URL(request.url).origin;
-  after(() => runSummaryRound("individual", inserted.id, baseUrl));
 
   return NextResponse.json({ summary: inserted }, { status: 202 });
 }

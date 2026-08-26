@@ -58,8 +58,12 @@
 
 **Phase E-1 — 정리본 생성 안정화 (실사용 피드백 반영)**
 - 실제 강의로 돌려보니 두 가지 문제가 있었습니다: (1) `max_tokens` 고정값(8192) 탓에 본문 중간에서 응답이 끊겨 마인드맵/출제경향/총평까지 도달하지 못함, (2) Claude가 태그 스펙과 다른 형식([H1]/[H2], "이미지:" 등)을 즉흥적으로 섞어써서 파서가 못 읽고 원문 그대로 노출됨. `src/lib/ai/summary-prompt.ts`(어댑터 노트만 보정, v3.6 원문은 그대로), `src/lib/summary/parse.ts`, `src/lib/ai/generate-summary.ts`에서 고쳤습니다.
-- **생성을 "60초 안에 끝나는 라운드"로 쪼개고, 각 라운드가 스스로 다음 라운드를 호출하는 체인 구조**로 재설계했습니다 (`src/lib/summary/run-round.ts`, `src/app/api/internal/summary-round/route.ts`). 처음엔 백그라운드(`after()`)로만 전환했는데, 실제로 돌려보니 `after()`도 같은 함수 호출 안에서 도는 거라 Vercel Hobby의 60초 실행 제한을 그대로 물려받아 여전히 중간에 죽는 게 로그로 확인됐습니다 — Runtime 시간 초과 에러. 그래서 한 라운드(최대 35초, `ROUND_WALL_CLOCK_BUDGET_MS`)가 끝나면 결과를 DB에 저장하고, 아직 안 끝났으면(`stop_reason`이 `max_tokens`거나 우리가 직접 abort) **자기 자신을 새 HTTP 요청으로 재호출**해 완전히 새로운 함수 실행에서 이어가도록 바꿨습니다. 각 라운드는 독립된 60초 예산을 받기 때문에, 전체 생성 시간에는 이제 상한이 없습니다(대신 총 20라운드 안전장치 有). 원본 문서와 시스템 프롬프트는 prompt caching(`cache_control`)으로 캐싱해 매 라운드 자료를 다시 보내는 비용을 낮췄습니다.
-- `POST /api/lecture-sessions/[id]/summary` · `POST /api/courses/[id]/combined-summary`는 `status: "generating"` 행을 즉시 만들어 응답하고(202), 첫 라운드부터 위 체인이 시작됩니다. 상세 페이지는 3초 간격으로 폴링해 완료되면 자동으로 결과를 표시하고, 브라우저 탭을 닫아도 서버 쪽 체인은 계속 진행됩니다.
+- **생성을 "60초 안에 끝나는 라운드" 단위로 쪼갰습니다** (`src/lib/summary/run-round.ts`, `src/lib/ai/generate-summary.ts`의 `generateSummaryRound`). 한 라운드는 최대 35초(`ROUND_WALL_CLOCK_BUDGET_MS`, 토큰 수가 아니라 실제 경과 시간 기준 강제 중단)만 Claude를 돌리고, 아직 못 끝냈으면(`stop_reason`이 `max_tokens`거나 우리가 직접 abort) 지금까지 쓴 내용을 DB에 저장한 뒤 "generating" 상태로 남겨둡니다.
+  - 처음엔 이 라운드가 끝나면 **서버가 스스로에게 새 HTTP 요청을 보내** 다음 라운드를 새 함수 실행에서 이어가는 체인으로 만들었는데, 실제로 돌려보니 Vercel 인프라가 이걸 무한 루프로 감지해서 `508 Loop Detected`로 차단했습니다 — 서버가 자기 자신을 호출하는 방식 자체가 이 플랫폼에서 안 됩니다.
+  - 그래서 최종적으로는 **브라우저가 라운드를 하나씩 직접 호출**하는 구조로 바꿨습니다: 정리본 상세 페이지(`/courses/[courseId]/summary/[summaryId]`, `.../summary/combined/[combinedId]`)가 `status`가 `generating`인 동안 `POST /api/summary-round`를 호출 → 완료를 기다림 → 최신 상태를 다시 불러옴 → 아직 안 끝났으면 반복하는 루프를 돌립니다. 라운드 하나당 최대 60초(Vercel 함수 duration)만 쓰기 때문에 이 안에서 안전하고, 전체 생성 시간에는 더 이상 상한이 없습니다(대신 총 20라운드 안전장치 有).
+  - 트레이드오프: 이 루프를 브라우저가 직접 돌리기 때문에 **정리본 생성 중엔 그 탭을 열어둬야** 진행됩니다. 탭을 닫으면 그 시점까지 쓴 내용은 DB에 저장된 채로 멈추고, 다시 그 페이지를 열면 멈춘 라운드부터 자동으로 이어서 진행됩니다 — 완전히 날아가진 않습니다.
+  - 원본 문서와 시스템 프롬프트는 prompt caching(`cache_control`)으로 캐싱해, 라운드마다 자료를 다시 보내는 비용을 낮췄습니다.
+- `POST /api/lecture-sessions/[id]/summary` · `POST /api/courses/[id]/combined-summary`는 이제 `status: "generating"` 행만 즉시 만들고(202) 생성은 전혀 시작하지 않습니다 — 상세 페이지가 열리는 순간부터 위 브라우저 주도 루프가 라운드 1부터 시작합니다.
 - `summaries`/`combined_summaries`에 `status`(`pending`/`generating`/`done`/`error`) · `error_message` · `round`(진행된 라운드 수) 컬럼 추가 (`supabase/migrations/0002_summary_status.sql`, `0003_summary_round.sql` — SQL Editor에서 순서대로 실행 필요).
 
 ## 다음 Phase

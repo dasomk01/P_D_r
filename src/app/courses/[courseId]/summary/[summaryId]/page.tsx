@@ -11,6 +11,7 @@ interface SummaryDetail {
   id: string;
   version: number;
   status: "pending" | "generating" | "done" | "error";
+  round: number;
   error_message: string | null;
   content: string | null;
   docx_url: string | null;
@@ -18,10 +19,12 @@ interface SummaryDetail {
   lecture_session: { date: string; period: number; part_name: string | null; professor: string | null } | null;
 }
 
-// Generation now runs as a chain of ~60s-bounded rounds (see
-// src/lib/summary/run-round.ts), so a legitimately-still-working summary can
-// take a few minutes end to end. Only flag it as possibly stuck well past
-// what even a large combined summary should reasonably need.
+// Vercel blocks a function calling back into its own deployment (508 Loop
+// Detected), so rounds can't chain server-side — this page itself drives
+// each round by calling /api/summary-round and waiting for it, then
+// re-fetching state, in a loop. That means generation only progresses while
+// this page is open; closing the tab just pauses it (progress so far is
+// saved), and reopening resumes from where it left off.
 const STALE_GENERATION_MS = 240_000;
 
 export default function IndividualSummaryPage() {
@@ -38,27 +41,46 @@ export default function IndividualSummaryPage() {
     let cancelled = false;
     const startedAt = Date.now();
 
-    function load() {
-      fetch(`/api/summaries/${summaryId}`)
-        .then(async (res) => {
-          const body = await res.json();
-          if (!res.ok) throw new Error(body.error ?? "정리본을 불러오지 못했습니다.");
-          return body as { summary: SummaryDetail };
-        })
-        .then((body) => {
-          if (cancelled) return;
-          setSummary(body.summary);
-          if (body.summary.status === "generating") {
-            if (Date.now() - startedAt > STALE_GENERATION_MS) setStale(true);
-            else setTimeout(load, 3000);
-          }
-        })
-        .catch((err) => {
-          if (!cancelled) setError(err instanceof Error ? err.message : "정리본을 불러오지 못했습니다.");
-        });
+    async function loadFull(): Promise<SummaryDetail> {
+      const res = await fetch(`/api/summaries/${summaryId}`);
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error ?? "정리본을 불러오지 못했습니다.");
+      return (body as { summary: SummaryDetail }).summary;
     }
 
-    load();
+    async function tickOnce() {
+      const res = await fetch("/api/summary-round", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ kind: "individual", id: summaryId }),
+      });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.error ?? "정리본 생성에 실패했습니다.");
+    }
+
+    async function run() {
+      try {
+        let current = await loadFull();
+        if (cancelled) return;
+        setSummary(current);
+
+        while (!cancelled && current.status === "generating") {
+          if (Date.now() - startedAt > STALE_GENERATION_MS) {
+            setStale(true);
+            break;
+          }
+          await tickOnce();
+          if (cancelled) return;
+          current = await loadFull();
+          if (cancelled) return;
+          setSummary(current);
+        }
+      } catch (err) {
+        if (!cancelled) setError(err instanceof Error ? err.message : "정리본을 불러오지 못했습니다.");
+      }
+    }
+
+    run();
     return () => {
       cancelled = true;
     };
@@ -140,13 +162,13 @@ export default function IndividualSummaryPage() {
 
       {summary.status === "generating" && !stale && (
         <div className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-          ⏳ 정리본을 생성하고 있습니다. 여러 단계로 나눠 이어서 작성하는 방식이라 자료 분량에 따라 몇 분 정도 걸릴 수 있어요. 이 화면을 닫아도 서버에서 계속 진행되며, 다시 열면 이어서 표시됩니다.
+          ⏳ 정리본을 생성하고 있습니다 (라운드 {summary.round + 1} 진행 중). 여러 단계로 나눠 이어서 작성하는 방식이라 자료 분량에 따라 몇 분 정도 걸릴 수 있어요. <strong>이 화면을 열어둔 채로 기다려주세요</strong> — 탭을 닫으면 진행이 멈추지만, 지금까지 쓴 내용은 저장돼 있어서 다시 열면 이어서 진행됩니다.
         </div>
       )}
 
       {summary.status === "generating" && stale && (
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm text-amber-700 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-300">
-          생성이 예상보다 오래 걸리고 있습니다. 이어서 진행 중인 작업이 중간에 끊겼을 가능성이 있어요 — 잠시 더 기다려보고, 계속 이 상태면 삭제 후 다시 시도해 주세요.
+          생성이 예상보다 오래 걸리고 있습니다. 페이지를 새로고침해서 이어서 시도해보고, 계속 이 상태면 삭제 후 다시 시도해 주세요.
         </div>
       )}
 
