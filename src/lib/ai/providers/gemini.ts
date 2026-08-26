@@ -15,7 +15,7 @@ export class GeminiProvider implements AIProvider {
     const rest = messages.filter((m) => m.role !== "system");
 
     const model = this.client.getGenerativeModel({
-      model: "gemini-2.5-pro",
+      model: "gemini-3.1-pro-preview",
       systemInstruction: system,
     });
 
