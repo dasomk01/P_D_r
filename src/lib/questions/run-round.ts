@@ -76,7 +76,7 @@ export async function runOneQuestionRound(batchId: string): Promise<void> {
     }
 
     const rows = parsed.map((q) => {
-      const answerUnparsed = q.answerIndex === null;
+      const answerUnparsed = q.format === "subjective" ? !q.answerText : q.answerIndex === null;
       const needsReview = q.needsReview || answerUnparsed;
       const reviewNotes = answerUnparsed
         ? [q.reviewReason, "정답 파싱 실패 — 직접 확인 필요"].filter(Boolean).join(" / ")
@@ -86,9 +86,11 @@ export async function runOneQuestionRound(batchId: string): Promise<void> {
         course_id: batch.course_id,
         category: q.category,
         content_json: {
+          format: q.format,
           stem: q.stem,
           choices: q.choices,
           answerIndex: q.answerIndex ?? 0,
+          answerText: q.answerText,
           explanation: q.explanation,
           sourceNote: q.sourceNote,
           outOfScope: q.outOfScope,
