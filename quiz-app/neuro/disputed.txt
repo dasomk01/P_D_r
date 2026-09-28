@@ -1,0 +1,267 @@
+## topic-001-area-yama-q-005 야마 · 5/41 · 야마 2023 객1 · 학습지 319쪽 원문대조
+S: 우세 반구의 브로드만 영역 40, 39이 손상된 경우 발생 할 수 있는 증상을 고르시오.
+C: 1. 운동실어증 | 2. 감각실어증 | 3. 미각상실 | 4. 후각상실 | 5. 시야장애
+A: [2] 2. 감각실어증
+B: 원본의 감각실어증 정답을 보존한다. 현재 강의록 7·32·33·39쪽은 BA22를 Wernicke, BA39·40을 Geschwind/삼차 두정 연합영역으로 구분한다.
+E: Broca 영역 BA44·45의 말 산출 기능과 관련된다. | 학습지 제공 답이다. 다만 현재 강의는 Wernicke BA22와 Geschwind BA39·40을 구별한다. | 미각피질 BA43 등의 미각 경로 장애에 관련된다. | 후각 경로 장애이며 BA39·40의 대표 기능이 아니다. | 일차시각피질·시방사 등 시각 경로 병변에 관련된다.
+
+## topic-001-area-yama-q-007 야마 · 7/41 · 야마 2023 객3 · 학습지 320쪽 원문대조
+S: 기저핵의 output이 되는 부위를 고르시오.
+C: 1. striatum | 2. Globus pallidus interna | 3. Globus pallidus externa | 4. Substantia nigra | 5. caudate nucleus
+A: [2] 2. Globus pallidus interna
+B: 원본 정답 GPi를 보존한다. 강의록 41–42쪽의 기저핵 회로에서 GPi가 시상으로 억제성 출력을 보낸다.
+E: 선조체: 꼬리핵·조가비핵으로 구성되며 기저핵의 주요 입력부이다. | GPi: 기저핵 주요 출력핵이며 시상에 억제성 출력을 보낸다. | GPe: 간접경로 중계에 관여하며 GPi와 구별한다. | 흑질은 SNc와 SNr로 나뉜다. SNr도 출력핵이므로 하위부분을 적지 않은 이 선지는 엄밀한 단일정답 해석에 모호함이 있다. | 꼬리핵: 선조체 구성 요소로 주로 입력부에 속한다.
+
+## topic-001-area-yama-q-008 야마 · 8/41 · 야마 2023 객4 · 학습지 320쪽 원문대조
+S: 해마에서 시작되는 fornix가 도착하는 구조물을 고르시 오.
+C: 1. Amygdala | 2. Septal nuclei | 3. Cingulate gyrus | 4. Mammillary body | 5. Anterior nucleus of thalamus
+A: [4] 4. Mammillary body
+B: 제공 답 유두체를 보존한다. 3교시 STT 10:29·28:15의 해마→뇌궁→유두체→앞시상핵 기억 경로에 대응한다.
+E: 편도체는 정서·두려움 등과 관련되며 이 문항에서 제시된 대표 해마→뇌궁 경로의 유두체와 구별한다. | 중격핵도 해마 뇌궁 섬유를 받을 수 있다. 따라서 이 문제의 목적지는 대표적인 유두체 경로로 한정해야 한다. | 띠이랑은 기억·정서 회로의 피질 구성 요소이며 제시된 대표 경로에서는 시상 다음에 연결된다. | 유두체: 해마에서 뇌궁을 통해 도달하는 대표적인 기억 회로 구조이다. | 앞시상핵: 유두체에서 유두시상로를 통해 연결되는 다음 구조이다.
+
+## topic-001-area-yama-q-009 👑👑 킹킹야 · 3회 (2022, 2021, 2020)야마 · 9/41 · 야마 2022 객5 · 학습지 320쪽 원문대조
+S: Dominant hemisphere의 Boradmann area 39, 40이 손상되었을 때 나타나는 증상은?
+C: 1. Motor aphasia | 2. Sensory aphasia | 3. Loss of taste | 4. Anosmia | 5. Anopia
+A: [2] 
+B: 원본의 감각실어증 정답을 보존한다. 현재 강의록 7·32·33·39쪽은 BA22를 Wernicke, BA39·40을 Geschwind/삼차 두정 연합영역으로 구분한다.
+E: Broca 영역 BA44·45의 말 산출 기능과 관련된다. | 학습지 제공 답이다. 다만 현재 강의는 Wernicke BA22와 Geschwind BA39·40을 구별한다. | 미각피질 BA43 등의 미각 경로 장애에 관련된다. | 후각 경로 장애이며 BA39·40의 대표 기능이 아니다. | 시각 소실을 의미하며 이 문제의 제공 답은 아니다.
+
+## topic-001-area-yama-q-010 👑 킹야 · 2회 (2022, 2021)야마 · 10/41 · 야마 2022 객6 · 학습지 320쪽 원문대조
+S: basal ganglia의 output은?
+C: 1. striatum | 2. globus pallidus interna | 3. globus pallidus externus | 4. substantia nigra | 5. subthalamic nucleus
+A: [2] 
+B: 원본 정답 GPi를 보존한다. 강의록 41–42쪽의 기저핵 회로에서 GPi가 시상으로 억제성 출력을 보낸다.
+E: 선조체: 꼬리핵·조가비핵으로 구성되며 기저핵의 주요 입력부이다. | GPi: 기저핵 주요 출력핵이며 시상에 억제성 출력을 보낸다. | GPe: 간접경로 중계에 관여하며 GPi와 구별한다. | 흑질은 SNc와 SNr로 나뉜다. SNr도 출력핵이므로 하위부분을 적지 않은 이 선지는 엄밀한 단일정답 해석에 모호함이 있다. | 시상하핵: 간접경로 등에 참여하며 주요 시상 억제 출력핵인 GPi와 구별한다.
+
+## topic-001-area-yama-q-011 야마 · 11/41 · 야마 2022 객7 · 학습지 320–321쪽 원문대조
+S: hippocampus에서 시작해서 fornix에 잇는 것을 고르시오.
+C: 1. sepal nuclei | 2. cingulate gyrus | 3. stria terminalis | 4. mammilary body | 5. amygdaloid body
+A: [4] 4. mammilary body
+B: 제공 답 유두체를 보존한다. 3교시 STT 10:29·28:15의 해마→뇌궁→유두체→앞시상핵 기억 경로에 대응한다.
+E: 원문은 sepal nuclei이다. septal nuclei를 뜻한다면 뇌궁 연결이 있어 유두체와 복수 해석 가능성을 확인해야 한다. | 띠이랑은 기억·정서 회로의 피질 구성 요소이며 제시된 대표 경로에서는 시상 다음에 연결된다. | 분계선조: 편도체의 주요 연결 경로로, 해마 뇌궁과 구별한다. | 원문 철자는 mammilary body이며 유두체를 가리킨다. 해마에서 뇌궁으로 연결되는 대표 목적지이다. | 편도체: 정서와 관련된 변연계 구조이다. 대표적인 해마→뇌궁→유두체 경로와 구별한다.
+
+## topic-001-area-yama-q-018 야마 · 18/41 · 야마 2020 객20 · 학습지 322쪽 원문대조
+S: Basal ganglia의 output에 해당하는 부위를 고르시오.
+C: 1. Striatum | 2. Globus pallidus interna | 3. Globus pallidus externus | 4. Substantia nigra | 5. Subthalamic nucleus
+A: [2] 2. Globus pallidus interna
+B: 원본 정답 GPi를 보존한다. 강의록 41–42쪽의 기저핵 회로에서 GPi가 시상으로 억제성 출력을 보낸다.
+E: 선조체: 꼬리핵·조가비핵으로 구성되며 기저핵의 주요 입력부이다. | GPi: 기저핵 주요 출력핵이며 시상에 억제성 출력을 보낸다. | GPe: 간접경로 중계에 관여하며 GPi와 구별한다. | 흑질은 SNc와 SNr로 나뉜다. SNr도 출력핵이므로 하위부분을 적지 않은 이 선지는 엄밀한 단일정답 해석에 모호함이 있다. | 시상하핵: 간접경로 등에 참여하며 주요 시상 억제 출력핵인 GPi와 구별한다.
+
+## topic-001-area-yama-q-021 야마 · 21/41 · 야마 2019 객72 · 학습지 324쪽 원문대조
+S: 다음 중 양 쪽 hemisphere를 연결하는 구조물이 아닌 것은?
+C: 1. anterior commissure | 2. median eminence | 3. hippocampal commissure | 4. corpus callosum | 5. massa intermedia
+A: [2] 2. median eminence
+B: 제공 답은 median eminence이다. 현재 수업도 반구 사이의 연결을 설명하지만 massa intermedia와 진정한 맞교차는 구별해야 한다.
+E: 앞맞교차: 반구 사이를 연결하는 섬유 다발. | 정중융기: 시상하부-뇌하수체 신경내분비 연결과 관련된 부위이며 반구 사이 맞교차가 아니다. | 해마맞교차: 양측 해마 관련 섬유 연결. | 뇌량: 양측 대뇌반구의 주요 맞교차 섬유 다발. | 시상간유착: 양쪽 시상을 연결하는 회백질 다리로 전형적인 반구간 백질 맞교차와는 다르다.
+
+## topic-001-area-yama-q-029 야마 · 29/41 · 야마 2017 주11 · 학습지 326쪽
+S: Consciousness와 관련 있는 RAS의 core는 thalamus의 centromedian nucleus, parafascicular nucleus, 그리고 이것이다. 이것은 무엇인가?
+C: 
+A: [] internal medullary lamina (intra laminar nucleus) — 원본도 답 불확실 표시
+B: 수질판(internal medullary lamina)은 백질판, 수질판속핵(intralaminar nuclei)은 그 안의 핵군이다. 구조와 핵을 동의어로 처리하면 안 된다. 중심정중핵·다발곁핵은 핵군의 구성 요소이다.
+E: 
+
+## topic-001-area-yama-q-033 야마 · 33/41 · 야마 2016 주14 · 학습지 327쪽
+S: Amygdala와 Hippocampus를 연결하는 구조물의 이름을 쓰시오.
+C: 
+A: [] Fornix
+B: 원본 답은 Fornix이다. 현재 STT는 해마→뇌궁→유두체 경로를 설명한다.
+E: 
+
+## topic-002-area-yama-q-012 야마 · 12/29 · 야마 2019 객71 · 학습지 336쪽 원문대조
+S: 반복성 세균성 수막염으로 아이가 내원하였다. Physical exam을 해보니 L1 level에 구멍이 있었다. 시행해야 할 검사는?
+C: 1. Brain CT | 2. urine culture | 3. L spine MRI | 4. blood chemistry | 5. lumbosacral puncture
+A: [3] 3. L spine MRI
+B: 반복 세균성 수막염 + L1 구멍 → CDST 의심. 수업 PPT와 문헌에서 MRI로 누관의 깊이·척수 연결을 확인한다(복원자 추정: L-spine MRI).
+E: Brain CT: 병변은 요추부이며 누관 확인에 부적합. | Urine culture: 무관. | 정답. L-spine MRI로 누관 깊이와 척수 연결 확인. | Blood chemistry: 진단 불가. | Lumbosacral puncture: 감염 경로가 될 수 있어 부적절.
+
+## topic-002-area-yama-q-028 야마 · 28/29 · 야마 2011 주9 · 학습지 342쪽
+S: Filum terminale가 두꺼워져 있거나 lipoma, lipomyelomeningocele과 같은 병변이 conus medullaris의 상방이동과 spinal cord의 성장을 억제하여 족부기형, 배뇨장애, 비뇨기계 감염을 일으킬 수 있는 질환은 무엇인지 쓰시오.
+C: 
+A: [] Disorders of secondary neurulation (tethered cord)
+B: thickened filum terminale, lipoma·lipomyelomeningocele이 conus의 상방이동을 막는 질환(복원자 김수연). 복원자도 "문제가 요구하는 것이 정확히 무엇인지 모르겠다"고 적음 → tethered cord syndrome도 가능한 답.
+E: 
+
+## topic-003-area-yama-q-007 야마 · 7/39 · 야마 2023 객8 · 학습지 177–178쪽 원문대조
+S: 다음과 같은 척수 손상 환자에서 나타나는 이상 소견 은?
+C: 1. 병변부위 이하로 초기에 강직성 마비가 나타나고 후에 이완성 마비로 진행한다 | 2. 반대측에 위치감각, 진동감각이 소실된다 | 3. 병변측에서 온도감각을 정상적으로 인지한다 | 4. 반대측에서 이완성마비가 관찰된다 | 5. 병변측에서 물체를 만져서 구별해내는 것은 가능하다
+A: [3] 3. 병변측에서 온도감각을 정상적으로 인지한다
+B: 그림은 Brown-Séquard(척수 반절) 손상. spinothalamic tract는 들어오자마자 교차하므로 병변측 하부의 온도감각은 정상 전달된다. ※ 정답 미공개, 복원자 사견으로 ③.
+E: 척수 반절 손상의 전형적 소견으로 제시되지 않는다(복원자도 불확실). | 위치·진동감각(후색)은 동측에서 소실된다. | 정답(복원자 사견). 병변측 온도감각은 보존. | 운동 마비는 동측에서 나타난다. | fine touch(후색)는 병변측에서 소실되므로 물체 구별(입체인지)이 어렵다.
+
+## topic-003-area-yama-q-038 야마 · 38/39 · 야마 2011 주2 · 원문 복원 불완전
+S: Sensation의 modality와 담당 tract 및 fiber size에 대해서 기술하시오.
+C: 
+A: [] 원본 학습지에 제공 정답 미기재
+B: 원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.
+E: 
+
+## topic-004-area-yama-q-002 야마 · 2/26 · 야마 2025 객55 · 학습지 92쪽 원문대조
+S: 다음 중 시신경염에서 다발성경화증으로 진행할 가능성 을 가장 잘 예측하는 것은?
+C: 1. 시신경 mri에서 typical type optic neuritis 소견 을 관찰(T2영상) | 2. VEP에서 P100>=100ms | 3. 경두개 MRI T2에서 고신호 병변이 두 군데 이상 존 재 | 4. 뇌척수액 검사에서 oligoclonal band 양성 | 5. 안저검사상 시신경유두부종
+A: [3] 3. 경두개 MRI T2에서 고신호 병변이 두 군데 이상 존 재
+B: 시신경염 환자에서 MS로의 진행 예측인자: 뇌 MRI T2 고신호 병변(14년 객38: "MS로 가는 위험인자로 MRI T2 소견이 중요하다"). 전형적 시신경염이 MS와 연관. 복원자 정답 표기가 "③?⑤"로 불확실.
+E: typical optic neuritis는 MS와 연관되지만 시신경 MRI 소견이 가장 좋은 예측인자는 아니다. | VEP P100 지연은 시신경 탈수초를 반영하나 MS 진행 예측인자는 아니다. | 정답. 뇌 MRI T2 고신호 병변 2개 이상. | OCB 양성도 위험인자이나 뇌 MRI 병변이 가장 강력한 예측인자이다. | 시신경유두부종은 비전형적(NMO/MOG) 시신경염 쪽 소견이다.
+
+## topic-004-area-yama-q-024 야마 · 24/26 · 야마 2012 객28 · 학습지 104–105쪽 원문대조
+S: 28세 여자 환자가 우측 상하지 감각 장애를 증상으로 왔다. 과거력상 19세 때 시신경염으로 치료를 받은 적이 있고, 21세 때는 좌측의 상하지 마비로 치료받았었다. 다음은 환자의 뇌자기 공명영상 소견이다. 적절한 치료는?
+C: 1. Steroid agent | 2. Antibiotics | 3. Antifungal agent | 4. Omega3 | 5. Cholinergic drug
+A: [1] 1. Steroid agent
+B: 반복 발병(시신경염, 상하지 마비) + 뇌 MRI → MS 재발. 기존 야마 답은 interferon-β였으나 이 문제 보기에 없어, 재발이므로 steroid로 복원(복원자 추정).
+E: 정답(복원자 추정). 급성 재발 치료로 스테로이드. | 항생제: 감염 아님. | 항진균제: 무관. | Omega3: 치료 근거 없음. | Cholinergic drug: MG 등 치료.
+
+## topic-005-area-yama-q-023 야마 · 23/29 · 야마 2015 객19 · 학습지 124쪽 원문대조
+S: 다음 환자에서 적절한 치료제는?
+56세 여성, 한 달 전부터 서서히 대칭적으로 진행된 사지근위부와 몸통의 근쇠약을 보이며 피부병소는 없었다. 위약은 어깨근육과 pelvic girdle 근육 등 근위부 근육 위약이 심하다. 외안근과 얼굴근육은 정상이다. 검사상 CK 상승했고 근전도에서는 myopathic changes를 보였다. 근조직 검사상 lymphocytic inflammation이 보였다.
+C: 1. IV prednisone | 2. IVIG | 3. Subcutaneous injection? | 4. Oral anticoagulant | 5. Oral physiostigmine
+A: [2] 2. IVIG
+B: PM(피부병소 없는 근위부 위약, CK↑, 근병증 EMG, lymphocytic inflammation) 일차 치료는 경구 prednisone. 복원된 보기에 경구 스테로이드가 없어 IVIG로 답했으나, 동기 제보로는 3번이 oral prednisone이었을 수 있다(그러면 3번이 정답).
+E: IV prednisone: 강의록의 스테로이드는 경구(IV는 methylprednisolone 펄스). | 정답(복원자 기준). IVIG. | (복원 불확실한 선지 — oral prednisone이었을 가능성) | 경구 항응고제: 무관. | physostigmine: MG 치료 아님.
+
+## topic-008-area-yama-q-025 야마 · 25/27 · 야마 2010 객62 · 학습지 579쪽 원문대조
+S: 편두통시 peripheral sensitization에 의한 증상은?
+C: 1. Phonophobia | 2. Cutaneous allodynia | 3. Photophobia | 4. Contralateral allodynia | 5. 일상적인 움직임에 박동성 두통
+A: [5] 5. 일상적인 움직임에 박동성 두통
+B: Peripheral sensitization of trigeminal ganglion neuron: 몸을 숙이거나 기침 등 ICP를 높이는 활동에 박동성 두통이 악화. 나머지(allodynia, photo·phonophobia)는 central sensitization. 복원자: 해답에는 ②로 되어 있어 확실하지 않음.
+E: Phonophobia: central sensitization(thalamus). | Cutaneous allodynia: central sensitization(2nd order TNC). | Photophobia: central sensitization. | Contralateral allodynia: 해당 없음. | 정답(복원자 기준). 일상 움직임에 박동성 두통 악화.
+
+## topic-009-area-yama-q-002 야마 · 2/47 · 야마 2025 객30 · 학습지 381쪽 (정답·선지 복원 불완전)
+S: 여성 환자 과거력 – 고혈압, 약은 불규칙적 사용 내원 당시 활력징후 - 고혈압, 나머지는 크게 이상 없 음 신체검사 - 어지러워서 자세를 변경하려 하지 않음, Kernig sign + 경부 강직, 동공 대칭, 빛 반사 정상, 검 사 도중 시야가 흐려졌다 말함 혈액검사 수치는 troponin I: 0.12 ng/mL (이외 결과는 잘 기억 안남…) 다음으로 해야 할 것은?
+C: 1. (선지 복원 실패) | 2. 심혈관 추가검사를 실시한다. | 3. 혈압을 낮추는 내과적 치료를 실시한다. | 4. 지주막하 출혈 관련 선지(원문 복원 실패) | 5. 감염성 수막염 가능성을 배제하기 위해 요추천자, CSF 검사를 실시한다.
+A: [5] 5. 감염성 수막염 가능성을 배제하기 위해 요추천자, CSF 검사를 실시한다.
+B: 복원자 정답 "⑤?" — 문제·선지 복원이 불완전(1번 공란, 4번은 "지주막하 출혈 관련 선지"로만 기억). Kernig sign·경부강직으로 뇌수막염을 생각해 CSF 검사를 골랐다는 의견과, 신병수 교수님 두통 강의록의 비외상성 SAH 경부강직 내용으로 4번을 골랐다는 학습부 의견이 갈린다. 박정수 교수님은 SAH 치료(coiling vs clipping)를 강조.
+E: (선지 복원 실패) | troponin 경미 상승만으로 심혈관 검사가 우선은 아니다. | 혈압 조절은 필요하나 다음 단계의 핵심 검사는 아니다. | (SAH 관련 선지 — 원문 미상) | 복원자 정답 후보.
+
+## topic-009-area-yama-q-004 야마 · 4/47 · 야마 2023 객38 · 학습지 382쪽 원문대조
+S: 54세 여자 환자가 의식 저하를 주소로 응급실 내원하였 다. 반혼수 상태의 의식 수준이었으며 특별한 기저질환 은 없는 상태였다. 응급실 내원 시 뇌 전산화 단층 촬 영 및 치료 후의 사진이다. 환자의 진단명 및 시행한 수술명은?
+C: 1. Subarachnoid hemorrhage, endovascular coil embolization | 2. Acute subdural hemorrhage, trephination | 3. Intracerebral hemorrhage, craniotomy | 4. Subarachnoid hemorrhage, clipping | 5. Intraventricular hemorrhage, external ventricular
+A: [1] 1. Subarachnoid hemorrhage, endovascular coil embolization
+B: 반혼수로 내원, CT에서 SAH, 치료 후 영상에서 개두술 흔적 없이 동맥류 모양 그대로 coil이 채워짐 → coil embolization(행인 의견). 복원자 정답 표기는 "① or ④".
+E: 정답(학습지 기준). | SDH, trephination: 영상 소견과 맞지 않다. | ICH, craniotomy: 맞지 않다. | clipping은 개두술 흔적이 있어야 한다. | IVH, EVD: 맞지 않다.
+
+## topic-009-area-yama-q-006 야마 · 6/47 · 야마 2022 객26 · 학습지 383쪽 원문대조
+S: 환자가 응급실에 내원하여 치료함. 다음 사진에서 보이 는 출혈은 무엇인가? 어떤 치료를 했는가?
+C: 1. subarachnoid hemorrhage, coil embolization | 2. epidural hemorrhage, endovascular surtery | 3. epidural hemorrhage, coil embolization | 4. subarachnoid hemorrhage, clipping | 5. subdural hemorrhage, cliping
+A: [4] 4. subarachnoid hemorrhage, clipping
+B: SAH와 그 치료(clipping vs coil) 구분 문제. 머리를 연 흔적 유무로 구분. 학습지 정답 표기는 ④(clipping)이나 복원자 해설에는 "수술은 coil embolization"으로 적혀 있어 서로 맞지 않는다. 나머지 선지는 임의 구성.
+E: coil embolization. | EDH가 아니다. | EDH가 아니다. | 정답(학습지 표기). | SDH가 아니다.
+
+## topic-009-area-yama-q-036 야마 · 36/47 · 야마 2013 객17 · 학습지 396쪽 원문대조 · 복수정답
+S: 뇌동맥류 파열에 의한 지주막하 출혈에서 합병증으로 혈관연축이 있다. 혈관연축의 치료 중 ‘triple H therapy’에 해당하는 것을 골라라.
+C: 1. Hyperventilation | 2. Hypertension | 3. Hemodilution | 4. (나머지 선지 복원 실패)
+A: [1, 2, 3] 1. Hyperventilation / 2. Hypertension / 3. Hemodilution
+B: 학습지 정답 ①②③(R형, 복원자 권은영 — "답만 기억"). 강의록 triple H: hypertension, hypervolemia, hemodilution. 복원 선지의 "Hyperventilation"은 hypervolemia를 잘못 기억한 것일 가능성이 크다.
+E: 학습지 정답(원래는 hypervolemia였을 가능성). | 정답. Hypertension. | 정답. Hemodilution. | (나머지 선지 복원 실패)
+
+## topic-010-area-yama-q-018 야마 · 18/49 · 야마 2020 객73 · 학습지 408쪽 원문대조
+S: 다음 두부 외상에 대하여 옳은 선지는?
+C: 1. 의식 명료기 (lucid interval)을 보이지 않는다. | 2. Middle cerebral artery의 손상으로 발생한다. | 3. (선지복원실패) | 4. 충좌상 (Coup lesion)이다. | 5. 두개골의 골절이 있다.
+A: [4] 4. 충좌상 (Coup lesion)이다.
+B: 경막외혈종: 외력에 의한 두개골 변형·골절과 동반된 경막·두개골 혈관 손상, 주로 중경막동맥, 볼록 렌즈 모양, 의식 명료기(lucid interval), 반대측 편마비, 동측 동공 산대. 충좌상(coup) 부위. 충좌상(coup)은 맞은 쪽 병변으로 주로 EDH, 반충좌상(countercoup)은 반대쪽으로 주로 SDH. 학습지 정답 ④(복원자 해설 말미의 "3번"은 오기로 보임). 원문 3번 선지는 복원 실패.
+E: EDH는 lucid interval을 보일 수 있다. | MCA가 아니라 middle meningeal artery. | (선지 복원 실패) | 정답(학습지 기준). 충좌상. | 두개골 골절이 흔히 동반되지만 학습지 정답은 ④.
+
+## topic-010-area-yama-q-021 야마 · 21/49 · 야마 2019 객65 · 학습지 409–410쪽 (선지 복원 실패)
+S: 다음 CT 소견과 설명에 해당하는 두부 외상은?
+A. 외력에 의해 두개골의 변형이나 골절이 생기면서 동반된 경막 또는 두개골 혈관의 손상으로 혈종이 된다.
+B. 주로 외상시 중경막 동맥(middle meningeal artery)의 손상으로 인해 발생한다.
+C. 수상 후 의식 명료기(Lucid interval)을 보이기도 한다.
+C: 1. Acute epidural hematoma (복원된 정답) | 2. (나머지 선지 복원 실패)
+A: [1] 1. Acute epidural hematoma (복원된 정답)
+B: CT lens form + 뇌실질보다 매우 높은 음영 + lucid interval → acute epidural hemorrhage. 객관식이었으나 다른 선지는 복원하지 못함(복원자 박지훈).
+E: 정답. | 선지 복원 실패
+
+## topic-010-area-yama-q-034 야마 · 34/49 · 야마 2016 객41 · 학습지 416쪽 원문대조
+S: 68세 남자 환자가 3개월전 교통사고 기왕력 있던 환자로 일주일부터 시작된 좌측 상하지의 위약감과 두통을 주소로 내원하였다. 입원당시 brain CT소견을 보고 상기 환자에 대한 설명으로 맞는 것은?
+C: 1. 진단명을 acute sudural hematoma를 가장 먼저 의심할 수 있다. | 2. Midline이 5mm 이상 displacement된 상태로 예후가 좋지 않다. | 3. 응급으로 두개골 감압술 및 혈종제거술을 해야한다. | 4. 주기적으로 CT 촬영, 경과 관찰, 보존적치료를 해야 한다. | 5. 천두술로 치료할 수 있다.
+A: [3] 3. 응급으로 두개골 감압술 및 혈종제거술을 해야한다.
+B: 3개월 전 외상 + 일주일 전부터 편측 위약·두통 → chronic SDH. midline shift 5mm 이상. 수술 적응증: CT 두께 10mm 이상 또는 midline shift 5mm 이상이면 GCS와 무관하게 수술(가능한 빨리). 복원자: 동기들 의견이 ②와 ③으로 나뉨.
+E: chronic SDH이다. | 학습지 정답은 ③(동기 의견은 ②·③으로 나뉨). | 정답(학습지 기준). | 수술 적응증이다. | 천두술도 가능하나 학습지 정답은 ③.
+
+## topic-010-area-yama-q-046 야마 · 46/49 · 야마 2012 주47 · 학습지 422쪽
+S: Tentorial herniation시 나타날 수 있는 임상증상은?
+C: 
+A: [] 의식 저하, 반대측 편마비, 동측 동공 산대·안검하수 (uncal herniation 증후)
+B: 2013 객10 기준 답안. 복원자는 인터넷 사전을 참고해 "심한 두통, 발열, 홍조, 발한, 비정상 동공반사, 졸음, 저혈압, 의식소실"로 적었다.
+E: 
+
+## topic-016-area-yama-q-008 야마 · 8/18 · 야마 2020 객95 · 학습지 142–143쪽 (정답 미기재)
+S: 나이가 들면 늘어나는 수면패턴은?
+C: 1. Sleep latency | 2. (선지복원실패) | 3. Sleep pattern R | 4. Sleep pattern NREM 1 | 5. Sleep pattern NREM 2
+A: [1] 1. Sleep latency
+B: 학습지에 정답 미기재. 나이 들수록 증가: sleep latency, WASO, stage N1, N2 / 감소: TST, sleep efficiency, REM latency, N3, stage R. 복원자: 1·4·5번이 모두 증가라 답이 확실하지 않아 논의 필요.
+E: 나이 들수록 증가. | (선지 복원 실패) | Stage R은 감소. | N1은 증가. | N2는 증가.
+
+## topic-017-area-yama-q-018 야마 · 18/39 · 야마 2019 객21 · 학습지 521쪽 원문대조
+S: 다음은 어떤 상태의 뇌파인가?
+C: 1. 각성기로 눈을 감은 상태 | 2. Rubrospinal tract 침범 여부 | 3. Pyramidal tract 침범 여부 | 4. Vestibulospinal tract 침범 여부 | 5. Reticulospinal tract 침범 여부
+A: [1] 1. 각성기로 눈을 감은 상태
+B: posterior alpha wave + frontal beta wave, 좌우 대칭(A-P gradient) → 눈을 감은 각성 상태. ※ 이 문제는 2~4번 선지가 다른 문항(20번)과 같게 나온 오류로 전원 정답 처리됨.
+E: 정답. 각성기로 눈을 감은 상태. | 출제 오류로 들어간 선지. | 출제 오류로 들어간 선지. | 출제 오류로 들어간 선지. | 출제 오류로 들어간 선지.
+
+## topic-018-area-yama-q-041 야마 · 41/59 · 야마 2014 객16 · 학습지 242쪽 (정답 미기재)
+S: 다음은 Alzheimer disease의 진행단계(초기 – 중기 – 말기)로 구성이 올바르게 된 것은?
+C: 1. β-amyloid 축적 – 측두엽 위축 – 경도 인지장애 | 2. 측두엽 위축 – 기억력 장애 – β-amyloid 축적 | 3. 기억력, 운동장애 – β-amyloid 축적 – 측두엽 위축 | 4. β-amyloid 축적 – CSF내 Aβ 항체감소 – 기억 & 운동장애 | 5. β-amyloid 축적 – 기억력, 운동장애 – 측두엽 위축
+A: [] 학습지 정답 미기재
+B: 학습지에 정답이 없음. 참고: 2013 객39 복원 — 초기 β-amyloid 축적, 중기 측두엽 중심 위축, 말기 인지·행동장애. 이 순서에 가장 가까운 것은 ①.
+E: 초기 Aβ → 중기 위축 → 말기 인지저하 순서와 가장 가깝다. | 순서가 거꾸로이다. | Aβ가 먼저이다. | CSF "Aβ 항체"는 강의 내용이 아니다. | 위축이 인지·운동장애보다 먼저이다.
+
+## topic-019-area-yama-q-014 야마 · 14/17 · 야마 2015 객9 · 학습지 219쪽 원문대조
+S: 의식 상태에 대한 설명 중 틀린 것은?
+C: 1. Brain stem reflex가 없고 coma 상태라면 뇌사로 정의할 수 있다. | 2. 말에 반응하지 않아도 스스로 눈을 뜨고 눈을 맞출 수 있다면 alert 하다고 할 수 있다. | 3. 지시사항을 이행 할 수 있다면 자꾸 눈을 감으려 해도 drowsy가 아니다. | 4. Diencephalic 구조에 lesion이 생기면 decorticate rigidity가 나타난다. | 5. Ascending reticular activation system은 consciousness 유지에 중요하다.
+A: [1] 1. Brain stem reflex가 없고 coma 상태라면 뇌사로 정의할 수 있다.
+B: 의식 = 자신과 환경에 대한 인식. 두 요소: 의식의 내용(awareness: 혼돈, 섬망, 치매, 지속식물상태)과 각성 정도(arousal: alert, drowsy, stupor, semicoma, coma). Drowsy — 말(대화)에 깨어남, stupor — 통증 자극에만 깨어남, coma — 눈을 뜨지 않는 완전한 무반응. Decorticate(대뇌반구·간뇌 병변) vs decerebrate(중뇌 이하 병변). 뇌사: coma + 뇌간반사 소실 + 무호흡(3가지 모두). ARAS는 감각 경로에서 섬유를 받아 각성·주의·깨어 있음을 유지한다.
+E: 정답(틀린 설명). 뇌사에는 coma + 뇌간반사 소실 + 무호흡 세 가지가 모두 필요하다. | 맞는 설명. 자극 없이 눈을 뜨고 눈을 맞추면 alert(단, awareness는 떨어질 수 있음). | 맞는 설명. | 맞는 설명. 간뇌·대뇌반구 병변 → decorticate. | 맞는 설명.
+
+## topic-021-area-yama-q-033 야마 · 33/41 · 야마 2012 객8 · 학습지 761쪽 (정답 미기재)
+S: 뇌졸중 후 재활병동으로 전과된 66세 남자환자이다. 병력청취 상에 오른손잡이이며 뇌졸중 발병 전에는 특별한 의학적 문제는 없었다. 환자의 확산강조영상은 아래와 같다. 본 환자의 재활치료 계획을 다음과 같이 세우고자 하는데 올바른 것은 무엇인가?
+C: 1. 우측 하지의 근 마비에 대해 하지 기능 강화 치료에 집중한다. | 2. 우측 상지의 근 마비에 대해 상지를 이용한 일상생활 기능 훈련에 집중한다. | 3. 편측무시등과 같은 시지각기능 훈련에 집중한다. | 4. 표현력 훈련을 위주로 하는 실어증 치료에 집중한다. | 5. 이해력 훈련을 위주로 하는 실어증 치료에 집중한다.
+A: [] 학습지 정답 미기재 — 복원자도 사진이 잘 보이지 않아 답을 고르지 못함
+B: 오른손잡이(좌측 우세반구). 영상에서 병변 부위를 찾아 증상과 치료를 고르는 문제. 좌측 MCA 상분지면 우측 상지 마비·Broca(표현) 실어증, 하분지면 Wernicke(이해) 실어증, 우측 하분지면 편측무시. 뇌졸중 증후군(재활의학 교과서): ACA — 반대측 하지 > 상지 마비·감각소실, 큰 전두엽 병변이면 무동무언증, 좌반구면 초피질 운동실어증(자발적 대화 감소, 이해·따라말하기 보존). MCA 주줄기 — 상지·얼굴 > 하지 편마비, 반맹, 우세반구면 전실어증·실행증. MCA 상분지(전두엽) — 반대측 얼굴·상지의 심한 운동·감각장애(하지 경미), 우세반구면 Broca 실어증. MCA 하분지(두정·측두엽) — 운동·감각은 대체로 정상, 우세반구면 Wernicke(감각) 실어증, 반대측 동측반맹, 비우세반구면 좌측 무시·시공간 결손. PCA — 시상: 반대측 감각소실·중추성 통증(시상통), 시야결손, 난독증, 기억결손. 열공경색 — 내낭 후각은 순수 운동마비.
+E: ACA 병변이면 해당. | MCA 상분지 병변이면 해당. | 비우세(우측) MCA 하분지면 해당. | 우세 MCA 상분지(Broca)면 해당. | 우세 MCA 하분지(Wernicke)면 해당.
+
+## topic-022-area-yama-q-020 야마 · 20/29 · 야마 2015 객1 · 학습지 773쪽 (정답 미기재)
+S: 뇌 손상 후 재활치료에 관하여
+C: 1. 말하기 영역의 손상 시 말하기 영역은 반대쪽 영역으로 이동한다. | 2. 말초신경 손상 시 정상 신경에서 일어나는 sprouting 과정이 뇌 손상 시 중추신경에서도 일어난다. | 3. 뇌의 발달이 이루어진 성인에서도 뇌의 가소성 과정은 일어날 수 있다. | 4. 뇌 손상이 일어난 직후 빠르게 재활치료를 하는 것이 좋다. | 5. 뇌 손상 재활치료는 치료가 가능하다고 생각하는 것이 옳다.
+A: [] 학습지 정답 미기재 — 복원자가 문제를 정확히 복원하지 못함
+B: 발문("옳은 것/옳지 않은 것")과 정답이 복원되지 않음. 복원자: 2014·2012년 기출과 소재가 같고, ①⑤는 기억에 의존해 복원. 뇌가소성(plasticity)과 재조직화(reorganization): 괴사된 영역 자체는 살아나지 않지만, 손상 조직이 확정된 뒤 손상되지 않은 다른 부위가 같은 기능을 맡도록 재조직화된다. 뇌에 병이 없어도 일어난다(예: 상지절단 환자 — 의수를 쓰며 이두박근 운동에 손 운동 영역까지 끌어와 씀). 학습·기술 습득의 기본 기전. 회복기전: ① 국소 유해인자 해소(부종·독소 해소, 국소 순환 개선, 부분 손상 뉴런 회복) ② 신경가소성(collateral sprouting, 잠재 경로의 unmasking, 손상되지 않은 중복 경로의 기능 대체, diaschisis 회복, denervation supersensitivity, 절단 축삭의 재생). 재조직화 양상: 언어중추 손상 시 반대편 상동 영역으로(또는 양측), 한쪽 운동영역이 양측 사지를 담당하기도. 반대쪽 반구에서도 일어난다(대뇌반구 대치). 재활은 ASAP — 손상 직후 회복 능력이 최대이고 3개월이 지나면 90% 이상, 6개월 이후 거의 소실.
+E: 언어중추는 반대편 상동 영역으로 재조직화되기도 한다. | 중추신경에서도 재생·곁발아가 일어난다. | 성인에서도 가소성은 일어난다. | 손상 직후 빠르게 재활한다. | 치료 가능하다고 보는 것이 재활의 기본 관점이다.
+
+## topic-023-area-yama-q-008 야마 · 8/28 · 야마 2022 객39 · 학습지 635쪽 원문대조
+S: 48세 여성 환자가 2시간전부터 발생한 심한 두통으로 응급실에 내원하였다. 외상은 없었으며 내원 후 시행한 뇌 컴퓨터단층촬영 검사상 다음과 같은 소견을 보였다. 다음 질환에 대한 설명 중 맞는 것은?
+C: 1. 급성 뇌졸중 가능성을 염두해 두고 tPA를 주입한다. | 2. 급성 저산소성성 뇌손상 가능성이 높다. | 3. 경막하 출혈이 관찰되며 출혈양이 적어 관찰한다. | 4. 지주막하 출혈이 관찰되며 조영증강 뇌 컴퓨터단층 촬영 검사 촬영을 시행한다. | 5. 뇌혈관 폐쇄로 인한 출혈이 의심되어 조영증강 뇌 컴퓨터단층촬영검사 촬영이나 뇌 자기공명영상 검사 촬영을 시행한다.
+A: [4] 4. 지주막하 출혈이 관찰되며 조영증강 뇌 컴퓨터단층 촬영 검사 촬영을 시행한다.
+B: 갑작스러운 심한 두통 + CT에서 기저조(basal cistern)를 따라 불가사리 모양 고음영 → 지주막하출혈(SAH). 외상이 없으면 자발성 SAH이며 가장 흔한 원인은 뇌동맥류 파열. 동맥류 확인은 CT 혈관조영, MR 혈관조영, 뇌혈관조영술. 뇌동맥류 호발 3부위: ACom, MCA 분지부, ICA–PCom 분지부.
+E: 틀림. 출혈에 tPA는 금기이다. | 틀림. | 틀림. 경막하 출혈이 아니다. | 정답(학습지). 동맥류 확인을 위해 조영증강 CT(CT 혈관조영)를 시행한다. | 틀림. 혈관 폐쇄로 인한 출혈이 아니다.
+
+## topic-024-area-yama-q-014 야마 · 14/21 · 야마 2017 객14 · 학습지 312쪽 원문대조
+S: 다음 중 옳은 것은?
+가. NCS 검사시 velocity가 70%미만으로 감소하고 latency가 증가할 때 Demylinating type 이다.
+나. NCS가 정상이고 EMG 시행시 short amplitude, short latency일 때 neuropathy로 진단 가능하다.
+다. AIDP의 hyperacute 질환에서 normal NCS는 AIDP를 배제할 수 없다.
+라. Demylinating neuropathy의 진단시 감각신경 검사도 포함된다.
+C: 1. 가, 나, 다 | 2. 가, 나 | 3. 가, 다 | 4. 라 | 5. 가, 나, 다, 라
+A: [3] 3. 가, 다
+B: NCS — axonopathy vs myelinopathy(오선영 교수님 강의록): Myelinopathy(탈수초) — 전도속도 현저 감소(<70%), 원위 잠복기 연장, conduction block, temporal dispersion, F-wave 지연·소실, amplitude는 비교적 유지; wasting 동반·대칭적 원위부→근위부 위약, 발목반사부터 소실, 운동+감각(스타킹·장갑), 회복이 좋음. Axonopathy(축삭) — amplitude(CMAP·SNAP) 감소, 속도·잠복기 정상; 급성·근위부 위약(wasting 없음), 초기 DTR 소실·전신 무반사, 원위근 탈신경, 온도·통증 감각 보존, 회복이 느리고 불완전. Hyperacute GBS(AIDP)에서는 NCS가 정상일 수 있어 배제할 수 없다(교수님 티야).
+E: 틀림. 나가 틀렸다. | 틀림. | 정답. 가, 다. | 틀림. | 틀림.
+
+## topic-026-area-yama-q-011 야마 · 11/30 · 야마 2019 객82 · 학습지 670–671쪽 (사진 미복원)
+S: 다음 영상소견들중 T1 고신호강도인 것은?
+C: 1. 아급성출혈 | 2. 단백질이 많은 병변 | 3. 지방종 | 4. 흑색종 | 5. Gd-contrast media
+A: [] 학습지 정답 미기재 — 영상 사진 미복원
+B: 보기는 모두 T1 고신호 물질이며, 각각의 영상 사진과 옳게 짝지어진 것을 고르는 문제였으나 사진이 복원되지 않음. T1 고신호: 지방(지방종, 기형종, 유피종), MetHb(아급성 출혈), 고단백(Rathke 낭, 두개인두종), 멜라닌(흑색종), 상자성 물질(Mn, Cu, Gd 조영제). 대부분의 병변은 물이 늘어 T1 저신호.
+E: T1 고신호(MetHb). | T1 고신호. | T1 고신호. | T1 고신호. | T1 고신호.
+
+## topic-026-area-yama-q-019 야마 · 19/30 · 야마 2015 객20 · 학습지 675쪽 (정답 공란·사진 미복원)
+S: 다음 사진 중에서 countercoup에 해당하는 사진은?
+C: 1. ① 원본 CT 사진 | 2. ② 원본 CT 사진 | 3. ③ 원본 CT 사진 | 4. ④ 원본 CT 사진 | 5. ⑤ 원본 CT 사진
+A: [] 학습지 정답 칸 공란 — countercoup(SDH) 사진을 고르는 문제
+B: 사진 5개 중 countercoup 병변 사진을 찾는 문제. Countercoup = SDH 사진(복원자). 보기 사진은 복원되지 않음. Coup: 외력이 가해진 쪽 — 두피혈종, 두개골 골절, EDH. Contrecoup: 반대쪽 — SDH.
+E:  |  |  |  | SDH 사진이면 정답.
+
+## topic-026-area-yama-q-017 야마 · 17/30 · 야마 2016 객19 · 학습지 674쪽 원문대조
+S: 다음 사진에서 coup-contrecoup lesion?
+C: 1. 보기 ① 사진 | 2. 보기 ② 사진 | 3. 보기 ③ 사진 | 4. 보기 ④ 사진 | 5. 보기 ⑤ 사진
+A: [1] 1. 보기 ① 사진
+B: Coup: 외력이 가해진 쪽 — 두피혈종, 두개골 골절, EDH. Contrecoup: 반대쪽 — SDH. 복원자: 사진으로만 된 5지선다였고 강의록 사진들이었음(정답 ①).
+E: 정답(학습지). | 오답. | 오답. | 오답. | 오답.
+

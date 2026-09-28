@@ -1,0 +1,226 @@
+q-001 2026.9.18 치매 1·2 강의록 형성평가 13쪽 
+  S: 75세 남자가 2년 전부터 기억력이 떨어졌다고 느끼지만 보호자가 관찰한 뚜렷한 변화는 없고, 인지기능검사도 같은 나이·학력의 정상범위이다. 가장 적절한 임상적 진단은?
+  C: 1. Dementia | 2. Mild cognitive impairment | 3. Subjective cognitive decline 
+  A: 3. Subjective cognitive decline
+q-002 2026.9.18 치매 1·2 강의록 형성평가 14쪽 
+  S: 75세 남자가 2년 전부터 기억저하가 있고 같은 질문을 반복한다. 일상생활에는 문제가 없지만 인지기능검사가 같은 나이·학력의 정상보다 저하되어 있다. 가장 적절한 임상적 진단은?
+  C: 1. Dementia | 2. Mild cognitive impairment | 3. Subjective cognitive decline 
+  A: 2. Mild cognitive impairment
+q-003 2026.9.18 치매 1·2 강의록 형성평가 15쪽 
+  S: 72세 여자가 수년간 진행하는 기억저하·길찾기 장애가 있고 최근 복잡한 요리를 못 하는 등 일상생활장애가 시작되었다. 임상 단계로 가장 적절한 것은?
+  C: 1. Dementia | 2. Mild cognitive impairment | 3. Subjective cognitive decline 
+  A: 1. Dementia
+q-004 2026.9.18 치매 1·2 강의록 형성평가 55쪽 
+  S: 72세 여성, 4년 서서히 기억저하·길찾기 장애·IADL 저하·의심망상, B12/TSH/RPR 정상, 양측 내측 측두엽/두정엽 위축. 진단은?
+  C: 1. Multi-infarct dementia | 2. MCI | 3. SCD | 4. Alzheimer disease dementia | 5. Subcortical vascular dementia 
+  A: 4. Alzheimer disease dementia
+q-005 야마 연도미상 객42 
+  S: 알츠하이머 치매에서 중요한 병리물질을 구성하는 단백 질 2가지를 짝지은 것은?
+  C: 1. α-synuclein - tau protein | 2. amyloid β - α-synuclein | 3. tau protein - 14-3-3 protein | 4. amyloid β - 14-3-3 protein | 5. amyloid β - tau protein 
+  A: 5. amyloid β - tau protein
+q-006 야마 2025 객43 · 학습지 227쪽 원문대조 
+  S: 72세 여자가 4년 전부터 서서히 시작된 인지저하로 왔 다. 며칠 전에 질문했던 것을 다시 질문하거나, 중요한 물건을 어느 곳에 두었는지 찾지 못하는 증상을 보였 고, 가끔씩 다니던 길을 혼동하기 시작했다고 하였다. 최근에는 복잡한 요리는 잘 하지 못하는 등 일상생활장…
+  C: 1. Multi-infarc dementia | 2. Mild cognitive impairment | 3. Subjective cognitive decline | 4. Alzheimer’s disease dementia | 5. Subcortical vascular dementia 
+  A: 4. Alzheimer’s disease dementia
+q-007 야마 2023 객43 · 학습지 227쪽 원문대조 
+  S: 75세 남자가 2년 전부터 시작된 기억력 저하로 왔다. 최근에는 같은 질문을 반복해서 하고, 했던 이야기를 잠시 후에 다시 하는 모습을 보였다. 길찾기, 이해력은 문제 없었으며 일상생활의 문제는 없었다. 인지기능검 사 결과가 동일한 나이와 학력의 정상인보다 저하되어 있…
+  C: 1. Multi-infarction dementia | 2. Mild Cognitive Impairment | 3. Subjective Cognitive Decline | 4. Alzheimer's Disease Dementia | 5. Subcortical Vascular Dementia 
+  A: 2. Mild Cognitive Impairment
+q-008 야마 2023 객44 · 학습지 228쪽 원문대조 
+  S: 70세 여자가 약 5년 전부터 서서히 기억력이 나빠졌다 고 왔다. 최근 기억은 떨어져 있으나 오래된 기억은 비 교적 유지되어 있었다. 기억력 저하와 함께 물건을 종 종 잃어버리거나 방금 한 대화내용을 잊어버리는 일이 점차 잦아지며 최근에는 길을 잃는 일이 발생하는 등,…
+  C: 1. antiplatelet | 2. atorvastatin | 3. anticoagulant | 4. dopamine agonist | 5. cholinesterase inhibitor 
+  A: 5. cholinesterase inhibitor
+q-009 야마 2023 객45 · 학습지 228쪽 원문대조 [시각]
+  S: 아래 그림과 같은 진행경과를 보이는 치매의 종류로 가 장 적절한 것은?
+  C: 1. Corticobasal syndrome | 2. Multi-infarction dementia | 3. Dementia with Lewy Bodies | 4. Alzheimer's Disease Dementia | 5. Subcortical Vascular Dementia 
+  A: 2. Multi-infarction dementia
+q-010 야마 2023 객46 · 학습지 229쪽 원문대조 
+  S: 다음 중 기억력 저하 환자를 평가하는 방법으로 가장 적절한 것은?
+  C: 1. Activity of daily living이 저하되면 경도인지장애 수 준이 | 2. Behavioral problem으로 우울, 망상. 불안 등의 증 상을 평가 | 3. Cognitive impairment가 인지검사에서 확인되면 주 관적인지장애 | 4. Dementia로 진단하면 추가적인 differential diagnosis | 5. Visual Hallucination이 반복적으로 발생하면 알츠하 이머병일  
+  A: 2. Behavioral problem으로 우울, 망상. 불안 등의 증 상을 평가한다.
+q-011 야마 2022 객11 · 학습지 229쪽 원문대조 
+  S: 75세 남자가 2년전부터 시작된 기억력 저하로 왔다. 최 근에는 같은 질문을 반복해서 하고, 했던 이야기를 잠 시 후에 다시 하는 모습을 보였다. 길찾기, 이해력은 문 제 없었으며 일상생활의 문제는 없었다. 인지기능검사 결과가 동일한 나이와 학력의 정상범위에 속해 있었…
+  C: 1. Dementia | 2. mild cognitive impairment | 3. subcortical vascular dementia | 4. Alzheimer's disease dementia | 5. subjective cognitive decline 
+  A: 5. subjective cognitive decline
+q-012 야마 2022 객12 · 학습지 230쪽 원문대조 
+  S: 기억력 저하 환자에서의 평가방법 중 적절한 것을 고르 시오.
+  C: 1. Activities of daily linving은 주관적 인지능력을 평가  | 2. behavioral problem에서 우울, 망상, 불안이 있는 치매 드물다 | 3. cognitive impairment에서 기억력이 정상일 시 다른 인지기능저 | 4. 감별진단을 위해 신경학적 진단, 뇌영상검사, 혈액검 사를 시행한다. | 5. executive function만 문제가 있는 경우 치매로 진단 
+  A: 4. 감별진단을 위해 신경학적 진단, 뇌영상검사, 혈액검 사를 시행한다.
+q-013 야마 2022 객13 · 학습지 230쪽 원문대조 
+  S: 72세 여자가 4년 전부터 서서히 시작된 인지 저하로 왔 다. 며칠 전에 질문했던 것을 다시 질문하거나, 중요한 물건을 어느 곳에 두었는지 찾지 못하는 증상을 보였 고, 2년 전부터는 가끔씩 다니던 길을 혼동하기 시작했 다. 최근에는 복잡한 요리를 잘 하지 못하는 등 …
+  C: 1. Dementia with Lewy bodies | 2. subcortical vascular dementia | 3. Alzheimer's disease | 4. Normal pressure hydrocephalus | 5. Parkinson’s disease dementia 
+  A: 3. Alzheimer's disease
+q-014 야마 2022 객14 · 학습지 231쪽 원문대조 [시각]
+  S: 58세 여자가 3일전부터 10년전 이야기를 어제 이야기 처럼 꺼냈으며 물어본 질문을 또했다. 환자는 고혈압과 이상지질혈증이 있었다. 다음은 DWI 사진이다. 진단은?
+  C: 1. strategic infarct dementia | 2. multi infarct dementia | 3. alzhimer dementia | 4. frontotemporal dementia | 5. subcortical infarct dementia 
+  A: 1. strategic infarct dementia
+q-015 야마 2021 객11 · 학습지 231쪽 원문대조 
+  S: 75세 남자가 2년 전부터 시작된 기억력 저하로 내원하 였다. 최근에는 했던 질문을 다시 하거나 방금 했던 말 을 잠시 후에 다시 하곤 했다. 길을 잃거나 이해력이 떨어지지는 않았으며 일상생활에 지장도 없었다. 인지 기능 검사 결과 같은 나이 및 학력의 정상인에 비해 …
+  C: 1. Dementia with lewy body | 2. Subjective cognitive decline | 3. Mild cognitive impairment | 4. Alzheimer’s disease dementia | 5. Multi-infarct dementia 
+  A: 3. Mild cognitive impairment
+q-016 야마 2021 객45 · 학습지 232쪽 원문대조 
+  S: 72세 여자가 4년 전부터 서서히 시작된 인지 저하로 왔 다. 며칠 전에 질문했던 것을 다시 질문하거나, 중요한 물건을 어느 곳에 두었는지 찾지 못하는 증상을 보였 고, 2년 전부터는 가끔씩 다니던 길을 혼동하기 시작했 다. 최근에는 복잡한 요리를 잘 하지 못하는 등 …
+  C: 1. Dementia with Lewy bodies | 2. subcortical vascular dementia | 3. Alzheimer’s disease | 4. Normal pressure hydrocephalus | 5. Parkinson’s disease dementia 
+  A: 3. Alzheimer’s disease
+q-017 야마 2021 객54 · 학습지 232쪽 원문대조 
+  S: 42세 남자가 1년 전부터 충동적 행동을 종종 하였으며 이로 인해 회사에서 해고되었다. 경미한 두통이 있었으 며 CSF검사에서 WBC 30, protein 56으로 나타났다.
+  C: 1. Neurosyphilis | 2. Hypothyrodism | 3. Vascular dementia | 4. Vitamine deficiency dementia | 5. Normal pressure hydrocephalus 
+  A: 1. Neurosyphilis
+q-018 야마 2021 객61 · 학습지 232쪽 원문대조 
+  S: 53세 여자가 6주 전부터 시작된 오심, 구토, 혼돈 증상 으로 응급실에 왔다. 2년 전 위암으로 전체위절제술을 받은 과거력이 있었으며, 이후 종종 오심, 구토가 있었 지만 6주 전부터는 증상이 악화되어 거의 식사를 하지 못했다. 신경학적 검사상, 지남력, 집중력, 기…
+  C: 1. neurosyphilis | 2. hypothyroidism | 3. subdural hematoma | 4. NPH | 5. vItamin deficiency 
+  A: 5. vItamin deficiency
+q-019 야마 2020 객42 · 학습지 233쪽 원문대조 
+  S: 다음 중 dementia의 원인으로 가장 흔한 것은?
+  C: 1. Frontotemporal dementia | 2. Vascular dementia | 3. Dementia with Lewy Bodies | 4. Alzheimer's disease dementia | 5. Parkinson's disease dementia 
+  A: 4. Alzheimer's disease dementia
+q-020 야마 2020 객43 · 학습지 233쪽 원문대조 [시각]
+  S: 59세 남자가 단계적으로 진행하는 치매 증상으로 병원 에 왔다. 환자는 고혈압, 당뇨병으로 치료 중이었으며, 4년 전부터는 다른 사람의 말에 대한 이해력이 떨어졌 으며, 3년 전부터는 말수가 적어지고 매사에 무관심해 졌고, 1년 전부터는 식사할 때 오른쪽에 있는 반찬만…
+  C: 1. Multi infarct dementia | 2. Strategic infarct dementia | 3. Subjective cognitive dementia | 4. Alzheimer’s disease dementia | 5. Subcortical vascular dementia 
+  A: 1. Multi infarct dementia
+q-021 야마 2019 객25 · 학습지 234쪽 원문대조 
+  S: 72세 여자가 4년 전부터 서서히 시작된 인지 저하로 왔 다. 이전에는 집안일과 봉사활동을 문제없이 해오던 분 인데, 4년 전부터는 며칠 전에 질문했던 것을 다시 질 문하거나, 중요한 물건을 어느 곳에 두었는지 찾지 못 하는 증상을 보였고, 2년 전부터는 가끔씩 다니던…
+  C: 1. Dementia with Lewy Bodies | 2. Frontotemporal Dementia | 3. Mild Cognitive Impairment | 4. Alzheimer’s Disease Dementia | 5. Parkinson’s Disease Dementia 
+  A: 4. Alzheimer’s Disease Dementia
+q-022 야마 2019 객26 · 학습지 234쪽 원문대조 [시각]
+  S: 59세 남자가 단계적으로 진행하는 치매 증상으로 왔다. 환자는 고혈압, 당뇨병으로 치료 중이였으며 4년 전부 터 다른 사람의 말을 이해력이 떨어졌으며, 3년 전부터 는 말수가 적어지고 매사에 무관심해졌고, 1년 전부터 는 식사할 때 오른쪽에 있는 반찬만 먹는 모습을 보…
+  C: 1. Multi infarct dementia | 2. mild cognitive impairment | 3. Subjective cognitive decline | 4. Alzheimer’s disease dementia | 5. Subcortical vascular dementia 
+  A: 1. Multi infarct dementia
+q-023 야마 2019 객27 · 학습지 235쪽 원문대조 [시각]
+  S: 50세 남성이 3개월 전부터 시작된 기억장애와 보행장애 로 왔다. 아들의 보고에 따르면 최근 속옷에 소변 실수 를 하는 횟수가 증가하였다고 한다. 뇌 MRI 사진은 다 음과 같았다. 다음 중 가장 적절한 진단을 고르시오.
+  C: 1. Parkinson’s disease | 2. Alzheimer’s disease | 3. Dementia with Lewy body | 4. Amyotrophic lateral sclerosis | 5. Normal pressure hydrocephalus 
+  A: 5. Normal pressure hydrocephalus
+q-024 야마 2018 객11 · 학습지 235쪽 원문대조 
+  S: 75세 여성이 2년전부터 시작된 기억력 저하로 왔다. 딸의 보고에 따르면 어머니는 최근에는 같은 질문을 반복해서 하고, 했던 이야기를 잠시 후에 다시 하는 모습을 보였다. 길찾기, 이해력은 문제 없었으며 우울감 등의 기분장애는 없었다. 또한 환자는 혼자 살고 있었으며 …
+  C: 1. Mild cognitive impairment | 2. Subjective cognitive decline | 3. Early stage of Alzheimer’s disease dementi | 4. Middle stage of Alzheimer’s disease dement | 5. Late stage of Alzheimer’s disease dementia 
+  A: 1. Mild cognitive impairment
+q-025 야마 2018 객12 · 학습지 236쪽 원문대조 [시각]
+  S: 50세 남성이 3개월 전부터 시작된 기억장애와 보행장애로 왔다. 아들의 보고에 최근 속옷에 소변실수를 하는 횟수가 증가하였다고 한다. 뇌 MRI 사진은 다음과 같았다. 다음 중 가장 적절한 진단을 고르시오.
+  C: 1. Parkinson’s disease | 2. Alzheimer’s disease | 3. Dementia with Lewy bodies | 4. Amyotrophic lateral sclerosis | 5. Normal pressure hydrocephalus 
+  A: 5. Normal pressure hydrocephalus
+q-026 야마 연도미상 주4 · 원문 복원 불완전 [제외]
+  S: Alzheimer’s disease의 치료약으로 현재 쓰는 것은? MCI(Mild cognitive impairment)= Cognitive impairment + intact ADL. 즉 기억장애는 있으나 일상생활 수행능력에는 지장이 없는 상태를 MCI라고 합니다. …
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-027 야마 2018 주5 · 원문 복원 불완전 [제외]
+  S: Socially inappropriate behavior, frontotemporal lobar degeneration의 특징을 갖는 dementia를 쓰시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-028 야마 2017 주1 · 원문 복원 불완전 [제외]
+  S: 치료가능한 치매의 원인에 대해 기술하시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-029 야마 2017 주2 · 원문 복원 불완전 [제외]
+  S: Progressive dementia의 종류를 서술하시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-030 야마 2017 주3 · 원문 복원 불완전 [제외]
+  S: Alzheimer’s disease의 병리 소견 두 가지를 쓰세요.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-031 야마 2017 주4 · 원문 복원 불완전 [제외]
+  S: 현재 사용되고 있는 알츠하이머의 치료제는?
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-032 야마 2016 주10 · 원문 복원 불완전 [제외]
+  S: Progressive dementia 4가지는 무엇인지 쓰시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-033 야마 2016 주11 · 원문 복원 불완전 [제외]
+  S: 알츠하이머의 병리적 원인 두가지를 쓰시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-034 야마 2016 주12 · 원문 복원 불완전 [제외]
+  S: 조기에 발견 시 치료 가능한 치매를 쓰시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-035 야마 2016 주13 · 원문 복원 불완전 [제외]
+  S: 치매의 CSBD에 대해 기술하시오.
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-036 야마 2015 객30 · 학습지 240쪽 원문대조 
+  S: 아들의 생일에 있었던 일에 대한 기억, 자전거를 가르쳐줬던 기억 등 자신만이 가진 특별한 기억에 해당하는 것을 다음 보기에서 고르시오.
+  C: 1. 가 - 다 - 마 | 2. 가 - 라 - 바 | 3. 나 - 라 - 바 | 4. 나 - 라 - 마 | 5. 나 - 다 – 마 
+  A: 5. 나 - 다 – 마
+q-037 야마 2015 객31 · 학습지 240쪽 원문대조 
+  S: 병인이 임상증상에 앞서 미리 일어난다는 내용 가장 먼저 일어나는 것은?
+  C: 1. Synapse dysfuntion | 2. Tau에 의한 파괴 | 3. 베타 아밀로이드 축적 | 4. 측두엽 중심 위축 | 5. 인지 및 행동장애 
+  A: 3. 베타 아밀로이드 축적
+q-038 야마 2015 객32 · 학습지 241쪽 원문대조 [제외]
+  S: 다음은 환자에 대한 설명이다. 65세 남자 환자가 인지장애를 주소로 내원하였다. 1년전에 파킨슨병을 진단받았다. 보호자에 따르면 파킨슨병을 진단받기전에 인지장애를 보였다고 한다. 환자는 가끔씩 창밖에 누가 보인다는 말을 자주 했다고 한다. 이 환자에 가장 타당한 진단명…
+  C: 1. 알츠하이머병 | 2. 파킨슨병치매 | 3. 혈관성치매 | 4. CJD | 5. 루이소체치매 
+  A: 4. CJD
+q-039 야마 2015 객33 · 학습지 241쪽 원문대조 
+  S: 뇌척수액에서 계측해 치매진단에 이용할 수 있는 fluid biomarker로, 알츠하이머 환자인 경우 뇌실질에 이 물질의 침착이 많아 뇌척수액에서는 정상인보다 낮게 계측 되는 것으로 알려진 것은?
+  C: 1. Amyloid beta-42 | 2. Tau protein | 3. Amyloid plaque | 4. Lewy body | 5. Alanine aminotransferase 
+  A: 1. Amyloid beta-42
+q-040 야마 2014 객28 · 학습지 242쪽 원문대조 
+  S: 아버지가 아들의 생일이 1월 28일인데 몇 년 전 아들생일에 있었던 일을 기억한다는 내용의 지문이었습니다. 다음 중 옳은 것들로 짝지어진 보기는?
+  C: 1. Short term memory – declarative - episodic | 2. Short term memory – non-declarative - sema | 3. Long term memory – declarative - semantic | 4. Long term memory - non-declarative - episo | 5. Long term memory - declarative – episodic 
+  A: 5. Long term memory - declarative – episodic
+q-041 야마 2014 객16 · 학습지 242쪽 원문대조 [제외]
+  S: 다음은 Alzheimer disease에 진행단계로 구성이 올바르게 된 것은?
+  C: 1.  -amyloid 축적 측두엽 위축 경도 인지장애 | 2. 측두엽 위축 기억력 장애  -amyloid 축적 | 3. 기억력, 운동장애  -amyloid 축적 측두엽 위축 | 4.  -amyloid 축적 CSF내  A 항체감소 기억 & 운동장애 | 5.  -amyloid 축적 기억력, 
+  A: 5.  -amyloid 축적 기억력,
+q-042 야마 2014 객26 · 학습지 242쪽 원문대조 [제외]
+  S: 60세 여자가 인지장애를 주소로 내원하였다. 최종학력은 초졸이다. 환자는 가끔씩 중요한 약속이나 금방 있었던 일을 잊어버린다고 한다. 환자는 보험회사 직원으로 최근에 정년퇴임을 하였고, 일을 더 하지 못하는 것을 매우 아쉬워 하였다. 간이정신검사(K-MMSE) 검사상 …
+  C: 1. 알츠하이머병 | 2. 혈관성 치매 | 3. 루이소체 치매 | 4. 경도인지장애 (MCI) | 5. 파킨슨병 치매 
+  A: 5. 파킨슨병 치매
+q-043 야마 2014 객27 · 원문 복원 불완전 [제외]
+  S: (PDD vs DLB)
+  C: 1. [27쪽] 27 alzheimersresearchuk.org Symptoma | 2. ® A cylindrical mass of nerve tissue encas | 3. [60쪽] 60 © Knee flexion © Knee extension ( | 4. [94쪽] 94 ✓ 기본 소생 요소 ABC( 기도 airway , 호흡 br | 5. 얼굴에 가벼운 통증이나 가벼운 촉각 이런 것들을 통해서 확인해 볼 수 있고  
+  A: 1. [27쪽] 27 alzheimersresearchuk.org Symptomatic vs. Disease
+q-044 야마 2013 객36 
+  S: 다음의 대화에서 해당되는 것을 모두 고르시오
+  C: 1. Short term memory | 2. Procedural memory | 3. Episodic memory | 4. Semantic memory | 5. Declarative memory | 6. Non-declarative memory 
+  A: 2. Procedural memory
+q-045 야마 2013 객37 · 학습지 244쪽 원문대조 
+  S: 65세 여자환자가 인지장애를 주소로 내원하였다. 환자는 초등학교를 졸업했으며 보험 업무에 종사하는 중에 최근 일을 지속하기 어렵다고 퇴직하였다. 간이정신검사가 20점으로 25퍼센타일 이었고, 기억력검사에서 회상, 재인이 모두 감소했다. 심한 보속증 소견을 보였고 뇌 M…
+  C: 1. 알츠하이머 치매 | 2. 혈관성 치매 | 3. 전두측두 치매 | 4. Mild Cognitive Impairment | 5. 루이소체 치매 
+  A: 1. 알츠하이머 치매
+q-046 야마 2013 객38 · 학습지 245쪽 원문대조 
+  S: 다음은 환자에 대한 설명이다. 65세 남자 환자가 인지장애를 주소로 내원하였다. 환자는 2년 전부터 기억력 장애를 보였고, 1년 전부터 파킨슨병 증세를 보이기 시작했다고 한다. 보호자의 말에 따르면 환자는 가끔씩 허공에 대고 무언가를 잡는 시늉을 하며 벌레를 잡는다는 …
+  C: 1. 알쯔하이머병 | 2. 혈관성 치매 | 3. 전두측두치매 | 4. 경도인지장애 | 5. 루이소체치매 
+  A: 5. 루이소체치매
+q-047 야마 2013 객39 · 원문 복원 불완전 [제외]
+  S: 알츠하이머 초기 중기 말기에 일어나는 변화는?
+  C: 1. [41쪽] BASAL GANGLIA ü Main component : Str | 2. 헬스트루스 자이러스, 테슈스 자이러스인데요. 이제 프라이머리 오드럴 콜텍스  | 3. 그리고 이제 라테레라미스병 바깥쪽에 우리 세레럴 프로텍스처럼 네오세레벨럼인데 | 4. 자 여기에 문제가 생기면 내 몸이 어디 있냐 내가 무엇을 만들고 있는지 내가 | 5. 사실 우리 환자분들은 병식, 내가 인지가 떨어진다라는 병식이 없는 경우가 많 
+  A: 5. 사실 우리 환자분들은 병식, 내가 인지가 떨어진다라는 병식이 없는 경우가 많기 때문에 환자의 보고를 다
+q-048 야마 2012 객19 · 원문 복원 불완전 [제외]
+  S: 남녀가 대화를 하고 있다. 여자 A : 우리가 처음 만난 때가 언제였지? 남자 B : 100일전, 빼빼로 데이때! 여자 A : 우리가 언제 처음 손을 잡았지? 남자 B : 영화보고 나오다가.ㅎㅎ 다음 중 여자 A가 남자 B에게 어떤 기억을 묻고 있는가? 가장 적절한 것…
+  C: 1. [84쪽] Brudzinski 징후 환자를 눕힌 상태에서 머리와 목을 가슴쪽 | 2. [52쪽] Examination – Muscle Strength (cont. | 3. [18쪽] 전두엽피질 - 기저핵 순환회로에 의한 운동 조절 • 기저핵 (ba | 4. [37쪽] Neurodegenerative diseases Dementia  | 5. 왜냐면은 이런 경우는 브로카스 연령 뭐 트랜스포티크 보트의 아파자 같은 경우 
+  A: 4. [37쪽] Neurodegenerative diseases Dementia with Lewy bodie
+q-049 야마 2012 객20 · 학습지 246쪽 원문대조 
+  S: 다음은 환자에 대한 설명이다. 60세 여자가 인지장애를 주소로 내원하였다. 최종학력은 중학교 졸업이다. 환자는 가끔씩 중요한 약속이나 금방 있었던 일을 잊어버린다고 한다. 환자는 보험회사 직원으로 일을 하는데 지장은 없다고 하나 불안한 마음을 토로하였다. 간이정신검사(…
+  C: 1. 알쯔하이머병 | 2. 혈관성 치매 | 3. 루이소체 치매 | 4. 경도인지장애 | 5. 파킨슨병 치매 
+  A: 4. 경도인지장애
+q-050 야마 2012 객21 · 학습지 246쪽 원문대조 
+  S: 다음은 환자에 대한 설명이다. 65세 남자 환자가 인지장애를 주소로 내원하였다. 환자는 2년 전부터 기억력 장애를 보였고, 1년 전부터 파킨슨병 증세를 보이기 시작했다고 한다. 보호자의 말에 따르면 환자는 가끔씩 허공에 대고 무언가를 잡는 시늉을 하며 벌레를 잡는다는 …
+  C: 1. 알쯔하이머병 | 2. 혈관성 치매 | 3. 전두측두치매 | 4. 경도인지장애 | 5. 루이소체치매 
+  A: 5. 루이소체치매
+q-051 야마 2012 객22 · 학습지 247쪽 원문대조 
+  S: 다음은 알쯔하이머병의 발생과 연관되는 단일염기 다형성을 나열한 것이다. 베타-amyloid1-42oligomerization 및 이후 senile/neuritic plaque 형성을 촉진하는 것으로 알려진 것은 무엇인가 고르시오.
+  C: 1. Angiotensin converting enzyme (ACE) intron | 2. Apolipoprotein E (APOE) E4 allele | 3. Apolipoprotein E (APOE) E3 allele | 4. Apolipoprotein E (APOE) E2 allele | 5. Methylentetrahydrofolate (MTHFR) A1298C 
+  A: 2. Apolipoprotein E (APOE) E4 allele
+q-052 야마 2011 객17 [제외]
+  S: 기억이 일상생활에 미치는 영향은 우리가 인식하는 것보다 깊이 관련되어 있다. 다음 중 기억에 대한 설명으로 맞는 것은?
+  C: 1. '책상'의 뜻을 설명하는 것은 non-declarative 보존되어 있어 아 | 2. 알츠하이머병 - 치매 - 서서히 시작하고 진행하는 기억력 및 다른 인지기능의 | 3. 혈관성 치매 - 치매 - 뇌혈관질환 - 위의 두 장애 간에 아래와 같은 관련 | 4. 전두측두치매 - 전두엽과 측두엽에 국한된 병리적 변화로 인해 행동 및 성격  | 5. 루이소체치매 
+  A: 4. 전두측두치매 - 전두엽과 측두엽에 국한된 병리적 변화로 인해 행동 및 성격 변화가 주로 나타나는 퇴행성
+q-053 야마 2011 객18 · 원문 복원 불완전 [제외]
+  S: 기억의 개개 구성은 특정 뇌영역과 잘 조화된다. 다음 중 기억의 구성성분과 뇌 영역이 잘 조합된 것은 무엇인가?
+  C: 1. 다이네스템 같은 경우는 이제 분수 미드블의 메뉴라고 나와져 있고 이제 레스큘 | 2. [8쪽] 병력청취 Cognition • 기억력 (Memory): 발병 시기  | 3. [15쪽] FOUNDATION CNS inflammatory demyelin | 4. 그렇기 때문에 일단은 브레인 내에 브레인이나 패널 트랙 어쨌든 CNS 내에서 | 5. 조금 내가 내가 내는 시험에서 혹시 정말 최선의 암기가 필요할 수 있겠죠.  
+  A: 2. [8쪽] 병력청취 Cognition • 기억력 (Memory): 발병 시기 , 진행 양상 , 기억장애의
+q-054 야마 2011 객19 · 학습지 248쪽 원문대조 
+  S: 알츠하이머병에 이어 혈관성치매는 두 번째로 많은 형태이다. 이러한 혈관성 치매의 진단기준에 타당한 것은 무엇인가?
+  C: 1. 대개 보행 장애는 매우 늦게 나타난다. | 2. 뇌졸중이 있고 대개 1년 이후에 치매 증상을 보인다. | 3. 치매의 증상이 갑자기 악화되거나, 변동이 있는 계단식 진행을 보인다. | 4. 치매 증상과는 별개로 대개 요실금 증상이 드물고, 나타나도 후기에 동반된다. | 5. 인지장애를 설명할 뇌병변 없이 기억력의 소실을 
+  A: 3. 치매의 증상이 갑자기 악화되거나, 변동이 있는 계단식 진행을 보인다.
+q-055 야마 2011 객20 · 학습지 249쪽 원문대조 
+  S: 치매환자의 관리는 대개 10년이 넘는 장기간이 요구되곤 한다. 특히 중증의 치매환자를 볼 때는 적절한 시기에 요양시설로 모셔 적절한 치료 및 관리를 받도록 부양자(care giver)와 상의하는 게 좋다. 이때 환자분을 요양시설로 모시도록 권고하는 증상에 해당하는 것은…
+  C: 1. 심한 기억력 상실로 아무도 못알아 볼 때 | 2. 인지 전영역에 걸친 심한 인지 장애를 호소할 때 | 3. 직장생활장애로 인한 경제상황의 악화를 호소할 때 | 4. 수면장애로 보호자가 쉬지 못하고 힘들어 할 때 | 5. 시도 때도 없이 음식을 섭취하나 체중은 오히려 
+  A: 4. 수면장애로 보호자가 쉬지 못하고 힘들어 할 때
+q-056 야마 2010 객42 · 학습지 249쪽 원문대조 
+  S: 다음 중 DSM-IV의 기준에 준하는 치매 정의에 타당한 것은 무엇인가?
+  C: 1. 섬망 가능성이 높음 | 2. 사회 및 직장생활의 장애가 없어야 함 | 3. 언어장애 및 실행증이 꼭 나타나야 함 | 4. 진행성 기억력 장애를 보임 | 5. 일시적 기억력 장애를 포함함 
+  A: 4. 진행성 기억력 장애를 보임
+q-057 야마 2010 객43 · 학습지 249쪽 원문대조 
+  S: 알쯔하이머의 위험 및 보호인자가 알려져 있다. 다음 중 위험인자와 보호인자 순으로 잘 짝지어진 것은? (위험임자 – 보호인자)
+  C: 1. 저연령 – 고연령 | 2. 고학력 - 저학력 | 3. ApoE ℇ 4 allele - ApoE ℇ 2 allele | 4. 항산화제 복용 - 두부외상 | 5. Estrogen 공급 - estrogen 결핍 
+  A: 3. ApoE ℇ 4 allele - ApoE ℇ 2 allele
+q-058 야마 2010 객44 [제외]
+  S: 치매는 신경퇴행성 질환으로 본질적인 치료는 어렵다. 그러므로 신경퇴행성 치매 환자를 볼 때 먼저 치매증상을 보이나 치료가능한 질환과의 초기 감별이 중요하다. 다음 중 치료 가능한 치매에 해당되는 것은 무엇인가?
+  C: 1. 노인 | 2. 여자 | 3. 치매의 가족력 | 4. ApoE ℇ 4 유전자형 | 5. 저학력 | 6. head trauma의 과거력 2)알쯔하이머병으로부터의 보호인자 ①ApoE  
+  A: 3. 치매의 가족력
+q-059 야마 2010 객45 · 학습지 250쪽 원문대조 
+  S: 신경퇴행성 질환의 대표인 치매는 대개 이환기간이 10년을 넘는 장기간의 치료 및 관리가 요구된다. 다음 중 치매환자를 요양시설에 모시도록 권고하는 중요한 증상에 해당하는 것은?
+  C: 1. 심한 기억력 장애 | 2. 인지 전 영역에 걸친 심한 인지장애 | 3. 직장생활 장애로 인한 경제적 능력의 부재 | 4. 언어장애의 선택적 손실로 의사소통능력 부재 | 5. 낙상 및 골절 위험이 큰 경우 
+  A: 5. 낙상 및 골절 위험이 큰 경우

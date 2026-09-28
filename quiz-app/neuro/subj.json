@@ -1,0 +1,1038 @@
+[
+{
+"cid": "topic-001-area-yama-q-001",
+"meta": "야마 · 1/41 · 2026 강의록 39쪽 · QUIZ 1",
+"stem": "[형성평가] 이전에 Wernicke’s area로 알려졌던 area 40, 39의 이름은 무엇인가요?",
+"fb": "제공 정답: Geschwind’s territory\n\n정답: Geschwind’s territory\n현재 강의는 BA39·40을 읽기·쓰기와 삼차 통합의 Geschwind 영역으로 구분한다. Wernicke의 핵심은 우성 상측두회 BA22이다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-002",
+"meta": "야마 · 2/41 · 2026 강의록 56쪽 · QUIZ 2",
+"stem": "[형성평가] 의식을 명료하게 유지하기 위한 경로 중 BRAINSTEM의 정보를 THALAMUS로 전달하는 TRACT의 이름은 무엇인가요?",
+"fb": "제공 정답: Central tegmental tract\n\n정답: Central tegmental tract\n강의록49쪽의 상행망상활성계: 뇌간 망상체에서 중심뒤판로를 통해 동측 시상 수질판속핵으로 올라가는 경로를 묻는다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-023",
+"meta": "야마 · 23/41 · 야마 2018 주10 · 학습지 325쪽",
+"stem": "Consciousness와 관련 있는 RAS의 core의 nucleus에 대해 쓰시오.",
+"fb": "제공 정답: centromedian nucleus, parafascicular nucleus, intralaminar nucleus\n\n제공 정답: centromedian nucleus, parafascicular nucleus, intralaminar nucleus\n근거·해설: 시상 수질판속핵 계열의 중심정중핵·다발곁핵은 각성 유지에 관여한다. 수질판속핵은 상위 묶음이며 세 개가 동등하게 분리된 핵이라는 뜻은 아니다. 강의록45·49쪽 및 STT22:44.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-024",
+"meta": "야마 · 24/41 · 야마 2018 주11 · 학습지 325쪽",
+"stem": "뇌의 angular gyrus와 supramarginal gyrus를 통합하는 tertiary association area 인 Wernicke’s area에 문제가 생겨서 생기는 syndrome은?",
+"fb": "제공 정답: Gerstman’s syndrome\n\n제공 정답: Gerstman’s syndrome\n근거·해설: 좌우지남력장애, 손가락실인, 실서증, 실산증의 네 증상. 우성 각회 BA39 단일 병변과 연결된다. 원문의 Wernicke 명명은 현재 강의의 Geschwind 구분과 다르다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-025",
+"meta": "야마 · 25/41 · 야마 2018 주12 · 학습지 325,326쪽",
+"stem": "Cerebrocerebellum에 문제가 있을 때 extremity 증상은 (contralateral/ipsilateral) 하게 나타난다.",
+"fb": "제공 정답: ipsilateral\n\n제공 정답: ipsilateral\n근거·해설: 소뇌 병변의 사지 협응 장애는 일반적으로 병변과 같은 쪽에 나타난다. 원문 괄호의 두 방향 중 동측을 고르는 주관식 형식을 보존했다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-026",
+"meta": "야마 · 26/41 · 야마 2017 주8 · 학습지 326쪽",
+"stem": "Primary motor cortex와 primary sensory cortex의 경계는?",
+"fb": "제공 정답: central sulcus\n\n제공 정답: central sulcus\n근거·해설: 중심고랑이 중심전회 일차운동피질과 중심후회 일차체성감각피질의 경계이다. 강의록3·5쪽.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-027",
+"meta": "야마 · 27/41 · 야마 2017 주9 · 학습지 326쪽",
+"stem": "Gerstman’s syndrome이 발생할 수 있는 부위인 brodmann 39, 40 영역의 gyrus 이름을 각각 쓰시오.",
+"fb": "제공 정답: area 39 : angular gyrus / area 40 : supramarginal gyrus\n\n제공 정답: area 39 : angular gyrus / area 40 : supramarginal gyrus\n근거·해설: BA39는 각회, BA40은 모서리위회이다. 우성 각회 손상은 Gerstmann 증후군과 연결된다. 강의록7·36쪽.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-028",
+"meta": "야마 · 28/41 · 야마 2017 주10 · 학습지 326쪽",
+"stem": "Limbic system에서 대부분의 input을 담당하는 core는?",
+"fb": "제공 정답: hippocampus\n\n제공 정답: hippocampus\n근거·해설: 해마가 기억 정보의 진입 구조로 강조되었다. 강의록40쪽 및 3교시 STT07:45.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-029",
+"meta": "야마 · 29/41 · 야마 2017 주11 · 학습지 326쪽",
+"stem": "Consciousness와 관련 있는 RAS의 core는 thalamus의 centromedian nucleus, parafascicular nucleus, 그리고 이것이다. 이것은 무엇인가?",
+"fb": "제공 정답: internal medullary lamina (intra laminar nucleus) — 원본도 답 불확실 표시\n\n근거·해설: 수질판(internal medullary lamina)은 백질판, 수질판속핵(intralaminar nuclei)은 그 안의 핵군이다. 구조와 핵을 동의어로 처리하면 안 된다. 중심정중핵·다발곁핵은 핵군의 구성 요소이다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-030",
+"meta": "야마 · 30/41 · 야마 2016 주11 · 학습지 326,327쪽",
+"stem": "Basal ganglia의 구성을 쓰시오.",
+"fb": "제공 정답: nucleus accumbens, caudate, putamen, globus pallidus, subthalamic nucleus, substantia nigra\n\n제공 정답: nucleus accumbens, caudate, putamen, globus pallidus, subthalamic nucleus, substantia nigra\n근거·해설: 선조체(꼬리핵+조가비핵), 창백핵, 흑질, 시상하핵, 중격의지핵을 구분한다. 강의록41쪽의 구성 목록과 대응한다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-031",
+"meta": "야마 · 31/41 · 야마 2016 주12 · 학습지 327쪽",
+"stem": "소뇌(cerebellum)의 기능 중 언어에 관련된 증상을 쓰시오.",
+"fb": "제공 정답: 구음장애(dysarthria)\n\n제공 정답: 구음장애(dysarthria)\n근거·해설: 소뇌의 운동 협응 장애가 조음근의 타이밍·힘 조절에 영향을 주어 구음장애가 발생한다. 언어 이해·생성의 실어증과 구별한다. 강의록55쪽.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-032",
+"meta": "야마 · 32/41 · 야마 2016 주13 · 학습지 327쪽",
+"stem": "Midbrain에 nucleus가 존재하는 cranial nerve를 쓰시오.",
+"fb": "제공 정답: 3, 4번 CN\n\n제공 정답: 3, 4번 CN\n근거·해설: 원본 답은 눈돌림신경(CN III)과 도르래신경(CN IV)이다. 현재 수업의 구체적인 번호 설명은 확인되지 않아 범위 외로 유지한다.\n\n현재 9/15–9/23 수업 범위 밖 야마. 원문 보존.\n\n[수업범위 외] 현재 9/15~9/23 해당 수업의 강의록·STT 범위를 벗어나므로 원문은 보존하되 변형/탈야 산정에서 제외.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-033",
+"meta": "야마 · 33/41 · 야마 2016 주14 · 학습지 327쪽",
+"stem": "Amygdala와 Hippocampus를 연결하는 구조물의 이름을 쓰시오.",
+"fb": "제공 정답: Fornix\n\n근거·해설: 원본 답은 Fornix이다. 현재 STT는 해마→뇌궁→유두체 경로를 설명한다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-034",
+"meta": "야마 · 34/41 · 야마 2015 주3 · 학습지 327,328쪽",
+"stem": "Reticular activating system 의 구성요소를 쓰시오.",
+"fb": "제공 정답: 감각기관 input; thalamus(intra laminar, centromedian, parafascicular nucleus); brain stem reticular formation; central tegmental tract; cortex\n\n제공 정답: 감각기관 input; thalamus(intra laminar, centromedian, parafascicular nucleus); brain stem reticular formation; central tegmental tract; cortex\n근거·해설: 여러 감각 입력이 뇌간 망상체의 상행 경로와 시상을 거쳐 피질 각성을 유지하는 연결을 묻는다. 수질판속핵 안에 중심정중핵·다발곁핵이 포함되는 계층 구조로 이해한다. 강의록49쪽.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-035",
+"meta": "야마 · 35/41 · 야마 2015 주4 · 학습지 328쪽",
+"stem": "Basal ganglia의 구성요소를 쓰시오.",
+"fb": "제공 정답: Striatum(Caudate Nucleus + Putamen), Subthalamic Nucleus, Substantia Nigra, Nucleus Accumbens, Globus Pallidus\n\n제공 정답: Striatum(Caudate Nucleus + Putamen), Subthalamic Nucleus, Substantia Nigra, Nucleus Accumbens, Globus Pallidus\n근거·해설: 선조체가 꼬리핵과 조가비핵으로 구성됨을 함께 쓴다. 강의록41쪽.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-036",
+"meta": "야마 · 36/41 · 야마 2015 주5 · 학습지 328쪽",
+"stem": "Limbic system의 기능을 쓰시오.",
+"fb": "제공 정답: memory, learning, autonomic nervous system 조절, 본능·감정\n\n제공 정답: memory, learning, autonomic nervous system 조절, 본능·감정\n근거·해설: 기억과 학습, 자율신경 조절, 본능과 감정을 포함하는 변연계 기능을 묻는 주관식이다. 현재 STT에서는 특히 기억·정서 회로를 설명한다.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-037",
+"meta": "야마 · 37/41 · 야마 2015 주6 · 학습지 328쪽",
+"stem": "Pons에 nucleus가 존재하는 cranial nerve 번호를 쓰시오.",
+"fb": "제공 정답: 5, 6, 7번 CN\n\n근거·해설: 원본 제공 답은 5·6·7번이다. 뇌교에는 전정·달팽이핵의 일부도 걸쳐 있으므로 8번을 배제한 목록은 해부학적 경계에 주의가 필요하다. 현재 9/15–9/23 수업 범위 밖 야마. 원문 보존. [수업범위 외] 현재 9/15~9/23 해당 수업의 강의록·STT 범위를 벗어나므로 원문은 보존하되 변형/탈야 산정에서 제외.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-040",
+"meta": "야마 · 40/41 · 야마 2014 주33 · 학습지 329,330쪽",
+"stem": "Basal ganglia의 구성요소를 쓰시오.",
+"fb": "제공 정답: striatum(caudate nucleus, putamen), globus pallidus, substantia nigra, nucleus accumbens, subthalamic nucleus\n\n제공 정답: striatum(caudate nucleus, putamen), globus pallidus, substantia nigra, nucleus accumbens, subthalamic nucleus\n근거·해설: 학습지329–330쪽에 나뉜 다섯 항목을 모두 보존했다. 선조체의 두 구성 핵까지 포함한다. 강의록41쪽.",
+"vis": false
+},
+{
+"cid": "topic-001-area-yama-q-041",
+"meta": "야마 · 41/41 · 야마 2014 주34 · 학습지 330쪽",
+"stem": "하루에 생성되는 CSF의 양과 Ventricle 내의 CSF의 양은?",
+"fb": "제공 정답: 하루 생성 약 500cc / Ventricle 내 약 35~50cc\n\n제공 정답: 하루 생성 약 500cc / Ventricle 내 약 35~50cc\n근거·해설: 학습지 제공 답은 하루 생성 약500cc, 뇌실 내 약35~50cc이다. 원본은 전체 CSF 약150cc도 해설에 적지만 질문은 생성량과 뇌실 내 양을 묻는다. 현재 수업의 해당 수치는 확인되지 않아 범위 외로 보존한다.\n\n현재 9/15–9/23 수업 범위 밖 야마. 원문 보존.\n\n[수업범위 외] 현재 9/15~9/23 해당 수업의 강의록·STT 범위를 벗어나므로 원문은 보존하되 변형/탈야 산정에서 제외.",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-013",
+"meta": "야마 · 13/29 · 야마 2018 주13 · 학습지 336쪽",
+"stem": "몸의 midline 위에 구멍이 보이고 반복적인 세균성 수막염이 있는 아이가 있다. 검사 및 치료는?",
+"fb": "제공 정답: MRI로 확인 후 병변(누관·pus 등) 근치적 절제\n\n근거·해설: congenital dermal sinus tract. 반복되는 이유 없는 세균성 수막염이 있으면 midline을 따라 구멍을 찾고, MRI로 확인한 뒤 끝까지 찾아 완전히 제거한다(복원자 오현).",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-014",
+"meta": "야마 · 14/29 · 야마 2018 주14 · 학습지 336–337쪽",
+"stem": "다음과 같은 소견을 보이는 소아 환자에서 조기 유합된 suture는?",
+"fb": "제공 정답: metopic suture\n\n근거·해설: 사진은 trigonocephaly(삼각두) → metopic suture 조기유합(복원자 온채련). 거의 매년 출제.",
+"vis": true
+},
+{
+"cid": "topic-002-area-yama-q-015",
+"meta": "야마 · 15/29 · 야마 2017 주10 · 학습지 337쪽",
+"stem": "반복적인 세균성뇌막염으로 내원한 환자를 PHYSICAL EXAMINATION 하였더니 L1 level 피부에 작은 구멍이 관찰되었다. 적절한 검사와 처치는?",
+"fb": "제공 정답: 검사: Sonography, MRI / 처치: 근치적 제거술\n\n근거·해설: Sonography 또는 MRI로 깊이를 확실히 파악하여 근치적으로 제거한다고 수업에서 언급(복원자 정한준).",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-016",
+"meta": "야마 · 16/29 · 야마 2017 주11 · 학습지 337쪽",
+"stem": "생후 3개월된 남아의 두개골 CT이다. 조기유합된 suture는?",
+"fb": "제공 정답: metopic suture\n\n근거·해설: 환아는 craniosynostosis 중 삼각두(trigonocephaly) → metopic suture 조기유합(복원자 조상원).",
+"vis": true
+},
+{
+"cid": "topic-002-area-yama-q-018",
+"meta": "야마 · 18/29 · 야마 2016 주2 · 학습지 338쪽",
+"stem": "머리에서 천추부까지 midline을 따라 skin에 fistula와 같은 이상구조가 관찰되며, 반복되는 뇌수막염이 나타난다면 이 질환명은?",
+"fb": "제공 정답: Congenital dermal sinus tract\n\n근거·해설: incomplete dysjunction 질환 중 하나. 반복되는 meningitis가 특징(복원자 최소윤, 14년 주52와 동일).",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-020",
+"meta": "야마 · 20/29 · 야마 2015 주2 · 학습지 339쪽",
+"stem": "머리 끝 부터 천골 끝 까지 midline을 따라 전신에 fistula와 같은 이상이 있고, 뇌척수염이 자주 재발하는 경우 어떤 질환을 의심할 수 있는가?",
+"fb": "제공 정답: (Congenital) Dermal sinus tract\n\n근거·해설: 고은정 교수님 티야(복원자 김호림).",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-022",
+"meta": "야마 · 22/29 · 야마 2014 주52 · 학습지 339–340쪽",
+"stem": "머리에서 천추부까지 midline을 따라 skin에 fistula와 같은 이상구조가 관찰되며, 반복되는 뇌수막염이 나타난다면, 이 질환명은?",
+"fb": "제공 정답: Congenital dermal sinus tract\n\n근거·해설: incomplete dysjunction(dermal sinus tract, dermoid·epidermoid tumor, meningocele manqué). 치료: sono·MR로 깊이를 파악해 근치적 제거.",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-027",
+"meta": "야마 · 27/29 · 야마 2011 주8 · 학습지 341–342쪽",
+"stem": "두개골 조기 유합증의 치료에서 두개골을 잘게 나누어 remodeling 하는 방법을 무엇이라 하는지 쓰시오.",
+"fb": "제공 정답: Suturectomy (suture line 절개 후 remodeling)\n\n근거·해설: Craniosynostosis 치료: suture line을 따라 절개한 후 리모델링을 거치면 정상 모양으로 다시 융합(복원자 김수연A).",
+"vis": false
+},
+{
+"cid": "topic-002-area-yama-q-028",
+"meta": "야마 · 28/29 · 야마 2011 주9 · 학습지 342쪽",
+"stem": "Filum terminale가 두꺼워져 있거나 lipoma, lipomyelomeningocele과 같은 병변이 conus medullaris의 상방이동과 spinal cord의 성장을 억제하여 족부기형, 배뇨장애, 비뇨기계 감염을 일으킬 수 있는 질환은 무엇인지 쓰시오.",
+"fb": "제공 정답: Disorders of secondary neurulation (tethered cord)\n\n근거·해설: thickened filum terminale, lipoma·lipomyelomeningocele이 conus의 상방이동을 막는 질환(복원자 김수연). 복원자도 \"문제가 요구하는 것이 정확히 무엇인지 모르겠다\"고 적음 → tethered cord syndrome도 가능한 답.",
+"vis": false
+},
+{
+"cid": "topic-002-area-variants-q-026",
+"meta": "야마 변형 · 26/29 · 야마 변형 · 야마 2011 객29 · 원문 복원 불완전",
+"stem": "다음 임상·개념 단서에 해당하는 개념을 쓰시오.\n“다음 중 이주이상질환에 해당하는 질환을 모두 고르시오. (1) Encephalocele (2) Dermal sinus tract (3) Heterotopia (4) Schizencephaly (5) Porencephaly (6) Holoprocencephaly (7) Pachygyria”",
+"fb": "제공 정답: [5쪽] 3. Congenital dermal sinus tract Chronic bouts of meningitis, Meningitis cause by unusual organisms, Recurrent feve…\n\n정답 개념 “[5쪽] 3. Congenital dermal sinus tract Chronic bouts of meningitis, Meningitis cause by unusual organisms, Recurrent feve…”을 원 야마와 반대 방향(개념→단서)으로 묻도록 변형했다.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-022",
+"meta": "야마 · 22/39 · 야마 2018 주2 · 학습지 188쪽",
+"stem": "정신 및 고위기능검사 중 유명한 배우 얼굴 알아보기는 ( )의 이상여부를 알아보기 위한 검사이다 빈칸에 알맞은 것은?",
+"fb": "제공 정답: Visual and body perception (시지각·신체지각)\n\n근거·해설: 고위기능 검사 중 visual and body perception: 유명한 배우 얼굴 알아보기, \"왼손 검지로 우측 귀 만지세요\" (서만욱 교수님, 티야).",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-023",
+"meta": "야마 · 23/39 · 야마 2018 주3 · 학습지 188–189쪽",
+"stem": "소뇌기능검사를 아는데로 열거하시오.(3개 이상 맞을 시 정답)",
+"fb": "제공 정답: Test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors 중 3개 이상\n\n근거·해설: 서만욱 교수님 신경학의 개요 강의록 3-2-8 소뇌기능검사: test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors. 19·20·21·22년 반복 출제된 킹야.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-024",
+"meta": "야마 · 24/39 · 야마 2017 주14 · 학습지 189–190쪽",
+"stem": "소뇌기능검사의 방법은?",
+"fb": "제공 정답: Test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors\n\n근거·해설: 서만욱 교수님 신경학의 개요 강의록 3-2-8 소뇌기능검사: test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors. 19·20·21·22년 반복 출제된 킹야.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-025",
+"meta": "야마 · 25/39 · 야마 2017 주15 · 학습지 190쪽",
+"stem": "Deep tendon reflex 정상등급은?",
+"fb": "제공 정답: 2+\n\n근거·해설: Reflex grading: 0 absent, ± reinforcement 시에만, 1+ 감소, 2+ 정상, 3+ 증가, 4+ clonus.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-026",
+"meta": "야마 · 26/39 · 야마 2016 주15 · 학습지 190쪽",
+"stem": "신경학적 검사상 운동기능 검사는 ( ) 와 ( )을 검사한다.",
+"fb": "제공 정답: Power(근력), Tone(긴장도)\n\n근거·해설: Motor 검사 시 power와 tone을 본다 — 수업시간 TY (복원자 김은혜). ※ 이전 버전의 정답 \"2+\"는 2017 주15의 답이 잘못 들어간 것이어서 수정함.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-027",
+"meta": "야마 · 27/39 · 야마 2016 주16 · 학습지 190쪽",
+"stem": "Deep tendon reflex를 설명하시오.",
+"fb": "제공 정답: 근육과 연결된 힘줄에 급작스런 폄 자극 → muscle spindle 자극 → 척수 내 alpha motor neuron 연결 → 근육의 반사수축\n\n근거·해설: 교수님 해설 답안: 근육과 연결된 인대와 관절주위 조직에 급작스런 폄 자극을 주면 muscle spindle이 자극되고, 척수 내에서 알파 신경세포에 연결되어 근육의 반사수축을 일으키는 일련의 과정.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-028",
+"meta": "야마 · 28/39 · 야마 2016 주18 · 학습지 190–191쪽",
+"stem": "Finger to nose test는 뇌 중 ( )의 기능을 검사하는 방법이다.",
+"fb": "제공 정답: 소뇌\n\n근거·해설: Finger to nose test는 소뇌기능검사(slide 61·62).",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-029",
+"meta": "야마 · 29/39 · 야마 2016 주19 · 학습지 191쪽",
+"stem": "이상운동반응질환은 ( ) 의 기능 이상으로 발생한다.",
+"fb": "제공 정답: 추체외로계 (striatopallidonigral system = basal ganglia, cerebellum)\n\n근거·해설: 이상운동질환은 추체외로계, 즉 striatopallidonigral system(basal ganglia)과 cerebellum의 기능 이상으로 발생. 아세틸콜린·도파민이 대표적.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-030",
+"meta": "야마 · 30/39 · 야마 2015 주16 · 학습지 191쪽",
+"stem": "Grading power에서 정상 수치는 ( )이다.",
+"fb": "제공 정답: 5\n\n근거·해설: Grading power(MRC) 정상 = 5 (복원자 오현석).",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-031",
+"meta": "야마 · 31/39 · 야마 2015 주17 · 학습지 191–192쪽",
+"stem": "Deep tendon reflex의 정상 등급은 ( ) 이다.",
+"fb": "제공 정답: 2+\n\n근거·해설: Reflex grading: 0 absent, ± reinforcement 시에만, 1+ 감소, 2+ 정상, 3+ 증가, 4+ clonus.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-032",
+"meta": "야마 · 32/39 · 야마 2015 주18 · 학습지 192쪽",
+"stem": "소뇌기능검사 종류는?",
+"fb": "제공 정답: Test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors\n\n근거·해설: 서만욱 교수님 신경학의 개요 강의록 3-2-8 소뇌기능검사: test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors. 19·20·21·22년 반복 출제된 킹야.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-033",
+"meta": "야마 · 33/39 · 야마 2014 주29 · 학습지 192쪽",
+"stem": "신경학의 정의에 대해 쓰시오.",
+"fb": "제공 정답: 신경계(뇌, 척수, 말초신경)의 질환을 진단하고 치료하는 의학의 한 전문분야\n\n근거·해설: 복원자 김화평.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-034",
+"meta": "야마 · 34/39 · 야마 2014 주32 · 학습지 192–193쪽",
+"stem": "신경학적 증후군의 종류에 대해 아는대로 쓰시오. (5가지 이상 정답)",
+"fb": "제공 정답: 뇌졸중, 어지럼증, 두통, 이상운동질환, 치매, 수면장애, 경련성 질환, 다발경화증, 퇴행성 질환, 척수 질환, 말초신경질환, 신경근육접합질환, 근육질환 중 5가지 이상\n\n근거·해설: 서만욱 교수님 강의록 5장 신경학적 증후군 목록.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-035",
+"meta": "야마 · 35/39 · 야마 2013 주45 · 학습지 193쪽",
+"stem": "Vocal cord palsy, swallowing, gag reflex, palatal palsy 여부를 보는 것은 뇌신경 중 ( ) 의 기능을 알아보는 방법이다",
+"fb": "제공 정답: 설인신경(CN IX)과 미주신경(CN X)\n\n근거·해설: Glossopharyngeal & vagus nerve 검사: vocal cord palsy, swallowing, gag reflex, palatal palsy (강의록 p42).",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-036",
+"meta": "야마 · 36/39 · 야마 2013 주46 · 학습지 193쪽",
+"stem": "운동 검사는 근력 검사와 ( )검사를 실시한다.",
+"fb": "제공 정답: Tone(긴장도)\n\n근거·해설: Motor 검사: power와 tone.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-037",
+"meta": "야마 · 37/39 · 야마 2013 주47 · 학습지 193–194쪽",
+"stem": "감각 이상의 유형을 아는대로 기술하세요. (2개 이상)",
+"fb": "제공 정답: 국소 감각 이상, 방사성 감각 이상, 대칭성 사지 원위부 감각 이상, 감각 해리, 감각 실조증, 피질성 감각 이상 중 2개 이상\n\n근거·해설: 신경학 개요 ppt 77.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-038",
+"meta": "야마 · 38/39 · 야마 2011 주2 · 원문 복원 불완전",
+"stem": "Sensation의 modality와 담당 tract 및 fiber size에 대해서 기술하시오.",
+"fb": "제공 정답: 원본 학습지에 제공 정답 미기재\n\n근거·해설: 원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.",
+"vis": false
+},
+{
+"cid": "topic-003-area-yama-q-039",
+"meta": "야마 · 39/39 · 야마 2011 주3 · 학습지 194쪽",
+"stem": "Glasgow coma scale에 대해 설명하시오.",
+"fb": "제공 정답: GCS = Eye opening(1–4) + Best verbal response(1–5) + Best motor response(1–6), 총 3–15점. 경도 13↑, 중등도 9–12, 중증 8↓\n\n근거·해설: 의식 수준을 수치화하여 파악하고 예후를 추정. 최하점은 0점이 아니라 3점.",
+"vis": false
+},
+{
+"cid": "topic-004-area-variants-q-019",
+"meta": "야마 변형 · 19/25 · 야마 변형 · 야마 2014 객32",
+"stem": "다음 임상·개념 단서에 해당하는 개념을 쓰시오.\n“56세 여자환자가 일주인 전부터 시작된 복시와 시력저하를 주소로 내진하였다. 병력상 8개월전 지속되는 구역과 구토 입원하였고 2개원 전에는 우측 상지 저림, 근력 저하로 횡단성 척수염 진단을 받아서 스테로이드 정주한 기왕력을 가지고 있다. 감기 , 예방접종 기왕력은 없다. 시각 유발 전위검사에서 양측 좌우 p100 의 잠복기가 연장되었으며 AQP4 특이 자가 항체 NMO-IgG 양성이 확인 되었다. 이 질환에 관하여 맞는 것을…”",
+"fb": "제공 정답: Astrocyte는 말초신경의 수초를 형성한다. : Asctrocyte는 세포 외부 이온농도 조절 및 구조 지지 역할을 합니다. 말초신경 수초 형성은 Schwann cell의 역할입니다. ( X )\n\n정답 개념 “Astrocyte는 말초신경의 수초를 형성한다. : Asctrocyte는 세포 외부 이온농도 조절 및 구조 지지 역할을 합니다. 말초신경 수초 형성은 Schwann cell의 역할입니다. ( X )”을 원 야마와 반대 방향(개념→단서)으로 묻도록 변형했다.",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-003",
+"meta": "야마 · 3/10 · 야마 2018 주1 · 학습지 188쪽",
+"stem": "신경학적 검사 (neurological examination)을 아는대로 열거하시오. (3개 이상 정답 인정)",
+"fb": "제공 정답: 정신 및 고위기능 검사, 뇌신경 검사, 운동계 검사, 감각계 검사, 반사, 소뇌기능검사, 자율신경 기능검사, 혼수 환자의 신경학적 검진 (+ 언어, 자세와 보행) 중 3개 이상\n\n근거·해설: 서만욱 교수님 신경학의 개요 강의록. 킹야 및 티야.",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-004",
+"meta": "야마 · 4/10 · 야마 2017 주12 · 학습지 189쪽",
+"stem": "신경학적 검진의 정의는?",
+"fb": "제공 정답: 정상적인 구심성·중추성·원심성 신경계의 구조와 기능을 이해하고, 병적 상태의 이상 징후를 해석하여 어떤 종류의 병변이 신경계 어느 부위에 발생했는지 검진하는 방법\n\n근거·해설: 신경학 통합강의록 p.210 요약.",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-005",
+"meta": "야마 · 5/10 · 야마 2017 주13 · 학습지 189쪽",
+"stem": "신경학적 검진 방법은?",
+"fb": "제공 정답: 언어, 정신 및 고위기능 검사, 자세와 보행, 뇌신경 검사, 운동계 검사, 감각계 검사, 반사, 소뇌기능검사, 자율신경 기능검사, 혼수 환자의 신경학적 검진\n\n근거·해설: PPT 빨간 글씨. 과거 야마에는 \"언어\"와 \"자세와 보행\"이 빠져 있으니 강의록 기준으로.",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-006",
+"meta": "야마 · 6/10 · 야마 2015 주15 · 학습지 191쪽",
+"stem": "신경학적 검사를 열거해 보세요.",
+"fb": "제공 정답: 정신 및 고위기능 검사, 뇌신경 검사, 운동계 검사, 감각계 검사, 반사, 소뇌기능검사, 자율신경 기능검사, 혼수 환자의 신경학적 검진 (+ 언어, 자세와 보행)\n\n근거·해설: 강의록·과거 기출 (복원자 오태섭).",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-007",
+"meta": "야마 · 7/10 · 야마 2014 주30 · 학습지 192쪽",
+"stem": "신경학적 검사를 열거해 보세요. (5가지 이상)",
+"fb": "제공 정답: 정신 및 고위기능 검사, 뇌신경 검사, 운동계 검사, 감각계 검사, 반사, 소뇌기능검사, 자율신경 기능검사, 혼수 환자의 신경학적 검진 (+ 언어, 자세와 보행) 중 5가지 이상\n\n근거·해설: 강의록 182p (복원자 나호현).",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-008",
+"meta": "야마 · 8/10 · 야마 2014 주31 · 학습지 192쪽",
+"stem": "다음 pain의 종류를 채워 넣으시오. 국소통 (Local Pain), 연관통 (Referred Pain), ( ), 복합 지역 통증 증후군 (Complex Regional Pain Syndrome), 시상통 (Thalamic Pain)",
+"fb": "제공 정답: 방사통 (Radicular pain)\n\n근거·해설: pain의 종류: 국소통, 연관통, 방사통, 복합지역통증증후군, 시상통 (총론 ppt 80쪽).",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-009",
+"meta": "야마 · 9/10 · 야마 2013 주44 · 학습지 193쪽",
+"stem": "소뇌기능검사에 대하여 아는대로 쓰시오. (3개 이상)",
+"fb": "제공 정답: Test the gait, rebound phenomenon, finger to nose, heel to shin, rapid alternating movements, speech, nystagmus, hypotonia, pendular reflexes, tremors 중 3개 이상\n\n근거·해설: 서만욱 교수님 PPT 61번.",
+"vis": false
+},
+{
+"cid": "topic-006-area-yama-q-010",
+"meta": "야마 · 10/10 · 야마 2011 주1 · 학습지 194쪽",
+"stem": "신경학적 검사를 열거해 보세요.",
+"fb": "제공 정답: 정신 및 고위기능 검사, 뇌신경 검사, 운동계 검사, 감각계 검사, 반사, 소뇌기능검사, 자율신경 기능검사, 혼수 환자의 신경학적 검진 (+ 언어, 자세와 보행)\n\n근거·해설: 강의록 182p (복원자 김다솔). 소아에서는 psychomotor development와 원시반사를 추가로 본다.",
+"vis": false
+},
+{
+"cid": "topic-008-area-yama-q-003",
+"meta": "야마 · 3/27 · 야마 2015 주15 · 학습지 15쪽",
+"stem": "두통의 신경학적 검진으로는 어떠한 것들이 있는가?",
+"fb": "제공 정답: 두통의 양상, 정도, 위치, 기간, 변해가는 모습, 발생인자, 악화인자, 완화인자\n\n근거·해설: 통합강의록 신경학 각론 p.491.",
+"vis": false
+},
+{
+"cid": "topic-008-area-yama-q-008",
+"meta": "야마 · 8/27 · 야마 2023 주19 · 학습지 573쪽",
+"stem": "편두통 환자에서 photophobia나 phonophobia가 오는 기전은?",
+"fb": "제공 정답: Central sensitization — 두통이 수시간 지속되면 thalamus까지 감작되어 빛·소리에 민감해짐\n\n근거·해설: throbbing headache가 4시간 이상 지속되면 thalamus가 sensitization되면서 소리·냄새·빛에 민감해진다(central sensitization).",
+"vis": false
+},
+{
+"cid": "topic-008-area-yama-q-009",
+"meta": "야마 · 9/27 · 야마 2022 주6 · 학습지 573–574쪽",
+"stem": "Migraine without aura의 진단기준은? (소아)",
+"fb": "제공 정답: (A) B~D를 만족하는 발작 5회 이상 (B) 2(1)~72시간 지속 (C) 편측(소아는 양측·전측두부 가능), 박동성, 중등도 이상, 일상활동으로 악화 중 2개 이상 (D) 구역/구토 또는 빛·소리 공포(행동으로 추정 가능) 중 1개 이상 (E) 다른 질환으로 설명되지 않음\n\n근거·해설: 2004(2013) IHS criteria for pediatric migraine without aura. 강의록은 1시간, 수업에서는 2시간 언급(성인 4~72시간).",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-017",
+"meta": "야마 · 17/47 · 야마 2018 주19 · 학습지 388쪽 원본대조",
+"stem": "56세 여자 환자가 두통, 의식소실로 내원하였다. 진단 결과와 처치가 다음 사진과 같았을 때 (앞의 나이와 문제지문은 정확하지 않습니다.), 진단과 처치방법은?",
+"fb": "제공 정답: 동맥류 파열에 의한 지주막하출혈 / 개두술을 통한 동맥류 경부 결찰술(clipping)\n\n원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.",
+"vis": true
+},
+{
+"cid": "topic-009-area-yama-q-018",
+"meta": "야마 · 18/47 · 야마 2018 주20 · 학습지 389쪽 원본대조",
+"stem": "우측 편마비 (더 많은 증상을 보였습니다.), 다음 사진 에서 손상된 혈관은?",
+"fb": "제공 정답: 좌측 lenticulostriate artery\n\n원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.",
+"vis": true
+},
+{
+"cid": "topic-009-area-yama-q-019",
+"meta": "야마 · 19/47 · 야마 2018 주21 · 학습지 389–390쪽 원본대조",
+"stem": "다음 사진과 같은 병변을 보이는 사람이 갑작스러운 의 식소실로 내원하였다. 환자는 양쪽 ICA에 stenosis 소 견을 보였다. 진단은?",
+"fb": "제공 정답: Moyamoya disease\n\n원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.",
+"vis": true
+},
+{
+"cid": "topic-009-area-yama-q-020",
+"meta": "야마 · 20/47 · 야마 2017 주7 · 학습지 389쪽",
+"stem": "70대 이상의 노인에서 발병하여 고혈압의 기왕력 없이 뇌 엽내에 많은 양의 출혈이 발생하는 경우로 혈관벽이 병리적 단백질로 대치되어 혈관 신축성이 떨어져 정상 혈압에서도 터지는 질환은?",
+"fb": "제공 정답: 아밀로이드 혈관병증에 의한 출혈 (cerebral amyloid angiopathy)\n\n근거·해설: 아밀로이드 혈관병증에 의한 출혈: 70대 이상, 고혈압 병력 없이 뇌엽 내 대량 출혈, 피질 소혈관의 수축요소가 비수축성 amyloid β로 대치되어 정상 혈압에서도 파열.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-021",
+"meta": "야마 · 21/47 · 야마 2017 주8 · 학습지 390쪽 원본대조",
+"stem": "아래 사진의 뇌혈관기형 치료시 전신마취나 관혈적 처치를 하지 않고 할 수 있는 치료를 쓰시오",
+"fb": "제공 정답: 감마나이프 수술(Gamma knife radiosurgery)\n\n원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.",
+"vis": true
+},
+{
+"cid": "topic-009-area-yama-q-022",
+"meta": "야마 · 22/47 · 야마 2017 주9 · 학습지 390쪽",
+"stem": "뇌동맥류 파열에 의한 뇌지주막하 출혈의 가장 심한 합병증은?",
+"fb": "제공 정답: 뇌혈관연축 (vasospasm)\n\n근거·해설: 뇌동맥류 파열 환자의 사망·신경학적 장애의 주요 원인. SAH 양이 많을수록 흔하고, 출혈 후 3일째 시작 → 6~8일 최고조 → 3주 후 안정. 가장 심각한 합병증이라고 강조한 티야. 치료: triple H(수업: hypervolemia → euvolemia로 바뀜), 동맥내 nimodipine, balloon angioplasty.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-035",
+"meta": "야마 · 35/47 · 야마 2014 주69 · 학습지 395쪽",
+"stem": "다음에서 설명하는 질환에 대한 수술적 치료는? a. 안면신경이 분포하는 안면근육에 불수의적이고 돌발적인 수축을 일으킨다 b. 주로 편측에서 발생하며 정상혈관이 뇌간의 안면신경 진입부 (root entry zone)을 압박하여 발생한다 c. 보튤리늄 에이독소로 효과를 볼수 있으나 평균 4개월간의 효과를 나타내고 반복 시술시 안면마비, 안검하수, 알레르기 반응을 보일수 있다. 정답 : ④ (4단계) 의식이 혼미하고, 반신마비가 있기 때문에 grade IV에 해당 합니다.",
+"fb": "제공 정답: 미세혈관 감압술 (microvascular decompression, MVD)\n\n근거·해설: 반측안면경련(hemifacial spasm): 정상 혈관이 안면신경 root entry zone을 압박. mastoid 뒤쪽으로 접근해 혈관과 신경 사이에 패드·mesh를 대어 감압. 가장 효과적이고 재발이 적다.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-039",
+"meta": "야마 · 39/47 · 야마 2013 주52 · 학습지 396쪽",
+"stem": "Spetzler-Martin Grade는 몇 점인가? Size 4cm, 시상하부에 위치, venous drainage가 deep component까지 있다.",
+"fb": "제공 정답: 4점 (size 3~6cm 2 + eloquent(시상하부) 1 + deep venous drainage 1)\n\n근거·해설: Spetzler-Martin grade: size <3cm 1 / 3~6cm 2 / >6cm 3 + eloquence(감각운동, 언어, 시각, 시상·시상하부, 뇌간, 소뇌각, 심부 소뇌핵) 1 + deep venous drainage 1. 문제: 2(size) + 1(cerebellar peduncle) + 1(deep) = 4.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-040",
+"meta": "야마 · 40/47 · 야마 2012 주37 · 학습지 396–397쪽",
+"stem": "Vasospasm의 치료 중 ‘triple H therapy’란?",
+"fb": "제공 정답: Hypertension, Hypervolemia, Hemodilution\n\n근거·해설: SAH 후 혈관연축(3일째 시작, 6~8일 최고조, 3주 후 안정) 치료: triple H, 동맥내 nimodipine, balloon angioplasty.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-041",
+"meta": "야마 · 41/47 · 야마 2012 주38 · 학습지 397쪽",
+"stem": "모야모야병의 수술적 치료방법이다. 대문자가 무엇의 약자인지 쓰시오. (1) EDAS (2) EMS (3) EC-IC bypass",
+"fb": "제공 정답: (1) EDAS: Encephalo-duro-arterio-synangiosis (2) EMS: Encephalo-myo-synangiosis (3) EC-IC bypass: Extracranial-intracranial bypass\n\n근거·해설: 모야모야병의 간접·직접 혈관문합술.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-042",
+"meta": "야마 · 42/47 · 야마 2012 주39 · 학습지 397쪽",
+"stem": "뇌동정맥기형의 Spetzler-Martin Grade를 정하는 요소를 쓰시오.",
+"fb": "제공 정답: Size(nidus 최대직경), Eloquence(기능 부위 여부), Venous drainage(심부 배출 여부)\n\n근거·해설: Spetzler-Martin grade: size <3cm 1 / 3~6cm 2 / >6cm 3 + eloquence(감각운동, 언어, 시각, 시상·시상하부, 뇌간, 소뇌각, 심부 소뇌핵) 1 + deep venous drainage 1. 문제: 2(size) + 1(cerebellar peduncle) + 1(deep) = 4.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-043",
+"meta": "야마 · 43/47 · 야마 2012 주40 · 학습지 397쪽",
+"stem": "주로 70대 이상의 고령에서 발생하며 고혈압의 기왕력이 없고 혈관에 amyloid beta protein이 침착되는 질환은 무엇인가?",
+"fb": "제공 정답: 아밀로이드 혈관병증 (amyloid angiopathy)\n\n근거·해설: 아밀로이드 혈관병증에 의한 출혈: 70대 이상, 고혈압 병력 없이 뇌엽 내 대량 출혈, 피질 소혈관의 수축요소가 비수축성 amyloid β로 대치되어 정상 혈압에서도 파열. ※ 이전 버전의 정답 \"⑤\"는 학습지 표기 오류를 그대로 옮긴 것이라 수정함.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-045",
+"meta": "야마 · 45/47 · 야마 2011 주1 · 학습지 398쪽",
+"stem": "뇌지주막하출혈 후 발생하는 혈관연축에 대해 시도할 수 있는 치료방법을 모두 고르시오.\n① Hypervolemia ② Hypovolemia ③ Hemodilution ④ Hemoconcentration ⑤ Hypertension ⑥ Hypotension ⑦ Intra-arterial nimodipine ⑧ Balloon angioplasty",
+"fb": "제공 정답: ①③⑤⑦⑧ (Hypervolemia, Hemodilution, Hypertension, Intra-arterial nimodipine, Balloon angioplasty)\n\n근거·해설: 혈관연축 치료: triple H(hypertension, hypervolemia, hemodilution), 동맥내 nimodipine, balloon angioplasty.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-046",
+"meta": "야마 · 46/47 · 야마 2011 주8 · 학습지 398쪽 (정답 미기재)",
+"stem": "심방세동으로 인해 warfarin을 투여받고 있는 환자에게 발생한 시상부출혈이 발생한 경우 시행할 수 있는 수술적 처치를 쓰시오.",
+"fb": "제공 정답: 원본 학습지에 제공 정답 미기재\n\n근거·해설: 원문 야마 보존. 제공 정답: 미기재. 원본 선지/정답 정보가 부족하여 자동 복원 표시.",
+"vis": false
+},
+{
+"cid": "topic-009-area-yama-q-047",
+"meta": "야마 · 47/47 · 야마 2011 주9 · 학습지 398쪽",
+"stem": "17세 여자환자가 건강검진상에서 우연히 좌측 운동피질에 2cm크기의 뇌동정맥 기형이 발견되었다. 고려할 수 있는 치료방법을 모두 쓰시오.",
+"fb": "제공 정답: 개두술을 이용한 동정맥기형 절제, 뇌혈관내 수술(색전술), 감마나이프 수술\n\n근거·해설: 뇌동정맥 기형의 치료 3가지(고은정 교수님 ppt p35).",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-025",
+"meta": "야마 · 25/49 · 야마 2018 주16 · 학습지 412쪽",
+"stem": "한 환자가 내원하였다. 의식이 없었으며, 의사가 손으로 치며 말을 걸었을 때 반응이 없었다. 명치를 강하게 꼬집으니 눈을 뜨고 “으...으…”등의 신음 소리를 내며 꼬집은 부위에 손을 대는 반응을 보였다. 이 환자의 GCS는 어떻게 되는가? Total : E : V : M :",
+"fb": "제공 정답: Total 9 (E:2, V:2, M:5)\n\n근거·해설: 통증 자극에 눈 뜸(2) + 신음 위주의 이해할 수 없는 소리(2) + 국재성 반응(5) = 9. GCS — Eye: 자발 4 / 명령 3 / 통증 2 / 없음 1. Verbal: 지남력 5 / 혼돈된 대화 4 / 부적절한 단어 3 / 이해할 수 없는 소리(신음) 2 / 없음 1. Motor: 명령 6 / 국재성 5 / 도피성 4 / 이상굴곡(decorticate) 3 / 이상신전(decerebrate) 2 / 없음 1. 매년 출제되는 킹야.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-026",
+"meta": "야마 · 26/49 · 야마 2018 주17 · 학습지 412–413쪽",
+"stem": "다음 CT 소견과 설명에 해당하는 두부 외상은? (단답형) A. 외력에 의해 두개골의 변형이나 골절이 생기면서 동반된 경막 또는 두개골 혈관의 손상으로 혈종이 된다. B. 주로 외상시 중경막 동맥 (middle meningeal artery)의 손상으로 인해 발생한다. C. 수상 후 의식 명료기(Lucid interval)을 보이기도 한다.",
+"fb": "제공 정답: Acute epidural hematoma\n\n근거·해설: CT 볼록 렌즈 모양 + A~C 설명 → 경막외혈종. 교수님은 phase(acute)까지 써야 정답 인정한다고 함.",
+"vis": true
+},
+{
+"cid": "topic-010-area-yama-q-027",
+"meta": "야마 · 27/49 · 야마 2018 주18 · 학습지 413쪽",
+"stem": "만니톨 투여, 과호흡 유도, 머리를 3~40도 올리는 행위들은 어떤 목적으로 시행되는가? (단답형)",
+"fb": "제공 정답: 두개내압(ICP) 하강\n\n근거·해설: 뇌압을 낮추기 위한 처치(킹야). ICP 감소: 과호흡(PCO2↓ → 뇌혈관 수축 → 뇌혈량↓, 일시적), mannitol·삼투제제(세포 내·간질 수분↓), 두부 30도 거상, 진정, 뇌실배액, 저체온, 수술적 감압, barbiturate coma.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-031",
+"meta": "야마 · 31/49 · 야마 2017 주13 · 학습지 415쪽",
+"stem": "다음 그림과 관련된 질환은? - 주로 외상시 Middle meningeal artery의 손상이 있다. - 외상 후 명료한 의식(lucid period)이 있을 수 있다.",
+"fb": "제공 정답: Epidural hematoma (경막외혈종)\n\n근거·해설: 경막외혈종: 외력에 의한 두개골 변형·골절과 동반된 경막·두개골 혈관 손상, 주로 중경막동맥, 볼록 렌즈 모양, 의식 명료기(lucid interval), 반대측 편마비, 동측 동공 산대. 충좌상(coup) 부위.",
+"vis": true
+},
+{
+"cid": "topic-010-area-yama-q-035",
+"meta": "야마 · 35/49 · 야마 2016 주31 · 학습지 417쪽",
+"stem": "다음 그림과 관련된 외상성 손상을 일으키는 원인은? o ?? o 주로 외상 시 middle meningeal artery의 손상이 있다. o 외상 후 명료한 의식(lucid period)이 있다.",
+"fb": "제공 정답: Coup contusion (충좌상, 접촉 부위 손상)\n\n근거·해설: 15년 주22(답 EDH)와 비슷한 사진·보기이나 이번엔 원인을 묻는 것으로 복원자가 기억. 강의록: 접촉 현상에 의한 손상 — 두피손상, 두개골 골절, 경막외혈종 등 충좌상 / 충격파 — 간충좌상, 반충좌상.",
+"vis": true
+},
+{
+"cid": "topic-010-area-yama-q-037",
+"meta": "야마 · 37/49 · 야마 2015 주22 · 학습지 418–419쪽",
+"stem": "다음 그림과 관련된 질환은? - 주로 외상 시 middle meningeal artery의 손상이 있다. - 외상 후 명료한 의식(Lucid period)이 있을 수 있다.",
+"fb": "제공 정답: Epidural hematoma\n\n근거·해설: 경막외혈종: 외력에 의한 두개골 변형·골절과 동반된 경막·두개골 혈관 손상, 주로 중경막동맥, 볼록 렌즈 모양, 의식 명료기(lucid interval), 반대측 편마비, 동측 동공 산대. 충좌상(coup) 부위.",
+"vis": true
+},
+{
+"cid": "topic-010-area-yama-q-038",
+"meta": "야마 · 38/49 · 야마 2015 주23 · 학습지 419쪽",
+"stem": "다음 처치의 목적은 무엇인가? A. 과호흡을 시켜 PCO2를 낮춘다. B. 만니톨을 투여한다. C. 두부를 30-45도로 높여준다. D. 삼투제제를 투여하여 뇌세포 내와 세포 간질액을 줄인다.",
+"fb": "제공 정답: ICP(두개내압)를 낮추기 위함\n\n근거·해설: 과호흡은 일시적 효과만 있어 크게 의미가 없다고 이종명 교수님 언급. ICP 감소: 과호흡(PCO2↓ → 뇌혈관 수축 → 뇌혈량↓, 일시적), mannitol·삼투제제(세포 내·간질 수분↓), 두부 30도 거상, 진정, 뇌실배액, 저체온, 수술적 감압, barbiturate coma.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-039",
+"meta": "야마 · 39/49 · 야마 2014 주70 · 학습지 419쪽",
+"stem": "해당 설명에 해당하는 질환은? - 직접적인 두부손상 부위에 나타난다. - 외상 후에 lucid period가 보인다.",
+"fb": "제공 정답: Epidural hematoma\n\n근거·해설: 직접적인 두부손상 부위(충좌상) + lucid period → 경막외혈종.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-040",
+"meta": "야마 · 40/49 · 야마 2014 주71 · 학습지 420쪽",
+"stem": "해당 설명에 해당하는 질환은?",
+"fb": "제공 정답: Subdural hematoma\n\n근거·해설: 사진(초승달 모양)으로 알 수 있는 문제(여러 설명은 복원 실패). ASDH: 교정맥 파열, 사망률 50% 이상 / chronic SDH: 지속적 두통, 구토, 경도 편마비, 노인에서 정신착란·기억력 장애.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-041",
+"meta": "야마 · 41/49 · 야마 2014 주72 · 학습지 420쪽",
+"stem": "두부 외상 후 다음 처치의 목적은? A. 과호흡을 시켜 PCo₂를 낮춰 뇌혈관을 축소시켜 뇌혈량을 줄인다. B. 만니톨을 투여한다. C. 두부를 30~45도로 높여서 정맥혈을 줄인다. D. 삼투제제를 투여하여 뇌세포 내와 세포 간질액을 줄인다.",
+"fb": "제공 정답: 두개강내압항진증 치료 — ICP를 낮추기 위해\n\n근거·해설: 과호흡(PCO2↓), 만니톨, 두부 30~45도 거상, 삼투제제. ICP 감소: 과호흡(PCO2↓ → 뇌혈관 수축 → 뇌혈량↓, 일시적), mannitol·삼투제제(세포 내·간질 수분↓), 두부 30도 거상, 진정, 뇌실배액, 저체온, 수술적 감압, barbiturate coma.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-044",
+"meta": "야마 · 44/49 · 야마 2012 주45 · 학습지 421쪽",
+"stem": "두부 손상에 따른 뇌압의 증가 시 치료방법을 기술하시오.",
+"fb": "제공 정답: Head elevation, sedation, 전신 고혈압 치료, 영양 지원, neuromuscular blockade, hyperventilation, CSF drainage, osmotherapy(mannitol), barbiturate coma\n\n근거·해설: 강의록 p.552 slide 31 Management of intracranial hypertension.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-045",
+"meta": "야마 · 45/49 · 야마 2012 주46 · 학습지 421–422쪽",
+"stem": "전두와 부위의 두개저 골절을 의심할만한 임상소견을 모두 고르시오.\n① Racoon's eye sign ② 안면마비 ③ Rhinorrhea (뇌척수액 비루) ④ Hemotympanium (혈고실) ⑤ Anosmia (후각소실) ⑥ Battle's sign ⑦ Otorrhea (뇌척수액 이루)",
+"fb": "제공 정답: ①③⑤ — Raccoon eye sign, Rhinorrhea(뇌척수액 비루), Anosmia(후각소실)\n\n근거·해설: 전두와(anterior cranial fossa) 골절: raccoon eye, CSF 비루, 후각소실. 중두개와(측두골) 골절: Battle sign, hemotympanum, CSF 이루, 안면·청신경 마비. ※ 이전 버전의 정답 \"1\"은 학습지 정답(1,3,5)이 잘린 것이라 수정함.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-046",
+"meta": "야마 · 46/49 · 야마 2012 주47 · 학습지 422쪽",
+"stem": "Tentorial herniation시 나타날 수 있는 임상증상은?",
+"fb": "제공 정답: 의식 저하, 반대측 편마비, 동측 동공 산대·안검하수 (uncal herniation 증후)\n\n근거·해설: 2013 객10 기준 답안. 복원자는 인터넷 사전을 참고해 \"심한 두통, 발열, 홍조, 발한, 비정상 동공반사, 졸음, 저혈압, 의식소실\"로 적었다.",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-047",
+"meta": "야마 · 47/49 · 야마 2012 주48 · 학습지 422쪽",
+"stem": "ASDH의 수술적 적응증은?",
+"fb": "제공 정답: ① CT상 두께 10mm 이상 또는 midline shift 5mm 이상이면 GCS와 무관하게 수술 ② coma(GCS<9) ③ GCS<9이면서 입원 후 GCS 2점 이상 저하 + 비대칭/고정 산동 또는 ICP>20mmHg ④ 결정되면 가능한 빨리 수술\n\n근거·해설: 12학번 정리본 기준(복원자 이완섭).",
+"vis": false
+},
+{
+"cid": "topic-010-area-yama-q-048",
+"meta": "야마 · 48/49 · 야마 2011 주10 · 학습지 423쪽",
+"stem": "외상성 뇌손상 후 뇌압을 떨어뜨리기 위해 hyperventilation을 할 때 PCO2는 어느 정도 유지해야 하는지 쓰시오.",
+"fb": "제공 정답: PaCO2 30~35mmHg\n\n근거·해설: 과호흡으로 PCO2를 낮춰 뇌혈관 수축 → 뇌혈량·ICP 감소. 25~30mmHg일 때 가장 효과적이나 20 이하에서는 뇌허혈 위험, 25 이하로 떨어지지 않게. 복원자는 인터넷 자료 참고.",
+"vis": false
+},
+{
+"cid": "topic-013-area-yama-q-022",
+"meta": "야마 · 22/30 · 야마 2016 주15 · 학습지 15쪽",
+"stem": "코 막힘, 비루, 이상출혈, 자율신경계 증상을 동반하는 두통은?",
+"fb": "제공 정답: 군발성 두통 (cluster headache)\n\n근거·해설: 한쪽 안면이 붉어질 정도의 심한 통증이 하루에도 몇 번씩, 6~12주 동안 매우 정확한 시간에 재발. 코막힘, 비루, 자율신경 증상 동반.",
+"vis": false
+},
+{
+"cid": "topic-013-area-yama-q-023",
+"meta": "야마 · 23/30 · 야마 2015 주17 · 학습지 15–16쪽",
+"stem": "다음과 같은 양상의 두통에 대한 진단명은? - 65세 남자 - 편측성, 박동성 두통 - 측두부 두통 - 표재성 측두동맥이 불거져 나옴 - ESR 증가 - Steroid에 현저한 반응",
+"fb": "제공 정답: 측두동맥염 (giant cell arteritis)\n\n근거·해설: 65세, 편측 박동성 측두부 두통, 표재측두동맥 돌출, ESR 증가, steroid에 현저한 반응. 턱파행, 시력소실(AION) 합병증, 진단은 ESR·측두동맥 생검.",
+"vis": false
+},
+{
+"cid": "topic-014-area-yama-q-041",
+"meta": "야마 · 41/58 · 야마 2015 객15 · 학습지 49쪽 원문대조 (정답 선지 외 ①②③⑤ 복원 실패 → 주관식으로 전환)",
+"stem": "환자가 갑작스럽게 우측 운동장애, 우측 안면마비, 실어증으로 응급실에 내원하였다. 얼마 전에도 이와 비슷한 문제로 내원하였다고 한다. 어느 구조(혈관)의 문제일 것이라고 예상하는가?",
+"fb": "제공 정답: 좌측 중대뇌동맥(Left MCA) — 원문 선지 ④ 좌중간대뇌동맥\n\n근거·해설: 갑작스러운 발생 → 색전. 우측 운동장애 + 우측 안면마비 + 실어증 → 좌측(우성반구) MCA 영역(Broca·중심 언어 영역·운동/감각 영역). 색전성 경색은 ICA가 곧장 이어지는 MCA 영역에 가장 흔하다.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-011",
+"meta": "야마 · 11/39 · 야마 2023 주13 · 학습지 519쪽",
+"stem": "다음 뇌파를 나타내는 질환을 세 가지 쓰시오.",
+"fb": "제공 정답: Left side brain tumor, left side infarction, left side vascular malformation (등 좌측 대뇌 병변)\n\n근거·해설: 우측에서는 posterior alpha rhythm이 잘 나오는데 좌측에서 사라짐 → 좌측 뇌 손상.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-012",
+"meta": "야마 · 12/39 · 야마 2023 주14 · 학습지 519쪽",
+"stem": "다음 뇌파의 seizure focus를 쓰시오.",
+"fb": "제공 정답: Right centrotemporoparietal area (C4)\n\n근거·해설: 제시된 뇌파에서 C4가 가장 높음 → Rt. central. monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측. bipolar montage에서는 위상역전(만나는 곳)이 focus.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-013",
+"meta": "야마 · 13/39 · 야마 2022 주11 · 학습지 519–520쪽",
+"stem": "다음 뇌파에서 간질파의 위치는?",
+"fb": "제공 정답: Right central (C4)\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측. C4의 파가 가장 크다.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-014",
+"meta": "야마 · 14/39 · 야마 2022 주12 · 학습지 520쪽",
+"stem": "다음 뇌파 사진에 해당하는 질환을 치료하기 위한 약제 를 2가지 쓰시오",
+"fb": "제공 정답: Valproic acid, Ethosuximide\n\n근거·해설: 세로선 간격 1초, 3Hz spike-wave → absence seizure → valproic acid, ethosuximide. 참고: infantile spasm은 ACTH·스테로이드, benign rolandic epilepsy는 carbamazepine·valproic acid.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-015",
+"meta": "야마 · 15/39 · 야마 2022 주13 · 학습지 520–521쪽",
+"stem": "다음 뇌파를 보이는 질환이 발생했을 때 약 2가지는?",
+"fb": "제공 정답: Valproic acid, Ethosuximide\n\n근거·해설: 3Hz spike-wave → absence seizure(소아·청소년, 여아, staring, 자세 유지). 약제는 valproic acid, ethosuximide.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-016",
+"meta": "야마 · 16/39 · 야마 2022 주14 · 학습지 521쪽",
+"stem": "GABAa recepter에서 chloride channel을 자극하여 open시키는 GABA 이외의 항경련제를 쓰시오.",
+"fb": "제공 정답: Benzodiazepine, Barbiturate\n\n근거·해설: GABAa receptor에 작용하는 항경련제: benzodiazepine, barbiturate, sabril(vigabatrin).",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-020",
+"meta": "야마 · 20/39 · 야마 2018 주32 · 학습지 522쪽",
+"stem": "10세 남자 환자의 뇌파를 측정하였는데 양측전두부에서 약 2~4초간 12Hz로 symmetric하게 규칙적으로 웨이브가 발견되었다. 이는 sleep-waking cycle 중 어디인지 적으시오.",
+"fb": "제공 정답: NREM stage 2 (sleep spindle)\n\n근거·해설: 양측 전두부에 2~4초간 12Hz 대칭 규칙파 = sleep spindle → NREM stage 2(가장 긴 수면기). 수면 뇌파: 각성(눈 감음) — posterior alpha, frontal beta, 좌우 대칭(A-P gradient) / N1 — vertex sharp wave / N2 — sleep spindle(frontal·central, 12~14Hz, 2~4초), K-complex / N3 — slow wave 20% 이상 / REM — saw tooth wave, 안구운동.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-021",
+"meta": "야마 · 21/39 · 야마 2018 주33 · 학습지 523쪽",
+"stem": "다음 뇌파에서 간질파의 위치는? (두 EEG 중 뒤쪽에 있는 monopolar EEG가 출제됨)",
+"fb": "제공 정답: T4 — right temporal\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측. 뒤쪽 monopolar EEG에서 T4가 가장 negative.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-022",
+"meta": "야마 · 22/39 · 야마 2018 주34 · 학습지 523쪽",
+"stem": "GABA A receptor가 activation되면 열리는 ion channel은?",
+"fb": "제공 정답: Chloride channel\n\n근거·해설: GABA-A receptor 모식도 가운데의 chloride channel이 열린다.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-023",
+"meta": "야마 · 23/39 · 야마 2017 주14 · 학습지 523–524쪽",
+"stem": "GABAa receptor에서 chloride channel을 자극하여 open시키는 GABA이외의 물질을 2가지 쓰시오.",
+"fb": "제공 정답: Benzodiazepine, Barbiturate\n\n근거·해설: 뇌전증 약제 작용기전: Na channel 차단(carbamazepine, phenytoin, valproate), GABA 강화(benzodiazepine, barbiturate, sabril), glutamate 억제(topiramate, lamotrigine, felbamate), T-type Ca 차단(ethosuximide).",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-024",
+"meta": "야마 · 24/39 · 야마 2017 주15 · 학습지 524쪽",
+"stem": "NMDA receptor opening을 조절하는 전해질은?",
+"fb": "제공 정답: Mg2+\n\n근거·해설: hypomagnesemia 시 Mg2+가 NMDA receptor를 막지 못해 Ca2+·Na+ 유입 → 탈분극 → seizure.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-025",
+"meta": "야마 · 25/39 · 야마 2017 주16 · 학습지 524–525쪽",
+"stem": "뇌파를 해석하시오.\n1) 의식 (수면-각성) 상태?\n2) 뇌 기능을 평가하시오.",
+"fb": "제공 정답: 1) 각성 상태 2) 좌측 alpha rhythm 소실 → 좌측 cerebral cortex 기능 이상 (moyamoya with infarction)\n\n근거·해설: 각성 상태에서는 A-P gradient가 좌우 대칭으로 유지되어야 하는데 좌측 alpha rhythm이 사라짐 → 좌측 대뇌피질 이상. 강의록과 같은 EEG(moyamoya 환아).",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-026",
+"meta": "야마 · 26/39 · 야마 2016 주22 · 학습지 525쪽",
+"stem": "Lumbar puncture 시 optimal spinal cord level은?",
+"fb": "제공 정답: L3-L4 또는 L4-L5 (Tuffier line)\n\n근거·해설: 요추천자 위치: L3-4 or L4-5(장골능 상연 연결선).",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-027",
+"meta": "야마 · 27/39 · 야마 2016 주23 · 학습지 525–526쪽",
+"stem": "(1) 다음 EEG를 보고 사용해야할 약제를 쓰시오.\n(2) 다음 EEG를 보고 사용해야할 약제를 쓰시오.",
+"fb": "제공 정답: (1) Infantile spasm → ACTH, 부신피질호르몬  (2) Absence seizure → Valproic acid, Ethosuximide\n\n근거·해설: (1) hypsarrhythmia → infantile spasm, (2) 3Hz spike-wave → absence seizure.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-028",
+"meta": "야마 · 28/39 · 야마 2016 주24 · 학습지 526쪽",
+"stem": "다음 뇌파에서 간질파의 위치는?",
+"fb": "제공 정답: C4 — right central\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-029",
+"meta": "야마 · 29/39 · 야마 2015 주3 · 학습지 526–527쪽",
+"stem": "다음과 관련된 이온은?\n① GABA receptor\n② NMDA receptor\n③ AMPA receptor",
+"fb": "제공 정답: ① GABA receptor – Cl⁻  ② NMDA receptor – Ca²⁺, Na⁺  ③ AMPA receptor – Na⁺\n\n근거·해설: 김선준 교수님 소아 경련성 질환 강의록.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-030",
+"meta": "야마 · 30/39 · 야마 2015 주5 · 학습지 527쪽",
+"stem": "다음 뇌파에서 간질파의 위치는?",
+"fb": "제공 정답: C4 — right central\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-031",
+"meta": "야마 · 31/39 · 야마 2014 주61 · 학습지 527쪽",
+"stem": "다음 뇌파에서 간질파의 위치는?",
+"fb": "제공 정답: C4 — right central\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-032",
+"meta": "야마 · 32/39 · 야마 2014 주62 · 학습지 527–528쪽",
+"stem": "다음 뇌파는 어떤 성향을 나타내는가?",
+"fb": "제공 정답: A-P gradient (frequency-amplitude gradient) — 정상 각성 뇌파\n\n근거·해설: 앞쪽은 low voltage fast wave, 뒤쪽(posterior)은 alpha rhythm의 high voltage slow wave가 좌우 대칭으로 나타나는 정상 각성 상태의 A-P gradient.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-035",
+"meta": "야마 · 35/39 · 야마 2012 주44 · 학습지 529쪽",
+"stem": "뇌척수액 검사의 금기증 2가지",
+"fb": "제공 정답: Raised ICP(tentorial herniation 위험), skin infection, thrombocytopenia(<20K), critically ill moribund patient 중 2가지\n\n근거·해설: 통합강의록 p83. 뇌압 상승이 의심되면 안저검사·CT 후 결정.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-036",
+"meta": "야마 · 36/39 · 야마 2012 주45 · 학습지 529쪽",
+"stem": "다음 뇌파에서 간질파 위치는?",
+"fb": "제공 정답: T3 — left temporal lobe\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측. 통합강의록 p.124 slide 59와 동일한 그림.",
+"vis": true
+},
+{
+"cid": "topic-017-area-yama-q-038",
+"meta": "야마 · 38/39 · 야마 2011 주15 · 학습지 530쪽",
+"stem": "뇌척수액 검사에서 뇌척수액에서\n1) Segmented neutrophil 증가를 보이는 경우 1가지\n2) Lymphocyte 증가를 보이는 경우 1가지",
+"fb": "제공 정답: 1) Segmented neutrophil 증가: bacterial meningitis  2) Lymphocyte 증가: viral(무균성) meningitis\n\n근거·해설: Abnormal CSF: PMNL — 세균성, 무균성 초기 / lymphocyte — 무균성, 결핵성, 진균성, 탈수초성 질환, 교원질 질환, 종양 등.",
+"vis": false
+},
+{
+"cid": "topic-017-area-yama-q-039",
+"meta": "야마 · 39/39 · 야마 2011 주17 · 학습지 530쪽",
+"stem": "다음 뇌파에서 간질파의 위치는?",
+"fb": "제공 정답: C4 — right central\n\n근거·해설: monopolar(AVG) 뇌파에서는 가장 negative한(위로 솟은) spike가 있는 전극이 간질파 위치. 전극: Fp frontal pole, F frontal, T temporal, C central, P parietal, O occipital, Z midline / 홀수 좌측, 짝수 우측.",
+"vis": true
+},
+{
+"cid": "topic-018-area-yama-q-026",
+"meta": "야마 · 26/59 · 야마 2018 주4 · 학습지 236쪽 원문대조",
+"stem": "Alzheimer’s disease의 치료약으로 현재 쓰는 것은?",
+"fb": "제공 정답: Cholinesterase inhibitor: donepezil(모든 병기), rivastigmine, galantamine(경도–중등도) / NMDA 길항제: memantine(중등도–중증)\n\n근거·해설: 서만욱 교수님 강의록: early to moderate stages에는 cholinesterase inhibitor 3가지, moderate to severe stages에는 memantine.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-027",
+"meta": "야마 · 27/59 · 야마 2018 주5 · 학습지 237쪽 원문대조",
+"stem": "Socially inappropriate behavior, frontotemporal lobar degeneration의 특징을 갖는 dementia를 쓰시오.",
+"fb": "제공 정답: Behavioural variant frontotemporal dementia (bvFTD)\n\n근거·해설: FTD는 전두·측두엽의 진행성 신경세포 소실(frontotemporal lobar degeneration). bvFTD는 사회적 행동 변화, 사회적 인식 상실, 충동 조절 저하가 특징. 그 밖에 semantic dementia, progressive nonfluent aphasia. (문제 사진은 강의록의 bvFTD 설명 그림)",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-028",
+"meta": "야마 · 28/59 · 야마 2017 주1 · 학습지 237쪽 원문대조",
+"stem": "치료가능한 치매의 원인에 대해 기술하시오.",
+"fb": "제공 정답: 정상압 수두증, 알코올 관련 치매, 갑상선기능저하증, 비타민 결핍 치매, 뇌 감염, 경막하혈종, 뇌종양 (하나만 써도 됨)\n\n근거·해설: 치료 가능한 치매(Dementia with treatable causes): 정상압 수두증, 알코올 관련 치매, 갑상선기능저하증, 비타민 결핍(B12, thiamine), 뇌 감염(신경매독 등), 경막하혈종, 뇌종양, 우울증(가성치매), 약물 중독.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-029",
+"meta": "야마 · 29/59 · 야마 2017 주2 · 학습지 238쪽 원문대조",
+"stem": "Progressive dementia의 종류를 서술하시오.",
+"fb": "제공 정답: Alzheimer's dementia, Frontotemporal dementia, Dementia with Lewy bodies, Parkinson's disease dementia\n\n근거·해설: 진행성(퇴행성) 치매: Alzheimer's dementia, Frontotemporal dementia, Dementia with Lewy bodies, Parkinson's disease dementia. 전년도 기출이자 수업 강조 부분.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-030",
+"meta": "야마 · 30/59 · 야마 2017 주3 · 학습지 238쪽 원문대조",
+"stem": "Alzheimer’s disease의 병리 소견 두 가지를 쓰세요.",
+"fb": "제공 정답: Senile plaques(amyloid β), neurofibrillary tangles(tau)\n\n근거·해설: 알츠하이머병: 세포 밖 amyloid β(plaque) + 세포 안 tau(neurofibrillary tangle). 서서히 진행하는 기억력 저하 → 길찾기·일상생활 장애, 망상(도둑 망상) 등 행동 증상. MRI에서 양측 내측 측두엽·두정엽 위축. 치료: cholinesterase inhibitor(donepezil, rivastigmine, galantamine), NMDA 길항제(memantine).",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-031",
+"meta": "야마 · 31/59 · 야마 2017 주4 · 학습지 238쪽 원문대조",
+"stem": "현재 사용되고 있는 알츠하이머의 치료제는?",
+"fb": "제공 정답: Cholinesterase inhibitor(donepezil, rivastigmine, galantamine) — 경도–중등도 / Memantine(NMDA 수용체 길항제) — 중등도–중증 (+ 신경정신과 약물)\n\n근거·해설: 증상을 완화하고 진행을 늦추는 약. Donepezil은 모든 병기에 쓸 수 있다.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-032",
+"meta": "야마 · 32/59 · 야마 2016 주10 · 학습지 239쪽 원문대조",
+"stem": "Progressive dementia 4가지는 무엇인지 쓰시오.",
+"fb": "제공 정답: Alzheimer's dementia, Frontotemporal dementia, Dementia with Lewy body, Parkinson's disease dementia\n\n근거·해설: 진행성(퇴행성) 치매: Alzheimer's dementia, Frontotemporal dementia, Dementia with Lewy bodies, Parkinson's disease dementia. 교수님 TY가 그대로 출제.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-033",
+"meta": "야마 · 33/59 · 야마 2016 주11 · 학습지 239–240쪽 원문대조",
+"stem": "알츠하이머의 병리적 원인 두가지를 쓰시오.",
+"fb": "제공 정답: Amyloid β 단백의 축적(senile plaque), neurofibrillary tangle(tau)\n\n근거·해설: 알츠하이머병: 세포 밖 amyloid β(plaque) + 세포 안 tau(neurofibrillary tangle). 서서히 진행하는 기억력 저하 → 길찾기·일상생활 장애, 망상(도둑 망상) 등 행동 증상. MRI에서 양측 내측 측두엽·두정엽 위축. 치료: cholinesterase inhibitor(donepezil, rivastigmine, galantamine), NMDA 길항제(memantine).",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-034",
+"meta": "야마 · 34/59 · 야마 2016 주12 · 학습지 240쪽 원문대조",
+"stem": "조기에 발견 시 치료 가능한 치매를 쓰시오.",
+"fb": "제공 정답: 정상압 수두증, 알코올 관련 치매, 갑상선기능저하증, 비타민 결핍 치매, 뇌 감염, 경막하혈종, 뇌종양, 우울증\n\n근거·해설: 치료 가능한 치매(Dementia with treatable causes): 정상압 수두증, 알코올 관련 치매, 갑상선기능저하증, 비타민 결핍(B12, thiamine), 뇌 감염(신경매독 등), 경막하혈종, 뇌종양, 우울증(가성치매), 약물 중독. 복원자: 출제 의도는 \"치료 가능한 원인을 가진 치매\"로 보임.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-035",
+"meta": "야마 · 35/59 · 야마 2016 주13 · 학습지 240쪽 원문대조",
+"stem": "치매의 CSBD에 대해 기술하시오.",
+"fb": "제공 정답: (CSBD는 ABCD의 오기로 추정) A: ADL — 인지장애로 일상·사회생활 지장 / B: Behavior — 이상행동·문제행동 / C: Cognition — 인지기능 저하 / D: Differential diagnosis — 증상군이며 원인 질환이 다양\n\n근거·해설: 치매 환자 평가 ABCD: A — ADL(일상생활능력; 저하되면 치매), B — Behavior(망상·우울·불안 등, 치매에 흔함), C — Cognition(주의력, 언어, 시공간, 기억, 전두엽/집행 기능; 하나라도 떨어지면 인지저하), D — Differential diagnosis(신경학적 진찰, 신경심리검사, 혈액검사, 뇌영상). 복원자: \"CSBD\"가 아니라 티야였던 \"ABCD\"로 보임.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-043",
+"meta": "야마 · 43/59 · 야마 2014 객27 · 학습지 243쪽 (발문 복원 실패 → 주관식으로 전환)",
+"stem": "(원문 발문·선지 복원 실패) 파킨슨병 치매(PDD)와 루이소체 치매(DLB)를 구분하는 기준을 쓰시오.",
+"fb": "제공 정답: 1-year rule: 치매가 파킨슨 증상 이전 또는 1년 이내에 나타나면 DLB, 파킨슨병이 확립된 뒤 치매가 오면 PDD\n\n근거·해설: 루이소체 치매(DLB): 파킨슨 증상, 인지 변동, 반복적이고 구체적인 환시(벌레 등), 실신·낙상, 항정신병약 과민. 1-year rule: 치매가 파킨슨 증상보다 먼저이거나 1년 이내에 함께 나타나면 DLB, 파킨슨병이 확립된 뒤 치매가 오면 PDD. (1-year rule은 두 질환을 감별하는 도구이며, DLB가 PDD로 진행하는 것이 아니다.)",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-047",
+"meta": "야마 · 47/59 · 야마 2013 객39 · 학습지 245쪽 (선지 복원 실패 → 주관식으로 전환)",
+"stem": "알츠하이머병의 초기·중기·말기에 일어나는 변화를 순서대로 쓰시오. (원문 객관식, 선지 복원 실패)",
+"fb": "제공 정답: 초기: β-amyloid 축적 → 중기: 측두엽 중심 위축(신경퇴행, NFT) → 말기: 인지 및 행동장애\n\n근거·해설: Stage 1 Aβ plaque → Stage 2 neurodegeneration(NFT) → Stage 3 biomarker + 미세한 인지저하 → MCI → AD. 복원자: 시험 보기는 이 세 가지 조합의 순서를 바꿔 가며 나왔으나 정확한 선지는 기억나지 않아 주관식처럼 답을 올림.",
+"vis": false
+},
+{
+"cid": "topic-018-area-yama-q-058",
+"meta": "야마 · 58/59 · 야마 2010 객44 · 학습지 249–250쪽 (선지 미수록 → 주관식으로 전환)",
+"stem": "치매는 신경퇴행성 질환으로 본질적인 치료는 어렵다. 그러므로 신경퇴행성 치매 환자를 볼 때 먼저 치매증상을 보이나 치료가능한 질환과의 초기 감별이 중요하다. 치료 가능한 치매에 해당하는 질환을 쓰시오. (원문 객관식, 선지 복원 실패)",
+"fb": "제공 정답: 갑상선기능저하증, 신경매독, 비타민 B12 결핍, 약물 중독, 뇌종양, 만성 경막하혈종, 정상압 수두증 (학습지 정답: ③번 선지)\n\n근거·해설: 정슬기 교수님 치매 PPT의 Treatable causes of dementia. ※ 원문 선지가 학습지에 남아 있지 않아(이전 버전의 선지는 다른 문항 해설이 섞인 것) 주관식으로 전환함.",
+"vis": false
+},
+{
+"cid": "topic-018-area-variants-q-053",
+"meta": "야마 변형 · 53/59 · 야마 변형 · 야마 2011 객18 · 원문 복원 불완전",
+"stem": "다음 임상·개념 단서에 해당하는 개념을 쓰시오.\n“기억의 개개 구성은 특정 뇌영역과 잘 조화된다. 다음 중 기억의 구성성분과 뇌 영역이 잘 조합된 것은 무엇인가? ➀ Classical conditioning - parietal lobe ➁ Conditioned reflex - frontal lobe ➂ Semantic memory - temporal lobe ➃ Episodic memory - cerebellum ➄ Procedural memory - temporal lobe”",
+"fb": "제공 정답: [8쪽] 병력청취 Cognition • 기억력 (Memory): 발병 시기 , 진행 양상 , 기억장애의 내용 , 기억장애의 정 도 • 언어기능 (Language): 이름대기 , 유창성 , 이해력 , 따라말하기 4 가…\n\n정답 개념 “[8쪽] 병력청취 Cognition • 기억력 (Memory): 발병 시기 , 진행 양상 , 기억장애의 내용 , 기억장애의 정 도 • 언어기능 (Language): 이름대기 , 유창성 , 이해력 , 따라말하기 4 가…”을 원 야마와 반대 방향(개념→단서)으로 묻도록 변형했다.",
+"vis": false
+},
+{
+"cid": "topic-019-area-yama-q-017",
+"meta": "야마 · 17/17 · 야마 2014 객27 · 학습지 220–221쪽 (선지 복원 실패 → 주관식으로 전환)",
+"stem": "혼수 환자가 내원하였다. 신경학적 검진 상 팔, 다리가 모두 extension 된 자세를 보였다. 이 자세의 이름과 병변 위치를 쓰시오. (원문 객관식, 선지 복원 실패)",
+"fb": "제공 정답: Decerebrate rigidity(제뇌강직) — 중뇌 이하(교뇌 상부) 병변\n\n근거·해설: 팔·다리 모두 신전 = decerebrate rigidity. 중뇌 이하 병변에서 pontine reticular formation과 vestibular nucleus는 남아 있고, 억제가 풀린 vestibular nucleus가 신근 긴장도를 높인다. Decorticate rigidity(팔 굴곡·다리 신전)는 대뇌반구·간뇌 병변. 학습지 정답: ⑤번(decerebrate rigidity에 대한 선지).",
+"vis": false
+},
+{
+"cid": "topic-021-area-yama-q-026",
+"meta": "야마 · 26/41 · 야마 2015 주1 · 학습지 756–757쪽 원문대조",
+"stem": "오른손잡이인 64세 환자가 뇌졸중 소견으로 입원하여 재활치료를 받고 있다. 다음은 해당 환자의 영상소견이다. 위 환자에서 예상되는 증상을 두 가지 고르시오.\n가. 감각 실어증\n나. 운동실어증\n다. 우측 상지 마비\n라. 좌측 상지 마비\n마. 우측 하지 마비\n바. 좌측 하지 마비\n사. 편측 무시\n아. 무동무언증",
+"fb": "제공 정답: 운동실어증(나), 우측 상지 마비(다)\n\n근거·해설: 뇌졸중 증후군(재활의학 교과서): ACA — 반대측 하지 > 상지 마비·감각소실, 큰 전두엽 병변이면 무동무언증, 좌반구면 초피질 운동실어증(자발적 대화 감소, 이해·따라말하기 보존). MCA 주줄기 — 상지·얼굴 > 하지 편마비, 반맹, 우세반구면 전실어증·실행증. MCA 상분지(전두엽) — 반대측 얼굴·상지의 심한 운동·감각장애(하지 경미), 우세반구면 Broca 실어증. MCA 하분지(두정·측두엽) — 운동·감각은 대체로 정상, 우세반구면 Wernicke(감각) 실어증, 반대측 동측반맹, 비우세반구면 좌측 무시·시공간 결손. PCA — 시상: 반대측 감각소실·중추성 통증(시상통), 시야결손, 난독증, 기억결손. 열공경색 — 내낭 후각은 순수 운동마비. 오른손잡이 → 좌측이 우세반구. 영상: 좌측 MCA 상분지 경색 → Broca(운동) 실어증 + 반대측(우측) 상지 마비. 고명환 교수님 킹야마.",
+"vis": true
+},
+{
+"cid": "topic-021-area-yama-q-037",
+"meta": "야마 · 37/41 · 야마 2011 주10 · 학습지 763쪽 원문대조",
+"stem": "감각검사에서 환자의 손에 물건을 쥐어주고 무엇인지 맞추게 하거나, 환자의 손바닥에 글자나 숫자를 써주면서 올바로 맞추는지 알아보는 검사는 무엇을 평가하기 위한 검사인가?",
+"fb": "제공 정답: 대뇌감각(피질감각) — 입체감각, 서화감각\n\n근거·해설: 표재·심부감각이 정상이면 두 점 구분, 서화감각, 입체감각, 두 점 동시자극 같은 대뇌(통합) 감각을 평가한다. 손에 쥔 물건 맞히기 = 입체감각, 손바닥에 쓴 글자 맞히기 = 서화감각.",
+"vis": false
+},
+{
+"cid": "topic-021-area-yama-q-040",
+"meta": "야마 · 40/41 · 야마 2011 주7 · 학습지 764–765쪽 원문대조",
+"stem": "[보기] 1) 우측 중뇌동맥의 상지 2) 우측 중뇌동맥의 하지 3) 좌측 중뇌동맥의 상지 4) 좌측 중뇌동맥의 하지 5) 우측 전뇌동맥 6) 좌측 전뇌동맥 7) 후뇌동맥 8) 상지가 하지보다 심한 편마비 9) 하지가 상지보다 심한 편마비 10) 운동 실어증 11) 감각 실어증 12) 편측무시 13) 무동무언증 14) 중추성통증 15) 난독증 16) 운동과 감각 기능은 대체로 정상\n\n상지근력은 유지되는데, 우측 하지마비와 감각손실이 심하고, 이해력과 단어를 따라하는 능력은 좋으나 자발적 대화가 감소하는 증상을 보이는 뇌경색 환자에서 폐색이 의심되는 뇌동맥은 어디인가?",
+"fb": "제공 정답: 좌측 전대뇌동맥(Lt. ACA)\n\n근거·해설: 하지 위주 마비·감각손실(상지 보존) → ACA. 좌반구 ACA 병변 → 초피질 운동실어증(이해력과 따라말하기 보존, 자발적 대화 감소). 보기 목록: 1) 우측 MCA 상지 2) 우측 MCA 하지 3) 좌측 MCA 상지 4) 좌측 MCA 하지 5) 우측 ACA 6) 좌측 ACA 7) PCA …",
+"vis": false
+},
+{
+"cid": "topic-021-area-yama-q-041",
+"meta": "야마 · 41/41 · 야마 2011 주8 · 학습지 765쪽 원문대조",
+"stem": "[보기] 1) 우측 중뇌동맥의 상지 2) 우측 중뇌동맥의 하지 3) 좌측 중뇌동맥의 상지 4) 좌측 중뇌동맥의 하지 5) 우측 전뇌동맥 6) 좌측 전뇌동맥 7) 후뇌동맥 8) 상지가 하지보다 심한 편마비 9) 하지가 상지보다 심한 편마비 10) 운동 실어증 11) 감각 실어증 12) 편측무시 13) 무동무언증 14) 중추성통증 15) 난독증 16) 운동과 감각 기능은 대체로 정상\n\n우측 중뇌동맥의 하지에 폐색이 있는 경우 예상되는 증상을 두 가지 고르세요.",
+"fb": "제공 정답: 12) 편측무시, 16) 운동과 감각 기능은 대체로 정상\n\n근거·해설: MCA 하분지(아랫가지): 운동·감각은 대체로 정상, 언어·시각·인지 장애. 우뇌 병변이면 좌측 무시, 구성실행증, 옷 입기 실행증, 지각장애. (좌뇌면 실인증·감각실어증)",
+"vis": false
+},
+{
+"cid": "topic-022-area-yama-q-015",
+"meta": "야마 · 15/29 · 야마 2018 주22 · 학습지 771쪽 원문대조",
+"stem": "성인의 뇌 손상 후 재활치료는 뇌가소성을 통해 손상된 뇌가 다시 ( )가 일어나 기능이 회복되도록 하는 치료이다.",
+"fb": "제공 정답: 재조직화(reorganization)\n\n근거·해설: \"뇌에 대한 재활의학과 치료: 뇌가소성을 촉진시켜 손상된 뇌가 다시 재조직화가 일어나 기능이 회복되도록 치료\"(강의록).",
+"vis": false
+},
+{
+"cid": "topic-022-area-yama-q-017",
+"meta": "야마 · 17/29 · 야마 2017 주6 · 학습지 772쪽 원문대조",
+"stem": "성인의 뇌 손상 후 재활치료는 뇌가소성을 통해 손상된 뇌가 다시 ( )가 일어나 기능이 회복되도록 하는 치료이다.",
+"fb": "제공 정답: 재조직화(reorganization)\n\n근거·해설: 강의록: 뇌가소성을 촉진시켜 손상된 뇌가 다시 재조직화가 일어나 기능이 회복되도록 치료.",
+"vis": false
+},
+{
+"cid": "topic-022-area-yama-q-019",
+"meta": "야마 · 19/29 · 야마 2016 주1 · 학습지 773쪽 원문대조",
+"stem": "뇌졸중의 회복에 가장 중요한 요인은 병변의 크기와 ______이다.",
+"fb": "제공 정답: 위치\n\n근거·해설: 뇌졸중 회복에 가장 중요한 요인은 병변의 크기와 위치(2010 객41을 주관식으로 출제).",
+"vis": false
+},
+{
+"cid": "topic-022-area-yama-q-021",
+"meta": "야마 · 21/29 · 야마 2015 주1 · 학습지 774쪽 원문대조",
+"stem": "성인의 뇌 손상 후 재활치료는 뇌가소성을 통해 손상된 뇌가 다시 ( )가 일어나 기능이 회복되도록 하는 치료이다.",
+"fb": "제공 정답: 재조직화(reorganization)\n\n근거·해설: 강의록: 뇌가소성을 촉진시켜 손상된 뇌가 다시 재조직화가 일어나 기능이 회복되도록 치료.",
+"vis": false
+},
+{
+"cid": "topic-022-area-yama-q-027",
+"meta": "야마 · 27/29 · 야마 2012 객14 · 학습지 776쪽 (선지 복원 실패 → 주관식으로 전환)",
+"stem": "뇌기능을 평가하는 비침습적인 검사는? (원문 객관식, 정답 ① 외 선지 복원 실패)",
+"fb": "제공 정답: fMRI(기능적 자기공명영상)\n\n근거·해설: fMRI는 뇌신경세포 활성과 혈류가 연동되어 있음을 이용해, 혈류를 측정함으로써 활성 부위를 해부학적 영상 위에 보여 주는 비침습적 뇌기능 검사(뇌파도 비침습적). PET은 방사성동위원소 주사가 필요해 침습적으로 분류.",
+"vis": false
+},
+{
+"cid": "topic-022-area-variants-q-026",
+"meta": "야마 변형 · 26/27 · 야마 변형 · 야마 2011 객25 · 원문 복원 불완전",
+"stem": "다음 임상·개념 단서에 해당하는 개념을 쓰시오.\n“뇌줄중 환자의 재활치료 시작 시 'Goal setting' 하는데 가장 중요한 요인은 무엇인가? ➀ 경제적 상황 ➁ 환자의 나이 ➂ 뇌졸중의 중증도 ➃ 환자의 치료 의지”",
+"fb": "제공 정답: [9쪽] Neuroplasticity Collateral sprouting Unmasking of previously latent functional pathway Assumption of function by un…\n\n정답 개념 “[9쪽] Neuroplasticity Collateral sprouting Unmasking of previously latent functional pathway Assumption of function by un…”을 원 야마와 반대 방향(개념→단서)으로 묻도록 변형했다.",
+"vis": false
+},
+{
+"cid": "topic-023-area-yama-q-018",
+"meta": "야마 · 18/28 · 야마 2018 객52 · 학습지 639쪽 (선지 복원 실패 → 주관식으로 전환)",
+"stem": "다음은 병원에 내원한 환자의 혈관 사진이다. 표시된 혈관(가~마)의 이름을 쓰시오. (원문 객관식, 정답 ④ 외 선지 복원 실패)",
+"fb": "제공 정답: 가 — common carotid a., 나 — middle cerebral a., 다 — vertebral a., 라 — basilar a., 마 — anterior cerebral a. (학습지 정답: ④ 다-vertebral artery, 나-middle cerebral artery)\n\n근거·해설: 박정수 교수님 티야. 시험에는 대동맥궁부터 머리 꼭대기까지 1장, 목 위부터 머리 꼭대기까지 1장이 나왔고 화살표로 혈관을 표시함(복원자가 비슷한 사진 첨부).",
+"vis": true
+},
+{
+"cid": "topic-024-area-yama-q-013",
+"meta": "야마 · 13/21 · 야마 2018 주9 · 학습지 312쪽 원문대조",
+"stem": "홍길동씨는 아침에 일어나 양치를 하려고 하는데 오른쪽 손목이 들어지지 않았다. 팔꿈치와 어깨는 잘 움직여서 어깨를 돌려보면 손목이 덜렁덜렁 매달려 있었다. 이항해서 정신을 차리고 보니 오른쪽 엄지와 검지쪽 손등이 저릿한 느낌이 있었다. 일주일 뒤 신경 전도 검사를 하였다. 양 팔의 median, ulnar, radial nerve를 검사하였다. 아래 검사 결과지에서 이상 소견이 관찰되는 것을 고르고 어떤 신경인지 쓰시오.",
+"fb": "제공 정답: c — right radial nerve (Saturday night palsy)\n\n근거·해설: a·b = median n., c·d = radial n., e·f = ulnar n. 오른쪽 wrist drop + 엄지·검지 쪽 손등 저림 → 요골신경 마비(saturday night palsy). 신현준 교수님이 수업 마지막에 시험에 낸다고 한 문제 그대로.",
+"vis": true
+},
+{
+"cid": "topic-024-area-yama-q-015",
+"meta": "야마 · 15/21 · 야마 2016 주1 · 학습지 313쪽 원문대조",
+"stem": "Electrodiagnostic study 중 late response는 ( )와 ( )가 있다.",
+"fb": "제공 정답: F-wave(F-response), H-reflex\n\n근거·해설: Electrodiagnostic study: NCS, 반복신경자극(RNS), late responses, blink reflex, needle EMG. Late response — F-response(운동신경원의 역방향 자극 반응), H-reflex(말초신경 자극 → 척수를 거친 단일연접 반사).",
+"vis": false
+},
+{
+"cid": "topic-024-area-yama-q-016",
+"meta": "야마 · 16/21 · 야마 2016 주2 · 학습지 313–314쪽 원문대조",
+"stem": "Neuropathy는 pathology에 따라 ( ) type과 ( ) type으로 나뉜다.",
+"fb": "제공 정답: Axonal(축삭형), Demyelinating(탈수초형)\n\n근거·해설: NCS — axonopathy vs myelinopathy(오선영 교수님 강의록): Myelinopathy(탈수초) — 전도속도 현저 감소(<70%), 원위 잠복기 연장, conduction block, temporal dispersion, F-wave 지연·소실, amplitude는 비교적 유지; wasting 동반·대칭적 원위부→근위부 위약, 발목반사부터 소실, 운동+감각(스타킹·장갑), 회복이 좋음. Axonopathy(축삭) — amplitude(CMAP·SNAP) 감소, 속도·잠복기 정상; 급성·근위부 위약(wasting 없음), 초기 DTR 소실·전신 무반사, 원위근 탈신경, 온도·통증 감각 보존, 회복이 느리고 불완전.",
+"vis": false
+},
+{
+"cid": "topic-024-area-yama-q-019",
+"meta": "야마 · 19/21 · 야마 2015 주2 · 학습지 315쪽 원문대조",
+"stem": "다음은 Nerve conduction study(NCS)를 나타낸 것이다. 각 빈칸에 알맞은 말을 쓰시오. (a) ________ (b) ________ (c) ________",
+"fb": "제공 정답: (a) latency, (b) amplitude, (c) duration\n\n근거·해설: NCS 파형: (a) latency — 자극부터 CMAP 시작까지(신경전도 시간 + NMJ 지연 + 근육 탈분극 시간), (b) amplitude — 최종적으로 발화하는 근섬유 수를 반영, (c) duration, 면적(area).",
+"vis": true
+},
+{
+"cid": "topic-025-area-yama-q-008",
+"meta": "야마 · 8/21 · 야마 2016 주19 · 학습지 122쪽",
+"stem": "45세 가정주부가 지난 수개월 전부터 서서히 진행하는 상하지 근위부 위약감을 주소로 내원하였다. 목 가느기도 점점 힘들었으며 복시나 안면마비 증상은 관찰되지 않았다. 일중 변동이나 말단부 위약감은 동반되지 않았으나 사진과 같은 피부병변이 동반되어 있었다. 또한 최근 개인의원에서 실시한 혈액검사 결과 CK가 크게 상승되어 있었다. 진단명은 무엇인가?",
+"fb": "제공 정답: Dermatomyositis\n\n근거·해설: 근위부 위약 + 목근육 위약 + 눈 증상·일중변동 없음 + 피부병변(Gottron sign, heliotrope rash, shawl sign) + CK 상승 → DM.",
+"vis": true
+},
+{
+"cid": "topic-025-area-yama-q-009",
+"meta": "야마 · 9/21 · 야마 2016 주30 · 학습지 122–123쪽",
+"stem": "3세 남아가 발달이 느리다고 병원에 왔다. 병력상 혼자 서기, 걷기 및 계단 오르기가 늦게 발달하였다. 하지 종아리는 비대해 보였으나 근력 특히 하지 힘이 약하였다. 깊은 힘줄반사(DTR)는 모두 감소하였다. 혈청검사 : 아스파테이트아미노전이효소 : 350 IU/L, 알라닌아미노전이효소 : 235 IU/L 혈당 95mg%, LDH 718 IU/L CPK 25,522 IU/L (CK-isozyme : MM fraction 100%), Lactate, pyruvate, ammonia : normal 이 질환의 유전 양상은? extremities), acute onset, variable severity (mild to total paralysis), proximal muscles most involved, spared (: mental, sensory, ocular, repiratory), DTRs decreased, hyperthyroidism -> Na+/K+ ATPase activity 증가 -> serum K+ 감소 hypokalemia (during attack) -> paralysis =============================================== 갑상선기능은 정상이었으나 potassium level은 상승되었다. 이것이 포인트죠. 고칼륨 주기마비에 해당하며 이것은 sodium channel gene의 point mutation에 의해서 발생했 음을 알 수 있습니다.",
+"fb": "제공 정답: X-linked recessive (Duchenne muscular dystrophy)\n\n근거·해설: 운동 발달 지연 + 종아리 가성비대 + 근위부 위약 + CK 25,522(MM 100%) → Duchenne MD. dystrophin 결핍, X-linked recessive.",
+"vis": false
+},
+{
+"cid": "topic-025-area-variants-q-021",
+"meta": "야마 변형 · 21/21 · 야마 변형 · 야마 2011 객8 · 원문 복원 불완전",
+"stem": "다음 임상·개념 단서에 해당하는 개념을 쓰시오.\n“21세 남자가 어릴적부터 서서히 더 진행하는 근위약감을 주소로 내원하였다. 환자는 달리기, 등산, 수영 등을 하지 못하였고 최근에는 계단 오르기도 힘들어졌다. 얼굴과 목 근육이 위축되고 대머리(baldness)였으며 (사진) 시력저하를 보여 방문한 안과에서 백내장 진단을 받았다고 하였다. 내원당시 당이 많이 상승되어 있었다 (공복 glucose 210). 신경학적 검사상 족부하수(foot drop)가 관찰되었으며 다음과 같은…”",
+"fb": "제공 정답: [33쪽] Myotonic Dystrophy CTG repeat expansion • 근긴장디스트로피 1 형 (Myotonic dystrophy type 1, DM1) • AD 유전 • DMPK 유전자 CTG 반복염…\n\n정답 개념 “[33쪽] Myotonic Dystrophy CTG repeat expansion • 근긴장디스트로피 1 형 (Myotonic dystrophy type 1, DM1) • AD 유전 • DMPK 유전자 CTG 반복염…”을 원 야마와 반대 방향(개념→단서)으로 묻도록 변형했다.",
+"vis": false
+}
+]

@@ -1,0 +1,232 @@
+q-001 2026 강의록 형성평가 
+  S: 70세, 2시간 전 우측 편마비·실어증, BP 210/115, CT 출혈 없음, CTA 좌측 MCA M1 폐색. 가장 먼저 할 처치는?
+  C: 1. 즉시 IV thrombolytic | 2. Labetalol로 BP<185/110 후 IV thrombolytic | 3. 재관류 금기 | 4. DAPT만 | 5. Mannitol 
+  A: 2. Labetalol로 BP<185/110 후 IV thrombolytic
+q-002 야마 2025 객23 · 학습지 21쪽 원문대조 [시각]
+  S: 56세 남성이 1시간 전 일하던 도중 우측 편마비 언어장 애가 발생하여 응급실에 방문했다. 응급실에서 확인한 환자의 NIH stroke scale score는 19점이었다. 환자는 지병인 고혈압으로 약을 복용하고 있었다. CT촬영 결과 hypodense lesion은 …
+  C: 1. t-PA IV | 2. aspirin dosing | 3. high dose sterioid | 4. anticoagulant | 5. fluid treatment 
+  A: 1. t-PA IV
+q-003 야마 2025 객24 · 학습지 21쪽 원문대조 [시각]
+  S: 70세 남자가 입원 전날 실어증을 주소로 응급실로 내원 하였다. 응급실 내원 당시 시행한 심전도 검사에서 심 방세동이 관찰되었고, 입원 후 시행한 심장 초음파에서 특별한 이상소견은 관찰되지 않았다. 그 외 혈액검사들 에서도 특별한 이상은 관찰되지 않았고, 뇌혈관 자기공…
+  C: 1. Statin | 2. Aspirin | 3. Apixaban | 4. Cliostazol | 5. Triflusal 
+  A: 3. Apixaban
+q-004 야마 2023 객27 · 학습지 23쪽 원문대조 
+  S: 56세 여자 환자가 극심한 두통으로 응급실에 내원하여 측정한 혈압이 200/120을 보였다. 병력상 3년전부터 고혈압이 있었는데, 혈압약은 복용하지 않고 있었다. 응 급실 초진의사는 혈압약을 투여하였고, 갑자기 환자는 구음장애와 좌측의 근력 약화를 호소했다. 당시 혈압…
+  C: 1. 뇌관류압(CPP)이 감소되어 뇌혈관저항이 증가된 상 황이다 | 2. 뇌혈관의 저항이증가되어 뇌 혈류는 증가된 상태이 다. | 3. 동맥 내 이산화탄소분압이 감소되어 뇌 혈류가 감소 된 상황이다 | 4. 동맥 내 산소농도가 감소되어 뇌혈관저항(CVR)이 감 소된 상황이다 | 5. 평균 동맥혈압(MAP)이 뇌 혈류(CBF)의 자동 조절 
+  A: 5. 평균 동맥혈압(MAP)이 뇌 혈류(CBF)의 자동 조절
+q-005 야마 2023 객29 · 학습지 24쪽 원문대조 
+  S: 뇌졸중 원인을 분류하는 TOAST classification에 해당되 지 않는 분류는?
+  C: 1. Large artery atherosclerosis | 2. Cardioembolism | 3. cancer related stroke | 4. stroke of undetermined etiology | 5. Small artery occlusion 
+  A: 3. cancer related stroke
+q-006 야마 2023 객30 · 학습지 24쪽 원문대조 [시각]
+  S: 61세 남자 환자가 내원 1시간 전 갑자기 발생한 일시적 인 우측 편마비를 주소로 응급실에 왔다. 증상은 5분 정도 지속되다가 호전되었으며 편마비와 함께 말을 하 고 싶었으나 나오지 않았다. 내원 당시 혈압은 150/90mmHg였으며, 이후 증상은 없었으나 불안해서 왔…
+  C: 1. ABCD2 score는 3점이다. | 2. 증상과 관련된 영역은 좌측 중대뇌동맥 영역일 가능 성이 높다. | 3. 1시간 내에 도착했으므로 정맥 혈전용해제를 사용한 다. | 4. 증상이 좋아졌으므로 동맥 혈전제거술을 실시한다. | 5. 큰 이상이 없으므로 퇴원 후 경과관찰한다. 
+  A: 2. 증상과 관련된 영역은 좌측 중대뇌동맥 영역일 가능 성이 높다.
+q-007 야마 2023 객31 · 학습지 25쪽 원문대조 
+  S: 58세 여자 환자가 고혈압과 심방세동 및 과거 뇌경색이 있어 와파린 복용 중이다. 특별한 증상은 없었으나 외 래 내원 당시 PT INR 4.3으로 확인되었다. 환자는 특별 한 출혈 소견은 관찰되지 않았다. 향후 적절한 처치는?
+  C: 1. Vitamin K를 경구로 투여한다. | 2. Vitamin K를 iv로 투여한다. | 3. FFP를 투여한다. | 4. Protamine sulfate를 투여한다. | 5. 이틀간 와파린투약을 멈추고 감량하여 다시 투여한 
+  A: 5. 이틀간 와파린투약을 멈추고 감량하여 다시 투여한
+q-008 야마 2023 객32 · 학습지 25쪽 원문대조 [시각]
+  S: 48세 남자가 내원 전날 발생한 실어증(aphaisa)를 주소 로 응급실로 내웠하였다. 응급실 내원 당시 시행한 심 전도 검사에서 심방세동이 관찰되었고, 입원후 시행한 심장 초음파에서 특별한 이상소견은 관찰되지 않았다. 그 외 혈액검사 들에서도 특별한 이상은 관찰되지 …
+  C: 1. Rivaroxaban | 2. Apixaban | 3. Edoxaban | 4. Cilostazol | 5. Dabigatran 
+  A: 4. Cilostazol
+q-009 야마 2023 객33 · 학습지 25쪽 원문대조 
+  S: 며 혈관 전산화 단층 촬영 소견은 다음과 같았다. 이 환자에서 시행해야 할 치료 방법은?
+  C: 1. Intravenous tPA | 2. Intra-arterial thrombectomy | 3. High dose statin | 4. Anticoagulation | 5. Fluid treatment 
+  A: 2. Intra-arterial thrombectomy
+q-010 야마 2023 객34 · 학습지 26쪽 원문대조 
+  S: 42세 남자 환자가 내원 당일 발생한 삼킴 장애와 쉰 목 소리, 딸꾹질을 주소로 내원하였다. 과거력상 고혈압과 당뇨병으로 10년간 약을 먹고 있었다. 신경학적 검사 상, 좌측 눈꺼풀이 쳐져 있었고, 동공이 수축되어 있었 으며 이마에 땀이 잘 나지 않는 증상이 있었다. …
+  C: 1. Left Middle Cerebral artery | 2. Left thalamogeniculate artery | 3. Basilar artery-medial circumferential arte | 4. Left anterior-inferior cerebellar artery | 5. Left vertebral artery 
+  A: 5. Left vertebral artery
+q-011 야마 2022 객27 · 학습지 26쪽 원문대조 
+  S: 다음 중 뇌혈류의 자동조절기능에 대한 설명 중 옳은 것은?
+  C: 1. 뇌혈류는 뇌관류압과 뇌혈관 저항에 정비례한다. | 2. 뇌혈류 자동조절 능력은 뇌혈관 저항을 변화시켜 뇌 혈류랑을 일정하게 유지한다 | 3. 고혈압인 사람의 뇌혈류 자동조절 기능은 뇌관류압 이 60mmHg~160mmH | 4. 세포의 산도의 변화나 대사산물의 축적은 직접뇌혈 관의 구경에 영향을 미치지  | 5. 동맥혈의 산소 분압은 미세한 변화라도 직접적으로 뇌혈관에 영향을 미친다. 
+  A: 2. 뇌혈류 자동조절 능력은 뇌혈관 저항을 변화시켜 뇌 혈류랑을 일정하게 유지한다.
+q-012 야마 2022 객29 · 학습지 27쪽 원문대조 
+  S: 61세 남자 환자가 내원 1시간 전 갑자기 발생한 우측 편마비를 주소로 응급실에 왔다. 증상은 5분 정도 지속 되다가 호전되었으며, 편마비와 함께 말을 하고 싶었으 나 나오지 않았다. 내원 당시 혈압은 150/90 이었으며, 이후 증상은 없었으나 불안해서 왔다고 한다.…
+  C: 1. ABCD2 score는 4점이다. | 2. CT에서 이상이 없었으므로 뇌졸중과는 관련이 없는 다른 질환이다. | 3. 1시간 내에 도착했으므로 정맥 혈전용해제를 사용한 다. | 4. 증상이 좋아졌으므로 동맥 혈전제거술을 실시한다. | 5. 큰 이상이 없으므로 퇴원 후 경과관찰한다. 
+  A: 1. ABCD2 score는 4점이다.
+q-013 야마 2022 객30 · 학습지 27쪽 원문대조 
+  S: 65세 남자 환자가 내원 2시간 전 갑자기 발생한 우측 편마비를 주소로 응급실에 왔다. 우측 편마비와 함께 말을 하고 싶었지만 하지 못했다. 내원 시 혈압은 205/115 mmHg 였고 과거 고혈압이 있었지만 약을 복 용하지 않고 지냈고 매일 한갑씩 40여년 피웠던 흡…
+  C: 1. intravenous tPA | 2. intra-arterial thrombectomy | 3. intravenous heparin | 4. oral aspirin | 5. beta-blocker(labetalol) 
+  A: 1. intravenous tPA
+q-014 야마 2022 객32 · 학습지 28쪽 원문대조 
+  S: 48세 남자가 전날부터 시작된 실어증으로 응급실로 내 원하였다. 심전도에서 심방세동이 발견되었고 입원 후 심장 초음파는 정상, 혈액검사 정상, MRI는 증상의 원 인이 되는 혈관의 이상소견이 있는 곳 외에는 정상이었 다. 환자의 뇌경색의 이차 예방에서 사용할 수 있는 …
+  C: 1. apixaban | 2. aspirin | 3. dabigatran | 4. wafarin | 5. ribaroxaban 
+  A: 2. aspirin
+q-015 야마 2022 객33 · 학습지 28쪽 원문대조 
+  S: 52세 남자환자가 2시간전 동생제사에서 밥을 먹다 갑자 기 편마비가 발생하고 말을 못하게 되어 응급실에 내원 하였다. 내원당시 시행한 심전도에서 심방세동이 있었 고 NIH stroke scale 19점에 체크되었다. 과거에 자발 성 뇌출혈이 있어 머리수술을 했었고 평소…
+  C: 1. intravenous tPA | 2. intra arterial thrombosection | 3. high dose statin | 4. anticoagulation | 5. fluid treatment 
+  A: 2. intra arterial thrombosection
+q-016 야마 2022 객34 · 학습지 28쪽 원문대조 
+  S: 뇨병으로 10년간 약을 먹고 있었다. 신경학적 검사상으 로 동공 수축, 이마에 땀이 잘 나지 않았다. 아~ 소리 를 낼 때 목젖이 우측으로올라가고 있었으며, 감각신경 은 좌측 안면부위의 통증감각이 10:7로 감소,(교차된 부분 이후 같습니다)은 좌측에 비해 우측에서 1…
+  C: 1. left middle cerebral artery | 2. left thalamogeniculate artery | 3. basilar artery-medial circumferential arte | 4. left anterior-inferiror cerebellar artery | 5. left vertebral artery 
+  A: 5. left vertebral artery
+q-017 야마 2021 객21 · 학습지 29쪽 원문대조 
+  S: Stroke etiology를 구분하는 TOAST classification에 해 당되는 분류가 아닌 것은?
+  C: 1. Large artery atherosclerosis | 2. Cardioembolism | 3. cancer related stroke | 4. stroke of other determined etiology | 5. stroke of undetermined etiology 
+  A: 3. cancer related stroke
+q-018 야마 2021 객22 · 학습지 29쪽 원문대조 
+  S: 48세 남자가 전날부터 시작된 실어증으로 응급실로 내 원하였다. 심전도에서 심방세동이 발견되었고 입원 후 심장 초음파는 정상, 혈액검사 정상, MRI는 증상의 원 인이 되는 혈관의 이상소견이 있는 곳 외에는 정상이었 다. 환자의 뇌경색의 이차 예방에서 사용할 수 있는 …
+  C: 1. apixaban | 2. aspirin | 3. dabigatran | 4. wafarin | 5. ribaroxaban 
+  A: 2. aspirin
+q-019 야마 2021 객32 · 학습지 30쪽 원문대조 
+  S: 56세 여자 환자가 극심한 두통으로 인해 응급실에 내원 하였다. 환자의 혈압은 200/120이었으며 과거력상 3년 동안 고혈압이 있었으며 혈압약은 따로 복용하지 않았 다 응급실 내진 의사가 혈압약을 투여하자 환자는 구음 장애와 좌측 근력 약화를 보였고 혈압은 110/6…
+  C: 1. 뇌관류압이 감소하여 뇌혈관저항이 증가하였다 | 2. 뇌혈관저항이 증가하여 뇌혈류량이 증가하였다 | 3. 혈액 내 이산화탄소 분압의 증가로 뇌 혈관이 확장되었다. | 4. 혈액 내 산소분압의 감소로 혈압이 감소하였다. | 5. 통제 가능 범위를 벗어나 뇌혈관이 혈류 조절능을 
+  A: 5. 통제 가능 범위를 벗어나 뇌혈관이 혈류 조절능을
+q-020 야마 2021 객39 · 학습지 30쪽 원문대조 
+  S: 61세 남자 환자가 내원 1시간 전 갑자기 발생한 우측 편마비를 주소로 응급실에 왔다. 증상은 5분 정도 지속 되다가 호전되었으며, 편마비와 함께 말을 하고 싶었으 나 나오지 않았다. 내원 당시 혈압은 150/90이었으며, 이후 증상은 없었으나 불안해서 왔다고 한다. …
+  C: 1. ABCD2 score는 4점이다 | 2. CT에서 이상이 없었으므로 뇌졸중과는 관련이 없는 다른 질환이다 | 3. 1시간 내에 도착했으므로 정맥 혈전용해제를 사용한 다. | 4. 증상이 좋아졌으므로 동맥 혈전제거술을 실시한다. | 5. 큰 이상이 없으므로 퇴원 후 경과관찰한다. 
+  A: 1. ABCD2 score는 4점이다
+q-021 야마 2021 객41 [시각]
+  S: 77세 남자가 의식이 저하되어 내원하였다. 환자의 영상 사진은 아래와 같았다. 다음 설명으로 옳은 것은?
+  C: 1. aspirin입니다 | 2. 허혈성 손상 주위의 spreading depression은 주위로 의 손상을 | 3. 허혈성 손상 48시간 후에는 세포독성에 의한 부종이 나타난다. | 4. 뇌혈관 장벽(Blood-brain barrier)의 손상으로 혈청 단백이 유 | 5. 고음영은~~~ 
+  A: 3. 허혈성 손상 48시간 후에는 세포독성에 의한 부종이 나타난다.
+q-022 야마 2021 객53 · 학습지 32쪽 원문대조 
+  S: Gertman’s syndrome애서 볼 수 있는 증상이 아닌 것 은?
+  C: 1. left inferior branch occlusion | 2. 문자 읽기 | 3. confusion | 4. 좌우 구분 불가 | 5. left inferior parietal lobe lesion 
+  A: 3. confusion
+q-023 야마 2020 객14 · 학습지 34쪽 원문대조 
+  S: 61세남자 환자가 내원 1시간전 갑자기 발생한 일차적인 우즉 편마비를 주소로 응급실에 왔다. 증상은 5분정도 지속되다가 호전되었으며, 편마비와 함께 말을 하고 싶 었으나 나오지 않았다. 내원당시 혈압은 150/90 이었으 며, 이후 증상은 없었으나 불안해서 왔다고한다.…
+  C: 1. ABCD2 score은 4점이다 | 2. CT에서 이상이 없었으므로 뇌졸중과는 관련이 없는 다른 질환이다. | 3. 1시간이내에 도착했으므로 정맥내 혈전용해제를 투 여한다. | 4. 증상이 좋아졌으므로 동맥내 혈전제거술을 시행한 다. | 5. 현제 큰이상은 없으므로 퇴원후 경과관찰한다. 
+  A: 1. ABCD2 score은 4점이다
+q-024 야마 2020 객15 · 학습지 34쪽 원문대조 
+  S: 48세 남자가 전날부터 시작된 실어증으로 응급실로 내 원하였다. 심전도에서 심방세동이 발견되었고 입원 후 심장 초음파는 정상, 혈액검사 정상, MRA는 증상의 원 인이 되는 혈관의 이상소견이 있는 곳 외에는 정상이었 다. 환자의 뇌경색의 이차예방에 사용할 수 있는 약물…
+  C: 1. Apixaban | 2. Rivaroxaban | 3. Aspirin | 4. Warfarin | 5. Dabigatran 
+  A: 3. Aspirin
+q-025 야마 2020 객44 · 학습지 35쪽 원문대조 [제외]
+  S: stroke 분류에서 TOAST classification이 아닌 것은?
+  C: 1. Large artery atherosclerosis | 2. Cardioembolism | 3. small artery occlusion | 4. Stroke of other determined etiology | 5. Stroke of undetermined etiology 
+  A: 2. Cardioembolism
+q-026 야마 2020 객45 · 학습지 35쪽 원문대조 
+  S: lateral medullary infarction에 의한 구조와 기능으로 옳 지 않은 것은?
+  C: 1. Vestibular neuropathy - vestibular nucleus | 2. Pain, temperature deficit - spinothalamic  | 3. Hoarseness - nucleus ambigus | 4. Hiccup - nucleus tractus solitarius | 5. Limb ataxia - Spinocerebellar tract 
+  A: 4. Hiccup - nucleus tractus solitarius
+q-027 야마 2019 객50 · 학습지 35쪽 원문대조 
+  S: 허혈성 뇌 손상 후 나타나는 현상에 대한 설명이다. 옳 은 것은??
+  C: 1. 치료의 주된 목적은 penumbra영역의 확대를 감소시 키는 것이다. | 2. Penumbra영역에서 anoxic depolarization 이 일어 난다 | 3. 경색 초기에 inflammation에 의한 necrosis가 나타 난다. | 4. BBB의 파괴로 인한 세포성 부종이 나타난다. | 5. 혈관 폐색이 진행되면 출혈성 뇌경색과 폐쇄성 뇌경 
+  A: 5. 혈관 폐색이 진행되면 출혈성 뇌경색과 폐쇄성 뇌경
+q-028 야마 2019 객52 · 학습지 37쪽 원문대조 
+  S: lateral medullary infarction에 의한 구조와 기능으로 옳 지 않은 것은 ?
+  C: 1. Vestibular neuropathy-vestibular nucleus | 2. Pain, temperature deficit-spinothalamic tr | 3. Hoarseness-nucleus ambigus | 4. Hiccup-nucleus tractus solitarius | 5. Limb ataxia-Spinocerebellar tract 
+  A: 4. Hiccup-nucleus tractus solitarius
+q-029 야마 2019 객73 · 학습지 38쪽 원문대조 
+  S: 우성반구의 supramarginal gyrus와 angular gyrus를 통 합하는 tertiary association cortex인 wernicke’s area에 문제가 발생하는 경우 발생하는 Gertman’s syndrome 에서 볼 수 있는 증상이 아닌 것은?
+  C: 1. Rt/Lt indiscrimination | 2. agraphia | 3. aphasia | 4. acalculia | 5. finger agnosia 
+  A: 3. aphasia
+q-030 야마 2018 객5 · 학습지 38쪽 원문대조 
+  S: 동맥경화의 pathology에 대한 설명으로 옳은 것은?
+  C: 1. 동맥경화의 시작은 HDL과 ApoA2가 만나 산화하면서 시작된다. | 2. 소혈관경화의 경우 arteriosclerosis에 의한 mural ather | 3. CBF의 경우 백질이 회색질의 4배정도 이다. | 4. Lacunar syndrome은 인지장애, 정서변화, 배뇨장애, 보행장애를  | 5. 정맥 혈전증은 watershed, borderzone 
+  A: 2. 소혈관경화의 경우 arteriosclerosis에 의한 mural atheroma가 가장 큰 병변이다.
+q-031 야마 2018 객6 · 학습지 39쪽 원문대조 
+  S: Lateral medullary infarction 증상과 관련 구조물이 일치하지 않는 것은?
+  C: 1. Vestibular neuropathy - Vestibular nucleus | 2. Pain, temperature deficit - spinothalamic  | 3. Hoarseness - Nucleus ambigus | 4. Hiccup - Nucleus tractus solitarius | 5. Limb ataxia - Spinocerebellar tract 
+  A: 4. Hiccup - Nucleus tractus solitarius
+q-032 야마 2018 객10 · 학습지 41쪽 원문대조 
+  S: 61세남자 환자가 내원3시간전 갑자기 발생한 일차적인 우즉 편마비를 주소로 응급실에 왔다. 증상은 5분정도 지속되다가 호전되었으며, 편마비와 함께 말을 하고 싶었으나 나오지 않았다. 내원당시 혈압은 150/90 이었으며, 이후 증상은 없었으나 불안해서 왔다고한다. 과거…
+  C: 1. ABCD score은 4점이다 | 2. CT에서 이상이 없었으므로 뇌졸증과는 관련이 없는 다른 질환이다. | 3. 1시간이내에 도착했으므로 정맥내 혈전용해제를 투여한다. | 4. 증상이 좋아졌으므로 동맥내 혈전제거술을 시행한다. | 5. 현제 큰이상은 없으므로 퇴원후 경과관찰한다. 
+  A: 1. ABCD score은 4점이다
+q-033 야마 2017 객8 · 학습지 43쪽 원문대조 
+  S: 우측마비, 우측 안구편위. 문제 있는 혈관은?
+  C: 1. 좌측 중뇌동맥 | 2. 좌측 외경동맥 | 3. 좌측 내경동맥 | 4. 좌측 척추동맥 | 5. 좌측 기저동맥 
+  A: 1. 좌측 중뇌동맥
+q-034 야마 2017 객9 · 학습지 43쪽 원문대조 [제외]
+  S: 45세 남자 오른손잡이. 우측마비. MRI 아래와 같을 때 맞는 것은?
+  C: 1. 손가락인식불능증 | 2. 실서증 | 3. 계산불능증 | 4. 감각소실 | 5. 하지보다 심한 상지마비 
+  A: 1. 손가락인식불능증
+q-035 야마 2016 객5 
+  S: 다음 중 뇌혈관에 대한 설명으로 옳은 것은?
+  C: 1. 외경동맥과 내경동맥을 연결하는 측부 순환은 주로 전교통동맥과 후교통동맥에 의 | 2. 대뇌 혈관은 신장이나 간과 다르게 “inside out” 형태를 보인다. | 3. 뇌혈관장벽의 형성은 oligodendrocyte와 혈관의 내피세포가 구성한다 | 4. Virchow-Robin space (perivascular space)는  | 5. 만성적인 고혈압에 의해 뇌혈관의 penetrating 
+  A: 5. 만성적인 고혈압에 의해 뇌혈관의 penetrating
+q-036 야마 2016 객7 · 원문 복원 불완전 [시각]
+  S: 남자가 그림처럼 응급실에 실려 왔는데 좌측으로 눈이 편위되어 있고 우측 안면과 상하지에 마비가 심했고, 자극시 그림과 같은 반사가 있었다. 맞는 병변은?
+  C: 1. 좌측 대뇌 병변 | 2. 우측 대뇌 병변 | 3. 좌측 뇌간 병변 | 4. 우측 뇌간 병변 | 5. MRT 손상?! 
+  A: 5. MRT 손상?!
+q-037 야마 2016 객8 
+  S: 66세 여성이 3시간 전에 발생한 오른쪽 마비로 내원하였다. 행동이 느리고 멍청하게 앞만 바라보았다. 묻는 말에 대답을 거의하지 않았고, 가끔 귀찮은 듯이 작은 소리로 이름만 말했다. 가벼운 발음장애가 있고 팔보다 다리가 심한 오른쪽 마비가 있었다. 다음중 이상혈관은?
+  C: 1. 전대뇌동맥 | 2. 중대뇌동맥 | 3. 후대뇌동맥 | 4. 척수동맥 | 5. 기저동맥 
+  A: 1. 전대뇌동맥
+q-038 야마 2015 객11 · 학습지 47쪽 원문대조 
+  S: 다음 중 뇌혈관에 대한 설명으로 옳은 것은?
+  C: 1. 뇌동맥 혈류는 간과 신장과 다르게 “outside in”으로 혈류를 공급한다 | 2. Willis’ circle은 중대뇌동맥 전대뇌맥동맥 후교통동맥으로 구성된다. | 3. 안동맥은 전두동맥의 분지로서 외경동맥과 우회로를 형성한다. | 4. Virchow-Robin space(perivascular space)는 지 | 5. Embolism에 의한 혈관폐색은 시간이 지날수록 
+  A: 1. 뇌동맥 혈류는 간과 신장과 다르게 “outside in”으로 혈류를 공급한다.
+q-039 야마 2015 객12 
+  S: 뇌혈류 조절에 대한 설명이다. 옳은 것은?
+  C: 1. 뇌혈류는 백질부가 회백질부에 비해 4배정도 많다. | 2. 뇌관류압(CPP)는 뇌혈류(CBF)와 뇌혈관저항(CVR)에 비례한다. | 3. 뇌혈류 자동조절 능력은 뇌관류압을 변화시켜 뇌혈류량을 일정하게 유지한다. | 4. 뇌관류압이 떨어지면 뇌혈류 변화, 뇌혈액량(CBV), 산소추출분획(OER)의 | 5. 동맥내 이산화탄소 압력이 감소하면 혈관수축과, 뇌혈류 
+  A: 5. 동맥내 이산화탄소 압력이 감소하면 혈관수축과, 뇌혈류
+q-040 야마 2015 객13 · 학습지 48쪽 원문대조 
+  S: 다음 중 뇌혈관질환의 병태생리에 관한 설명이다. 다음 중 옳은 것은?
+  C: 1. LDL cholesterol은 ApoAⅡ를 지니고 있다. | 2. LDL trapping은 inflammation에 의해 발생한다. | 3. 혈류가 turbulence flow일 때, ACA와 MCA가 나뉘는 부분에서 | 4. ACE inhibitor를 사용하면 동맥경화증을 증가시킨다. | 5. Lipohyalinosis(fibrinoid necrosis)는 주로 작은  
+  A: 3. 혈류가 turbulence flow일 때, ACA와 MCA가 나뉘는 부분에서 동맥경화증이 잘 발생한다.
+q-041 야마 2015 객15 · 학습지 49쪽 원문대조 [제외]
+  S: 환자가 갑작스럽게 우측 운동장애, 우측 안면마비, 실어증으로 응급실에 내원하였다. 얼마 전에도 이와 비슷한 문제로 내원하였다고 한다. 어느 구조의 문제일 것이라고 예상하는가?
+  C: 1. | 2. | 3. | 4. 좌중간대뇌동맥 | 5. 
+  A: 4. 좌중간대뇌동맥
+q-042 야마 2015 객16 
+  S: 66세 여자환자가 3시간 전부터 발생한 우측 편마비로 내원하였다. 멍한 채로 앞만 보고 걸어가며 묻는 말에 거의 대답하지 않았고 가끔 귀찮은 듯 작은 소리로 자기 이름만 말했다. 가벼운 발음장애가 있고 상지보다 심한 하지마비가 있다. 안구와 감각검사는 하지 못했고, C…
+  C: 1. Vertebral artery | 2. Basilar artery | 3. Anterior cerebral artery | 4. Middle cerebral artery | 5. Posterior cerebral artery 
+  A: 3. Anterior cerebral artery
+q-043 야마 2014 객15 · 학습지 50쪽 원문대조 
+  S: 다음 중 뇌혈관에 대한 설명으로 옳은 것은?
+  C: 1. 뇌혈관은 두 개의 쇄골하동맥과 두 개의 경동맥에 의해 이루어진다. | 2. Willi‘s 환은 내경동맥과 전두동맥, 후교통 동맥 등이 관여한다. | 3. 안동맥은 전두동맥의 분지로서 외경동맥과 우회로를 형성한다. | 4. 쇄골하동맥 도류 증후군은 쇄골하동맥 원위부의 협착에 의해 추골동맥에서 혈류의 | 5. 전교통동맥은 양측 전뇌대동맥을 연결한다. 
+  A: 5. 전교통동맥은 양측 전뇌대동맥을 연결한다.
+q-044 야마 2014 객18 
+  S: 60세 노인이 갑작스럽게 발생한 좌측 편마비, 감각장애 및 구음장애로 인해 응급실에 도착했다. 위 환자는 10개월 전에도 이와 비슷한 문제로 내원 했다고 했다고 했다. 어느 구조의 문제일 것이라고 예상되는가?
+  C: 1. 좌전대뇌동맥 | 2. 좌내경동맥 | 3. 좌전교통동맥 | 4. 우중간대뇌동맥 | 5. 후대뇌동맥 
+  A: 4. 우중간대뇌동맥
+q-045 야마 2014 객19 · 학습지 51쪽 원문대조 
+  S: 혈관의 동맥경화에 대한 설명이다. 맞는 것은 ?
+  C: 1. 뇌혈류량은 뇌관류압에 반비례하며 뇌혈관 저항에 비례한다. | 2. 치료의 목표는 infarction core를 회복하여 brain 조직의 정상 | 3. 경색 후에 나타나는 spreading depression은 뇌조직의 회복을  | 4. 세포성 부종이 먼저 발생 한 후, 혈관성 부종이 발생하며 혈관성 부종에서 M | 5. 가장 먼저 단백질 합성 장애가 일어나고, lactic 
+  A: 5. 가장 먼저 단백질 합성 장애가 일어나고, lactic
+q-046 야마 2013 객31 
+  S: 66세 남자환자가 1시간 전부터 갑자기 발생 된 우측 상하지 운동장애로 응급실에 내원하였다. 과거력상 10년 .전부터 심방세동으로 본원에서 지속적으로 약물치료 중이었다. 응급실에서 시행한 CT상 다음과 같은 소견이 보였다. 가장 먼저 해야 할 치료는?
+  C: 1. 말초 정맥을 통한 tPA 주입 | 2. 말초 동맥 내 tPA 주입 | 3. 뇌 동맥 내 tPA 주입 | 4. 뇌 정맥 내 urokinase 주입 | 5. Penumbra를 통한 동맥 내 혈전제거술 
+  A: 1. 말초 정맥을 통한 tPA 주입
+q-047 야마 2013 객33 · 원문 복원 불완전 
+  S: 혈관의 동맥경화에 대한 설명이다. 맞는 것은 ? ➀ HDL cholesterol은 apoB에 의해 LDL cholesterol을 제거한다. ➁ LDL trapping은 inflammation에 의해 발생한다. ➂ 혈류가 turbulence flow일 때, ACA와 MC…
+  C: 1. ® Mediates reflex activity of the deep ten | 2. 눈썹을 찡그리게 한다든지 양문을 꽉 감는다든지 이런 것들을 해보는 것들이고  | 3. [96쪽] 96 Motor Response TZ Fog 번찌 드세요 6= o | 4. [25쪽] • Internal carotid artery infarction | 5. 통증을 주려고 하니까 통증을 못 주게 한다. 알러지지 통증을 줄여야 하면 어 
+  A: 4. [25쪽] • Internal carotid artery infarction – Atherosclero
+q-048 야마 2013 객35 · 학습지 55쪽 원문대조 
+  S: 다음 중 맞는 설명은?
+  C: 1. Aspirin은 COX를 억제하여 혈관 확장시킨다. | 2. Aspirin은 가역적으로 COX를 억제하기 때문에, 시간이 지나면 계속 복 | 3. Thienopyridine 은 ~ | 4. 심질환 있을 때 Warfarin은 INR 3-4 정도로 유지한다. | 5. Heparin 은 antithrombin 3을 활성화시켜 ADP를 억제시켜  
+  A: 1. Aspirin은 COX를 억제하여 혈관 확장시킨다.
+q-049 야마 2013 객32 · 학습지 55쪽 원문대조 
+  S: 다음 중 우리나라에서 가장 빈도가 높은 뇌졸중 유형은?
+  C: 1. 혈전뇌경색 | 2. 색전뇌경색 | 3. 뇌내출혈 | 4. 지주막하출혈 | 5. 뇌실출혈 
+  A: 1. 혈전뇌경색
+q-050 야마 2012 객5 · 학습지 56쪽 원문대조 
+  S: 다음 중 우리나라에서 가장 빈도가 높은 뇌졸중 유형은?
+  C: 1. 혈전뇌경색 | 2. 색전뇌경색 | 3. 뇌내출혈 | 4. 지주막하출혈 | 5. 뇌실출혈 
+  A: 1. 혈전뇌경색
+q-051 야마 2012 객6 · 학습지 56쪽 원문대조 
+  S: 다음 중 뇌혈류의 자동조절기능에 대한 설명 중 틀린 것은?
+  C: 1. 동맥혈의 이산화탄소 분압은 미세한 변화라도 직접적으로 뇌혈관에 영향을 미치나 | 2. 뇌혈류를 정상으로 유지시켜주는 자동조절기능에는 크게 화학적 자동조절 기능과  | 3. 세포의 산도의 변화나 대사산물의 축적은 직접뇌혈관의 구경에 영향을 미치지 않 | 4. 자율성 자동조절 기능은 뇌관류압이 60mmHg 이하로 떨어지거나 160mmH | 5. 모두 맞다. 
+  A: 3. 세포의 산도의 변화나 대사산물의 축적은 직접뇌혈관의 구경에 영향을 미치지 않는다.
+q-052 야마 2012 객24 · 원문 복원 불완전 [제외]
+  S: 혈관의 동맥경화에 대한 설명이다. 맞는 것은?
+  C: 1. [68쪽] Dyslipidemia ✓ Plasma lipids and lip | 2. [13쪽] 5. Encephaloceles Preop Postop | 3. [14쪽] Confrontation visual field test • 목적 | 4. [60쪽] 60 © Knee flexion © Knee extension ( | 5. 왜냐하면은 막 텐션이 심하지 않을 때니까 키가 덜 커서 그래서 빨리 수술해  
+  A: 1. [68쪽] Dyslipidemia ✓ Plasma lipids and lipoproteins - inf
+q-053 야마 2011 객22 · 학습지 60쪽 원문대조 
+  S: Hypoxic ischemic encephalopathy의 병태생리에 가장 중요한 cell type은?
+  C: 1. Neuron | 2. Microglia | 3. Astrocyte | 4. Ependymocyte | 5. Oligodendrocyte 
+  A: 2. Microglia
+q-054 야마 2011 객12 · 원문 복원 불완전 [제외]
+  S: 혈관의 동맥경화에 대한 설명이다. 맞는 것은?
+  C: 1. [8쪽] • 뇌혈관이 atherosclerosis 에 의해 50 % 이상 협 | 2. 나는 이게 얘 시적 패턴이 사람이 있으면 사람이 있는데, 지금 차는 음식은  | 3. 대개 이제 셀브럴 프로텍스 브레인 셀브 콘텐츠는 랭귀지나 뭐 그런 거는 대개 | 4. [28쪽] • 안정 시와 대화 중의 얼굴을 모두 관찰한다 – 비대칭 ( 특히 | 5. [26쪽] 3 p RES/SHADE/SURF St "에 Por 는 F 4 2 
+  A: 1. [8쪽] • 뇌혈관이 atherosclerosis 에 의해 50 % 이상 협착 혹은 폐색이 있으면서 임
+q-055 야마 2011 객13 · 학습지 61쪽 원문대조 
+  S: 다음 중 그 역할이 다른 것과 다른 물질은?
+  C: 1. Thrombin | 2. Protein C | 3. t-PA | 4. Thrombomodulin | 5. PGI 
+  A: 1. Thrombin
+q-056 야마 2011 객43 · 원문 복원 불완전 [제외]
+  S: 다음 중 우리나라에서 가장 빈도가 높은 뇌졸중 유형은?
+  C: 1. [27쪽] MULTIPLE SCLEROSIS 2024 DIS · 5개의 MS | 2. 그런데 이 녀석들은 흥분성 경로는 좀 더 중요한 운동을 한번 시켜서 다 필요 | 3. [43쪽] 형성평가 1 72 세 남자가 3 시간 전 갑자기 발생한 말이 나오 | 4. 그러면 오른쪽 흰색소리 콘테스가 담당한 느낌인데 왼쪽 다리란 말이에요. 그런 | 5. 그리고 그런 쪽은 멀쩡하지만 뭔가 뇌에서 언어를 이해하거나 말하는 거에 대한 
+  A: 3. [43쪽] 형성평가 1 72 세 남자가 3 시간 전 갑자기 발생한 말이 나오지 않는 증상과 우측 편마비
+q-057 야마 2011 객44 · 원문 복원 불완전 [제외]
+  S: 다음 중 뇌혈류의 자동 조절 기능에 대한 설명 중 틀린 것은?
+  C: 1. [91쪽] IV thrombolysis Alteplase vs. tenect | 2. 근력 저하는 별로 시선이 생기지 않아요. 우리 아까 말했던 리지디티 그런 강 | 3. 그렇기 때문에 의식의 크게 가지로 얘기를 한다고 하면은 여기는 조금 이 표  | 4. 흔히 말하는 저항을 충분히 잘 이겨내고 예를 들어서 8을 가지고 설명을 한다 | 5. [18쪽] 01 Multiple sclerosis Inflammatory d 
+  A: 1. [91쪽] IV thrombolysis Alteplase vs. tenecteplase New drug
+q-058 야마 2011 객46 · 원문 복원 불완전 [제외]
+  S: 일과성 허혈증에 대해 바르지 못한 설명은?
+  C: 1. [42쪽] • Transient ischemic attack (TIA) #  | 2. 나탈벤트 리플, 허수벤트 리플 허수벤트 리플 배웠어요? 지금 우리가 하나 알 | 3. [42쪽] • 검사자의 손에 저항하며 양쪽 어깨를 위로 으쓱하게 한다 | 4. 그래서 머리에 피 안 말랐다는 게 여기에서 진짜로 실재하는 소리예요. 열어봤 | 5. 그때에도 또 문제가 발생을 많이 하고 조사나 문제가 발생하겠지만, 어쨌든 그 
+  A: 1. [42쪽] • Transient ischemic attack (TIA) # 예후 – 90 일까지의 뇌경

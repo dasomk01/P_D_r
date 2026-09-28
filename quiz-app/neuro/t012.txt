@@ -1,0 +1,135 @@
+q-001 2026 강의록 형성평가 
+  S: 허혈성 신경손상에서 혈류가 회복되면 기능 회복 가능성이 가장 높은 부위는?
+  C: 1. Blood-brain barrier | 2. Ischemic penumbra | 3. Ischemic preconditioning | 4. Apoptotic core | 5. Infarct core 
+  A: 2. Ischemic penumbra
+q-002 야마 2025 객74 · 학습지 22쪽 원문대조 
+  S: 뇌혈류 조절에 대한 설명이다. 옳은 것은?
+  C: 1. 뇌관류압(CPP)은 뇌혈류(CBF)와 뇌혈관저항(CVR)에 비례한다. | 2. 뇌혈류 자동조절 능력을 통해 뇌혈류량을 일정하게 유지하는데 중요한 것은 뇌관 | 3. 동맥 내 이산화탄소 압력이 증가하면 혈관 이완과 뇌혈류 증가가 일어난다. | 4. 외상성 뇌손상 환자는 뇌혈류 자동조절능력 곡선의 기울기를 좌측으로 편향시킨다 | 5. 뇌관류압이 감소하면 뇌혈류, 뇌혈액량(CBV), 산소 
+  A: 3. 동맥 내 이산화탄소 압력이 증가하면 혈관 이완과 뇌혈류 증가가 일어난다.
+q-003 야마 2025 객75 · 학습지 22쪽 원문대조 [시각]
+  S: 좌측 편마비, 언어 장애를 증상으로 내원한 환자의 확 산 강조영상이다. 맞는 설명은?
+  C: 1. 치료의 주된 목적은 infarct core 부분을 회복시키는 것이다. | 2. 뇌혈류 저하로 ATP depletion이 일어난 부위로 penumbra라 한 | 3. 초기에 혈관성 부종이 발생하고 시간이 지나면서 세 포성 부종이 발생한다. | 4. 허혈성 손상 주위의 spreading depression은 주위로 손상을 방 | 5. 혈관 폐색이 진행되면 출혈성 뇌경색과 폐쇄성 뇌경 
+  A: 5. 혈관 폐색이 진행되면 출혈성 뇌경색과 폐쇄성 뇌경
+q-004 야마 2023 객28 · 학습지 23쪽 원문대조 
+  S: 77세 남자환자가 좌측 편마비를 보여 응급실에 내원하 였다. 환자의 의식이 급격히 저하되어 촬영한 뇌 전산 화 단층 촬영 소견이다. 현재 상태에 대한 옳은 설명 은?
+  C: 1. 뇌경색주변부에서나타나는 염증성 반응은 조직 손상 을 보호하는 반응이다. | 2. 고밀도 음영을보이는 부위는 뇌혈류 자동조절능력이 유지되어있다. | 3. 허혈성 뇌손상후 1주일 정도 지나면서 나타난 세포 독성 부종에 의한다 | 4. 뇌혈관 장벽(blood-brain barrier) 손상에 의한 혈청 단백의  | 5. 허혈성 뇌손상의범위를 최소화 하기 위해 혈관의 재 
+  A: 4. 뇌혈관 장벽(blood-brain barrier) 손상에 의한 혈청 단백의 유리가 원인이다.
+q-005 야마 2022 객28 [제외]
+  S: 허혈성 뇌손상 이후에 일어나는 현상으로 옳은 것은?
+  C: 1. 치료의 주된 목적은 penumbra의 확산을 막는 것이 다. | 2. penumbra 영역은 8ml/100g/min이다. | 3. 복원실패 | 4. 급성기 뇌경색 초기에 세포외액이 세포내액으로 이 동하여 세포성 부종을 일으킨 
+  A: 
+q-006 야마 2020 객106 · 학습지 32쪽 원문대조 [시각]
+  S: 위 그래프를 보고 빈칸에 알맞은 것을 채우시오.
+  C: 1. a : hypertension, b : hypocapnia, c : hype | 2. a : hypercapnia, b : hypertension, c : hyp | 3. a: hypertension, b : hypercapnia, c : hypo | 4. a : hypercapnia, b : hypotension, c : hypo | 5. a : hypocapnia, b : hypotension, c : hyper 
+  A: 2. a : hypercapnia, b : hypertension, c : hypocapnia
+q-007 야마 2020 객107 · 학습지 33쪽 원문대조 
+  S: 허혈성 손상 후 나타나는 현상에 대한 설명 중 옳은 것 은?
+  C: 1. 치료의 주된 목적은 penumbra 영역의 확대를 감소 시키는 것이다. | 2. 뇌혈류 저하로 anoxic depolarization이 일어난 부위 를 pe | 3. 허혈이 발생한 후에 제일 먼저 세포고사 세포고사 (apoptosis) 에 의 | 4. 급성기 뇌경색 초기에 세포외액이 세포내액으로 이 동하여 혈관성 부종이 나타난 | 5. 동맥이 막힌 부위의 뇌혈류가 회복되면 출혈성 병변 
+  A: 5. 동맥이 막힌 부위의 뇌혈류가 회복되면 출혈성 병변
+q-008 야마 2019 객51 [시각]
+  S: 위 그래프를 보고 빈칸에 알맞은 것을 채우시오.
+  C: 1. a : hypertension, b : hypocapnia, c : hype | 2. a : hypercapnia, b : hypertension, c : hyp | 3. a: hypertension, b : hypercapnia, c : hypo | 4. a : hypercapnia, b : hypotension, c : hypo | 5. a : hypocapnia, b : hypotension, c : hyper 
+  A: 2. a : hypercapnia, b : hypertension, c : hypocapnia
+q-009 야마 2019 객53 
+  S: 61세남자 환자가 내원3시간전 갑자기 발생한 일차적인 우즉 편마비를 주소로 응급실에 왔다. 증상은 5분정도 지속되다가 호전되었으며, 편마비와 함께 말을 하고 싶 었으나 나오지 않았다. 내원당시 혈압은 150/90 이었으 며, 이후 증상은 없었으나 불안해서 왔다고한다. …
+  C: 1. ABCD2 score은 4점이다 | 2. CT에서 이상이 없었으므로 뇌졸중과는 관련이 없는 다른 질환이다. | 3. 1시간이내에 도착했으므로 정맥내 혈전용해제를 투 여한다. | 4. 증상이 좋아졌으므로 동맥내 혈전제거술을 시행한다. | 5. 현제 큰이상은 없으므로 퇴원후 경과관찰한다? 
+  A: 1. ABCD2 score은 4점이다
+q-010 야마 2018 객7 [시각]
+  S: 위 그래프를 보고 빈칸에 알맞은 것을 채우시오.
+  C: 1. a : hypertension, b : hypocapnia, c : hype | 2. a : hypercapnia, b : hypertension, c : hyp | 3. a : hypertension, b : hypercapnia, c : hyp | 4. a : hypercapnia, b : hypotension, c : hypo | 5. a : hypocapnia, b : hypotension, 
+  A: 2. a : hypercapnia, b : hypertension, c : hypocapnia
+q-011 야마 2018 객8 · 학습지 40쪽 원문대조 
+  S: Ischemic brain injury후 나타나는 현상에 대한 설명이다 옳은 것은?
+  C: 1. 치료의 목적은 infarct core를 회복하는 것이다. | 2. Anoxic depolarization 일어나는 곳이 penumbra이다. | 3. 경색 시 spreading depression을 통해 damage를 최소화한 | 4. 가장 먼저 혈관성 부종이 발생하며 MRI의 DWI 신호가 증가된다. | 5. 혈관폐색이 진행되면 출혈성 뇌경색과 폐쇄성 
+  A: 5. 혈관폐색이 진행되면 출혈성 뇌경색과 폐쇄성
+q-012 야마 2018 객9 
+  S: 48세 남자가 입원 전날 실어증이 있다고 했으며, 입원 당일 검사하니 심방세동이 있었다. 추가 검사로 MRA에 환자의 증상의 원인이 되는 혈관의 이상소견이 있는 것 말고는 다른 이상 소견이 없었다. 다른 검사들에도 이상 소견은 없었다. 환자의 뇌경색의 2차적 예방으로 …
+  C: 1. Dabigatran | 2. Cilostazol | 3. Apixaban | 4. Warfarin | 5. Rivaroxaban 
+  A: 2. Cilostazol
+q-013 야마 2017 객5 · 학습지 41쪽 원문대조 
+  S: Cardioembolism의 관한 문제였습니다. (맞는 지문을 고르는 문제였지만 질문을 복원하지 못하였습니다.)
+  C: 1. 허혈성 뇌졸중으로 가장 많은 원인들로는 embolism, aneurysm,  | 2. 작은동맥경화증은 1.5<cm lesion과 고혈압과 당뇨, cardioemb | 3. 한국인에서는 허혈성 뇌졸중의 원인으로 작은동맥폐색/큰동맥경화증 (둘중하나.. | 4. Lipohyalinosis와 microaneurysm은 작은 혈관 뇌졸중의  | 5. 확실하게 틀린 지문이였던거 같습니다. 
+  A: 4. Lipohyalinosis와 microaneurysm은 작은 혈관 뇌졸중의 원인이다
+q-014 야마 2017 객6 [제외]
+  S: 뇌혈류 조절에 대한 설명이다. 옳은 것은?
+  C: 1. 뇌혈류는 백질부가 회백질부에 비해 4배정도 많다. | 2. 뇌관류압(CPP)는 뇌혈류(CBF)와 뇌혈관저항(CVR)에 비례한다. | 3. 복원을 하지 못하였습니다. 죄송합니다. | 4. 뇌관류압이 떨어지면 뇌혈류 변화, 뇌혈액량(CBV), 산소추출분획(OER)의 | 5. 동맥내 이산화탄소 압력이 감소하면 혈관수축과, 뇌혈류 감소가 나타난다. 
+  A: 5. 동맥내 이산화탄소 압력이 감소하면 혈관수축과, 뇌혈류 감소가 나타난다.
+q-015 야마 2017 객7 
+  S: Ischemic brain injury후 나타나는 현상에 대한 설명이다 옳은 것은?
+  C: 1. 치료의 목적은 infarct core를 회복하는 것이다. | 2. Anoxic depolarization 일어나는 곳이 penumbra이다. | 3. 경색 시 spreading depression을 통해 damage를 최소화한 | 4. 가장 먼저 혈관성 부종이 발생하며 MRI의 DWI 신호가 증가된다. | 5. 허혈이 진행되면서 단백질 합성이 감소하고 그에 따른 hsp72 upregul 
+  A: 5. 허혈이 진행되면서 단백질 합성이 감소하고 그에 따른 hsp72 upregulation이 일어난다.
+q-016 야마 2016 객6 
+  S: 뇌혈류 조절에 대한 설명이다. 옳은 것은?
+  C: 1. 뇌혈류(CBF)는 뇌관류압(CPP)와 뇌혈관 저항(CVR)에 정비례한다. | 2. 뇌혈관 저항(CVR)은 혈액 점도와 혈관길이, 혈관의 직경에 반비례한다. | 3. 뇌혈류 자동조절 능력은 뇌관류압을 변화시켜 뇌혈류량을 일정하게 유지한다. | 4. 뇌관류압이 떨어지면 제일먼저 혈관이 수축하여 뇌혈액량을 증가시킨다. | 5. 동맥 내 이산화탄소 압력이 감소하면 혈관수축과 뇌혈류 감소가 나타난다. 
+  A: 5. 동맥 내 이산화탄소 압력이 감소하면 혈관수축과 뇌혈류 감소가 나타난다.
+q-017 야마 2016 객7 
+  S: 허혈성 뇌손상 후 나타나는 현상에 대한 설명이다. 옳은 것은?
+  C: 1. 치료의 주된 목적은 penumbra 영역의 확대를 감소시키는 것이다. | 2. 뇌혈류 저하로 ATP depletion이 일어나는 부위를 penumbra라  | 3. 뇌경색 후 delayed injury에 관여하는 것은 termainal de | 4. 뇌경색 발생시 혈관성 부종이 먼저 발생하고 확산강조영상(DWI)에서 저신호강 | 5. 혈관성 부종은 혈관의 장벽이 손상된 후에 발생한다. 
+  A: 5. 혈관성 부종은 혈관의 장벽이 손상된 후에 발생한다.
+q-018 야마 2016 객6 · 원문 복원 불완전 
+  S: 60세 남자가 좌측마비와 우측시야장애로 응급실에 내원하였다. 한 달 전에 우측시야장애가 생겼으나 10분 만에 해소되었다. 삼 일 전에도 우측시야장애가 있었다가 해소되었다. 가장 가능성이 높은 혈관은?
+  C: 1. 내경동맥 | 2. 척추동맥 | 3. 중대뇌동맥 | 4. 외경동맥 | 5. 기저동맥 
+  A: 2. 척추동맥
+q-019 야마 2015 객14 · 학습지 48쪽 원문대조 
+  S: Ischemic brain injury에 대한 설명으로 옳은 것은?
+  C: 1. 치료의 목적은 Infarct core를 회복하는데 있다. | 2. Anoxic depolarization 일어나는 곳이 penumbra다 | 3. 경색 시 spreading depression을 통해 damage를 최소화한 | 4. 가장 먼저 혈관성 부종이 발생하며 MRI의 DWI 신호가 증가된다. | 5. 경색 시 ATP depletion이 가장 먼저 발생하여 Anaerobic g 
+  A: 4. 가장 먼저 혈관성 부종이 발생하며 MRI의 DWI 신호가 증가된다.
+q-020 야마 2014 객17 · 학습지 50쪽 원문대조 
+  S: 뇌혈관의 병태생리에 대하여 다음 중 옳은 것은?
+  C: 1. 큰 혈관 동맥경화는 HDL의 산화로 시작된다. | 2. 동맥경화의 염증반응 과정에서 NO가 증가한다. | 3. 소혈관 동맥경화에는 microatheroma, junctional ather | 4. Arteriosclerosis는 평활근이 섬유모세포로 대체되어 회색질에 허혈 | 5. Lipohyalinosis(fibrinoid necrosis)는 주로 작은  
+  A: 3. 소혈관 동맥경화에는 microatheroma, junctional atheroma와 mural athe
+q-021 야마 2014 객20 · 학습지 51쪽 원문대조 [제외]
+  S: 다음 중 다른 것들과 성격이 다른 하나는?
+  C: 1. Thrombomodulina | 2. Heparin like molecule | 3. Thrombin receptor | 4. Protein C | 5. Glycoprotein Ib 
+  A: 4. Protein C
+q-022 야마 2013 객30 · 학습지 52쪽 원문대조 
+  S: Rt 근위부 내경동맥 완전폐쇄 환자의 측부순환 경로로 맞는 것은?
+  C: 1. a – anterior communicating artery b - post | 2. b – anterior communicating artery c - post | 3. a – anterior communicating artery c - post | 4. b – anterior communicating artery 
+  A: 3. a – anterior communicating artery c - posterior communica
+q-023 야마 2013 객32 
+  S: 다음 중 옳은 설명은?
+  C: 1. 뇌관류압은 평균동맥압과 뇌혈관 저항과 관련 있다. | 2. 뇌관류압이 감소하면 뇌혈류가 증가하여 뇌혈액량을 일정수준으로 유지한다. | 3. 뇌관류압이 감소하면 바로 산소추출분획이 증가하여 보상한다. | 4. 뇌혈관은 동맥혈의 이산화탄소 분압에 민감하게 반응하지만 산소분압에는 영향받지 | 5. 신경세포가 활성화되면 신경전달물질이 분비되어 뇌혈류가 증가한다. 
+  A: 5. 신경세포가 활성화되면 신경전달물질이 분비되어 뇌혈류가 증가한다.
+q-024 야마 2013 객34 
+  S: Ischemic brain injury에 대한 설명으로 옳은 것은?
+  C: 1. 치료의 목적은 Infarct core를 회복하는데 있다. | 2. Anoxic depolarization 일어나는 곳이 penumbra다. | 3. 경색 시 spreading depression을 통해 damage를 최소화한 | 4. 뇌관류압은 평균동맥압과 뇌혈관 저항과 관련있다. →틀림. 뇌관류압은 평균동맥 | 5. 뇌관류압이 감소하면 뇌혈류가 증가하여 뇌혈액량을 
+  A: 4. 뇌관류압은 평균동맥압과 뇌혈관 저항과 관련있다. →틀림. 뇌관류압은 평균동맥압과 두개내압(ICP)와 관
+q-025 야마 2013 객33 
+  S: ‘ischemic penumbra'에 대한 설명으로 합당한 것은?
+  C: 1. 뇌혈류가 10ml/100 이하이다. | 2. 전기적 기능이 살아있다. | 3. 이온펌프 기능과 세포막 투과율이 망가져 있다. | 4. 재관류 시 회복이 된다. | 5. Collateral circulation이 잘 되는 부위이다. 
+  A: 4. 재관류 시 회복이 된다.
+q-026 야마 2012 객7 · 학습지 57쪽 원문대조 
+  S: ‘Ischemic penumbra'에 대한 설명으로 합당한 것은?
+  C: 1. 뇌혈류가 10ml/100 이하이다. | 2. 전기적 기능이 살아있다. | 3. 이온펌프 기능과 세포막 투과율이 망가져 있다. | 4. 재관류 시 회복이 된다. | 5. Collateral circulation이 잘 되는 부위이다. 
+  A: 4. 재관류 시 회복이 된다.
+q-027 야마 2012 객8 · 학습지 57쪽 원문대조 
+  S: 57세 남자 환자가 우측 안면마비와 사지마비를 주소로 전북대학교 병원에 내원하였다. 편마비 증세를 치료하려고 노력하였으나 계단형태로 상태가 더 악화되었다. 이러한 경우는 다음 중 어디에 속하는가?
+  C: 1. Transient ischemic attack | 2. Reversible ischemic neurologic deficit | 3. Progressive stroke | 4. Complete infarct | 5. ? 
+  A: 3. Progressive stroke
+q-028 야마 2012 주23 · 원문 복원 불완전 [제외]
+  S: 다음 중 옳은 설명은?
+  [주관식] A: 원본 학습지에 제공 정답 미기재
+q-029 야마 2012 객25 
+  S: 허혈성뇌손상의 치료는?
+  C: 1. 아스피린은 cycloxygenase를 억제 | 2. 아스피린은 저농도에서 항혈소판 작용을 한다. | 3. 와파린은 비타민E 관련 응고인자에 작용 | 4. 뇌관류압은 평균동맥압과 뇌혈관 저항과 관련있다. →틀림. 뇌관류압은 평균동맥 | 5. 뇌관류압이 감소하면 뇌혈류가 증가하여 뇌혈액량을 
+  A: 2. 아스피린은 저농도에서 항혈소판 작용을 한다.
+q-030 야마 2012 객26 · 학습지 59쪽 원문대조 [제외]
+  S: Ischemic brain injury에 대한 설명이다. 옳은 것은?
+  C: 1. 치료의 목표는 infarction core를 회복하여 brain 조직의 정상 | 2. Anoxic depolarization이 일어나는 곳을 penumbra라고  | 3. 경색 후에 나타나는 spreading depression은 뇌조직의 회복을  | 4. Vasogenic edema가 나타날 경우, DWI에서 이상소견이 나타난다. | 5. 가장 먼저 protein synthesis 장애가 일어나고, 
+  A: 3. 경색 후에 나타나는 spreading depression은 뇌조직의 회복을 위한 과정이다.
+q-031 야마 2012 객27 
+  S: 윌리스환에 포함되지 않는 것은?
+  C: 1. 중대뇌동맥 | 2. 전교통동맥 | 3. 후대뇌동맥 | 4. 기저동맥 
+  A: 4. 기저동맥
+q-032 야마 2011 객11 · 학습지 60쪽 원문대조 
+  S: 다음은 뇌혈류 생리에 관련된 설명이다. 맞는 것은?
+  C: 1. 뇌산소 소모량이 4.5ml/100g/min으로 감소되면 혼수에 이른다. | 2. 뇌관류압이 감소하면 뇌혈류가 증가하여 뇌혈액량을 일정수준으로 유지한다. | 3. 자율성 자동조절 기능은 뇌관류압이 60mmHg에서 160mmHg 사이에서 작 | 4. 성인의 뇌는 체중의 2-2.5%를 차지하며, 뇌혈류는 심장 박출량의 30-3 | 5. 동맥혈의 산소분압은 미세한 변화라도 직접적으로 뇌혈관에 영향을 미치나, 이산 
+  A: 3. 자율성 자동조절 기능은 뇌관류압이 60mmHg에서 160mmHg 사이에서 작동한다.
+q-033 야마 2011 객14 · 학습지 61쪽 원문대조 
+  S: Ischemic brain injury에 대한 설명이다. 옳은 것은?
+  C: 1. 뇌혈류가 감소하면 단백질 합성이 가장 먼저 손상된다. | 2. 치료의 주된 목적은 infarction core를 회복하는데 있다 | 3. 혈류가 저하하여 ATP depletion이 일어난 부위를 penumbra라  | 4. 경색의 진행과정 중 경색이 발생한 직후 작용하는 기전은 inflammatio | 5. 초기에는 혈관성 부종이 발생하여 MRI상 확산강조 
+  A: 1. 뇌혈류가 감소하면 단백질 합성이 가장 먼저 손상된다.
+q-034 야마 2011 객45 · 학습지 62쪽 원문대조 
+  S: ‘Ischemic penumbra'에 대한 설명으로 합당한 것은?
+  C: 1. 전기적 기능이 살아 있다. | 2. 재관류시 회복이 되지 않는다. | 3. 뇌혈류가 10ml/100 이하이다. | 4. Collateral circulation이 잘 되는 부위이다. | 5. 이온 펌프 기능과 세포막의 투과율은 보전되어 
+  A: 5. 이온 펌프 기능과 세포막의 투과율은 보전되어
