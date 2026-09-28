@@ -10,9 +10,10 @@ AREAS=[('yama','야마'),('variants','야마 변형'),('ty','티야'),('off','�
 OFF_PAT=[3,1,4,2,5,2,4,1,5,3]; TY_PAT=[2,4,1,5,3,3,5,1,4,2]
 def rot(ch,ex,ans,target):
   r=(ans-target)%5; return ch[r:]+ch[:r],ex[r:]+ex[:r]
-def card(cid,i,f):
+def card(cid,i,f,n=5):
+  """n=None: 선지 수 자유(선지 일부만 복원된 야마 원문)."""
   f=dict(dict(scope=False,subj=False,visual=None,extra=None,caveat=None,nav='<div class="nav"></div>'),**f)
-  assert len(f['choices'])==len(f['exps'])==5 and all(1<=a<=5 for a in f['ans']),cid
+  k=len(f['choices']); assert k==len(f['exps']) and (k==n if n else k>=2) and all(1<=a<=k for a in f['ans']),cid
   return f'<article class="qcard{" active" if i==1 else ""}" data-qcard="{i-1}" id="{cid}">'+build(cid,f)+'</article>'
 yprof={}
 def topic_html(t):
@@ -23,7 +24,7 @@ def topic_html(t):
     cid=f'{t}-area-yama-q-{i:03d}'
     if q.get('prof') and q['prof']!=T['prof']: yprof[f'{t}|q-{i:03d}']=q['prof']
     cards['yama'].append(card(cid,i,dict(meta=f'야마 · {i}/{N} · {q["meta"]}',stem=q['stem'],choices=q['choices'],ans=[q['ans']],
-      basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat'))))
+      basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat')),n=None))
   N=len(m.VAR)
   for i,q in enumerate(m.VAR,1):
     cid=f'{t}-area-variants-q-{i:03d}'
