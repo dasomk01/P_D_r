@@ -24,7 +24,7 @@ def topic_html(t):
     cid=f'{t}-area-yama-q-{i:03d}'
     if q.get('prof') and q['prof']!=T['prof']: yprof[f'{t}|q-{i:03d}']=q['prof']
     cards['yama'].append(card(cid,i,dict(meta=f'야마 · {i}/{N} · {q["meta"]}',stem=q['stem'],choices=q['choices'],ans=[q['ans']],
-      basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat')),n=None))
+      basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat'),scope=bool(q.get('scope'))),n=None))
   N=len(m.VAR)
   for i,q in enumerate(m.VAR,1):
     cid=f'{t}-area-variants-q-{i:03d}'
