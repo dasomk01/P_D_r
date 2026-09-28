@@ -2,7 +2,7 @@
 
 1번 앱(`quiz-app/neuro`, https://claude.ai/artifact/1Hc4jiqbWcBXmF1ox3PcDS)이 16MB 한도에 가까워 **9/28 2교시 수업부터** 이 2번 앱에 넣는다. 1번 앱 폴더와 주소는 건드리지 않는다.
 
-배포 주소(Artifact): README 아래 "배포" 참고 — 수정할 땐 같은 URL로 다시 publish해서 주소를 유지한다.
+배포 주소(Artifact): https://claude.ai/artifact/PcoxmVy5jnawmgJZ34Lv2u — 수정할 땐 같은 URL로 다시 publish해서 주소를 유지한다.
 
 ## 빌드
 ```
