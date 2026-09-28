@@ -14,3 +14,6 @@ s=re.sub(r'<div class="audit">STEP 9 최종검수:.*?</div>',f'<div class="audit
 assert s.startswith('<title>'),s[:80]
 open(D+'/neuro2-app.html','w',encoding='utf-8').write(s)
 print(len(s)/1e6)
+# 크롬 등 브라우저에서 파일로 바로 여는 단독 HTML(완전한 문서, 복습 표시는 브라우저 localStorage에 저장)
+f=open(D+'/final.html',encoding='utf-8').read().replace('<title>신경학 문풀앱</title>','<title>신경학 문풀앱 2</title>',1)
+open(D+'/신경학문풀앱2.html','w',encoding='utf-8').write(f)

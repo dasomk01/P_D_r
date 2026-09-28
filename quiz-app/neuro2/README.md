@@ -6,7 +6,7 @@
 
 ## 빌드
 ```
-python3 make_work.py && python3 build.py && python3 features.py && python3 mkart.py   # → neuro2-app.html
+python3 make_work.py && python3 build.py && python3 features.py && python3 mkart.py   # → neuro2-app.html(Artifact용) + 신경학문풀앱2.html(크롬에서 파일로 여는 단독본)
 ```
 - `topics.json` : 앱에 넣을 주제 순서. 새 수업은 `specs/topic-0NN.py`를 만들고 여기에 추가.
 - `specs/topic-0NN.py` : 주제 하나의 원고 — `TOPIC`(교수·날짜·교시), `YAMA`(학습지 원문·제공 정답), `VAR`(야마 변형), `TY`(티야, STT 강조), `OFF`(탈야, 강의록 기준). 번호는 1번 앱(topic-001~026) 다음인 027부터.
