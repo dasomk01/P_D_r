@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>신경학 문풀앱 2</title><style>*{box-sizing:border-box}body{margin:0;background:#f7f7fc;color:#202139;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:#4b3296;color:#fff;padding:20px}header h1{margin:0;font-size:23px}main{max-width:980px;margin:auto;padding:12px}.audit{background:#eaf8ef;border:1px solid #9fd3ad;padding:12px;border-radius:12px;margin:12px 0}.prof{background:#fff;border:1px solid #dedce8;border-radius:14px;margin:12px 0;padding:8px}.prof>summary{font-size:20px;font-weight:800;padding:8px;cursor:pointer}.topic{border-top:1px solid #eeeaf5;margin-top:8px;padding-top:8px}.topic>summary{font-weight:750;padding:8px;cursor:pointer}.tabs,.jump,.nav{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tabs{position:sticky;top:0;background:#fff;z-index:2;padding:8px 0}.tabs button,.jump button,.nav button{border:1px solid #d7d1ea;background:#fff;border-radius:10px;padding:9px 12px;font:inherit;cursor:pointer}.tabs button.active{background:#5a3daa;color:#fff}.area{display:none}.area.active{display:block}.jump{max-height:150px;overflow:auto}.jump button.active{background:#eee9ff;border-color:#694db8}.qcard{display:none;border:1px solid #dedce8;border-radius:14px;padding:18px}.qcard.active{display:block}.qmeta{font-size:13px;color:#6b657a}.stem{font-size:19px;font-weight:700;margin:14px 0;white-space:pre-wrap}.visual{background:#eef6ff;border-left:4px solid #4f86c6;padding:12px;border-radius:8px;margin:12px 0;white-space:pre-wrap}.choice{display:block;width:100%;text-align:left;border:1px solid #d9d5e4;background:#fff;border-radius:11px;padding:12px;margin:8px 0;font:inherit}.choice.selected{border:2px solid #6547b5;background:#f0ecff}.feedback{display:none;background:#f4f1fa;border-radius:12px;padding:15px;margin-top:16px;white-space:pre-wrap}.feedback.show{display:block}.scope,.excluded{background:#fff2d7;padding:8px;border-radius:8px;margin:8px 0}.entry{width:100%;min-height:90px;border:1px solid #d9d5e4;border-radius:10px;padding:10px;font:inherit}.nav{justify-content:space-between}.source{font-size:13px;color:#6e6878;margin-top:10px}.exp{margin-top:8px}.opt-exp{border-top:1px dashed #d8d2e5;padding-top:8px;margin-top:8px}.reset{margin-top:10px;border:1px solid #d7d1ea;background:#fff;border-radius:10px;padding:9px 12px;font:inherit}@media(max-width:600px){main{padding:6px}.qcard{padding:13px}.stem{font-size:18px}.tabs button{padding:8px 10px}}
+
+/* v2: JavaScript-free interaction for iOS/ChatGPT file preview */
+.tabs a,.jump a,.nav a,.reset-area{border:1px solid #d7d1ea;background:#fff;border-radius:10px;padding:9px 12px;font:inherit;cursor:pointer;color:inherit;text-decoration:none;display:inline-block}
+.tabs a.active{background:#5a3daa;color:#fff}.jump a.active{background:#eee9ff;border-color:#694db8}
+.choice-wrap{position:relative;margin:8px 0}.choice-input{position:absolute;opacity:0;pointer-events:none}.choice-wrap .choice{margin:0;cursor:pointer}
+.choice-wrap:has(.choice-input:checked) .choice{border:2px solid #6547b5;background:#f0ecff}
+.qcard:has(.choice-input:checked) .feedback{display:block}
+.gradebox{display:none;border-radius:10px;padding:10px 12px;margin-top:12px;font-weight:800}
+.qcard:has(.choice-input:checked) .gradebox{display:block}
+.qcard:has(.correct-input:checked) .grade-correct{display:block}.qcard:has(.correct-input:checked) .grade-wrong{display:none}
+.qcard:has(.wrong-input:checked) .grade-correct{display:none}.qcard:has(.wrong-input:checked) .grade-wrong{display:block}
+.gradebox:has(.grade-correct){background:#eef9f0;border:1px solid #8ecb9a}.grade-excluded{background:#fff7df;border:1px solid #e2c66f;color:#725814}
+.qcard:has(.choice-input:checked) .correct-wrap .choice{border-color:#2e8b57;background:#eef9f0}
+.qcard:has(.wrong-input:checked) .wrong-wrap:has(.choice-input:checked) .choice{border-color:#c84a4a;background:#fff0f0}
+.reveal-toggle{position:absolute;opacity:0;pointer-events:none}.qcard:has(.reveal-toggle:checked) .feedback{display:block}.reveal{display:inline-block;cursor:pointer}
+/* No-JS card navigation */
+.questions:has(.qcard:target) > .qcard.active{display:none}.qcard:target{display:block!important;scroll-margin-top:110px}
+/* No-JS area/tab navigation, including when a question inside the area is targeted */
+.topic:has(> .area:target) > .area{display:none}.topic > .area:target{display:block!important}
+.topic:has(> .area .qcard:target) > .area{display:none}.topic > .area:has(.qcard:target){display:block!important}
+.area:target .qcard.active{display:block}
+@supports not selector(:has(*)){
+  .area{display:block!important}.qcard{display:block!important}.feedback{display:block!important}
+}
+
+/* multi-answer (복수정답) cards */
+.multi-input{position:absolute;opacity:0;pointer-events:none}.choice-wrap .multi-input+.choice{margin:0;cursor:pointer}
+.choice-wrap:has(.multi-input:checked) .choice{border:2px solid #6547b5;background:#f0ecff}
+.qcard.multi:has(.reveal-toggle:checked) .gradebox{display:block}
+.qcard.multi .grade-correct{display:none}.qcard.multi .grade-wrong{display:block}
+.qcard.multi:not(:has(.mc-correct:not(:checked))):not(:has(.mc-wrong:checked)) .grade-correct{display:block}
+.qcard.multi:not(:has(.mc-correct:not(:checked))):not(:has(.mc-wrong:checked)) .grade-wrong{display:none}
+.qcard.multi:has(.reveal-toggle:checked) .mc-correct+.choice{border-color:#2e8b57;background:#eef9f0}
+.qcard.multi:has(.reveal-toggle:checked) .mc-wrong:checked+.choice{border-color:#c84a4a;background:#fff0f0}
+.visual img{max-width:100%}
+</style><script type="text/plain" id="claude-handoff" style="display:none">
+
+CLAUDE HANDOFF — Somed 신경학 문풀앱 2 (2026-09-28 2교시~)
+
+[목적]
+이 파일은 기존 최종 문풀앱 전체 데이터와 UI를 포함한다. 사용자가 Claude에서 후속 수정/검수/기능 추가를 이어가려는 경우, 이 파일을 기준본으로 삼아 "처음부터 재생성하지 말고" 현재 데이터를 보존한 채 수정한다.
+
+[현재 상태]
+- 1번 앱(https://claude.ai/artifact/1Hc4jiqbWcBXmF1ox3PcDS, 9/15~9/28 1교시)이 16MB 한도에 가까워 9/28 2교시 수업부터 이 2번 앱에 넣는다.
+- 소스: 레포 quiz-app/neuro2 (1번 앱 소스 quiz-app/neuro는 건드리지 않음). 복습 표시 저장 키 neuro2-app-marks-v1.
+
+[문제 형식 — 사용자 지정]
+- 야마: 원본이 주관식인 문항만 주관식 유지(원문 보존). 원본 객관식은 객관식.
+- 야마 변형/티야/탈야: 전부 객관식(5지선다). 탈야를 빈칸 쓰기 주관식으로 만들지 않는다.
+
+[절대 유지할 앱 구조]
+교수님 → 날짜/주제 → 야마/야마 변형/티야/탈야 → 문제번호
+검색형 UI로 바꾸지 않는다.
+
+[자료 우선순위]
+1. 강의록 = 현재 수업 범위/내용
+2. STT = 교수님 실제 발언/강조의 유일한 근거
+3. 야마 = 실제 기출 원문/정답/출제 스타일
+예외: 9/21 고명환 교수님 야첵은 사용자가 명시적으로 강의록처럼 포함하라고 지정했으므로 강의록 계열 자료로 취급.
+
+[반드시 지킬 규칙]
+- 야마는 실제 문제 원문 + 실제 선지만 사용. 선배 해설/복원자 코멘트/참고/담당교수/해설 문장이 선지로 섞이면 안 됨.
+- 야마 제공 정답이 이상하거나 자료와 충돌해도 임의 수정 금지. 충돌/복수정답/정보부족이면 사용자에게 확인.
+- 야마 변형 수 = 범위 내 야마 수.
+- 탈야 수 = 범위 내 야마 수.
+- 티야는 STT에서 조금이라도 강조된 시험 가능 포인트를 빠짐없이 문제화. 수 제한 없음.
+- 교수님이 말했다/강조했다는 표현은 반드시 STT 근거가 있을 때만 사용.
+- 문제는 문제 자체만 보고 풀 수 있어야 함. “강의록에서 확인되는 것은?”, “STT에서 강조한 것은?” 같은 메타형 문제 금지.
+- 표/그림/CT/MRI/EEG/VFSS 등 시각자료가 있어야 풀 수 있는 문제는 원본 이미지를 앱에 직접 포함하거나, 정답을 노출하지 않는 범위에서 필수 시각 소견을 문제에 서술. “원본 시각자료 필요—건너뛰기”로 때우지 말 것. 단, 원본 자체가 복원 불완전한 과거 문제는 명확히 채점 제외로 표시 가능.
+- 정답 선택 전: 문제+선지만 표시.
+- 정답 선택 후: 정오표시, 정답, 정답근거, 모든 오답 선지 해설, 관련 TY/STT/야마 포인트 표시.
+- 정답 선지만 유난히 길거나 자세하지 않게 선지 균형 유지.
+- 하나의 최선 정답이 명확해야 함.
+
+[이전 버전에서 실제로 발생했던 오류 — 재발 금지]
+1. 삼킴곤란 야마에서 다른 문제 선지가 섞임.
+2. 선배 해설이 객관식 선지로 통째로 들어감.
+3. 신경심리/표 문제에서 표·그림이 빠져 문제를 못 풂.
+4. 티야에 다른 수업 STT 조각이 섞임.
+5. “강의록에서 확인되는 것은?” 같은 메타형 티야 대량 생성.
+6. OCR 찌꺼기로 탈야 문항이 생성됨.
+7. CT/MRI/EEG 영상형 문제에서 시각자료 없이 문제만 남음.
+
+[후속 작업 방법]
+- 사용자가 특정 문제를 지적하면 해당 문제만 보지 말고 같은 유형의 오류를 앱 전체에서 함께 탐지.
+- 이 HTML에 포함된 기존 데이터 구조/ID/목차/인터랙션은 가능한 한 유지하면서 in-place 수정.
+- 원본 자료가 새로 제공되면 그 자료를 우선 대조하고, 근거 없는 일반지식으로 조용히 보완하지 말 것.
+- 최종 출력 전 아래 15항목을 반드시 다시 점검.
+
+[문풀앱 프롬프트 원문]
+역할
+현재 교수님의 해당 수업을 시험 대비하기 위한 인터랙티브 문제풀이 앱을 생성한다.
+
+문제 제작의 근거 자료:
+1. 강의록
+2. 야마(기출문제 원문 + 정답)
+3. STT
+
+문제풀이 앱은 다음 네 영역으로 구성한다.
+1. 야마
+2. 야마 변형
+3. 티야
+4. 탈야 대비
+
+1. 전체 문제 형식
+모든 문제는 기본적으로 객관식으로 제작한다.
+사용자가 명시적으로 주관식을 요청한 경우에만 주관식 문제를 제작한다.
+사용자가 별도로 요청하지 않았다면 주관식 문제를 섞지 않는다.
+객관식은 실제 의대 시험처럼 하나의 최선의 정답을 고르는 형식을 기본으로 한다.
+
+2. 야마
+제공된 야마(기출)를 문제풀이 앱에 포함한다.
+야마를 임의로 제외하지 않는다.
+현재 수업 범위에 맞지 않는 야마가 존재하는 경우 해당 문제 위에 [수업범위 외]라고 명확히 표시한다.
+수업 범위 밖이라는 이유만으로 야마 자체를 앱에서 삭제하지 않는다.
+단, 해당 문제는 이후 야마 변형 및 탈야 문제 수 계산에서는 제외한다.
+야마 원문과 제공된 정답을 기준으로 문제를 구성한다.
+
+선배 복기 또는 제공된 정답이 이상하거나 강의 자료와 충돌하는 경우 AI가 임의로 정답을 수정하지 않는다.
+다음과 같은 경우 앱 생성 전에 사용자에게 먼저 질문한다.
+제공된 정답이 강의 내용과 명백하게 충돌
+선배 복기 자체에 오류가 의심됨
+두 개 이상의 정답이 가능해 보임
+문제 정보가 부족함
+문제 또는 정답이 이상함
+사용자의 확인 없이 임의로 정답을 바꾸지 않는다.
+
+3. 야마 변형
+야마에서 실제 출제된 개념을 기반으로 새로운 객관식 문제를 제작한다.
+문항 수는 현재 수업 범위에 해당하는 야마 문항 수와 동일하게 만든다.
+수업 범위에 맞지 않는 야마는 야마 변형 문제 제작 시 제외한다.
+단순히 숫자나 단어 하나만 바꾼 문제를 반복 생성하지 않는다.
+실제 시험에서 같은 개념이 다른 형태로 출제되는 상황을 대비하도록 변형한다.
+
+가능한 변형 예:
+임상 상황 변경
+선지 구성 변경
+정답/오답 관점 변경
+진단 → 치료
+치료 → 진단
+원인 → 결과
+결과 → 원인
+옳은 것 → 옳지 않은 것
+여러 개념을 연결한 응용
+
+단, 원본 수업 자료가 뒷받침하지 않는 내용을 임의로 추가하지 않는다.
+
+4. 티야 — 최우선
+티야 영역을 문제풀이 앱에서 가장 중요하게 취급한다.
+STT에서 교수님이 조금이라도 강조한 시험 가능한 포인트를 전부 문제화한다.
+문제 수 제한 없음.
+야마 문항 수와 관계없이 필요한 만큼 모두 만든다.
+
+다음과 같은 내용은 적극적으로 문제화한다.
+[TY!!] 강한 강조
+일반 TY
+“시험에 나와요”
+“시험 문제”
+“출제”
+“여기서 문제”
+“꼭 외우세요”
+“반드시 기억”
+“중요중요”
+“진짜 중요”
+“이게 포인트예요”
+“이게 핵심이에요”
+“자 여기”
+“여기 보세요”
+“이거 중요해요”
+“알았죠?”
+“이해했죠?”
+“다시 한번”
+“한 번 더”
+“반복해서”
+동일 개념/단어가 STT에서 반복되는 경우
+교수님이 사례를 들어 강조한 내용
+시험 관련성이 있는 교수님 예시
+
+STT에서 서로 다른 시험 포인트가 여러 개라면 문제 수를 줄이기 위해 억지로 하나의 문제로 합치지 않는다.
+각 포인트를 제대로 확인할 수 있도록 필요한 만큼 문제를 만든다.
+티야 문제의 목표는 STT에서 조금이라도 강조된 시험 가능한 내용을 하나도 놓치지 않는 것이다.
+
+5. 탈야 대비
+야마에는 직접 출제되지 않았지만 현재 수업 범위에서 시험에 나올 가능성이 있는 내용을 문제화한다.
+문항 수는 현재 수업 범위에 해당하는 야마 문항 수와 동일하게 만든다.
+수업 범위 밖 야마는 탈야 문제 수 계산에서 제외한다.
+
+다음 내용을 활용한다.
+야마에 나오지 않은 강의록 내용
+야마에 나오지 않은 STT 내용
+개념 응용
+약간 심화된 문제
+교수님이 설명했지만 기존 야마에는 없는 내용
+
+야마에 이미 나온 내용을 단순 반복하는 문제가 되지 않도록 한다.
+
+6. 자료별 역할 구분
+강의록 = 현재 수업 범위와 기본 강의 내용을 판단하는 핵심 자료.
+STT = 교수님이 실제로 한 말과 강조 정도를 판단하는 유일한 근거.
+야마 = 실제 과거 출제 내용과 출제 스타일을 판단하는 자료.
+강의록이나 야마의 내용을 STT 발언처럼 표현하지 않는다.
+
+7. 객관식 선지 제작 규칙
+정답이 선지 길이만으로 티 나지 않게 한다.
+정답만 유난히 길거나 자세하게 작성하지 않는다.
+정답과 오답 선지의 길이, 문장 구조, 구체성, 표현 방식을 최대한 균형 있게 만든다.
+오답도 실제 시험에서 헷갈릴 수 있도록 그럴듯하게 만든다.
+그러나 억지로 애매한 문제를 만들지 않는다.
+한 문제에서는 하나의 정답이 명확하게 결정되어야 한다.
+복수정답 가능성이 있거나 논란이 생길 수 있는 문제를 임의로 만들지 않는다.
+
+8. 문제 풀이 인터랙션
+문제를 처음 보여줄 때는 문제와 객관식 선지만 보여준다.
+정답과 해설을 처음부터 보여주지 않는다.
+
+사용자가 선지를 선택한 후에만 다음 내용을 표시한다.
+1. 정답/오답 여부
+2. 정답
+3. 해설
+4. 각 오답 선지가 틀린 이유
+5. 관련 TY/STT/야마 포인트
+
+선지를 선택하기 전에는 정답이나 해설을 볼 수 없도록 한다.
+
+9. 해설 규칙
+모든 문제에 해설을 제공한다.
+가능하면 다음을 포함한다.
+왜 정답인지
+왜 나머지 선지는 틀렸는지
+관련 강의록 개념
+관련 STT
+TY 여부
+야마와의 관계
+시험에서 어떻게 변형될 수 있는지
+
+단, 교수님 발언이라고 표시하는 내용은 반드시 STT에 실제 근거가 있어야 한다.
+
+10. 수업 범위 판정
+야마가 현재 수업 범위에 해당하는지 강의록과 대조하여 판단한다.
+명백히 범위 밖인 경우 [수업범위 외] 표시.
+
+수업 범위 밖 야마는:
+야마 영역에서는 그대로 확인 가능
+야마 변형 제작에서는 제외
+야마 변형 문제 수 계산에서 제외
+탈야 문제 수 계산에서 제외
+
+11. 오류 및 이상 정답 처리
+다음과 같은 경우 AI가 임의로 수정해서 앱을 완성하지 않는다.
+야마 정답이 강의 내용과 명백히 충돌
+선배 복기가 이상함
+문제 자체에 오류 가능성이 있음
+정답이 두 개 이상 가능해 보임
+문제 정보가 부족함
+
+해당 문제와 문제가 되는 부분을 사용자에게 먼저 알려 확인받은 후 진행한다.
+
+12. 앱 UI 필수 동작
+각 문제는 실제로 선택 가능한 객관식 선지를 가진다.
+
+선택 전:
+문제 + 선지만 표시
+
+선택 후:
+사용자가 선택한 선지 표시
+정답/오답 표시
+정답 공개
+해설 공개
+각 오답 선지 설명 공개
+
+다음 문제로 이동할 수 있어야 한다.
+
+가능하면 다음 기능을 포함한다.
+현재 문제 번호 / 전체 문제 수
+이전 문제
+다음 문제
+야마 / 야마 변형 / 티야 / 탈야 영역 이동
+맞힌 문제 수
+틀린 문제 수
+다시 풀기
+
+13. 문제풀이 앱 최종 검수
+앱을 최종 제공하기 전에 반드시 전수 검수한다.
+1. 야마가 누락되지 않았는가?
+2. 수업 범위 밖 야마가 [수업범위 외]로 표시됐는가?
+3. 범위 내 야마 수를 정확히 계산했는가?
+4. 야마 변형 문항 수 = 범위 내 야마 문항 수인가?
+5. STT에서 조금이라도 강조된 시험 가능한 포인트가 티야에 전부 반영됐는가?
+6. 티야 문제 수를 임의로 제한하지 않았는가?
+7. 탈야 문항 수 = 범위 내 야마 문항 수인가?
+8. 탈야가 단순 야마 반복이 아닌가?
+9. 모든 문제가 객관식인가? (사용자가 주관식을 요청한 경우 제외)
+10. 정답 선지만 길거나 자세해서 답이 노출되지 않는가?
+11. 모든 문제의 정답이 하나로 명확한가?
+12. 사용자가 선택하기 전에 정답/해설이 노출되지 않는가?
+13. 선택 후 정답/해설/오답 이유가 정상적으로 표시되는가?
+14. 이상하거나 충돌하는 야마 정답을 임의 수정하지 않았는가?
+15. 교수님 발언/강조라고 표시한 내용이 실제 STT에 근거하는가?
+
+하나라도 충족하지 않으면 수정한 뒤 최종 앱을 제공한다.
+
+[Claude에게]
+이 파일을 읽었다면 먼저 사용자에게 현재 앱을 처음부터 다시 만들지 않고 이 파일을 기준으로 이어서 수정하겠다고 한 줄로 확인한 뒤 작업한다.
+
+</script>
+</head>
