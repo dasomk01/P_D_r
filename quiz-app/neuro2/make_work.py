@@ -23,6 +23,10 @@ def topic_html(t):
   for i,q in enumerate(m.YAMA,1):
     cid=f'{t}-area-yama-q-{i:03d}'
     if q.get('prof') and q['prof']!=T['prof']: yprof[f'{t}|q-{i:03d}']=q['prof']
+    if q.get('subj'):  # 원본 주관식 야마는 주관식 그대로
+      f=dict(meta=f'야마 · {i}/{N} · {q["meta"]}',scope=bool(q.get('scope')),subj=True,stem=q['stem'],visual=q.get('visual'),caveat=q.get('caveat'),
+             keep_excluded=q.get('keep_excluded',False),ans=[],choices=[],answer_text=q['answer_text'],basis=q['basis'],extra=None,nav='<div class="nav"></div>')
+      cards['yama'].append(f'<article class="qcard{" active" if i==1 else ""}" data-qcard="{i-1}" id="{cid}">'+build(cid,f)+'</article>'); continue
     cards['yama'].append(card(cid,i,dict(meta=f'야마 · {i}/{N} · {q["meta"]}',stem=q['stem'],choices=q['choices'],ans=[q['ans']],
       basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat'),scope=bool(q.get('scope'))),n=None))
   N=len(m.VAR)
