@@ -21,7 +21,7 @@ def same(a,b):
   sc=sum(max(R(x,y) for y in b['ch']) for x in a['ch'])/len(a['ch'])
   return sc>=0.8
 # 같은 case(선지만 다르게 복원)라 자동 판정에서 빠지는 쌍을 수동 병합
-MANUAL={'topic-027-area-yama-q-005':['topic-027-area-yama-q-006'],'topic-028-area-yama-q-003':['topic-028-area-yama-q-006'],'topic-029-area-yama-q-003':['topic-029-area-yama-q-005'],'topic-030-area-yama-q-012':['topic-030-area-yama-q-014'],'topic-030-area-yama-q-015':['topic-030-area-yama-q-017'],'topic-030-area-yama-q-020':['topic-030-area-yama-q-023']}
+MANUAL={'topic-027-area-yama-q-005':['topic-027-area-yama-q-006'],'topic-028-area-yama-q-003':['topic-028-area-yama-q-006'],'topic-029-area-yama-q-003':['topic-029-area-yama-q-005'],'topic-030-area-yama-q-012':['topic-030-area-yama-q-014'],'topic-030-area-yama-q-015':['topic-030-area-yama-q-017'],'topic-030-area-yama-q-020':['topic-030-area-yama-q-023'],'topic-031-area-yama-q-011':['topic-031-area-yama-q-025'],'topic-031-area-yama-q-032':['topic-031-area-yama-q-041'],'topic-031-area-yama-q-029':['topic-031-area-yama-q-040','topic-031-area-yama-q-052'],'topic-031-area-yama-q-028':['topic-031-area-yama-q-042','topic-031-area-yama-q-050'],'topic-031-area-yama-q-034':['topic-031-area-yama-q-030'],'topic-031-area-yama-q-033':['topic-031-area-yama-q-047'],'topic-031-area-yama-q-013':['topic-031-area-yama-q-027','topic-031-area-yama-q-057'],'topic-031-area-yama-q-014':['topic-031-area-yama-q-058'],'topic-031-area-yama-q-056':['topic-031-area-yama-q-059']}
 def groups(s):
   cs=cards(s); G=[]
   by=collections.defaultdict(list)
