@@ -20,8 +20,10 @@ def same(a,b):
   if R(a['ans'],b['ans'])<0.85: return False
   sc=sum(max(R(x,y) for y in b['ch']) for x in a['ch'])/len(a['ch'])
   return sc>=0.8
+# 자동 판정은 비슷하지만 다른 문제(축외 vs 축내 고르기)
+NEVER={frozenset(('topic-033-area-yama-q-048','topic-033-area-yama-q-052'))}
 # 같은 case(선지만 다르게 복원)라 자동 판정에서 빠지는 쌍을 수동 병합
-MANUAL={'topic-027-area-yama-q-005':['topic-027-area-yama-q-006'],'topic-028-area-yama-q-003':['topic-028-area-yama-q-006'],'topic-029-area-yama-q-003':['topic-029-area-yama-q-005'],'topic-030-area-yama-q-012':['topic-030-area-yama-q-014'],'topic-030-area-yama-q-015':['topic-030-area-yama-q-017'],'topic-030-area-yama-q-020':['topic-030-area-yama-q-023'],'topic-031-area-yama-q-011':['topic-031-area-yama-q-025'],'topic-031-area-yama-q-032':['topic-031-area-yama-q-041'],'topic-031-area-yama-q-029':['topic-031-area-yama-q-040','topic-031-area-yama-q-052'],'topic-031-area-yama-q-028':['topic-031-area-yama-q-042','topic-031-area-yama-q-050'],'topic-031-area-yama-q-034':['topic-031-area-yama-q-030'],'topic-031-area-yama-q-033':['topic-031-area-yama-q-047'],'topic-031-area-yama-q-013':['topic-031-area-yama-q-027','topic-031-area-yama-q-057'],'topic-031-area-yama-q-014':['topic-031-area-yama-q-058'],'topic-031-area-yama-q-056':['topic-031-area-yama-q-059'],'topic-032-area-yama-q-009':['topic-032-area-yama-q-011']}
+MANUAL={'topic-027-area-yama-q-005':['topic-027-area-yama-q-006'],'topic-028-area-yama-q-003':['topic-028-area-yama-q-006'],'topic-029-area-yama-q-003':['topic-029-area-yama-q-005'],'topic-030-area-yama-q-012':['topic-030-area-yama-q-014'],'topic-030-area-yama-q-015':['topic-030-area-yama-q-017'],'topic-030-area-yama-q-020':['topic-030-area-yama-q-023'],'topic-031-area-yama-q-011':['topic-031-area-yama-q-025'],'topic-031-area-yama-q-032':['topic-031-area-yama-q-041'],'topic-031-area-yama-q-029':['topic-031-area-yama-q-040','topic-031-area-yama-q-052'],'topic-031-area-yama-q-028':['topic-031-area-yama-q-042','topic-031-area-yama-q-050'],'topic-031-area-yama-q-034':['topic-031-area-yama-q-030'],'topic-031-area-yama-q-033':['topic-031-area-yama-q-047'],'topic-031-area-yama-q-013':['topic-031-area-yama-q-027','topic-031-area-yama-q-057'],'topic-031-area-yama-q-014':['topic-031-area-yama-q-058'],'topic-031-area-yama-q-056':['topic-031-area-yama-q-059'],'topic-032-area-yama-q-009':['topic-032-area-yama-q-011'],'topic-033-area-yama-q-011':['topic-033-area-yama-q-016','topic-033-area-yama-q-021'],'topic-033-area-yama-q-017':['topic-033-area-yama-q-022','topic-033-area-yama-q-024'],'topic-033-area-yama-q-018':['topic-033-area-yama-q-023','topic-033-area-yama-q-025'],'topic-033-area-yama-q-015':['topic-033-area-yama-q-026'],'topic-033-area-yama-q-008':['topic-033-area-yama-q-027','topic-033-area-yama-q-030','topic-033-area-yama-q-038','topic-033-area-yama-q-042'],'topic-033-area-yama-q-013':['topic-033-area-yama-q-028'],'topic-033-area-yama-q-014':['topic-033-area-yama-q-029'],'topic-033-area-yama-q-012':['topic-033-area-yama-q-033'],'topic-033-area-yama-q-031':['topic-033-area-yama-q-035','topic-033-area-yama-q-040'],'topic-033-area-yama-q-006':['topic-033-area-yama-q-036','topic-033-area-yama-q-041'],'topic-033-area-yama-q-039':['topic-033-area-yama-q-049'],'topic-033-area-yama-q-045':['topic-033-area-yama-q-050'],'topic-033-area-yama-q-051':['topic-033-area-yama-q-053']}
 def groups(s):
   cs=cards(s); G=[]
   by=collections.defaultdict(list)
@@ -33,7 +35,7 @@ def groups(s):
       g=[a]
       for j in range(i+1,len(L)):
         if j in used or not L[j]['yl']: continue
-        if same(a,L[j]): g.append(L[j]); used.add(j)
+        if same(a,L[j]) and frozenset((a['cid'],L[j]['cid'])) not in NEVER: g.append(L[j]); used.add(j)
       used.add(i)
       if len(g)>1: G.append(g)
   # 언어만 다른(한글/영문) 같은 문제 수동 병합

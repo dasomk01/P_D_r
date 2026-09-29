@@ -14,7 +14,7 @@ def card(cid,i,f,n=5):
   """n=None: 선지 수 자유(선지 일부만 복원된 야마 원문)."""
   f=dict(dict(scope=False,subj=False,visual=None,extra=None,caveat=None,nav='<div class="nav"></div>'),**f)
   k=len(f['choices']); assert k==len(f['exps']) and (k==n if n else k>=2) and all(1<=a<=k for a in f['ans']),cid
-  return f'<article class="qcard{" active" if i==1 else ""}" data-qcard="{i-1}" id="{cid}">'+build(cid,f)+'</article>'
+  return f'<article class="qcard{" multi" if len(f["ans"])>1 else ""}{" active" if i==1 else ""}" data-qcard="{i-1}" id="{cid}">'+build(cid,f)+'</article>'
 yprof={}
 def topic_html(t):
   sp=importlib.util.spec_from_file_location(t,f'{D}/specs/{t}.py'); m=importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
@@ -27,8 +27,8 @@ def topic_html(t):
       f=dict(meta=f'야마 · {i}/{N} · {q["meta"]}',scope=bool(q.get('scope')),subj=True,stem=q['stem'],visual=q.get('visual'),caveat=q.get('caveat'),
              keep_excluded=q.get('keep_excluded',False),ans=[],choices=[],answer_text=q['answer_text'],basis=q['basis'],extra=None,nav='<div class="nav"></div>')
       cards['yama'].append(f'<article class="qcard{" active" if i==1 else ""}" data-qcard="{i-1}" id="{cid}">'+build(cid,f)+'</article>'); continue
-    cards['yama'].append(card(cid,i,dict(meta=f'야마 · {i}/{N} · {q["meta"]}',stem=q['stem'],choices=q['choices'],ans=[q['ans']],
-      basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat'),scope=bool(q.get('scope'))),n=None))
+    cards['yama'].append(card(cid,i,dict(meta=f'야마 · {i}/{N} · {q["meta"]}',stem=q['stem'],choices=q['choices'],ans=q['ans'] if isinstance(q['ans'],list) else [q['ans']],
+      basis=q['basis'],exps=q['exps'],visual=q.get('visual'),caveat=q.get('caveat'),scope=bool(q.get('scope')),keep_excluded=q.get('keep_excluded',False)),n=None))
   N=len(m.VAR)
   for i,q in enumerate(m.VAR,1):
     cid=f'{t}-area-variants-q-{i:03d}'
