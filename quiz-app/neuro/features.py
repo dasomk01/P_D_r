@@ -121,11 +121,18 @@ for m in re.finditer(r'<section class="area[^"]*" data-area-section="(\w+)" id="
   s=re.sub(r'(<a class="[^"]*" href="#'+m.group(2)+r'">'+AREA_NAME[m.group(1)]+r' )\d+',lambda k:k.group(1)+str(n),s,1)
 
 # ---- 3) 주제별 복습 모드 토글 ----
+s=re.sub(r'<article class="qcard([^"]*)"((?:(?!</article>).)*?class="scope">\[수업범위 외\])',lambda m:'<article class="qcard'+m.group(1)+' oos"'+m.group(2),s,flags=re.S)
+NSC={};NIN={}
+for m in re.finditer(r'<section class="area[^"]*" data-area-section="yama" id="(topic-\d+)-area-yama">(.*?)</section>',s,re.S):
+  arts=ART.findall(m.group(2)) if False else re.findall(r'<article.*?</article>',m.group(2),re.S)
+  NSC[m.group(1)]=sum(1 for a in arts if 'class="scope">[수업범위 외]' in a); NIN[m.group(1)]=len(arts)-NSC[m.group(1)]
 def topic_open(m):
   t=m.group(1)
   return (m.group(0)+f'<div class="review-bar"><input class="review-toggle" type="checkbox" id="{t}-review"/>'
           f'<label class="review-btn" for="{t}-review"><span class="rv-off">🔁 헷갈림·틀림만 다시 풀기</span><span class="rv-on">← 전체 문제로 돌아가기</span></label>'
-          f'<span class="review-count" data-topic="{t}"></span></div><div class="review-empty">이 주제에서 🟡 헷갈림·❌ 틀림으로 표시한 문제가 아직 없어요. 문제를 풀고 아래 "복습 표시"를 눌러 두세요.</div>')
+          f'<span class="review-count" data-topic="{t}"></span>'
+          +(f'<input class="scope-toggle" type="checkbox" id="{t}-inscope"/><label class="scope-btn" for="{t}-inscope"><span class="sc-off">📘 범위외 야마 빼고 풀기</span><span class="sc-on">← 전체 문제로 돌아가기</span></label><span class="scope-count">범위외 {NSC[t]}문항 제외 · 범위내 {NIN[t]}문항</span>' if NSC.get(t) else '')+'</div>'
+          f'<div class="review-empty">이 주제에서 🟡 헷갈림·❌ 틀림으로 표시한 문제가 아직 없어요. 문제를 풀고 아래 "복습 표시"를 눌러 두세요.</div>')
 s=re.sub(r'<details class="topic" id="(topic-\d+)"><summary>.*?</summary>',topic_open,s,flags=re.S)
 
 # ---- 4) CSS ----
@@ -188,6 +195,23 @@ css=f'''
 .topic:has(.review-toggle:checked) > .area[data-area-section="ty"]::before{{content:"티야"}}
 .topic:has(.review-toggle:checked) > .area[data-area-section="off"]::before{{content:"탈야"}}
 .topic:has(.review-toggle:checked):not(:has(.mk-q:checked)):not(:has(.mk-x:checked)) > .review-empty{{display:block}}
+.scope-toggle{{position:absolute;opacity:0;pointer-events:none}}
+.scope-btn{{border:1px solid #6f9be0;background:#f0f6ff;border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:700}}
+.scope-btn .sc-on{{display:none}}
+.scope-count{{font-size:13px;color:#6b6480}}
+.review-bar{{flex-wrap:wrap}}
+.topic:has(.scope-toggle:checked) .scope-btn{{background:#2f5fb0;color:#fff;border-color:#2f5fb0}}
+.topic:has(.scope-toggle:checked) .scope-btn .sc-on{{display:inline}}
+.topic:has(.scope-toggle:checked) .scope-btn .sc-off{{display:none}}
+.topic:has(.scope-toggle:checked) > .tabs,
+.topic:has(.scope-toggle:checked) .jump,
+.topic:has(.scope-toggle:checked) .reset-area,
+.topic:has(.scope-toggle:checked) .qcard .nav{{display:none!important}}
+.topic:has(.scope-toggle:checked) > .area{{display:none!important}}
+.topic:has(.scope-toggle:checked) > .area[data-area-section="yama"]{{display:block!important}}
+.topic:has(.scope-toggle:checked) > .area[data-area-section="yama"] .qcard{{display:block!important;margin-bottom:14px}}
+.topic:has(.scope-toggle:checked) > .area[data-area-section="yama"] .qcard.oos{{display:none!important}}
+.topic:has(.scope-toggle:checked) > .area[data-area-section="yama"]::before{{content:"야마 (범위외 제외)";display:block;font-weight:800;color:#2f5fb0;margin:14px 0 6px}}
 '''
 i=s.rfind('</style>'); s=s[:i]+css+s[i:]
 
