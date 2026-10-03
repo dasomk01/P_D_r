@@ -1,0 +1,88 @@
+<style>
+#wn-fab{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:50;border:0;border-radius:999px;padding:11px 16px;background:#c0392b;color:#fff;font:700 15px/1 inherit;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer}
+#wn-panel{display:none;position:fixed;inset:0;z-index:60;background:rgba(20,18,40,.45)}
+#wn-panel.on{display:block}
+#wn-box{position:absolute;left:0;right:0;bottom:0;max-height:88vh;overflow:auto;background:#fff;border-radius:16px 16px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));max-width:760px;margin:auto}
+#wn-box h2{margin:0 0 6px;font-size:19px}
+#wn-box .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+#wn-box input[type=text]{flex:1;min-width:140px;padding:9px 10px;border:1px solid #c9c4dc;border-radius:10px;font:inherit}
+#wn-box button{border:1px solid #c9c4dc;background:#f6f4ff;border-radius:10px;padding:9px 12px;font:600 14px/1.2 inherit;cursor:pointer;color:#202139}
+#wn-box button.pri{background:#4b3296;color:#fff;border-color:#4b3296}
+#wn-box .note{font-size:13px;color:#6b6480}
+#wn-box .st{font-size:13px;color:#2f7a3a;min-height:1em}
+#wn-list{list-style:none;padding:0;margin:8px 0}
+#wn-list li{border-top:1px solid #eee;padding:8px 2px;font-size:14px}
+#wn-list li a{color:#4b3296;font-weight:700;text-decoration:none}
+#wn-list .tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:999px;margin-right:4px;background:#fdecea;color:#b0392b}
+#wn-list .tag.q{background:#fff6dc;color:#8a6a00}
+#wn-list .tag.ok{background:#e6f5e9;color:#2f7a3a}
+#wn-out{width:100%;height:140px;display:none;font:12px/1.4 ui-monospace,monospace}
+</style>
+<button id="wn-fab" type="button">📒 내 오답 <span id="wn-n">0</span></button>
+<div id="wn-panel"><div id="wn-box">
+<h2>📒 내 오답노트</h2>
+<div class="note">문제에서 고른 답이 틀리면 자동으로 여기 쌓여요. ❌틀림·🟡헷갈림으로 표시한 문제도 함께 들어가요. 기록은 이 브라우저에 저장돼요.</div>
+<div class="row"><input type="text" id="wn-name" placeholder="이름 (예: 김다솜)" maxlength="30"/></div>
+<div class="row"><button class="pri" id="wn-copy" type="button">📋 AI 분석용으로 전체 복사</button><button id="wn-save" type="button" style="display:none">☁️ Claude가 읽을 수 있게 저장</button></div>
+<div class="st" id="wn-st"></div>
+<textarea id="wn-out" readonly></textarea>
+<div class="note">복사한 내용을 ChatGPT나 Claude 대화창에 그대로 붙여넣으면 분석 요청문까지 같이 들어가요.</div>
+<ul id="wn-list"></ul>
+<div class="row"><button id="wn-clear" type="button">오답 기록 모두 지우기</button><button id="wn-close" type="button">닫기</button></div>
+</div></div>
+<script>
+(function(){
+var KW='neuro-app-wrong-v1',KN='neuro-app-name',KM='neuro-app-marks-v5',W={};
+try{W=JSON.parse(localStorage.getItem(KW)||'{}')}catch(e){}
+function sv(){try{localStorage.setItem(KW,JSON.stringify(W))}catch(e){}}
+function marks(){try{return JSON.parse(localStorage.getItem(KM)||'{}')}catch(e){return{}}}
+function key(el){return el.getAttribute('data-k')||el.name}
+function cardOf(k){var el=document.querySelector('input.mk[data-k="'+k+'"]')||document.querySelector('input.mk[name="'+k+'"]');return el?el.closest('.qcard'):null}
+function txt(el){return el?el.textContent.replace(/\s+\n/g,'\n').replace(/[ \t]+/g,' ').trim():''}
+document.addEventListener('change',function(e){var t=e.target;if(!t.classList||!t.classList.contains('choice-input'))return;
+ var c=t.closest('.qcard');if(!c||!c.querySelector('.correct-input'))return;var mk=c.querySelector('input.mk');if(!mk)return;var k=key(mk);
+ var ok=t.classList.contains('correct-input'),r=W[k]||{w:0};r.c=+t.value;r.ok=ok;r.t=Date.now();if(!ok)r.w=(r.w||0)+1;
+ if(ok&&!r.w){delete W[k]}else W[k]=r;sv();upd();sched()});
+document.addEventListener('change',function(e){var t=e.target;if(t.classList&&t.classList.contains('mk'))setTimeout(function(){upd();sched()},0)});
+function items(){var m=marks(),ks={},out=[];Object.keys(W).forEach(function(k){if(W[k].w)ks[k]=1});Object.keys(m).forEach(function(k){if(m[k]==='x'||m[k]==='q')ks[k]=1});
+ Object.keys(ks).forEach(function(k){var c=cardOf(k);if(!c)return;var r=W[k]||{};out.push({k:k,c:c,r:r,m:m[k]||''})});
+ out.sort(function(a,b){return (b.r.t||0)-(a.r.t||0)});return out}
+function info(it){var c=it.c,top=c.closest('details.topic'),prof=top&&top.parentElement?top.parentElement.closest('details'):null,area=c.closest('.area');
+ var nm={yama:'야마',variants:'야마 변형',ty:'티야',off:'탈야'};var ans=[].map.call(c.querySelectorAll('.choice-input.correct-input,.multi-input.mc-correct'),function(x){return +x.value});
+ var ch=[].map.call(c.querySelectorAll('label.choice'),txt);var fb=c.querySelector('.feedback');var basis=fb?txt(fb.firstElementChild):'';
+ var ex=fb?[].map.call(fb.querySelectorAll('.opt-exp > div'),txt).join('\n'):'';var ai=fb?txt(fb.querySelector('.ai-est')):'';
+ return {id:c.id,topic:top?txt(top.querySelector('summary')):'',profGroup:prof?txt(prof.querySelector('summary')):'',area:area?nm[area.getAttribute('data-area-section')]||'':'',
+  meta:(function(q){return q?[].map.call(q.childNodes,function(n){return n.textContent.trim()}).filter(Boolean).join(' · '):''})(c.querySelector('.qmeta')),flags:[].map.call(c.querySelectorAll('.scope,.excluded'),txt).join(' / '),stem:txt(c.querySelector('.stem')),
+  hasImage:!!c.querySelector('.visual img'),choices:ch,answer:ans,mine:it.r.c||null,wrongCount:it.r.w||0,lastOk:!!it.r.ok,mark:it.m==='x'?'틀림':it.m==='q'?'헷갈림':'',
+  basis:basis.slice(0,1500),optExp:ex.slice(0,1200),aiEst:ai.slice(0,600)}}
+var PROMPT='아래는 신경학 블록 문풀앱에서 내가 틀리거나 헷갈린 문제 목록이야. 각 문제에 주제(수업 날짜·제목), 담당 교수 그룹, 영역(야마/야마 변형/티야/탈야), 출처 메타(출제 교수·연도·학습지 쪽), 범위외·복원불완전 표시, 문제, 선지, 정답, 내가 고른 답, 앱 해설이 들어 있어.\n\n다음 순서로 분석해 줘.\n1) 문제별 판정: 이 수업 내용(앱 해설의 강의록·STT·학습지 근거)만으로 풀 수 있는 문제인지 먼저 판정해. 풀 수 없거나 애매하면 이유를 구체적으로 적어 — 예: [수업범위 외], 출제 교수가 현재 담당 교수와 다름, 복원 불완전·선지 이상, 정답 논란(AI 추정 답변 존재), 사진 문제인데 근거가 사진에만 있음.\n2) 오답 원인: 내가 고른 답과 정답을 비교해서 어떤 개념을 헷갈렸는지 한 줄로.\n3) 약점 묶기: 같은 개념·주제·교수님별로 묶어서 내 약점 TOP 5를 빈도순으로.\n4) 보완: 약점마다 다시 볼 부분(주제·강의록/학습지 쪽), 꼭 외울 핵심 문장 1~3개, 헷갈린 개념 비교표가 필요하면 표로.\n5) 마지막에 "수업으로 풀 수 있는데 틀린 문제"만 모아서 우선 복습 순서를 정해 줘.\n추측은 추측이라고 표시하고, 해설에 없는 내용은 일반 교과서 기준이라고 밝혀 줘.\n';
+function exportText(){var L=items().map(info),nm=(document.getElementById('wn-name').value||'').trim();
+ var s=PROMPT+'\n이름: '+(nm||'(미입력)')+'\n문항 수: '+L.length+'\n';
+ L.forEach(function(x,i){s+='\n=== '+(i+1)+'. '+x.topic+' ['+x.area+'] ('+x.profGroup+') ===\n메타: '+x.meta+(x.flags?'\n표시: '+x.flags:'')+'\n문제: '+x.stem+(x.hasImage?' [사진 있음]':'')+'\n'+x.choices.join('\n')+'\n정답: '+x.answer.join(',')+' / 내 답: '+(x.mine||'-')+' / 틀린 횟수: '+x.wrongCount+(x.lastOk?' (마지막엔 맞힘)':'')+(x.mark?' / 내 표시: '+x.mark:'')+'\n해설: '+x.basis+(x.aiEst?'\nAI추정: '+x.aiEst:'')+(x.optExp?'\n선지해설: '+x.optExp:'')+'\n'});
+ return s}
+function upd(){var L=items();document.getElementById('wn-n').textContent=L.length;
+ if(!document.getElementById('wn-panel').classList.contains('on'))return;var ul=document.getElementById('wn-list');ul.textContent='';
+ L.forEach(function(it){var x=info(it),li=document.createElement('li');
+  var tg=document.createElement('span');tg.className='tag'+(x.lastOk?' ok':(!x.wrongCount?' q':''));tg.textContent=x.lastOk?'다시 맞힘':x.wrongCount?('틀림 '+x.wrongCount):x.mark;li.appendChild(tg);
+  var a=document.createElement('a');a.href='#'+x.id;a.textContent=x.topic+' · '+x.area;a.onclick=function(){document.getElementById('wn-panel').classList.remove('on');var d=it.c.closest('details.topic');if(d){d.open=true;var p=d.parentElement.closest('details');if(p)p.open=true}};li.appendChild(a);
+  var d=document.createElement('div');d.textContent=x.stem.slice(0,90)+(x.stem.length>90?'…':'');li.appendChild(d);ul.appendChild(li)});
+ if(!L.length){var li=document.createElement('li');li.textContent='아직 틀린 문제가 없어요.';ul.appendChild(li)}}
+var nmEl=document.getElementById('wn-name');try{nmEl.value=localStorage.getItem(KN)||''}catch(e){}
+nmEl.addEventListener('change',function(){try{localStorage.setItem(KN,nmEl.value.trim())}catch(e){}sched()});
+document.getElementById('wn-fab').onclick=function(){document.getElementById('wn-panel').classList.add('on');upd()};
+document.getElementById('wn-close').onclick=function(){document.getElementById('wn-panel').classList.remove('on')};
+document.getElementById('wn-panel').onclick=function(e){if(e.target.id==='wn-panel')this.classList.remove('on')};
+document.getElementById('wn-clear').onclick=function(){if(confirm('오답 기록을 모두 지울까요? (❌·🟡 복습 표시는 그대로 남아요)')){W={};sv();upd();sched()}};
+var st=document.getElementById('wn-st');
+document.getElementById('wn-copy').onclick=function(){var t=exportText(),o=document.getElementById('wn-out');
+ function fall(){o.style.display='block';o.value=t;o.focus();o.select();st.textContent='자동 복사가 막혀 있어요. 아래 칸을 길게 눌러 전체 선택 → 복사하세요.'}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){st.textContent='복사했어요 ('+items().length+'문항). AI 대화창에 붙여넣으세요.';o.style.display='none'},fall)}else fall()};
+var DB=null,UID=null,timer=null;
+function payload(){var L=items().slice(0,120).map(info);return {name:(nmEl.value||'').trim(),updatedAt:new Date().toISOString(),count:L.length,prompt:PROMPT,items:L.map(function(x){x.basis=x.basis.slice(0,700);x.optExp=x.optExp.slice(0,500);x.aiEst=x.aiEst.slice(0,300);return x})}}
+function push(){if(!DB||!UID)return Promise.resolve();var p=payload();if(!p.name){st.textContent='이름을 넣어야 Claude에서 "이름 오답"으로 찾을 수 있어요.';return Promise.resolve()}
+ return DB.doc('notes/'+UID).set(p).then(function(){st.textContent='저장했어요 · '+p.count+'문항 ('+new Date().toLocaleTimeString()+')'},function(e){st.textContent=e&&e.code==='invalid_argument'?'이 계정은 저장 권한이 없어요. 📋 복사 기능을 써 주세요.':'저장 실패: '+(e&&e.code||'')})}
+function sched(){if(!DB)return;clearTimeout(timer);timer=setTimeout(push,4000)}
+document.getElementById('wn-save').onclick=function(){clearTimeout(timer);push()};
+if(window.claude&&window.claude.use){Promise.all([window.claude.use('db'),window.claude.use('user')]).then(function(a){var db=a[0],u=a[1];if(!db||!u)return;return u.id().then(function(id){if(!id)return;DB=db;UID=id;document.getElementById('wn-save').style.display=''})}).catch(function(){})}
+upd();})();
+</script>

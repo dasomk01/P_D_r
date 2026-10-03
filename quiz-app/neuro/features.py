@@ -226,5 +226,6 @@ document.addEventListener('change',function(e){var t=e.target;if(t.classList&&t.
 count();})();
 </script>'''
 s=s.replace('</body>',js+'</body>',1)
+s=s.replace('</body>',open(D+'/wrongnote.html',encoding='utf-8').read()+'</body>',1)  # 오답노트
 open(D+'/final.html','w',encoding='utf-8').write(s)
 print('cards',len(ids),'size',len(s)/1e6)
