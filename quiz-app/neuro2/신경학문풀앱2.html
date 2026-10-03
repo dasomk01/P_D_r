@@ -9716,7 +9716,7 @@ function build(incQ,onlyIn){var out=[],n=0;
 var hd=document.querySelector('header');if(hd){
  var b=document.createElement('button');b.className='wn-open';b.type='button';hd.appendChild(b);
  var pnl=document.createElement('div');pnl.className='wn-panel';pnl.innerHTML='<div class="wn-box"><div class="wn-top"><b>📋 오답노트 내보내기</b><button type="button" class="wn-x">닫기</button></div><label><input type="checkbox" class="wn-q" checked/> 🟡 헷갈림도 포함</label> <label><input type="checkbox" class="wn-in"/> [수업범위 외] 문제 빼기</label><p class="wn-help">아래 글을 통째로 복사해서 ChatGPT나 Claude 대화창에 붙여넣으면 문제별 판정(수업으로 풀 수 있는지)·약점·보완점을 정리해 줘요. 복습 표시와 고른 답은 이 기기·이 브라우저에만 저장돼요.</p><textarea class="wn-t" readonly></textarea><div class="wn-btns"><button type="button" class="wn-copy">복사하기</button><button type="button" class="wn-dl">.txt로 저장</button><span class="wn-msg"></span></div></div>';document.body.appendChild(pnl);
- var ta=pnl.querySelector('.wn-t'),msg=pnl.querySelector('.wn-msg');
+ var ta=pnl.querySelector('.wn-t'),msg=pnl.querySelector('.wn-msg');if(location.protocol!=='file:')pnl.querySelector('.wn-dl').style.display='none';
  function lab(){var x=document.querySelectorAll('.mk-x:checked').length,q=document.querySelectorAll('.mk-q:checked').length;b.textContent='📋 오답노트 내보내기 (❌ '+x+' · 🟡 '+q+')'}
  function fill(){var r=build(pnl.querySelector('.wn-q').checked,pnl.querySelector('.wn-in').checked);ta.value=r.n?r.text:'아직 ❌ 틀림'+(pnl.querySelector('.wn-q').checked?'/🟡 헷갈림':'')+'으로 표시한 문제가 없어요. 문제 아래 "복습 표시"에서 표시해 두세요.';msg.textContent=r.n+'문항'}
  lab();document.addEventListener('change',function(e){if(e.target.classList&&e.target.classList.contains('mk'))lab()});
