@@ -33,14 +33,15 @@ OUT='오늘(10/2) 강의록·STT에 없는 내용'
 CP_OUT='뇌성마비 — 학습목표에는 있으나 STT 00:26 "6번 항목은 소아재활에서 디테일하게 배우셔서 하지 않겠다"'
 L4='2026.10.2 소아신경계질환 4교시 STT 29:49 강의 퀴즈'
 L3='2026.10.2 소아신경계질환 3교시 STT 40:01 강의 퀴즈'
+F1='2026.10.2 소아신경계질환 3교시 형성평가 1(강의 슬라이드 · STT 40:01)'
 
 YAMA=[
-Y(L3+' ①','18개월 남아가 발열 중 24시간 이내 1회의 전신 강직간대발작을 5분간 보였고, 발작 후 신경학적 결손은 없었다. 가장 가능성 높은 진단은?',
- ['단순 열성경련','복합 열성경련','세균성 수막염','영아연축','Dravet 증후군'],1,prof='김민선',basis='STT 40:01. '+FS,exps=['정답.','15분 이상·반복·국소징후.','수막자극·의식회복 지연 등.','연축 군집.','SCN1A, 반복·편측 발작.']),
-Y(L3+' ②','8개월 영아가 연속적인 상체 굴곡 연축을 군집으로 보이고 EEG에서 hypsarrhythmia가 관찰된다. 진단과 1차 치료 약제는?',
- ['West 증후군 — ACTH 또는 vigabatrin','Lennox-Gastaut — valproate','소아결신 — ethosuximide','BECTS — carbamazepine','Dravet — phenytoin'],1,prof='김민선',basis='STT 40:01–41:03. '+EPI,exps=['정답.','1–6세, 느린 극서파.','3 Hz.','centrotemporal spike.','Na 차단제 금기.']),
-Y(L3+' ③','소아의 경련이 6분째 지속 중이다. 1차 치료 약제는?',['Benzodiazepine(lorazepam·diazepam)','Phenytoin','Phenobarbital','Midazolam 지속 주입','Valproate'],1,prof='김민선',
- basis='STT 40:01–41:03. '+SE,exps=['정답.','2차.','2차.','불응성.','1차 아님.']),
+Y(F1+' Q1','18개월 남아가 발열 24시간 이내 전신 강직간대발작을 1회, 5분간 보였고 신경학적 결손이 없다. 가장 가능성 높은 진단은?',
+ ['단순 열성경련','복합 열성경련','세균성 수막염','영아연축','Dravet 증후군'],1,prof='김민선',basis='형성평가 1 Q1 슬라이드(보기 없는 단답형 — 앱에서는 5지선다로 구성) · STT 40:01: 단순 열성경련. '+FS,exps=['정답.','15분 이상·반복·국소징후.','수막자극·의식회복 지연 등.','연축 군집.','SCN1A, 반복·편측 발작.']),
+Y(F1+' Q2','연속적인 상체 굴곡 경련을 보이는 8개월 영아, EEG상 hypsarrhythmia. 진단과 1차 치료 약제는?',
+ ['West 증후군 — ACTH 또는 vigabatrin','Lennox-Gastaut — valproate','소아결신 — ethosuximide','BECTS — carbamazepine','Dravet — phenytoin'],1,prof='김민선',basis='형성평가 1 Q2 슬라이드(단답형 — 5지선다로 구성) · STT 40:01–41:03: 웨스트 증후군, ACTH나 vigabatrin. '+EPI,exps=['정답.','1–6세, 느린 극서파.','3 Hz.','centrotemporal spike.','Na 차단제 금기.']),
+Y(F1+' Q3','경련이 6분째 지속 중인 소아의 1차 치료 약제는?',['Benzodiazepine(lorazepam·diazepam)','Phenytoin','Phenobarbital','Midazolam 지속 주입','Valproate'],1,prof='김민선',
+ basis='형성평가 1 Q3 슬라이드(단답형 — 5지선다로 구성) · STT 41:03: benzodiazepine(lorazepam·diazepam). '+SE,exps=['정답.','2차.','2차.','불응성.','1차 아님.']),
 Y(L4+' ①','상행성 마비가 있는 소아의 CSF에서 백혈구는 정상인데 단백만 크게 증가해 있다(단백-세포 해리). 진단은?',['길랑-바레 증후군','세균성 수막염','바이러스 수막염','결핵성 수막염','정상'],1,prof='김민선',
  basis='STT 4교시 29:49–30:48: WBC·RBC가 정상인데 단백만 올라가 있는 건 굉장히 이상 — GBS. '+GBS,exps=['정답.','다핵구↑·당↓.','림프구↑.','림프구↑·당↓.','단백 상승.']),
 Y(L4+' ②','얼굴에 포도주색 반점이 있고 녹내장이 동반된 소아에서 가장 의심되는 질환은?',['Sturge-Weber 증후군','신경섬유종증 1형','결절성 경화증','Von Hippel-Lindau','Ataxia-telangiectasia'],1,prof='김민선',
@@ -484,9 +485,9 @@ def VR(key,stem,choices,ans,basis,exps,**k):
   d=dict(key=key if key.startswith('2026') else f'야마 {key}',stem=stem,choices=choices,ans=ans,basis=basis,exps=exps); d.update(k); return d
 def K(m): return m+' 변형'
 VAR=[
-VR(K(L3+' ①'),'단순 열성경련의 특징이 아닌 것은?',['전신 강직간대 발작','15분 미만 지속','24시간 내 1회','발작 후 Todd 마비','뇌전증 이행 약 1%'],4,FS,['단순.','단순.','단순.','정답 — 복합형.','단순.']),
-VR(K(L3+' ②'),'영아연축(West 증후군)의 3징후에 해당하지 않는 것은?',['연축 군집 발작','hypsarrhythmia','발달 퇴행','3 Hz 극서파','생후 3–9개월 호발'],4,EPI,['징후.','징후.','징후.','정답 — CAE.','역학.']),
-VR(K(L3+' ③'),'Benzodiazepine으로 조절되지 않는 소아 경련중첩증의 다음 단계 약물은?',['Phenytoin(fosphenytoin) 20 mg/kg','Ethosuximide','Carbamazepine 경구','Vigabatrin','ACTH'],1,SE,['정답.','결신.','경구 아님.','영아연축.','영아연축.']),
+VR(K(F1+' Q1'),'단순 열성경련의 특징이 아닌 것은?',['전신 강직간대 발작','15분 미만 지속','24시간 내 1회','발작 후 Todd 마비','뇌전증 이행 약 1%'],4,FS,['단순.','단순.','단순.','정답 — 복합형.','단순.']),
+VR(K(F1+' Q2'),'영아연축(West 증후군)의 3징후에 해당하지 않는 것은?',['연축 군집 발작','hypsarrhythmia','발달 퇴행','3 Hz 극서파','생후 3–9개월 호발'],4,EPI,['징후.','징후.','징후.','정답 — CAE.','역학.']),
+VR(K(F1+' Q3'),'Benzodiazepine으로 조절되지 않는 소아 경련중첩증의 다음 단계 약물은?',['Phenytoin(fosphenytoin) 20 mg/kg','Ethosuximide','Carbamazepine 경구','Vigabatrin','ACTH'],1,SE,['정답.','결신.','경구 아님.','영아연축.','영아연축.']),
 VR(K(L4+' ①'),'길랑-바레 증후군 치료로 효과가 없는 것은?',['IVIG','혈장교환술','스테로이드 단독','호흡 보조','자율신경 합병증 처치'],3,GBS,['효과.','효과.','정답.','대증.','대증.']),
 VR(K(L4+' ②'),'Sturge-Weber 증후군에 대한 설명으로 옳지 않은 것은?',['삼차신경 눈분지 분포 포도주색 반점','연수막 혈관종','녹내장','상염색체 우성 유전','반대쪽 부분발작과 편마비'],4,SWS,['옳다.','옳다.','옳다.','정답 — GNAQ 체세포 변이(sporadic).','옳다.']),
 VR(K(L4+' ③'),'결절성 경화증에서 가장 먼저(출생 시부터) 관찰되는 피부 소견은?',['저색소반점','안면 혈관섬유종','Shagreen patch','손발톱 주위 섬유종','café-au-lait 반점'],1,TSC,['정답.','4–6세.','허리·엉치.','사춘기 이후.','NF1.']),
