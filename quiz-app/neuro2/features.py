@@ -121,10 +121,22 @@ for m in re.finditer(r'<section class="area[^"]*" data-area-section="(\w+)" id="
   n=len(ART.findall(m.group(3)))
   s=re.sub(r'(<a class="[^"]*" href="#'+m.group(2)+r'">'+AREA_NAME[m.group(1)]+r' )\d+',lambda k:k.group(1)+str(n),s,1)
 
+# ---- 2-1) 범위 외 야마 표시(class) ----
+def mark_scope(m):
+  x=m.group(0)
+  if '-area-yama-' in m.group(1) and '[수업범위 외]' in x: x=x.replace('<article class="qcard','<article class="qcard out-scope',1)
+  return x
+s=ART.sub(mark_scope,s)
+def inscope_n(t):
+  sec=re.search(r'id="'+t+r'-area-yama">(.*?)</section>',s,re.S).group(1)
+  arts=re.findall(r'<article class="qcard([^"]*)"',sec)
+  return len(arts),sum(1 for a in arts if 'out-scope' not in a)
+
 # ---- 3) 주제별 복습 모드 토글 ----
 def topic_open(m):
-  t=m.group(1)
-  return (m.group(0)+f'<div class="review-bar"><input class="review-toggle" type="checkbox" id="{t}-review"/>'
+  t=m.group(1); tot,ins=inscope_n(t)
+  sc=(f'<input class="scope-toggle" type="checkbox" id="{t}-scope"/><label class="scope-btn" for="{t}-scope"><span class="sc-off">🎯 범위 외 야마 빼고 풀기 ({ins}문항)</span><span class="sc-on">← 야마 전체({tot}문항)로 돌아가기</span></label>') if ins<tot else ''
+  return (m.group(0)+f'<div class="review-bar">{sc}<input class="review-toggle" type="checkbox" id="{t}-review"/>'
           f'<label class="review-btn" for="{t}-review"><span class="rv-off">🔁 헷갈림·틀림만 다시 풀기</span><span class="rv-on">← 전체 문제로 돌아가기</span></label>'
           f'<span class="review-count" data-topic="{t}"></span></div><div class="review-empty">이 주제에서 🟡 헷갈림·❌ 틀림으로 표시한 문제가 아직 없어요. 문제를 풀고 아래 "복습 표시"를 눌러 두세요.</div>')
 s=re.sub(r'<details class="topic" id="(topic-\d+)"><summary>.*?</summary>',topic_open,s,flags=re.S)
@@ -189,6 +201,23 @@ css=f'''
 .topic:has(.review-toggle:checked) > .area[data-area-section="ty"]::before{{content:"티야"}}
 .topic:has(.review-toggle:checked) > .area[data-area-section="off"]::before{{content:"탈야"}}
 .topic:has(.review-toggle:checked):not(:has(.mk-q:checked)):not(:has(.mk-x:checked)) > .review-empty{{display:block}}
+/* 범위 외 야마 빼고 풀기: 수업범위 내 야마만 한 화면에 이어서 */
+.review-bar{{flex-wrap:wrap}}
+.scope-toggle{{position:absolute;opacity:0;pointer-events:none}}
+.scope-btn{{border:1px solid #62b37a;background:#f2fbf4;border-radius:10px;padding:8px 12px;cursor:pointer;font-weight:700}}
+.scope-btn .sc-on{{display:none}}
+.topic:has(.scope-toggle:checked) .scope-btn{{background:#2e7d4f;color:#fff;border-color:#2e7d4f}}
+.topic:has(.scope-toggle:checked) .scope-btn .sc-on{{display:inline}}
+.topic:has(.scope-toggle:checked) .scope-btn .sc-off{{display:none}}
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) > .tabs,
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) .jump,
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) .reset-area,
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) .qcard .nav{{display:none!important}}
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) > .area{{display:none!important}}
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) > .area[data-area-section="yama"]{{display:block!important}}
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) > .area[data-area-section="yama"] .qcard:not(.out-scope){{display:block!important;margin-bottom:14px}}
+.topic:has(.scope-toggle:checked):not(:has(.review-toggle:checked)) > .area[data-area-section="yama"]::before{{content:"야마 · 수업범위 내만 (범위 외 원문은 빠짐)";display:block;font-weight:800;color:#2e7d4f;margin:14px 0 6px}}
+.topic:has(.scope-toggle:checked) .qcard.out-scope.out-scope.out-scope{{display:none!important}}
 '''
 i=s.rfind('</style>'); s=s[:i]+css+s[i:]
 
