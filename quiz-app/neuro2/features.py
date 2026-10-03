@@ -201,6 +201,18 @@ css=f'''
 .topic:has(.review-toggle:checked) > .area[data-area-section="ty"]::before{{content:"티야"}}
 .topic:has(.review-toggle:checked) > .area[data-area-section="off"]::before{{content:"탈야"}}
 .topic:has(.review-toggle:checked):not(:has(.mk-q:checked)):not(:has(.mk-x:checked)) > .review-empty{{display:block}}
+/* 오답노트 */
+.wn-open{{margin-top:10px;border:1px solid #fff;background:rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}}
+.wn-panel{{display:none;position:fixed;inset:0;background:rgba(20,16,40,.45);z-index:50;padding:12px}}
+.wn-panel.on{{display:flex;align-items:center;justify-content:center}}
+.wn-box{{background:#fff;color:#202139;border-radius:14px;padding:14px;width:100%;max-width:760px;max-height:92vh;display:flex;flex-direction:column;gap:8px}}
+.wn-top{{display:flex;justify-content:space-between;align-items:center}}
+.wn-x,.wn-copy,.wn-dl{{border:1px solid #d7d1ea;background:#fff;border-radius:10px;padding:7px 12px;font:inherit;cursor:pointer}}
+.wn-copy{{background:#5a3daa;color:#fff;border-color:#5a3daa;font-weight:700}}
+.wn-help{{margin:0;font-size:13px;color:#6b6480}}
+.wn-t{{width:100%;flex:1;min-height:45vh;font:13px/1.5 ui-monospace,monospace;border:1px solid #d7d1ea;border-radius:10px;padding:8px}}
+.wn-btns{{display:flex;gap:8px;align-items:center;flex-wrap:wrap}}.wn-msg{{font-size:13px;color:#2e7d4f}}
+@media print{{.wn-open,.wn-panel{{display:none!important}}}}
 /* 범위 외 야마 빼고 풀기: 수업범위 내 야마만 한 화면에 이어서 */
 .review-bar{{flex-wrap:wrap}}
 .scope-toggle{{position:absolute;opacity:0;pointer-events:none}}
@@ -222,14 +234,65 @@ css=f'''
 i=s.rfind('</style>'); s=s[:i]+css+s[i:]
 
 # ---- 5) 복습 표시 저장(자바스크립트가 되는 환경에서만; 없어도 앱은 동작) ----
-js='''<script>
+js=r'''<script>
 (function(){var K='neuro2-app-marks-v1',st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
 function save(){try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
 function count(){document.querySelectorAll('.review-count').forEach(function(el){var t=el.getAttribute('data-topic');var n=document.querySelectorAll('#'+t+' .mk-q:checked, #'+t+' .mk-x:checked').length;el.textContent=n?('복습 대상 '+n+'문항'):''})}
 function key(el){return el.getAttribute('data-k')||el.name}
 document.querySelectorAll('input.mk').forEach(function(el){var v=st[key(el)];if(v&&el.value===v)el.checked=true});
 document.addEventListener('change',function(e){var t=e.target;if(t.classList&&t.classList.contains('mk')){var k=key(t);if(t.value==='n')delete st[k];else st[k]=t.value;save();count()}});
-count();})();
+count();
+/* ---- 고른 답 기억(오답노트용) ---- */
+var PK='neuro2-app-picks-v1',pk={};try{pk=JSON.parse(localStorage.getItem(PK)||'{}')}catch(e){}
+function psave(){try{localStorage.setItem(PK,JSON.stringify(pk))}catch(e){}}
+function ckey(card){var m=card.querySelector('input.mk');return m?key(m):card.id}
+document.addEventListener('change',function(e){var t=e.target;if(!t.classList)return;var c=t.closest&&t.closest('.qcard');if(!c)return;
+ if(t.classList.contains('choice-input')){pk[ckey(c)]=t.value;psave()}
+ else if(t.classList.contains('multi-input')){pk[ckey(c)]=[].map.call(c.querySelectorAll('.multi-input:checked'),function(x){return x.value}).join(',');psave()}});
+document.addEventListener('input',function(e){var t=e.target;if(t.classList&&t.classList.contains('entry')){var c=t.closest('.qcard');pk[ckey(c)]=t.value;psave()}});
+document.querySelectorAll('.qcard').forEach(function(c){var v=pk[ckey(c)];if(v==null)return;var ta=c.querySelector('.entry');if(ta){ta.value=v;return}
+ String(v).split(',').forEach(function(x){var i=c.querySelector('input[value="'+x+'"].choice-input, input[value="'+x+'"].multi-input');if(i)i.checked=true})});
+document.addEventListener('reset',function(e){var f=e.target;if(f.classList&&f.classList.contains('qform')){var c=document.getElementById(f.id.replace(/-f$/,''));if(c){delete pk[ckey(c)];psave()}}},true);
+/* ---- 오답노트 내보내기 ---- */
+function tx(el){return el?el.textContent.replace(/\s+\n/g,'\n').trim():''}
+function build(incQ,onlyIn){var out=[],n=0;
+ document.querySelectorAll('.qcard').forEach(function(c){var mx=c.querySelector('.mk-x:checked'),mq=c.querySelector('.mk-q:checked');if(!mx&&!(incQ&&mq))return;
+  var outScope=c.classList.contains('out-scope');if(onlyIn&&outScope)return;n++;
+  var tp=c.closest('.topic'),pr=c.closest('.prof'),sec=c.closest('.area');
+  var meta=c.querySelector('.qmeta').cloneNode(true);var pt=meta.querySelector('.prof-tag');var by=pt?pt.textContent.replace('출제 ',''):'';if(pt)pt.remove();var kt=meta.querySelector('.king-tag');var king=kt?kt.textContent:'';if(kt)kt.remove();
+  var teach=pr?tx(pr.querySelector('summary')):'';
+  var L=['=== '+n+'. '+(mx?'❌ 틀림':'🟡 헷갈림')+' ===','주제: '+(tp?tx(tp.querySelector('summary')):'')+' / 이 수업 담당: '+teach+' 교수님',
+   '영역: '+({yama:'야마(기출)',variants:'야마 변형',ty:'티야(수업 강조)',off:'탈야(수업자료 기준 신규)'}[sec?sec.getAttribute('data-area-section'):'']||''),
+   '출처: '+tx(meta)+(king?' · '+king:''),'출제 교수: '+by+(by&&teach&&by.indexOf(teach)<0?'  ← 이번 수업 담당 교수님과 다름':'')];
+  if(outScope)L.push('범위: [수업범위 외] — 앱에서 이번 강의록·STT에 없는 내용으로 표시한 문제');
+  c.querySelectorAll('.scope').forEach(function(x){var t=tx(x);if(t.indexOf('[수업범위 외]')<0)L.push('주의: '+t)});
+  if(c.querySelector('.excluded'))L.push('주의: 복원 불완전 · 자동채점 제외 문항');
+  L.push('문제: '+tx(c.querySelector('.stem')));
+  if(c.querySelector('.visual img'))L.push('(문제에 사진·그림·표 있음 — 앱에서 원본 확인: '+[].map.call(c.querySelectorAll('.visual b'),tx).join(', ')+')');
+  var ch=c.querySelectorAll('label.choice');if(ch.length){L.push('선지:');ch.forEach(function(x){L.push('  '+tx(x))})}
+  var v=pk[ckey(c)];L.push('내 답: '+(v==null||v===''?'(기록 없음)':(ch.length?v+'번':v)));
+  var fb=c.querySelector('.feedback');if(fb){var f0=fb.querySelector(':scope > div:not(.ai-est):not(.opt-exp)');if(f0)L.push(tx(f0));var oe=fb.querySelectorAll('.opt-exp > div');if(oe.length){L.push('선지별 해설:');oe.forEach(function(x){L.push('  '+tx(x))})}var ai=fb.querySelector('.ai-est');if(ai)L.push(tx(ai))}
+  out.push(L.join('\n'))});
+ var head=['[신경학 문풀앱2 오답노트] '+new Date().toLocaleDateString('ko-KR')+' · '+n+'문항','',
+ '너는 의대 본과 신경학 시험 튜터야. 아래는 내가 문풀앱에서 ❌ 틀림'+(incQ?' / 🟡 헷갈림':'')+'으로 표시한 문제들이야(각 문제에 주제·담당 교수·출제 교수·범위·선지·내 답·제공 정답·근거가 들어 있어). 다음 순서로 분석해줘.',
+ '1) 문제별로: (a) 이번 수업 자료(담당 교수님 강의록·STT)만으로 풀 수 있는 문제인지 판정 — 출제 교수가 이번 담당 교수님과 다른 옛 기출인지, [수업범위 외]인지, 선지 내용이 이번 강의와 다르게 설명되는지, 제공 정답에 주의 문구가 있는지를 근거로 "수업으로 풀 수 있음 / 일부만 / 수업 범위 밖"으로 나눠줘. (b) 내 답이 왜 틀렸는지(어떤 개념을 헷갈렸는지) (c) 꼭 외울 핵심 한두 줄.',
+ '2) 전체 정리: 주제·교수님별로 반복되는 약점 패턴, 수업 범위 밖이라 우선순위를 낮춰도 되는 문제, 보완해야 할 개념 목록(우선순위 순), 다시 풀어볼 문제 번호.',
+ '사진·그림이 있다고 표시된 문제는 사진 없이 지문·해설로 판단하고, 사진이 꼭 필요하면 그렇다고 알려줘.',''];
+ return {n:n,text:head.join('\n')+'\n'+out.join('\n\n')}}
+var hd=document.querySelector('header');if(hd){
+ var b=document.createElement('button');b.className='wn-open';b.type='button';hd.appendChild(b);
+ var pnl=document.createElement('div');pnl.className='wn-panel';pnl.innerHTML='<div class="wn-box"><div class="wn-top"><b>📋 오답노트 내보내기</b><button type="button" class="wn-x">닫기</button></div><label><input type="checkbox" class="wn-q" checked/> 🟡 헷갈림도 포함</label> <label><input type="checkbox" class="wn-in"/> [수업범위 외] 문제 빼기</label><p class="wn-help">아래 글을 통째로 복사해서 ChatGPT나 Claude 대화창에 붙여넣으면 문제별 판정(수업으로 풀 수 있는지)·약점·보완점을 정리해 줘요. 복습 표시와 고른 답은 이 기기·이 브라우저에만 저장돼요.</p><textarea class="wn-t" readonly></textarea><div class="wn-btns"><button type="button" class="wn-copy">복사하기</button><button type="button" class="wn-dl">.txt로 저장</button><span class="wn-msg"></span></div></div>';document.body.appendChild(pnl);
+ var ta=pnl.querySelector('.wn-t'),msg=pnl.querySelector('.wn-msg');
+ function lab(){var x=document.querySelectorAll('.mk-x:checked').length,q=document.querySelectorAll('.mk-q:checked').length;b.textContent='📋 오답노트 내보내기 (❌ '+x+' · 🟡 '+q+')'}
+ function fill(){var r=build(pnl.querySelector('.wn-q').checked,pnl.querySelector('.wn-in').checked);ta.value=r.n?r.text:'아직 ❌ 틀림'+(pnl.querySelector('.wn-q').checked?'/🟡 헷갈림':'')+'으로 표시한 문제가 없어요. 문제 아래 "복습 표시"에서 표시해 두세요.';msg.textContent=r.n+'문항'}
+ lab();document.addEventListener('change',function(e){if(e.target.classList&&e.target.classList.contains('mk'))lab()});
+ b.onclick=function(){fill();pnl.classList.add('on')};pnl.querySelector('.wn-x').onclick=function(){pnl.classList.remove('on')};
+ pnl.querySelector('.wn-q').onchange=fill;pnl.querySelector('.wn-in').onchange=fill;
+ pnl.querySelector('.wn-copy').onclick=function(){ta.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+  if(navigator.clipboard)navigator.clipboard.writeText(ta.value).then(function(){msg.textContent='복사했어요 ✔'},function(){msg.textContent=ok?'복사했어요 ✔':'길게 눌러 전체 선택 후 복사하세요'});else msg.textContent=ok?'복사했어요 ✔':'전체 선택 후 복사하세요'};
+ pnl.querySelector('.wn-dl').onclick=function(){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ta.value],{type:'text/plain;charset=utf-8'}));a.download='신경학_오답노트_'+new Date().toISOString().slice(0,10)+'.txt';document.body.appendChild(a);a.click();a.remove()};
+}
+})();
 </script>'''
 s=s.replace('</body>',js+'</body>',1)
 open(D+'/final.html','w',encoding='utf-8').write(s)
