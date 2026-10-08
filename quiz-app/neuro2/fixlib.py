@@ -91,8 +91,15 @@ def apply(s,topic,specs,log):
 
 import base64
 IMGDIR='/home/user/P_D_r/quiz-app/neuro2/img'
+import io
+from PIL import Image
+# 아티팩트 16MB 제한 — 임베드할 때 WebP(최대 폭 900, 품질 62)로 다시 인코딩
+def _b64(n):
+  im=Image.open(IMGDIR+'/'+n).convert('RGB')
+  if im.width>900: im=im.resize((900,round(im.height*900/im.width)),Image.LANCZOS)
+  b=io.BytesIO(); im.save(b,'WEBP',quality=62,method=6); return base64.b64encode(b.getvalue()).decode()
 def vis(title,*imgs,note=''):
-  h=''.join(f'<img src="data:image/jpeg;base64,{base64.b64encode(open(IMGDIR+"/"+n,"rb").read()).decode()}" alt="{E(title)}" style="max-width:100%;height:auto;display:block;margin:8px auto;border-radius:6px"/>' for n in imgs)
+  h=''.join(f'<img src="data:image/webp;base64,{_b64(n)}" alt="{E(title)}" style="max-width:100%;height:auto;display:block;margin:8px auto;border-radius:6px"/>' for n in imgs)
   return f'<div class="visual"><b>{E(title)}</b>{h}'+(f'<div class="source">{E(note)}</div>' if note else '')+'</div>'
 
 def Q(ans,basis,*exps,**kw):
