@@ -90,3 +90,7 @@ Q('강의록 28쪽','Schizencephaly에서 틈의 벽이 맞닿아 있는 형태�
 Q('강의록 33쪽','Molar tooth sign을 보이는 질환은?',['Joubert syndrome','Dandy-Walker','Chiari II','Holoprosencephaly','Lissencephaly'],1,POST,['정답.','큰 후두와.','작은 후두와.','아님.','아님.']),
 Q('강의록 36쪽','Chiari II에 meningoencephalocele이 더해진 것은?',['Chiari III','Chiari I','Chiari IV','Dandy-Walker','Joubert'],1,POST,['정답.','단순 tonsil.','심한 소뇌 형성저하.','아님.','아님.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

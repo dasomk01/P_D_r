@@ -144,3 +144,7 @@ Q('강의록 25쪽','약물과 신경계 부작용의 연결이 옳은 것은?',
  '강의록 25쪽: opioid — miosis + respiratory depression + depressed consciousness; sedative-hypnotic — CNS depression; anti-psychotic — extrapyramidal symptoms; anti-depressant — serotonin syndrome, 일부 과량에서 seizure·arrhythmia.',
  ['정답.','축동·호흡억제.','중추신경 억제.','opioid 소견; 항우울제는 세로토닌 증후군.','세로토닌 증후군은 항우울제.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

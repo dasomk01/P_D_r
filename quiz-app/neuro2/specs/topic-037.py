@@ -56,3 +56,7 @@ def Q(src,stem,choices,ans,basis,exps,**k):
 OFF=[
 Q('강의록 20쪽','전정신경핵과 기능의 연결로 옳지 않은 것은?',['상전정핵(SVN) — VOR','내측전정핵(MVN) — VOR·자세 반사','하전정핵(IVN) — 전정 정보 통합','외측전정핵(Deiters) — 동측 외측 전정척수로','외측전정핵 — 반대측 시각피질로 투사'],5,ANA,['옳다.','옳다.','옳다.','옳다.','틀리다(정답).']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

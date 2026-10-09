@@ -105,3 +105,7 @@ Q('강의록 39쪽','PSP의 영상 소견은?',['midbrain 위축(hummingbird sig
 Q('강의록 46쪽','감염 후 소아에서 단상성으로 뇌·척수를 침범하는 탈수초 질환은?',['ADEM','MS','NMOSD','MOGAD','CJD'],1,ETC,['정답.','재발-완화.','시신경.','시신경.','아님.']),
 Q('강의록 50쪽','NPH의 영상 소견이 아닌 것은?',['callosal angle > 120°','Evans index ≥ 0.3','양측 sylvian fissure 확장','high convexity tightness','DESH'],1,ETC,['정답 — < 90°.','소견.','소견.','소견.','소견.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

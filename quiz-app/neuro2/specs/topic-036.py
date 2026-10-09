@@ -327,3 +327,7 @@ Q('강의록 Candidates','강의록의 국내 뇌전증 수술 센터로 비수�
 Q('강의록 Temporal lobectomy','Interictal PET에서 측두엽 뇌전증의 소견은?',['측두엽 저대사','측두엽 과대사','후두엽 과대사','소뇌 저대사','정상'],1,'강의록 Temporal lobectomy Images: interictal PET — temporal hypometabolism; MRI — 해마 위축, FLAIR·T2 신호 증가.',['정답.','ictal.','아니다.','아니다.','아니다.']),
 Q('강의록 Lesionectomy','Lesionectomy를 계획할 때 함께 고려하는 것으로 강의록에 제시되지 않은 것은?',['Dual pathology(해마 경화)','발작 임상 양상','발작 중·발작 사이 두피 뇌파','신경영상','혈중 ASM 농도만'],5,'강의록 Lesionectomy.',['고려.','고려.','고려.','고려.','정답.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

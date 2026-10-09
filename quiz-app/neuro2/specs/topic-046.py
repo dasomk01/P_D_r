@@ -206,3 +206,7 @@ Q('강의록 125쪽','외상후 수두증의 기전은?',['뇌실내 출혈 후 
 Q('강의록 125쪽','외상후 수두증 치료는?',['VP shunt','항생제','스테로이드','관찰','방사선'],1,HYD,['정답.','아님.','아님.','아님.','아님.']),
 Q('강의록 140쪽','TBI 환자 각성 증진 목적으로 쓰는 약물은?',['amantadine·L-dopa','haloperidol','diazepam','phenytoin','baclofen'],1,'강의록 138–141쪽. '+AGIT,['정답.','진정.','진정.','진정.','진정.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

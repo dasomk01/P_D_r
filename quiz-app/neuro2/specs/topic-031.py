@@ -228,3 +228,7 @@ Q('강의록1 22쪽','헌팅턴병 외에 무도증을 일으키는 유전 질�
 Q('강의록2 19쪽','파킨슨병의 경과에 따른 증상 시간표에서 병의 후기에 두드러지는 것은?',['낙상·체위불안정, 치매, 심한 자율신경 증상','렘수면행동장애','후각저하','변비','우울'],1,'강의록2 19쪽(Lancet Neurology 2015). STT 3교시 25:32: 이런 것이 초반부터 심하면 비정형 의심.',['정답.','전구.','전구.','전구.','전구.']),
 Q('강의록1 26–27쪽','음성 근간대경련(asterixis)과 같은 말은?',['Flapping tremor','Intention tremor','Pill-rolling tremor','Physiologic tremor','Hemiballism'],1,'강의록1 27쪽: Negative myoclonus(= Asterixis, = Flapping tremor).',['정답.','소뇌.','파킨슨.','생리적.','도리깨질.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

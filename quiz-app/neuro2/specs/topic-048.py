@@ -112,3 +112,7 @@ Q('강의록 32쪽','skull의 다발성 punch-out defect의 감별진단이 아�
 Q('강의록 35쪽','수막종에서 인접 두개골의 hyperostosis 빈도는?',['약 20%','약 90%','약 1%','100%','약 50%'],1,MEN,['정답.','아님.','아님.','아님.','아님.']),
 Q('강의록 41쪽','성인에서 대부분 발생하며 대부분 solid이고 석회화가 드문 두개인두종은?',['Papillary craniopharyngioma','Adamantinomatous craniopharyngioma','Pituitary adenoma','Arachnoid cyst','Germinoma'],1,CRANIO,['정답.','소아·석회화.','다른 종양.','낭종.','아님.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

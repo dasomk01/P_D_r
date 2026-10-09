@@ -196,3 +196,7 @@ Q('강의록 50쪽','GMFCS 5단계는?',['수동 휠체어로 다른 사람이 �
 Q('강의록 61쪽','1st·2nd trimester에 생기는 뇌 이상은?',['maldevelopments(lissencephaly, schizencephaly 등)','PVL','기저핵·시상 병변','parasagittal lesion','다낭성 뇌연화'],1,MRI,['정답.','early 3rd.','late 3rd.','late 3rd.','late 3rd.']),
 Q('강의록 70쪽','시냅스가 가지치기되어 성인 수준에 이르는 나이는?',['약 16세','2세','6세','30세','1세'],1,PLAS,['정답.','최고 밀도.','아님.','아님.','아님.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])

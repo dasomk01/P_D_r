@@ -130,3 +130,7 @@ Q('강의록 12쪽','뇌척수액 압력이 가장 크게(↑↑) 오르는 것�
 Q('강의록 14–15쪽','중추신경계 감염의 원인과 치료 연결이 옳지 않은 것은?',['Enterovirus 뇌수막염 — acyclovir를 반드시 투여한다','HSV-1 뇌염 — acyclovir, 의심 즉시 시작','결핵성 뇌수막염 — HRZE 2개월 후 HR 12–14개월(+dexamethasone)','세균성 뇌수막염 — ceftriaxone + vancomycin ± ampicillin','뇌고름집 — 흡인 또는 절제 + 항생제 4–8주'],1,
  '강의록 14쪽: 바이러스성 뇌수막염은 대부분 supportive care, HSE는 acyclovir 즉시. 15쪽: 결핵성 HRZE 2개월 → HR 12–14개월(+dexamethasone). 13쪽: 세균성. 16쪽: 고름집.',['옳지 않음(정답). 대부분 대증치료.','옳다.','옳다.','옳다.','옳다.']),
 ]
+
+# 드라이브 티야방 정리 (specs/tyroom.py)
+from tyroom import TYR as _TYR
+TY+=_TYR.get(TOPIC['id'],[])
