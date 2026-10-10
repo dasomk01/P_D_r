@@ -23,7 +23,7 @@
 <h2>📒 내 오답노트</h2>
 <div class="note">문제에서 고른 답이 틀리면 자동으로 여기 쌓여요. ❌틀림·🟡헷갈림으로 표시한 문제도 함께 들어가요. 기록은 이 브라우저에 저장돼요.</div>
 <div class="row"><input type="text" id="wn-name" placeholder="이름 (예: 김다솜)" maxlength="30"/></div>
-<div class="row"><button class="pri" id="wn-short" type="button">📤 오답 내보내기 (번호·문제만)</button><button id="wn-copy" type="button">📋 AI 분석용 자세히 복사</button><button id="wn-save" type="button" style="display:none">☁️ Claude가 읽을 수 있게 저장</button></div>
+<div class="row"><button class="pri" id="wn-short" type="button">📤 오답 내보내기</button><button id="wn-copy" type="button">📋 AI 분석용 자세히 복사</button><button id="wn-save" type="button" style="display:none">☁️ Claude가 읽을 수 있게 저장</button></div>
 <div class="st" id="wn-st"></div>
 <textarea id="wn-out" readonly></textarea>
 <div class="note">📤는 주제·문제 번호와 문제만, 📋는 선지·정답·내 답·해설과 분석 요청문까지 복사해요.</div>
@@ -74,12 +74,11 @@ document.getElementById('wn-close').onclick=function(){document.getElementById('
 document.getElementById('wn-panel').onclick=function(e){if(e.target.id==='wn-panel')this.classList.remove('on')};
 document.getElementById('wn-clear').onclick=function(){if(confirm('오답 기록을 모두 지울까요? (❌·🟡 복습 표시는 그대로 남아요)')){W={};sv();upd();sched()}};
 var st=document.getElementById('wn-st');
-function shortText(){return items().map(info).map(function(x,i){var m=x.meta.match(/(야마 변형|야마|티야|탈야) · (\d+)\/\d+/),y=x.meta.match(/야마 (\d{4} [객주]\s?\d+)/);
- return (i+1)+'. '+x.topic.replace(/\s+/g,' ')+' · '+(m?m[1]+' '+m[2]+'번':x.area)+(y?' ('+y[1]+')':'')+'\n'+x.stem}).join('\n\n')}
+function shortText(){return items().map(info).map(function(x,i){return '=== '+(i+1)+'. '+x.topic+' ['+x.area+'] ('+x.profGroup+') ===\n메타: '+x.meta+(x.flags?'\n표시: '+x.flags:'')+'\n문제: '+x.stem+(x.hasImage?' [사진 있음]':'')+'\n'+x.choices.join('\n')+'\n정답: '+x.answer.join(',')+' / 틀린 횟수: '+x.wrongCount+(x.lastOk?' (마지막엔 맞힘)':'')+(x.mark?' / 내 표시: '+x.mark:'')+'\n해설: '+x.basis+(x.aiEst?'\nAI추정: '+x.aiEst:'')+(x.optExp?'\n선지해설: '+x.optExp:'')}).join('\n\n')}
 function copyOut(t,msg){var o=document.getElementById('wn-out');
  function fall(){o.style.display='block';o.value=t;o.focus();o.select();st.textContent='자동 복사가 막혀 있어요. 아래 칸을 길게 눌러 전체 선택 → 복사하세요.'}
  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){st.textContent=msg;o.style.display='none'},fall)}else fall()}
-document.getElementById('wn-short').onclick=function(){copyOut(shortText(),'번호·문제만 복사했어요 ('+items().length+'문항).')};
+document.getElementById('wn-short').onclick=function(){copyOut(shortText(),'오답을 복사했어요 ('+items().length+'문항).')};
 document.getElementById('wn-copy').onclick=function(){var t=exportText(),o=document.getElementById('wn-out');
  function fall(){o.style.display='block';o.value=t;o.focus();o.select();st.textContent='자동 복사가 막혀 있어요. 아래 칸을 길게 눌러 전체 선택 → 복사하세요.'}
  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){st.textContent='복사했어요 ('+items().length+'문항). AI 대화창에 붙여넣으세요.';o.style.display='none'},fall)}else fall()};

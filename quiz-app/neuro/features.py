@@ -1,6 +1,6 @@
 """work.html → final.html : 출제교수 표시, 연도 내림차순 정렬, 번호판 현재/표시 색, 복습 표시(맞음/헷갈림/틀림)와 주제별 복습 모드."""
 import re,json,html,collections,sys
-D='/home/user/P_D_r/quiz-app/neuro'
+D='/tmp/claude-0/-home-user-P-D-r/561b9438-f541-5374-9f36-ce0f5db3fe50/scratchpad'
 s=open(D+'/work2.html',encoding='utf-8').read()
 yprof={tuple(k.split('|')):v for k,v in json.load(open(D+'/yprof.json',encoding='utf-8')).items()}
 AREA_NAME={'yama':'야마','variants':'야마 변형','ty':'티야','off':'탈야'}
