@@ -258,16 +258,29 @@ function tx(el){return el?el.textContent.replace(/\s+\n/g,'\n').trim():''}
 function build(incQ,onlyIn){var out=[],n=0;
  document.querySelectorAll('.qcard').forEach(function(c){var mx=c.querySelector('.mk-x:checked'),mq=c.querySelector('.mk-q:checked');if(!mx&&!(incQ&&mq))return;
   var outScope=c.classList.contains('out-scope');if(onlyIn&&outScope)return;n++;
-  out.push(n+'. '+tx(c.querySelector('.stem')))});
+  var tp=c.closest('.topic'),pr=c.closest('.prof'),sec=c.closest('.area');
+  var meta=c.querySelector('.qmeta').cloneNode(true);var pt=meta.querySelector('.prof-tag');var by=pt?pt.textContent.replace('출제 ',''):'';if(pt)pt.remove();var kt=meta.querySelector('.king-tag');var king=kt?kt.textContent:'';if(kt)kt.remove();
+  var teach=pr?tx(pr.querySelector('summary')):'';
+  var L=['=== '+n+'. '+(mx?'❌ 틀림':'🟡 헷갈림')+' ===','주제: '+(tp?tx(tp.querySelector('summary')):'')+' / 이 수업 담당: '+teach+' 교수님',
+   '영역: '+({yama:'야마(기출)',variants:'야마 변형',ty:'티야(수업 강조)',off:'탈야(수업자료 기준 신규)'}[sec?sec.getAttribute('data-area-section'):'']||''),
+   '출처: '+tx(meta)+(king?' · '+king:''),'출제 교수: '+by+(by&&teach&&by.indexOf(teach)<0?'  ← 이번 수업 담당 교수님과 다름':'')];
+  if(outScope)L.push('범위: [수업범위 외] — 앱에서 이번 강의록·STT에 없는 내용으로 표시한 문제');
+  c.querySelectorAll('.scope').forEach(function(x){var t=tx(x);if(t.indexOf('[수업범위 외]')<0)L.push('주의: '+t)});
+  if(c.querySelector('.excluded'))L.push('주의: 복원 불완전 · 자동채점 제외 문항');
+  L.push('문제: '+tx(c.querySelector('.stem')));
+  if(c.querySelector('.visual img'))L.push('(문제에 사진·그림·표 있음 — 앱에서 원본 확인: '+[].map.call(c.querySelectorAll('.visual b'),tx).join(', ')+')');
+  var ch=c.querySelectorAll('label.choice');if(ch.length){L.push('선지:');ch.forEach(function(x){L.push('  '+tx(x))})}
+  var fb=c.querySelector('.feedback');if(fb){var f0=fb.querySelector(':scope > div:not(.ai-est):not(.opt-exp)');if(f0)L.push(tx(f0));var oe=fb.querySelectorAll('.opt-exp > div');if(oe.length){L.push('선지별 해설:');oe.forEach(function(x){L.push('  '+tx(x))})}var ai=fb.querySelector('.ai-est');if(ai)L.push(tx(ai))}
+  out.push(L.join('\n'))});
  return {n:n,text:out.join('\n\n')}}
 var hd=document.querySelector('header');if(hd){
  var b=document.createElement('button');b.className='wn-open';b.type='button';hd.appendChild(b);
- var pnl=document.createElement('div');pnl.className='wn-panel';pnl.innerHTML='<div class="wn-box"><div class="wn-top"><b>📋 오답노트 내보내기</b><button type="button" class="wn-x">닫기</button></div><label><input type="checkbox" class="wn-q" checked/> 🟡 헷갈림도 포함</label> <label><input type="checkbox" class="wn-in"/> [수업범위 외] 문제 빼기</label><p class="wn-help">버튼을 누르면 번호와 문제만 바로 복사돼요. 복습 표시는 이 기기·이 브라우저에만 저장돼요.</p><textarea class="wn-t" readonly></textarea><div class="wn-btns"><button type="button" class="wn-copy">복사하기</button><button type="button" class="wn-dl">.txt로 저장</button><span class="wn-msg"></span></div></div>';document.body.appendChild(pnl);
+ var pnl=document.createElement('div');pnl.className='wn-panel';pnl.innerHTML='<div class="wn-box"><div class="wn-top"><b>📋 오답노트 내보내기</b><button type="button" class="wn-x">닫기</button></div><label><input type="checkbox" class="wn-q" checked/> 🟡 헷갈림도 포함</label> <label><input type="checkbox" class="wn-in"/> [수업범위 외] 문제 빼기</label><p class="wn-help">버튼을 누르면 바로 복사돼요. 복습 표시는 이 기기·이 브라우저에만 저장돼요.</p><textarea class="wn-t" readonly></textarea><div class="wn-btns"><button type="button" class="wn-copy">복사하기</button><button type="button" class="wn-dl">.txt로 저장</button><span class="wn-msg"></span></div></div>';document.body.appendChild(pnl);
  var ta=pnl.querySelector('.wn-t'),msg=pnl.querySelector('.wn-msg');if(location.protocol!=='file:')pnl.querySelector('.wn-dl').style.display='none';
  function lab(){var x=document.querySelectorAll('.mk-x:checked').length,q=document.querySelectorAll('.mk-q:checked').length;b.textContent='📋 오답노트 내보내기 (❌ '+x+' · 🟡 '+q+')'}
  function fill(){var r=build(pnl.querySelector('.wn-q').checked,pnl.querySelector('.wn-in').checked);ta.value=r.n?r.text:'아직 ❌ 틀림'+(pnl.querySelector('.wn-q').checked?'/🟡 헷갈림':'')+'으로 표시한 문제가 없어요. 문제 아래 "복습 표시"에서 표시해 두세요.';msg.textContent=r.n+'문항'}
  lab();document.addEventListener('change',function(e){if(e.target.classList&&e.target.classList.contains('mk'))lab()});
- b.onclick=function(){fill();pnl.classList.add('on');if(/^1\. /.test(ta.value))pnl.querySelector('.wn-copy').onclick()};pnl.querySelector('.wn-x').onclick=function(){pnl.classList.remove('on')};
+ b.onclick=function(){fill();pnl.classList.add('on');if(/^=== 1\. /.test(ta.value))pnl.querySelector('.wn-copy').onclick()};pnl.querySelector('.wn-x').onclick=function(){pnl.classList.remove('on')};
  pnl.querySelector('.wn-q').onchange=fill;pnl.querySelector('.wn-in').onchange=fill;
  pnl.querySelector('.wn-copy').onclick=function(){ta.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}
   if(navigator.clipboard)navigator.clipboard.writeText(ta.value).then(function(){msg.textContent='복사했어요 ✔'},function(){msg.textContent=ok?'복사했어요 ✔':'길게 눌러 전체 선택 후 복사하세요'});else msg.textContent=ok?'복사했어요 ✔':'전체 선택 후 복사하세요'};
