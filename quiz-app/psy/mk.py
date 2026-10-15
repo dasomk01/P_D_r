@@ -8,7 +8,7 @@ def build(items,title,appkey,out):
     if o.get('excl'): notes=notes+['복원 불완전·확인 필요 문항이라 정답 자동 채점은 하지 않아요.']
     fl=dict(warn=bool(warn or o.get('excl')),chk=bool(o.get('ai') or any('정답' in n for n in warn)),
       inc=bool(o.get('excl') or any('복원' in n for n in warn)),ydiff=any(('연도' in n or '년도' in n) and '선지' in n for n in notes),
-      oos=bool(o.get('oos')))
+      oos=bool(o.get('oos')),tyb=bool(o.get('tyb')))
     meta=re.sub(r'^👑+ 킹+야 · \d+회 \([^)]*\)','',o.get('meta',''))
     Q.append(dict(k=o.get('k') or o['id'],area=o['area'],prof=o.get('prof',''),sec=o.get('sec',''),meta=meta,year=o.get('year',''),
       type=o.get('type','객'),rep=o.get('rep',1),repyears=o.get('repyears',''),stem=o['stem'],choices=o['choices'],

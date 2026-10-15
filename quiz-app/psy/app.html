@@ -107,7 +107,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
       <option value="">반복 전체</option><option value="3">킹킹야 (3회+)</option><option value="2">킹야 (2회)</option><option value="23">킹야+킹킹야</option><option value="1">단독</option>
     </select>
     <select id="fSt" aria-label="문제 상태">
-      <option value="">문제 상태 전체</option><option value="inscope">수업범위 외 빼기</option><option value="nowarn">주의 문항 제외</option><option value="chk">정답 확인 필요</option><option value="inc">복원불완전</option><option value="ydiff">연도별 선지 차이</option><option value="img">그림 문제</option><option value="noimg">그림 없는 문제</option><option value="myerr">내가 표시한 문제오류</option><option value="myoos">내가 표시한 범위외</option>
+      <option value="">문제 상태 전체</option><option value="tyb">📌 티야방 표시 문제</option><option value="inscope">수업범위 외 빼기</option><option value="nowarn">주의 문항 제외</option><option value="chk">정답 확인 필요</option><option value="inc">복원불완전</option><option value="ydiff">연도별 선지 차이</option><option value="img">그림 문제</option><option value="noimg">그림 없는 문제</option><option value="myerr">내가 표시한 문제오류</option><option value="myoos">내가 표시한 범위외</option>
     </select>
   </div>
   <div style="margin-top:8px"><input type="search" id="fQ" placeholder="검색 (지문·정답·연도 예: 2023 객12)" aria-label="검색"></div>
@@ -163,7 +163,7 @@ function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
   if(F.prof&&q.prof!==F.prof)return false;if(F.sec&&q.sec!==F.sec)return false;if(F.area&&q.area!==F.area)return false;if(F.type&&q.type!==F.type)return false;
   if(F.rep){var r=q.rep||1;if(F.rep==='3'&&r<3)return false;if(F.rep==='2'&&r!==2)return false;if(F.rep==='23'&&r<2)return false;if(F.rep==='1'&&r!==1)return false}
   var fl=q.fl||{};
-  switch(F.st){case'inscope':if(fl.oos||f.oos)return false;break;case'nowarn':if(fl.warn)return false;break;case'chk':if(!fl.chk)return false;break;case'inc':if(!fl.inc)return false;break;case'ydiff':if(!fl.ydiff)return false;break;
+  switch(F.st){case'inscope':if(fl.oos||f.oos)return false;break;case'tyb':if(!fl.tyb)return false;break;case'nowarn':if(fl.warn)return false;break;case'chk':if(!fl.chk)return false;break;case'inc':if(!fl.inc)return false;break;case'ydiff':if(!fl.ydiff)return false;break;
     case'img':if(!q.imgs||!q.imgs.length)return false;break;case'noimg':if(q.imgs&&q.imgs.length)return false;break;case'myerr':if(!f.err)return false;break;case'myoos':if(!f.oos)return false;break}
   switch(F.chip){case'new':if(solved(a))return false;break;case'wrong':if(!inWrong(k))return false;break;case'conf':if(!f.conf)return false;break;case'memo':if(!memoOf(k))return false;break}
   if(F.q){var t=(q.year+' '+q.meta+' '+q.stem+' '+q.choices.join(' ')+' '+q.ans.map(function(n){return q.choices[n-1]||''}).join(' ')+' '+q.sec+' '+memoOf(k)).toLowerCase();
