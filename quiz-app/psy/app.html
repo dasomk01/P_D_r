@@ -1,0 +1,284 @@
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* layout: 상단 고정 필터 묶음 + 한 문제씩 넘기는 카드 한 장 */
+:root{
+  --bg:#f3f4f8;--card:#ffffff;--fg:#1d2030;--mute:#6b6f85;--line:#d9dbe6;
+  --accent:#3550c0;--accent-fg:#ffffff;--accent-soft:#e8ecfb;
+  --ok:#23824a;--ok-soft:#e5f4ea;--bad:#c23a32;--bad-soft:#fbeae8;--warn:#8a6400;--warn-soft:#fff4d6;
+  --chip:#ebedf3;
+  --f-body:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14161e;--card:#1d2029;--fg:#e8e9f0;--mute:#9a9db0;--line:#333747;
+  --accent:#7d93ff;--accent-fg:#0f1220;--accent-soft:#252d4d;
+  --ok:#5fcf8a;--ok-soft:#18321f;--bad:#ff7d73;--bad-soft:#3a1d1b;--warn:#f2c552;--warn-soft:#3a3016;--chip:#272a36;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14161e;--card:#1d2029;--fg:#e8e9f0;--mute:#9a9db0;--line:#333747;
+  --accent:#7d93ff;--accent-fg:#0f1220;--accent-soft:#252d4d;
+  --ok:#5fcf8a;--ok-soft:#18321f;--bad:#ff7d73;--bad-soft:#3a1d1b;--warn:#f2c552;--warn-soft:#3a3016;--chip:#272a36;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--f-body);margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 60px}
+h1{font-size:26px;line-height:1.25;margin:4px 0 10px;font-weight:700;letter-spacing:-.01em}
+.stats{display:flex;flex-wrap:wrap;gap:4px 18px;color:var(--mute);font-size:14.5px}
+.stats b{color:var(--fg);font-family:var(--f-num);font-weight:500;margin-left:4px}
+.sync{text-align:right;color:var(--mute);font-size:13px;margin:6px 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+select,input[type=search],textarea{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:12px}
+select,input[type=search]{width:100%;min-width:0;padding:10px 12px;font-size:15px}
+select:focus,input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip,.btn{font:inherit;font-size:15px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:7px 16px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn{border-radius:12px;padding:9px 14px}
+.btn.pri{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
+.navbar{display:flex;align-items:center;gap:8px}
+.navbar .pos{flex:1;font-family:var(--f-num);color:var(--mute);font-size:15px;min-width:0}
+.navbar .pos b{color:var(--fg);font-weight:500}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:12px}
+.head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;color:var(--mute);font-size:14px}
+.pill{background:var(--chip);color:var(--fg);border-radius:8px;padding:2px 9px;font-size:13px;font-weight:600}
+.pill.area{background:var(--accent-soft);color:var(--accent)}
+.pill.king{background:var(--warn-soft);color:var(--warn)}
+.meta{color:var(--accent);font-size:14px;margin-top:8px;font-weight:500}
+.note{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:7px 11px;font-size:13.5px;margin-top:8px}
+.note.oos{background:var(--chip);color:var(--mute)}
+.stem{font-size:17px;margin:14px 0 12px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
+.imgs img{display:block;max-width:100%;height:auto;margin:8px auto;border-radius:8px;border:1px solid var(--line)}
+.vis{background:var(--chip);border-radius:10px;padding:8px 11px;font-size:14px;white-space:pre-wrap;margin-bottom:8px}
+.choices{display:grid;gap:10px}
+.ch{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;font:inherit;font-size:16px;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;word-break:keep-all;overflow-wrap:anywhere}
+.ch .no{font-family:var(--f-num);color:var(--mute);font-size:14px;flex:none;width:18px;padding-top:2px}
+.ch span:last-child{min-width:0}
+.ch.right{border-color:var(--ok);background:var(--ok-soft)}
+.ch.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.ch.mine{box-shadow:inset 0 0 0 1px currentColor}
+.done .ch{cursor:default}
+.result{margin-top:14px;font-weight:700;font-size:16px}
+.result.ok{color:var(--ok)}.result.bad{color:var(--bad)}
+.exp{margin-top:8px;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.exp h3{font-size:13px;color:var(--mute);margin:14px 0 4px;font-weight:600;letter-spacing:.02em}
+.exp ol{margin:0;padding-left:22px;white-space:normal}
+.exp li{margin:3px 0}
+.ai{background:var(--accent-soft);border-radius:10px;padding:8px 11px;font-size:14px;margin-top:10px;white-space:pre-wrap}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.acts .chip{font-size:14px;padding:6px 13px}
+.memo{margin-top:14px}
+.memo label{display:block;font-size:13px;color:var(--mute);margin-bottom:4px;font-weight:600}
+.memo textarea{width:100%;min-height:84px;padding:10px 12px;font-size:15px;resize:vertical}
+.memo .saved{font-size:12px;color:var(--mute);min-height:1em}
+.bottomnav{display:flex;gap:8px;justify-content:space-between;margin-top:14px}
+.empty{color:var(--mute);text-align:center;padding:30px 10px}
+.sheet{position:fixed;inset:0;background:rgba(10,12,20,.45);display:flex;align-items:flex-end;justify-content:center;z-index:20;padding-top:env(safe-area-inset-top,0px)}
+.sheet[hidden]{display:none}
+.sheet .box{background:var(--bg);width:100%;max-width:760px;max-height:86vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.sheet h2{font-size:18px;margin:0 0 8px}
+.list{list-style:none;margin:0;padding:0}
+.list li{border-top:1px solid var(--line);padding:9px 2px;cursor:pointer;display:flex;gap:10px}
+.list li.cur{background:var(--accent-soft)}
+.list .n{font-family:var(--f-num);color:var(--mute);font-size:13px;width:44px;flex:none;padding-top:2px}
+.list .t{min-width:0;font-size:14.5px}
+.list .s{font-size:12.5px;color:var(--mute)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line);margin-right:6px;vertical-align:1px}
+.dot.ok{background:var(--ok)}.dot.bad{background:var(--bad)}
+.sheet textarea{width:100%;height:160px;font:12px/1.4 var(--f-num);padding:8px}
+.msg{font-size:13px;color:var(--ok);min-height:1.2em;margin:6px 0}
+@media (max-width:420px){h1{font-size:23px}.stem{font-size:16.5px}}
+@media (prefers-reduced-motion:no-preference){.ch{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="wrap">
+  <h1 id="ttl">__TITLE__</h1>
+  <div class="stats" id="stats"></div>
+  <div class="sync" id="sync">이 기기에 저장 중</div>
+  <div class="grid">
+    <select id="fProf" aria-label="교수"></select>
+    <select id="fSec" aria-label="섹션"></select>
+    <select id="fArea" aria-label="영역"></select>
+    <select id="fType" aria-label="객관식·주관식"><option value="">객·주</option><option value="객">객관식</option><option value="주">주관식</option></select>
+    <select id="fRep" aria-label="반복 출제">
+      <option value="">반복 전체</option><option value="3">킹킹야 (3회+)</option><option value="2">킹야 (2회)</option><option value="23">킹야+킹킹야</option><option value="1">단독</option>
+    </select>
+    <select id="fSt" aria-label="문제 상태">
+      <option value="">문제 상태 전체</option><option value="inscope">수업범위 외 빼기</option><option value="nowarn">주의 문항 제외</option><option value="chk">정답 확인 필요</option><option value="inc">복원불완전</option><option value="ydiff">연도별 선지 차이</option><option value="img">그림 문제</option><option value="noimg">그림 없는 문제</option><option value="myerr">내가 표시한 문제오류</option><option value="myoos">내가 표시한 범위외</option>
+    </select>
+  </div>
+  <div style="margin-top:8px"><input type="search" id="fQ" placeholder="검색 (지문·정답·연도 예: 2023 객12)" aria-label="검색"></div>
+  <div class="chips" id="chips">
+    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" id="shuf" aria-pressed="false">섞기</button>
+  </div>
+  <div class="tools">
+    <button class="btn" id="bSync">기록 새로고침</button><button class="btn" id="bBak">기록 백업</button><button class="btn" id="bRes">백업 불러오기</button><button class="btn" id="bExp">오답·헷갈림·메모 내보내기</button>
+  </div>
+  <hr class="sep">
+  <div class="navbar">
+    <button class="btn" id="prev">이전</button><div class="pos" id="pos"></div><button class="btn" id="bList">목록</button><button class="btn pri" id="next">다음</button>
+  </div>
+  <div id="view"></div>
+</div>
+
+<div class="sheet" id="sheet" hidden><div class="box" id="sheetBox"></div></div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function(){
+var APP='__APPKEY__';
+var Q=JSON.parse(document.getElementById('data').textContent);
+var byK={};Q.forEach(function(q,i){q.i=i;byK[q.k]=q});
+var LK=APP+'-state-v1',UK=APP+'-ui-v1';
+function lsGet(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+// S.a[k]={c:마지막 선택,ok,w:틀린 횟수,n:푼 횟수,t}  S.f[k]={conf,err,oos,out,t}  S.m[k]={x:메모,t}
+var S=lsGet(LK)||{a:{},f:{},m:{}};['a','f','m'].forEach(function(x){S[x]=S[x]||{}});
+var U=lsGet(UK)||{};
+var $=function(id){return document.getElementById(id)};
+function now(){return Date.now()}
+function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+/* ---------- 필터 ---------- */
+function opts(sel,first,vals){sel.innerHTML='<option value="">'+first+'</option>'+vals.map(function(v){return '<option value="'+esc(v[0])+'">'+esc(v[1])+'</option>'}).join('')}
+var profs=[],secs=[],areas=[];
+Q.forEach(function(q){if(q.prof&&profs.indexOf(q.prof)<0)profs.push(q.prof);var s=q.sec;if(s&&!secs.some(function(x){return x[0]===s}))secs.push([s,s+(q.prof?' · '+q.prof:'')]);if(areas.indexOf(q.area)<0)areas.push(q.area)});
+opts($('fProf'),'전체 교수',profs.map(function(p){return[p,p]}));
+function secOpts(){var p=$('fProf').value;opts($('fSec'),'전체 섹션',secs.filter(function(s){return !p||Q.some(function(q){return q.sec===s[0]&&q.prof===p})}))}
+secOpts();
+opts($('fArea'),'전체 영역',areas.map(function(a){return[a,a]}));
+if(areas.length<2)$('fArea').hidden=true;
+if(!Q.some(function(q){return q.rep>1}))$('fRep').hidden=true;
+var F={prof:'',sec:'',area:'',type:'',rep:'',st:'',q:'',chip:'',shuf:false,seed:1};
+Object.keys(F).forEach(function(k){if(U.f&&U.f[k]!=null)F[k]=U.f[k]});
+function syncCtl(){$('fProf').value=F.prof;secOpts();$('fSec').value=F.sec;$('fArea').value=F.area;$('fType').value=F.type;$('fRep').value=F.rep;$('fSt').value=F.st;$('fQ').value=F.q;
+  [].forEach.call(document.querySelectorAll('#chips .chip[data-v]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===F.chip))});$('shuf').setAttribute('aria-pressed',String(!!F.shuf))}
+function solved(a){return !!(a&&(a.c!=null||a.self))}
+function inWrong(k){var a=S.a[k],f=S.f[k]||{};return !!(a&&a.w>0&&!f.out)}
+function memoOf(k){var m=S.m[k];return m&&m.x?m.x:''}
+function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
+  if(F.prof&&q.prof!==F.prof)return false;if(F.sec&&q.sec!==F.sec)return false;if(F.area&&q.area!==F.area)return false;if(F.type&&q.type!==F.type)return false;
+  if(F.rep){var r=q.rep||1;if(F.rep==='3'&&r<3)return false;if(F.rep==='2'&&r!==2)return false;if(F.rep==='23'&&r<2)return false;if(F.rep==='1'&&r!==1)return false}
+  var fl=q.fl||{};
+  switch(F.st){case'inscope':if(fl.oos||f.oos)return false;break;case'nowarn':if(fl.warn)return false;break;case'chk':if(!fl.chk)return false;break;case'inc':if(!fl.inc)return false;break;case'ydiff':if(!fl.ydiff)return false;break;
+    case'img':if(!q.imgs||!q.imgs.length)return false;break;case'noimg':if(q.imgs&&q.imgs.length)return false;break;case'myerr':if(!f.err)return false;break;case'myoos':if(!f.oos)return false;break}
+  switch(F.chip){case'new':if(solved(a))return false;break;case'wrong':if(!inWrong(k))return false;break;case'conf':if(!f.conf)return false;break;case'memo':if(!memoOf(k))return false;break}
+  if(F.q){var t=(q.year+' '+q.meta+' '+q.stem+' '+q.choices.join(' ')+' '+q.ans.map(function(n){return q.choices[n-1]||''}).join(' ')+' '+q.sec+' '+memoOf(k)).toLowerCase();
+    var ws=F.q.toLowerCase().split(/\s+/).filter(Boolean);for(var i=0;i<ws.length;i++)if(t.indexOf(ws[i])<0)return false}
+  return true}
+function rnd(seed){return function(){seed=(seed*1103515245+12345)%2147483648;return seed/2147483648}}
+var L=[],cur=U.cur||null;
+function refilter(keep){L=Q.filter(pass);if(F.shuf){var r=rnd(F.seed);for(var i=L.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=L[i];L[i]=L[j];L[j]=t}}
+  if(!keep||!L.some(function(q){return q.k===cur}))cur=L.length?L[0].k:null;saveUI();render()}
+function saveUI(){lsSet(UK,{f:F,cur:cur})}
+function idx(){for(var i=0;i<L.length;i++)if(L[i].k===cur)return i;return -1}
+
+/* ---------- 상단 숫자 ---------- */
+function stats(){var n=0,ok=0,wrong=0,memo=0;Q.forEach(function(q){var a=S.a[q.k];if(solved(a)){n++;if(a.ok)ok++}if(inWrong(q.k))wrong++;if(memoOf(q.k))memo++});
+  var img=Q.filter(function(q){return q.imgs&&q.imgs.length}).length;
+  $('stats').innerHTML='<span>전체<b>'+Q.length+'</b></span>'+(img?'<span>원본 그림<b>'+img+'</b>문항</span>':'')+'<span>푼 것<b>'+n+'</b></span><span>최근 정답<b>'+(n?Math.round(ok/n*100):0)+'%</b></span><span>오답노트<b>'+wrong+'</b></span><span>메모<b>'+memo+'</b></span>'}
+
+/* ---------- 문제 카드 ---------- */
+function render(){stats();var i=idx(),v=$('view');
+  $('pos').innerHTML=L.length?'<b>'+(i+1)+'</b> / '+L.length:'0 / 0';
+  $('prev').disabled=i<=0;$('next').disabled=i<0||i>=L.length-1;
+  if(i<0){v.innerHTML='<div class="card empty">조건에 맞는 문제가 없어요. 위 필터나 칩을 바꿔 보세요.</div>';return}
+  var q=L[i],k=q.k,a=redo[k]?null:S.a[k],f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend));
+  var h='<article class="card'+(done?' done':'')+'">';
+  h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
+  if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
+  (q.notes||[]).forEach(function(n){h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
+  if(f.err)h+='<div class="note">⚑ 내가 문제오류로 표시함</div>';if(f.oos)h+='<div class="note oos">내가 범위외로 표시함</div>';
+  h+='<div class="stem">'+esc(q.stem)+'</div>';
+  if(q.imgs&&q.imgs.length)h+='<div class="imgs">'+q.imgs.map(function(s){return '<img src="'+esc(s)+'" alt="문제 사진" loading="lazy">'}).join('')+'</div>';
+  (q.vis||[]).forEach(function(t){h+='<div class="vis">'+esc(t)+'</div>'});
+  if(q.choices.length){h+='<div class="choices">';q.choices.forEach(function(c,j){var n=j+1,cl='ch';
+      if(done&&hasAns){if(q.ans.indexOf(n)>=0)cl+=' right';else if(a.c===n)cl+=' wrong'}if(done&&a.c===n)cl+=' mine';
+      h+='<button class="'+cl+'" data-n="'+n+'"'+(done?' disabled':'')+'><span class="no">'+'①②③④⑤⑥⑦⑧'.charAt(j)+'</span><span>'+esc(c)+'</span></button>'});h+='</div>'}
+  if(!done&&(!hasAns))h+='<div class="acts"><button class="btn pri" id="reveal">정답·해설 보기</button></div>';
+  if(done){
+    if(hasAns&&a.c!=null)h+='<div class="result '+(a.ok?'ok':'bad')+'">'+(a.ok?'정답이에요':'오답이에요 · 정답 '+q.ans.join(', ')+'번')+'</div>';
+    else h+='<div class="result">'+(hasAns?'정답 '+q.ans.join(', ')+'번':'정답을 확인하고 맞았는지 골라 주세요')+'</div>'+(a&&a.self?'':'<div class="acts"><button class="chip" id="selfOk">⭕ 맞았어요</button><button class="chip" id="selfBad">❌ 틀렸어요</button></div>');
+    h+='<div class="exp">';if(q.ai)h+='<div class="ai">'+esc(q.ai)+'</div>';
+    if(q.basis)h+='<h3>해설</h3>'+esc(q.basis);
+    if(q.exps&&q.exps.length)h+='<h3>선지별 해설</h3><ol>'+q.exps.map(function(e){return '<li>'+esc(e)+'</li>'}).join('')+'</ol>';
+    h+='</div>'}
+  h+='<div class="acts"><button class="chip" id="tConf" aria-pressed="'+!!f.conf+'">🟡 헷갈림</button>'+(done?'<button class="chip" id="redo">↺ 다시 풀기</button>':'')+(inWrong(k)?'<button class="chip" id="tOut">오답노트에서 빼기</button>':'')+'<button class="chip" id="tErr" aria-pressed="'+!!f.err+'">⚑ 문제오류</button><button class="chip" id="tOos" aria-pressed="'+!!f.oos+'">범위외</button></div>';
+  h+='<div class="memo"><label for="memo">내 메모 · 뭐가 헷갈렸는지, 외울 포인트</label><textarea id="memo" placeholder="예: 3번이랑 헷갈림. A는 급성, B는 만성!">'+esc(memoOf(k))+'</textarea><div class="saved" id="memoSt"></div></div>';
+  h+='<div class="bottomnav"><button class="btn" id="prev2"'+(i<=0?' disabled':'')+'>이전</button><button class="btn pri" id="next2"'+(i>=L.length-1?' disabled':'')+'>다음</button></div>';
+  h+='</article>';v.innerHTML=h;
+  [].forEach.call(v.querySelectorAll('.ch'),function(b){b.onclick=function(){answer(q,+b.getAttribute('data-n'))}});
+  var r=$('reveal');if(r)r.onclick=function(){var x=S.a[k]||{w:0,n:0};x.c=null;x.self=0;x.pend=1;x.t=now();S.a[k]=x;delete redo[k];changed();render()};
+  var so=$('selfOk'),sb=$('selfBad');if(so)so.onclick=function(){self(q,true)};if(sb)sb.onclick=function(){self(q,false)};
+  $('tConf').onclick=function(){flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
+  var o=$('tOut');if(o)o.onclick=function(){flag(k,'out',true)};
+  var rd=$('redo');if(rd)rd.onclick=function(){redo[k]=1;render()};
+  $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
+  var m=$('memo'),mt=null;m.oninput=function(){clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
+}
+// 다시 풀기: 기록(틀린 횟수)은 남기고 화면만 처음 상태로
+var redo={};
+function answer(q,n){var k=q.k,a=S.a[k]||{w:0,n:0};var ok=q.ans.indexOf(n)>=0;
+  a.c=n;a.ok=ok;a.self=0;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;delete redo[k];
+  if(!ok&&S.f[k]&&S.f[k].out){S.f[k].out=false;S.f[k].t=now()}changed();render()}
+function self(q,ok){var k=q.k,a=S.a[k]||{w:0,n:0};a.c=null;a.self=1;a.ok=ok;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;delete redo[k];changed();render()}
+function flag(k,name,val){var f=S.f[k]||{};f[name]=val!=null?val:!f[name];f.t=now();S.f[k]=f;changed();render()}
+function go(d){var i=idx()+d;if(i<0||i>=L.length)return;cur=L[i].k;saveUI();render();window.scrollTo({top:$('pos').getBoundingClientRect().top+window.scrollY-10})}
+$('prev').onclick=go.bind(null,-1);$('next').onclick=go.bind(null,1);
+document.addEventListener('keydown',function(e){if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+
+
+/* ---------- 필터 이벤트 ---------- */
+$('fProf').onchange=function(){F.prof=this.value;F.sec='';secOpts();refilter()};
+$('fSec').onchange=function(){F.sec=this.value;refilter()};$('fArea').onchange=function(){F.area=this.value;refilter()};
+$('fType').onchange=function(){F.type=this.value;refilter()};$('fRep').onchange=function(){F.rep=this.value;refilter()};$('fSt').onchange=function(){F.st=this.value;refilter()};
+var qt=null;$('fQ').oninput=function(){clearTimeout(qt);var v=this.value;qt=setTimeout(function(){F.q=v.trim();refilter()},250)};
+[].forEach.call(document.querySelectorAll('#chips .chip[data-v]'),function(b){b.onclick=function(){F.chip=b.getAttribute('data-v');syncCtl();refilter()}});
+$('shuf').onclick=function(){F.shuf=!F.shuf;F.seed=Math.floor(Math.random()*1e9)+1;syncCtl();refilter()};
+
+/* ---------- 시트(목록·백업·내보내기) ---------- */
+function sheet(h){$('sheetBox').innerHTML=h;$('sheet').hidden=false}
+function closeSheet(){$('sheet').hidden=true}
+$('sheet').onclick=function(e){if(e.target.id==='sheet')closeSheet()};
+$('bList').onclick=function(){var h='<h2>목록 · '+L.length+'문항</h2><ul class="list">';
+  L.forEach(function(q,i){var a=S.a[q.k];h+='<li data-k="'+esc(q.k)+'"'+(q.k===cur?' class="cur"':'')+'><span class="n">'+(i+1)+'</span><span class="t"><span class="dot'+(solved(a)?(a.ok?' ok':' bad'):'')+'"></span>'+esc(q.stem.slice(0,70))+(q.stem.length>70?'…':'')+'<div class="s">'+esc((q.area||'')+' · '+q.sec+(q.year?' · '+q.year:''))+(memoOf(q.k)?' · 📝 '+esc(memoOf(q.k).slice(0,30)):'')+'</div></span></li>'});
+  h+='</ul><div class="tools"><button class="btn" id="cls">닫기</button></div>';sheet(h);
+  [].forEach.call(document.querySelectorAll('.list li'),function(li){li.onclick=function(){cur=li.getAttribute('data-k');saveUI();closeSheet();render()}});
+  $('cls').onclick=closeSheet;var c=document.querySelector('.list li.cur');if(c)c.scrollIntoView({block:'center'})};
+function copyBox(title,text,note){sheet('<h2>'+esc(title)+'</h2><div class="msg" id="cmsg">'+esc(note||'')+'</div><textarea id="cbox" readonly></textarea><div class="tools"><button class="btn pri" id="ccopy">복사</button><button class="btn" id="cls">닫기</button></div>');
+  $('cbox').value=text;$('cls').onclick=closeSheet;
+  $('ccopy').onclick=function(){var b=$('cbox');function fb(){b.focus();b.select();$('cmsg').textContent='자동 복사가 막혔어요. 칸을 길게 눌러 전체 선택 → 복사하세요.'}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){$('cmsg').textContent='복사했어요.'},fb);else fb()}}
+function exportText(){var out=Q.filter(function(q){var f=S.f[q.k]||{};return inWrong(q.k)||f.conf||memoOf(q.k)});
+  return out.map(function(q,i){var a=S.a[q.k]||{},f=S.f[q.k]||{},tags=[];if(inWrong(q.k))tags.push('틀림 '+a.w+'회'+(a.ok?' (마지막엔 맞힘)':''));if(f.conf)tags.push('헷갈림');
+    return '=== '+(i+1)+'. '+q.sec+' ['+q.area+'] ('+q.prof+') ===\n'+(q.year?'기출: '+q.year+'\n':'')+(tags.length?'표시: '+tags.join(' / ')+'\n':'')+'문제: '+q.stem+(q.imgs&&q.imgs.length?' [사진 있음]':'')+'\n'+q.choices.map(function(c,j){return (j+1)+'. '+c}).join('\n')+
+      '\n정답: '+(q.ans.join(',')||'-')+(memoOf(q.k)?'\n내 메모: '+memoOf(q.k):'')+(q.basis?'\n해설: '+q.basis:'')+(q.exps&&q.exps.length?'\n선지해설:\n'+q.exps.map(function(e,j){return (j+1)+'. '+e}).join('\n'):'')}).join('\n\n')}
+$('bExp').onclick=function(){var t=exportText();copyBox('오답·헷갈림·메모 내보내기',t||'아직 틀리거나 헷갈림·메모를 남긴 문제가 없어요.',(t?t.split('\n=== ').length:0)+'문항 · 복사해서 AI 대화창이나 메모장에 붙여넣으세요.')};
+$('bBak').onclick=function(){copyBox('기록 백업',JSON.stringify({app:APP,at:new Date().toISOString(),s:S}),'이 글을 복사해 두면 나중에 “백업 불러오기”로 되살릴 수 있어요.')};
+$('bRes').onclick=function(){sheet('<h2>백업 불러오기</h2><div class="msg" id="rmsg">“기록 백업”에서 복사한 글을 붙여넣고 불러오기를 누르세요. 지금 기록과 합쳐져요.</div><textarea id="rbox"></textarea><div class="tools"><button class="btn pri" id="rgo">불러오기</button><button class="btn" id="cls">닫기</button></div>');
+  $('cls').onclick=closeSheet;$('rgo').onclick=function(){try{var o=JSON.parse($('rbox').value);merge(o.s||o);changed();refilter(true);$('rmsg').textContent='불러왔어요.'}catch(e){$('rmsg').textContent='백업 글 형식이 아니에요. 처음부터 끝까지 그대로 붙여넣었는지 확인해 주세요.'}}};
+
+/* ---------- 저장·계정 동기화 ---------- */
+function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object.keys(src).forEach(function(k){var v=src[k];if(!v)return;var c=S[x][k];if(!c||(v.t||0)>(c.t||0))S[x][k]=v})})}
+var DB=null,UID=null,pt=null,dirty=false;
+function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
+function push(){if(!DB||!UID||!dirty)return;dirty=false;
+  var st={a:S.a,f:S.f,updatedAt:new Date().toISOString()},mm={m:S.m,updatedAt:st.updatedAt};
+  Promise.all([DB.doc('st/'+UID).set(st),DB.doc('memo/'+UID).set(mm)]).then(function(){$('sync').textContent='계정에 저장됨 · 모든 기기 연결'},function(){dirty=true;$('sync').textContent='계정 저장 실패 · 이 기기에는 저장됨'})}
+function pull(){if(!DB||!UID)return Promise.resolve();$('sync').textContent='계정 기록 연결 중…';
+  return Promise.all([DB.doc('st/'+UID).get(),DB.doc('memo/'+UID).get()]).then(function(r){
+    var s=r[0]&&r[0].exists?r[0].data():null,m=r[1]&&r[1].exists?r[1].data():null;
+    if(s)merge({a:s.a,f:s.f});if(m)merge({m:m.m});lsSet(LK,S);refilter(true);$('sync').textContent='계정에 저장됨 · 모든 기기 연결';
+    if(!s||!m||Object.keys(S.a).length)dirty=true,push()},function(){$('sync').textContent='계정 연결 실패 · 이 기기에만 저장'})}
+$('bSync').onclick=function(){if(DB)pull();else{S=lsGet(LK)||S;refilter(true)}};
+window.addEventListener('pagehide',function(){lsSet(LK,S);push()});
+if(window.claude&&window.claude.use){Promise.all([window.claude.use('db'),window.claude.use('user')]).then(function(r){
+  if(!r[0]||!r[1]){$('sync').textContent='이 기기에 저장됨';return}DB=r[0];return r[1].id().then(function(id){if(!id){$('sync').textContent='이 기기에 저장됨';DB=null;return}UID=id;return pull()})}).catch(function(){$('sync').textContent='이 기기에 저장됨'})}
+else $('sync').textContent='이 기기에 저장됨';
+
+syncCtl();refilter(true);
+})();
+</script>
