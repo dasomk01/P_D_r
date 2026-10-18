@@ -1,5 +1,6 @@
 import json,re,sys
-D='/tmp/claude-0/-home-user-P-D-r/561b9438-f541-5374-9f36-ce0f5db3fe50/scratchpad/psy'
+import os
+D=os.path.dirname(os.path.abspath(__file__))
 def build(items,title,appkey,out):
   Q=[]
   for o in items:

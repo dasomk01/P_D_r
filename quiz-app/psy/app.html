@@ -197,7 +197,7 @@ function render(){stats();var i=idx(),v=$('view');
   (q.vis||[]).forEach(function(t){h+='<div class="vis">'+esc(t)+'</div>'});
   if(q.choices.length){h+='<div class="choices">';q.choices.forEach(function(c,j){var n=j+1,cl='ch';
       if(done&&hasAns){if(q.ans.indexOf(n)>=0)cl+=' right';else if(a.c===n)cl+=' wrong'}if(done&&a.c===n)cl+=' mine';
-      h+='<button class="'+cl+'" data-n="'+n+'"'+(done?' disabled':'')+'><span class="no">'+'①②③④⑤⑥⑦⑧'.charAt(j)+'</span><span>'+esc(c)+'</span></button>'});h+='</div>'}
+      h+='<button class="'+cl+'" data-n="'+n+'"'+(done?' disabled':'')+'><span class="no">'+'①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬'.charAt(j)+'</span><span>'+esc(c)+'</span></button>'});h+='</div>'}
   if(!done&&(!hasAns))h+='<div class="acts"><button class="btn pri" id="reveal">정답·해설 보기</button></div>';
   if(done){
     if(hasAns&&a.c!=null)h+='<div class="result '+(a.ok?'ok':'bad')+'">'+(a.ok?'정답이에요':'오답이에요 · 정답 '+q.ans.join(', ')+'번')+'</div>';
