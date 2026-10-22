@@ -60,6 +60,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 .ch.right{border-color:var(--ok);background:var(--ok-soft)}
 .ch.wrong{border-color:var(--bad);background:var(--bad-soft)}
 .ch.mine{box-shadow:inset 0 0 0 1px currentColor}
+.ch.sel{border-color:var(--fg);box-shadow:inset 0 0 0 2px var(--fg)}
 .done .ch{cursor:default}
 .result{margin-top:14px;font-weight:700;font-size:16px}
 .result.ok{color:var(--ok)}.result.bad{color:var(--bad)}
@@ -186,7 +187,7 @@ function render(){stats();var i=idx(),v=$('view');
   $('pos').innerHTML=L.length?'<b>'+(i+1)+'</b> / '+L.length:'0 / 0';
   $('prev').disabled=i<=0;$('next').disabled=i<0||i>=L.length-1;
   if(i<0){v.innerHTML='<div class="card empty">조건에 맞는 문제가 없어요. 위 필터나 칩을 바꿔 보세요.</div>';return}
-  var q=L[i],k=q.k,a=redo[k]?null:S.a[k],f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend));
+  var q=L[i],k=q.k,a=redo[k]?null:S.a[k],f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend)),multi=hasAns&&q.pick>1,pk=PK[k]||[],mine=function(n){return a&&(Array.isArray(a.c)?a.c.indexOf(n)>=0:a.c===n)};
   var h='<article class="card'+(done?' done':'')+'">';
   h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
@@ -196,11 +197,12 @@ function render(){stats();var i=idx(),v=$('view');
   if(q.imgs&&q.imgs.length)h+='<div class="imgs">'+q.imgs.map(function(s){return '<img src="'+esc(s)+'" alt="문제 사진" loading="lazy">'}).join('')+'</div>';
   (q.vis||[]).forEach(function(t){h+='<div class="vis">'+esc(t)+'</div>'});
   if(q.choices.length){h+='<div class="choices">';q.choices.forEach(function(c,j){var n=j+1,cl='ch';
-      if(done&&hasAns){if(q.ans.indexOf(n)>=0)cl+=' right';else if(a.c===n)cl+=' wrong'}if(done&&a.c===n)cl+=' mine';
+      if(done&&hasAns){if(q.ans.indexOf(n)>=0)cl+=' right';else if(mine(n))cl+=' wrong'}if(done&&mine(n))cl+=' mine';if(!done&&multi&&pk.indexOf(n)>=0)cl+=' sel';
       h+='<button class="'+cl+'" data-n="'+n+'"'+(done?' disabled':'')+'><span class="no">'+'①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬'.charAt(j)+'</span><span>'+esc(c)+'</span></button>'});h+='</div>'}
+  if(!done&&multi)h+='<div class="acts"><span class="meta">'+q.pick+'개를 모두 골라야 정답이에요 · '+pk.length+'/'+q.pick+' 선택</span><button class="btn pri" id="submitM"'+(pk.length?'':' disabled')+'>채점하기</button></div>';
   if(!done&&(!hasAns))h+='<div class="acts"><button class="btn pri" id="reveal">정답·해설 보기</button></div>';
   if(done){
-    if(hasAns&&a.c!=null)h+='<div class="result '+(a.ok?'ok':'bad')+'">'+(a.ok?'정답이에요':'오답이에요 · 정답 '+q.ans.join(', ')+'번')+'</div>';
+    if(hasAns&&a.c!=null)h+='<div class="result '+(a.ok?'ok':'bad')+'">'+(a.ok?'정답이에요':'오답이에요 · 정답 '+q.ans.join(', ')+'번'+(multi?' (모두 골라야 정답)':''))+'</div>';
     else h+='<div class="result">'+(hasAns?'정답 '+q.ans.join(', ')+'번':'정답을 확인하고 맞았는지 골라 주세요')+'</div>'+(a&&a.self?'':'<div class="acts"><button class="chip" id="selfOk">⭕ 맞았어요</button><button class="chip" id="selfBad">❌ 틀렸어요</button></div>');
     h+='<div class="exp">';if(q.ai)h+='<div class="ai">'+esc(q.ai)+'</div>';
     if(q.basis)h+='<h3>해설</h3>'+esc(q.basis);
@@ -210,18 +212,19 @@ function render(){stats();var i=idx(),v=$('view');
   h+='<div class="memo"><label for="memo">내 메모 · 뭐가 헷갈렸는지, 외울 포인트</label><textarea id="memo" placeholder="예: 3번이랑 헷갈림. A는 급성, B는 만성!">'+esc(memoOf(k))+'</textarea><div class="saved" id="memoSt"></div></div>';
   h+='<div class="bottomnav"><button class="btn" id="prev2"'+(i<=0?' disabled':'')+'>이전</button><button class="btn pri" id="next2"'+(i>=L.length-1?' disabled':'')+'>다음</button></div>';
   h+='</article>';v.innerHTML=h;
-  [].forEach.call(v.querySelectorAll('.ch'),function(b){b.onclick=function(){answer(q,+b.getAttribute('data-n'))}});
+  [].forEach.call(v.querySelectorAll('.ch'),function(b){b.onclick=function(){var n=+b.getAttribute('data-n');if(!multi)return answer(q,n);var p=(PK[k]||[]).slice(),j=p.indexOf(n);if(j>=0)p.splice(j,1);else p.push(n);PK[k]=p;render()}});
+  var sm=$('submitM');if(sm)sm.onclick=function(){answer(q,(PK[k]||[]).slice().sort(function(x,y){return x-y}));delete PK[k]};
   var r=$('reveal');if(r)r.onclick=function(){var x=S.a[k]||{w:0,n:0};x.c=null;x.self=0;x.pend=1;x.t=now();S.a[k]=x;delete redo[k];changed();render()};
   var so=$('selfOk'),sb=$('selfBad');if(so)so.onclick=function(){self(q,true)};if(sb)sb.onclick=function(){self(q,false)};
   $('tConf').onclick=function(){flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
   var o=$('tOut');if(o)o.onclick=function(){flag(k,'out',true)};
-  var rd=$('redo');if(rd)rd.onclick=function(){redo[k]=1;render()};
+  var rd=$('redo');if(rd)rd.onclick=function(){redo[k]=1;delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
   var m=$('memo'),mt=null;m.oninput=function(){clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
 }
 // 다시 풀기: 기록(틀린 횟수)은 남기고 화면만 처음 상태로
-var redo={};
-function answer(q,n){var k=q.k,a=S.a[k]||{w:0,n:0};var ok=q.ans.indexOf(n)>=0;
+var redo={},PK={};
+function answer(q,n){var k=q.k,a=S.a[k]||{w:0,n:0};var ok=Array.isArray(n)?(n.length===q.ans.length&&n.every(function(x){return q.ans.indexOf(x)>=0})):q.ans.indexOf(n)>=0;
   a.c=n;a.ok=ok;a.self=0;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;delete redo[k];
   if(!ok&&S.f[k]&&S.f[k].out){S.f[k].out=false;S.f[k].t=now()}changed();render()}
 function self(q,ok){var k=q.k,a=S.a[k]||{w:0,n:0};a.c=null;a.self=1;a.ok=ok;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;delete redo[k];changed();render()}

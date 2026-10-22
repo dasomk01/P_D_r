@@ -14,7 +14,7 @@ def build(items,title,appkey,out):
     Q.append(dict(k=o.get('k') or o['id'],area=o['area'],prof=o.get('prof',''),sec=o.get('sec',''),meta=meta,year=o.get('year',''),
       type=o.get('type','객'),rep=o.get('rep',1),repyears=o.get('repyears',''),stem=o['stem'],choices=o['choices'],
       ans=[] if o.get('excl') else o.get('ans',[]),imgs=o.get('imgs',[]),vis=o.get('vis',[]),notes=notes,basis=o.get('basis',''),
-      exps=o.get('exps',[]),ai=o.get('ai',''),fl={k:1 for k,v in fl.items() if v}))
+      exps=o.get('exps',[]),ai=o.get('ai',''),pick=(len(o.get('ans',[])) if len(o.get('ans',[]))>1 and re.search(r'지시하는 수만큼|\((두|세) 가지\)',o['stem']) else 0),fl={k:1 for k,v in fl.items() if v}))
   t=open(D+'/app.html',encoding='utf-8').read()
   data=json.dumps(Q,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
   t=t.replace('__TITLE__',title).replace('__APPKEY__',appkey).replace('__DATA__',data)
