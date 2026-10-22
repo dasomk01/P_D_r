@@ -30,6 +30,11 @@ def same(c,s,ch,ans):
   if R(' '.join(c['ch'][a-1] for a in c['ans']),' '.join(ch[a-1] for a in ans))<0.85: return False
   return min(R(x,y) for x,y in zip(c['ch'],ch))>=0.9   # 선지가 하나라도 바뀌거나 순서가 다르면 따로 둔다
 
+# 야마 해설 보강: yexp_*.py 의 EXP = {카드키: {'cls': 올해 수업 기준 해설, 'wb': 학습지 해설}}
+import glob
+EXP={}
+for p in sorted(glob.glob(D+'/yexp_*.py')): EXP.update(importlib.import_module(os.path.basename(p)[:-3]).EXP)
+
 def yama():
   cards=[];fam=collections.defaultdict(list)
   for m in YMODS:
@@ -51,15 +56,20 @@ def yama():
     notes=c['notes']
     if len(c['ys'])>1: notes=['같은 문제(문제·선지 거의 동일): '+' · '.join(c['ys'][1:])]+notes
     if c['excl']: notes=notes+['학습지 정답 그대로는 채점하지 않고, 확인되면 반영할게요.']
-    tb=TYB.get(k);basis=c['basis']
-    if tb: basis='📌 티야방('+tb[0]+'): '+tb[1]+'\n\n'+basis
+    tb=TYB.get(k);ex=EXP.get(k,{})
+    parts=['📌 티야방('+tb[0]+'): '+tb[1]] if tb else []
+    if ex.get('cls'): parts.append('🎓 올해 수업 기준: '+ex['cls'])
+    parts.append('📚 학습지 해설: '+ex['wb'] if ex.get('wb') else '📚 학습지 해설 요약: '+c['basis'])
+    basis='\n\n'.join(parts)
     sec,prof=PRE[c['sec']][:2] if c['sec'] in PRE else importlib.import_module(YSEC[c['sec']]).SEC
     out[c['sec']].append(dict(k='psy-'+k,area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
       year=c['ys'][0],type='객',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
-      stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=[],vis=[],notes=notes,basis='📚 학습지 해설 요약: '+basis if not tb else basis,exps=[],ai=''))
+      stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=[],vis=[],notes=notes,basis=basis,exps=[],ai=''))
   return out
 
 Y=yama()
+if os.environ.get('DUMPKEYS'):
+  json.dump({s:[dict(k=i['k'][4:],year=i['year'],rep=i['repyears'],stem=i['stem'][:60]) for i in v] for s,v in Y.items()},open(os.environ['DUMPKEYS'],'w'),ensure_ascii=False,indent=0)
 items=[];errs=[]
 for m in MODS:
   M=importlib.import_module(m); sec,prof=M.SEC
