@@ -30,6 +30,11 @@
 - 솜에드(Somed): 강의록·STT는 `get_lesson_materials(date, period)`, 학습지는 `정신의학` 학습지(id `7a75f08e-b3c8-403f-aa4e-e58fe479b837`, 목차 확정, 380쪽).
 - 티야방: Google Docs `1icF0qNtNhgyGeGOSWDEDr6FCsZ1SBKwGgyH4zj0upSo` (수업별 표, 담당자가 채움).
 
+## 야마 해설 보강 (10/22)
+- `yexp_*.py`의 `EXP[카드키] = {'cls': 올해 수업 기준(학습지와 같으면 ''), 'wb': 학습지 복원자 해설}` → 해설 순서: 📌 티야방 → 🎓 올해 수업 기준 → 📚 학습지 해설. 없으면 예전 요약.
+- 카드 키 목록 뽑기: `DUMPKEYS=<경로.json> python3 build_psy.py`. 새 야마를 넣으면 같은 형식으로 yexp에 추가.
+- 옛 학습지 7a75f08e…는 Somed에서 지워짐 → 새 학습지 3ec72092… (쪽 +1).
+
 ## 10/22 추가
 - 789문제. 박태원 1교시 운동장애·틱(`q20_child3`, 틱 야마 구역 `tic`을 수업 섹션으로 옮김 – PRE에서 제거), 2–3교시 소아 불안·우울(+품행·ODD·야경증·배설·학습장애 일부)(`q21_child4`/`y_child4`: canx·cdep, 새 학습지 113–144). 4교시 자료 없음.
 - 새 학습지 workbookId `3ec72092-5e6a-48ff-92e7-0a3a1ba6b71c` – 쪽번호가 옛 학습지보다 +1. 10/22는 Somed에서 수업–목차 연결이 안 되어 있었음(주제로 직접 선택).
