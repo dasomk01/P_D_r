@@ -30,6 +30,10 @@
 - 솜에드(Somed): 강의록·STT는 `get_lesson_materials(date, period)`, 학습지는 `정신의학` 학습지(id `7a75f08e-b3c8-403f-aa4e-e58fe479b837`, 목차 확정, 380쪽).
 - 티야방: Google Docs `1icF0qNtNhgyGeGOSWDEDr6FCsZ1SBKwGgyH4zj0upSo` (수업별 표, 담당자가 채움).
 
+## 10/23 추가
+- 양종철 1–2교시 정신사회심리치료(`q22_psysoc`/`y_psysoc` pst 206–218, 해설 `yexp_psysoc`). 3–4교시 자료 없음(영상 시청). 강의록 41쪽 이후 스캔 깨짐.
+- 다중선택("지시하는 수만큼/(두 가지)") 문제는 `pick`으로 모두 골라 제출해야 채점(mk.py·app.html).
+
 ## 야마 해설 보강 (10/22)
 - `yexp_*.py`의 `EXP[카드키] = {'cls': 올해 수업 기준(학습지와 같으면 ''), 'wb': 학습지 복원자 해설}` → 해설 순서: 📌 티야방 → 🎓 올해 수업 기준 → 📚 학습지 해설. 없으면 예전 요약.
 - 카드 키 목록 뽑기: `DUMPKEYS=<경로.json> python3 build_psy.py`. 새 야마를 넣으면 같은 형식으로 yexp에 추가.
