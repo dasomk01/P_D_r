@@ -56,17 +56,17 @@
 
 ## 4. 설치 · 배포
 
-1. **Supabase 프로젝트 생성** → SQL Editor 에 `supabase/migrations/0001_our_studio.sql` 전체를 붙여 실행.
+1. **Supabase 프로젝트 생성** → SQL Editor 에서 `supabase/migrations/0001_our_studio.sql`, 이어서 `0002_auto_member.sql` 을 실행.
 2. **Authentication → Sign In / Providers → Email** 에서 *Allow new users to sign up* 끄기 (초대 전용).
-3. **두 사람 계정 만들기** (서비스 롤 키는 이 명령에서만 사용, 배포 환경변수에 넣지 않음):
-   ```bash
-   cd our-studio && npm install
-   SUPABASE_URL=https://xxxx.supabase.co SUPABASE_SERVICE_ROLE_KEY=... \
-     node scripts/invite-user.mjs her@example.com '비밀번호' 토끼 '#b97f84'
-   SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
-     node scripts/invite-user.mjs him@example.com '비밀번호' 곰 '#1b2540'
-   ```
-   (대시보드에서 직접 사용자를 만들었다면 SQL: `insert into members (user_id, display_name) values ('<uuid>', '토끼');`)
+3. **두 사람 계정 만들기**: **Authentication → Users → Add user → Create new user** (비밀번호 입력 + *Auto Confirm User* 체크).
+   `0002_auto_member.sql` 덕분에 여기서 만든 계정은 **자동으로 멤버**가 됩니다. 표시 이름은 이메일 앞부분으로 시작하니 사이트의 *설정·백업* 에서 바꾸세요.
+   - *Invite user* (초대 메일)는 쓰지 마세요 — 비밀번호를 정하는 화면이 없어 로그인할 수 없습니다.
+   - 터미널을 쓴다면 `node scripts/invite-user.mjs <email> <password> <이름>` 도 같은 일을 합니다.
+   - 비밀번호를 잊었을 때 (SQL Editor):
+     ```sql
+     update auth.users set encrypted_password = extensions.crypt('새비밀번호', extensions.gen_salt('bf'))
+     where email = '이메일';
+     ```
 4. **Vercel 새 프로젝트** → 같은 저장소, **Root Directory = `our-studio`**, 환경변수 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, (선택) `ANTHROPIC_API_KEY`.
 5. (선택) 샘플 데이터: `SEED_EMAIL=... SEED_PASSWORD=... NEXT_PUBLIC_SUPABASE_URL=... NEXT_PUBLIC_SUPABASE_ANON_KEY=... node scripts/seed-sample.mjs`
 
