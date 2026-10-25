@@ -1,5 +1,7 @@
 # SOM STUDY
 
+> 같은 저장소에 별도 앱 **OUR STUDIO**(`our-studio/`, 커플 공동 인스타그램 콘텐츠 작업실)가 있습니다. 독립된 Next.js 앱이며 Vercel 에서 Root Directory 를 `our-studio` 로 지정해 따로 배포합니다 — [our-studio/README.md](our-studio/README.md).
+
 개인용 의대 AI 공부 웹앱. iPad에서 웹으로 사용(설치 X).
 
 핵심 흐름: **자료 업로드 → 정리본 생성(Claude) → 문제 생성(Gemini) → 문제풀이 → 오답 축적 → AI 과외(GPT)**
