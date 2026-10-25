@@ -56,25 +56,47 @@
 
 ## 4. 설치 · 배포
 
-1. **Supabase 프로젝트 생성** → SQL Editor 에 `supabase/migrations/0001_our_studio.sql` 전체를 붙여 실행.
+1. **Supabase 프로젝트 생성** → SQL Editor 에서 `supabase/migrations/0001_our_studio.sql`, 이어서 `0002_auto_member.sql` 을 실행.
 2. **Authentication → Sign In / Providers → Email** 에서 *Allow new users to sign up* 끄기 (초대 전용).
-3. **두 사람 계정 만들기** (서비스 롤 키는 이 명령에서만 사용, 배포 환경변수에 넣지 않음):
-   ```bash
-   cd our-studio && npm install
-   SUPABASE_URL=https://xxxx.supabase.co SUPABASE_SERVICE_ROLE_KEY=... \
-     node scripts/invite-user.mjs her@example.com '비밀번호' 토끼 '#b97f84'
-   SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... \
-     node scripts/invite-user.mjs him@example.com '비밀번호' 곰 '#1b2540'
-   ```
-   (대시보드에서 직접 사용자를 만들었다면 SQL: `insert into members (user_id, display_name) values ('<uuid>', '토끼');`)
+3. **두 사람 계정 만들기**: **Authentication → Users → Add user → Create new user** (비밀번호 입력 + *Auto Confirm User* 체크).
+   `0002_auto_member.sql` 덕분에 여기서 만든 계정은 **자동으로 멤버**가 됩니다. 표시 이름은 이메일 앞부분으로 시작하니 사이트의 *설정·백업* 에서 바꾸세요.
+   - *Invite user* (초대 메일)는 쓰지 마세요 — 비밀번호를 정하는 화면이 없어 로그인할 수 없습니다.
+   - 터미널을 쓴다면 `node scripts/invite-user.mjs <email> <password> <이름>` 도 같은 일을 합니다.
+   - 비밀번호를 잊었을 때 (SQL Editor):
+     ```sql
+     update auth.users set encrypted_password = extensions.crypt('새비밀번호', extensions.gen_salt('bf'))
+     where email = '이메일';
+     ```
 4. **Vercel 새 프로젝트** → 같은 저장소, **Root Directory = `our-studio`**, 환경변수 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, (선택) `ANTHROPIC_API_KEY`.
 5. (선택) 샘플 데이터: `SEED_EMAIL=... SEED_PASSWORD=... NEXT_PUBLIC_SUPABASE_URL=... NEXT_PUBLIC_SUPABASE_ANON_KEY=... node scripts/seed-sample.mjs`
 
 로컬 개발: `cp .env.example .env.local` 후 값 입력 → `npm run dev`.
 
+## 4-1. ChatGPT 에서 쓰기 (MCP 커넥터)
+
+ChatGPT(유료 플랜) 대화창에서 OUR STUDIO 의 아이디어·아카이브를 읽고, 콘텐츠 **초안**을 제작실에 저장할 수 있습니다. 승인·삭제·게시는 할 수 없습니다.
+
+1. Supabase SQL Editor 에서 `0003_activity_actor.sql` 실행 (ChatGPT 로 저장한 변경에도 작성자가 남도록)
+2. Vercel 환경변수 추가 후 Redeploy
+   - `SUPABASE_SERVICE_ROLE_KEY` — Supabase → Project Settings → API Keys 의 **secret / service_role** 키 (서버 전용)
+   - `MCP_AUTH_SECRET` — 32자 이상 임의 문자열. 바꾸면 모든 ChatGPT 연결이 끊깁니다
+3. ChatGPT → 설정 → 앱(Apps) → 고급 설정 → **개발자 모드** 켜기 → 새 앱 만들기
+   - MCP 서버 URL: `https://<사이트 주소>/api/mcp` (사이트 *설정·백업* 화면에서 복사)
+   - 인증: OAuth → 연결하면 이 사이트의 로그인·허용 화면이 뜹니다
+4. 대화 예시: "OUR STUDIO 에서 korea-trip 다음 제작 추천 가져와서 7장 캐러셀 초안 만들고 저장해줘"
+
+도구: `get_project_rules`, `get_next_up`, `list_ideas`, `get_idea`, `search_archive`, `get_place`, `list_contents`, `get_content`, `search`, `fetch`, `create_idea`, `save_content_draft`, `add_place_research`
+
+- 인증: OAuth 2.1 (자동 발견 RFC 9728/8414, 동적 등록, PKCE S256). 토큰은 서명된 JWT(1시간, 리프레시 60일)이고 매 요청마다 멤버 여부를 다시 확인합니다.
+- 리다이렉트는 ChatGPT·Claude 도메인만 허용 (`MCP_ALLOWED_REDIRECT_HOSTS` 로 추가 가능).
+- 방문 날짜·방문자·금지어 목록은 전달하지 않습니다. 직접 경험(OUR_EXPERIENCE)과 조사 자료(RESEARCHED)를 구분해 전달합니다.
+- 초안은 `검토 대기` 로 저장되고, 승인된 버전은 덮어쓰지 않고 새 버전으로 추가됩니다. 툰 초안은 저장 시 익명성 검사 결과를 돌려줍니다.
+- ChatGPT 예약 작업(Scheduled tasks) 안에서 이 커넥터를 쓸 수 있는지는 ChatGPT 쪽 기능이라 직접 시험해 봐야 합니다. 쓰기 도구는 ChatGPT 가 실행 전에 확인을 요청할 수 있습니다.
+
 ## 5. 검증
 
 - `npm test` — 유사도·익명성 스캔·추천 우선순위·30일 중복·아카이브 매칭·KST 날짜·거리·캐러셀 규칙 단위 테스트
+- `tests/mcp-e2e.cjs` — 공식 MCP SDK 클라이언트로 ChatGPT 와 같은 OAuth 흐름(발견 → 동적 등록 → 브라우저 동의 → PKCE 토큰 → 도구 호출)을 수행하는 21개 시나리오 (비멤버 차단, 거부, 초안 저장·버전, 규칙·익명성 검사, 조사 자료, 401, 리프레시, 리다이렉트 제한). 서버에 `MCP_ALLOWED_REDIRECT_HOSTS=localhost` 필요
 - `tests/e2e.cjs` — 로컬 Supabase(Docker) + `next dev` 에 대해 두 브라우저(토끼·곰)로 실제 동작을 검증하는 49개 시나리오: 비멤버 차단·RLS, 실시간 동기화(아이디어·투표·댓글·승인), 사진 업로드·권리 편집·일괄 연결, 7장 제작·해시태그 규칙, 페이지별 댓글·수정 요청, 1인 승인, 승인본 DB 잠금, 승인 후 v2, 버전 비교, ZIP 내용, 30일 중복 경고, 익명성 검수, 캘린더 순서 변경, JSON 백업, 모바일 가로 스크롤.
   ```bash
   npx supabase start            # 별도 폴더에서, Docker 필요
@@ -95,6 +117,7 @@
 | 콘텐츠 이미지 생성 | **연동 준비 중** | 연결된 서비스 없음. 완성 이미지는 업로드 |
 | 자동 제작 스케줄 (17:00/23:00) | **연동 준비 중** | ChatGPT 예약과 연결되어 있지 않음 — 캘린더는 목표 시간 표시만 |
 | Instagram / Metricool 게시 | **구현하지 않음 (요구사항)** | ZIP 으로 내려받아 직접 게시 |
+| ChatGPT 에서 아이디어 기반 초안 만들기 | **구현됨 (MCP 커넥터)** | 4-1 참고. 실제 ChatGPT 연결은 배포 후 확인 필요 |
 | ChatGPT 대화 기록 | 자동 접근 없음 | 사용자가 붙여넣은 내용만 공동 아이디어로 저장 |
 
 > 이 저장소 작업 환경에는 Claude API 키가 없어 AI 경로는 실제 호출로 검증하지 못했습니다(타입 검사·빌드만 통과). 키를 넣은 뒤 아이디어 하나로 'AI 기획 받기'를 먼저 시험해 보세요.
