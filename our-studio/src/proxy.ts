@@ -26,7 +26,7 @@ export async function proxy(request: NextRequest) {
   } = await sb.auth.getUser();
 
   const path = request.nextUrl.pathname;
-  const isPublic = path === "/login" || path.startsWith("/api/");
+  const isPublic = path === "/login" || path.startsWith("/api/") || path.startsWith("/.well-known/");
   if (!user && !isPublic) {
     const to = request.nextUrl.clone();
     to.pathname = "/login";

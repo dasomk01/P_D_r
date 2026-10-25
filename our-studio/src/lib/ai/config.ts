@@ -1,5 +1,7 @@
 import "server-only";
 
+import { mcpConfigured } from "../mcp/oauth";
+
 export const AI_MODEL = process.env.AI_MODEL || "claude-opus-5-5";
 
 export function aiConfigured(): boolean {
@@ -25,6 +27,7 @@ export function aiStatus() {
       anonymity_check: on,
       image_generation: false,
       scheduled_production: false,
+      mcp: mcpConfigured(),
     },
   };
 }

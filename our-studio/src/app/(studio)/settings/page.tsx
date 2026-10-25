@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JSZip from "jszip";
 import { supabase } from "@/lib/supabase/client";
 import { must } from "@/lib/live";
@@ -93,6 +93,11 @@ export default function SettingsPage() {
   const status: [string, boolean, string][] = [
     ["데이터베이스·로그인·파일 저장 (Supabase)", true, "연결됨 — 두 사람의 데이터가 실시간으로 동기화됩니다."],
     ["AI 기획·문구·조사 (Claude API)", ai.configured, ai.configured ? `연결됨 · ${ai.model}` : "ANTHROPIC_API_KEY 미설정 — 관련 버튼은 '연동 준비 중'으로 표시됩니다."],
+    [
+      "ChatGPT 연결 (MCP 커넥터)",
+      ai.features.mcp,
+      ai.features.mcp ? "준비됨 — 아래 주소로 ChatGPT 에 커넥터를 추가하세요." : "MCP_AUTH_SECRET, SUPABASE_SERVICE_ROLE_KEY 미설정",
+    ],
     ["AI 이미지 생성", false, "연결된 서비스 없음 — 완성 이미지는 직접 업로드합니다."],
     ["자동 제작 스케줄 (ChatGPT 예약 연동)", false, "연결 안 됨 — 캘린더의 17:00/23:00 는 목표 시간 표시용입니다."],
     ["Instagram / Metricool 게시", false, "의도적으로 구현하지 않음 — ZIP 으로 내려받아 직접 게시합니다."],
@@ -164,6 +169,15 @@ export default function SettingsPage() {
         </ul>
       </section>
 
+      <section className="max-w-2xl space-y-3">
+        <SectionTitle>ChatGPT 에서 쓰기</SectionTitle>
+        <p className="text-sm text-muted">
+          ChatGPT → 설정 → 앱(Apps) → 고급 설정에서 개발자 모드를 켠 뒤, 새 앱(커넥터)을 만들고 아래 주소를 넣으세요. 인증은 OAuth 입니다. 연결하면 이
+          사이트의 허용 화면이 뜨고, 허용하면 ChatGPT 가 아이디어·아카이브를 읽고 콘텐츠 <b>초안</b>을 제작실에 저장할 수 있습니다(승인·게시는 불가).
+        </p>
+        <McpUrl />
+      </section>
+
       <section className="space-y-4">
         <SectionTitle>백업 · 내보내기</SectionTitle>
         <p className="text-sm text-muted">모든 데이터(아이디어·장소·후기·조사 자료·콘텐츠 버전·승인 이력·댓글)를 JSON 으로, 업로드한 원본 파일은 프로젝트별 ZIP(출처·권리 manifest 포함)으로 내려받습니다.</p>
@@ -181,6 +195,28 @@ export default function SettingsPage() {
       </section>
       {msg && <p className="text-sm text-ok">{msg}</p>}
       <ErrorNote error={error} />
+    </div>
+  );
+}
+
+function McpUrl() {
+  const [copied, setCopied] = useState(false);
+  const [url, setUrl] = useState("/api/mcp");
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- origin is only known in the browser
+  useEffect(() => setUrl(`${window.location.origin}/api/mcp`), []);
+  return (
+    <div className="flex gap-2">
+      <input className="input" readOnly value={url} onFocus={(e) => e.target.select()} aria-label="MCP 주소" />
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={async () => {
+          await navigator.clipboard.writeText(url);
+          setCopied(true);
+        }}
+      >
+        {copied ? "복사됨" : "복사"}
+      </Button>
     </div>
   );
 }
