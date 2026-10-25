@@ -187,7 +187,7 @@ function render(){stats();var i=idx(),v=$('view');
   $('pos').innerHTML=L.length?'<b>'+(i+1)+'</b> / '+L.length:'0 / 0';
   $('prev').disabled=i<=0;$('next').disabled=i<0||i>=L.length-1;
   if(i<0){v.innerHTML='<div class="card empty">조건에 맞는 문제가 없어요. 위 필터나 칩을 바꿔 보세요.</div>';return}
-  var q=L[i],k=q.k,a=redo[k]?null:S.a[k],f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend)),multi=hasAns&&q.pick>1,pk=PK[k]||[],mine=function(n){return a&&(Array.isArray(a.c)?a.c.indexOf(n)>=0:a.c===n)};
+  var q=L[i],k=q.k,a=SES[k]||null,f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend)),multi=hasAns&&q.pick>1,pk=PK[k]||[],mine=function(n){return a&&(Array.isArray(a.c)?a.c.indexOf(n)>=0:a.c===n)};
   var h='<article class="card'+(done?' done':'')+'">';
   h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
@@ -214,20 +214,21 @@ function render(){stats();var i=idx(),v=$('view');
   h+='</article>';v.innerHTML=h;
   [].forEach.call(v.querySelectorAll('.ch'),function(b){b.onclick=function(){var n=+b.getAttribute('data-n');if(!multi)return answer(q,n);var p=(PK[k]||[]).slice(),j=p.indexOf(n);if(j>=0)p.splice(j,1);else p.push(n);PK[k]=p;render()}});
   var sm=$('submitM');if(sm)sm.onclick=function(){answer(q,(PK[k]||[]).slice().sort(function(x,y){return x-y}));delete PK[k]};
-  var r=$('reveal');if(r)r.onclick=function(){var x=S.a[k]||{w:0,n:0};x.c=null;x.self=0;x.pend=1;x.t=now();S.a[k]=x;delete redo[k];changed();render()};
+  var r=$('reveal');if(r)r.onclick=function(){var x=S.a[k]||{w:0,n:0};x.c=null;x.self=0;x.pend=1;x.t=now();S.a[k]=x;SES[k]={pend:1};changed();render()};
   var so=$('selfOk'),sb=$('selfBad');if(so)so.onclick=function(){self(q,true)};if(sb)sb.onclick=function(){self(q,false)};
   $('tConf').onclick=function(){flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
   var o=$('tOut');if(o)o.onclick=function(){flag(k,'out',true)};
-  var rd=$('redo');if(rd)rd.onclick=function(){redo[k]=1;delete PK[k];render()};
+  var rd=$('redo');if(rd)rd.onclick=function(){delete SES[k];delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
   var m=$('memo'),mt=null;m.oninput=function(){clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
 }
 // 다시 풀기: 기록(틀린 횟수)은 남기고 화면만 처음 상태로
-var redo={},PK={};
+// 다회독: 예전에 고른 답은 화면에 보이지 않음. 이번에 열어서 푼 것(SES)만 표시하고, 기록(S.a: 틀린 횟수 등)은 계속 쌓인다
+var redo={},PK={},SES={};
 function answer(q,n){var k=q.k,a=S.a[k]||{w:0,n:0};var ok=Array.isArray(n)?(n.length===q.ans.length&&n.every(function(x){return q.ans.indexOf(x)>=0})):q.ans.indexOf(n)>=0;
-  a.c=n;a.ok=ok;a.self=0;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;delete redo[k];
+  a.c=n;a.ok=ok;a.self=0;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;SES[k]={c:n,ok:ok};
   if(!ok&&S.f[k]&&S.f[k].out){S.f[k].out=false;S.f[k].t=now()}changed();render()}
-function self(q,ok){var k=q.k,a=S.a[k]||{w:0,n:0};a.c=null;a.self=1;a.ok=ok;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;delete redo[k];changed();render()}
+function self(q,ok){var k=q.k,a=S.a[k]||{w:0,n:0};a.c=null;a.self=1;a.ok=ok;a.n=(a.n||0)+1;if(!ok)a.w=(a.w||0)+1;a.t=now();a.pend=0;S.a[k]=a;SES[k]={self:1,ok:ok};changed();render()}
 function flag(k,name,val){var f=S.f[k]||{};f[name]=val!=null?val:!f[name];f.t=now();S.f[k]=f;changed();render()}
 function go(d){var i=idx()+d;if(i<0||i>=L.length)return;cur=L[i].k;saveUI();render();window.scrollTo({top:$('pos').getBoundingClientRect().top+window.scrollY-10})}
 $('prev').onclick=go.bind(null,-1);$('next').onclick=go.bind(null,1);
