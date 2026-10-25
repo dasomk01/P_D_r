@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #fbf8f2;
+  --cream: #f3ecdf;
+  --sand: #e8dfcf;
+  --line: #e2d8c6;
+  --navy: #1b2540;
+  --navy-soft: #2f3b5c;
+  --rose: #d8aeb0;
+  --rose-deep: #b97f84;
+  --rose-wash: #f4e4e3;
+  --ink: #1d1d1f;
+  --muted: #6f6a62;
+  --ok: #4f7a5e;
+  --warn: #a66a2c;
+  --danger: #a3434b;
+  --font-display: "Cormorant Garamond";
+  --font-serif-kr: "Noto Serif KR";
+  --font-body: "Noto Sans KR";
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-rose: var(--rose);
+  --color-rose-deep: var(--rose-deep);
+  --color-rose-wash: var(--rose-wash);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-body), "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-serif: var(--font-display), var(--font-serif-kr), Georgia, serif;
+  --font-serif-kr: var(--font-serif-kr), Georgia, serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.005em;
+}
+
+::selection {
+  background: var(--rose-wash);
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.card {
+  background: #fffdf9;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.hairline {
+  border-color: var(--line);
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  background: #fffdf9;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.6rem 0.75rem;
+  font-size: 16px; /* iOS 확대 방지 */
+  line-height: 1.4;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus {
+  border-color: var(--navy-soft);
+}
+@media (min-width: 768px) {
+  .input {
+    font-size: 0.92rem;
+  }
+}
+
+.ratio-45 {
+  aspect-ratio: 4 / 5;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--cream);
+}
