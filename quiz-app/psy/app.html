@@ -158,7 +158,9 @@ Object.keys(F).forEach(function(k){if(U.f&&U.f[k]!=null)F[k]=U.f[k]});
 function syncCtl(){$('fProf').value=F.prof;secOpts();$('fSec').value=F.sec;$('fArea').value=F.area;$('fType').value=F.type;$('fRep').value=F.rep;$('fSt').value=F.st;$('fQ').value=F.q;
   [].forEach.call(document.querySelectorAll('#chips .chip[data-v]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===F.chip))});$('shuf').setAttribute('aria-pressed',String(!!F.shuf))}
 function solved(a){return !!(a&&(a.c!=null||a.self))}
-function inWrong(k){var a=S.a[k],f=S.f[k]||{};return !!(a&&a.w>0&&!f.out)}
+// 오답노트 = 틀린 적 있음 또는 🟡헷갈림 (빼기 누르면 제외)
+function wasWrong(k){var a=S.a[k];return !!(a&&a.w>0)}
+function inWrong(k){var f=S.f[k]||{};return !!((wasWrong(k)||f.conf)&&!f.out)}
 function memoOf(k){var m=S.m[k];return m&&m.x?m.x:''}
 function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
   if(F.prof&&q.prof!==F.prof)return false;if(F.sec&&q.sec!==F.sec)return false;if(F.area&&q.area!==F.area)return false;if(F.type&&q.type!==F.type)return false;
@@ -216,7 +218,7 @@ function render(){stats();var i=idx(),v=$('view');
   var sm=$('submitM');if(sm)sm.onclick=function(){answer(q,(PK[k]||[]).slice().sort(function(x,y){return x-y}));delete PK[k]};
   var r=$('reveal');if(r)r.onclick=function(){var x=S.a[k]||{w:0,n:0};x.c=null;x.self=0;x.pend=1;x.t=now();S.a[k]=x;SES[k]={pend:1};changed();render()};
   var so=$('selfOk'),sb=$('selfBad');if(so)so.onclick=function(){self(q,true)};if(sb)sb.onclick=function(){self(q,false)};
-  $('tConf').onclick=function(){flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
+  $('tConf').onclick=function(){var f=S.f[k]||{};if(!f.conf&&f.out){f.out=false;S.f[k]=f}flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
   var o=$('tOut');if(o)o.onclick=function(){flag(k,'out',true)};
   var rd=$('redo');if(rd)rd.onclick=function(){delete SES[k];delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
@@ -257,7 +259,7 @@ function copyBox(title,text,note){sheet('<h2>'+esc(title)+'</h2><div class="msg"
   $('ccopy').onclick=function(){var b=$('cbox');function fb(){b.focus();b.select();$('cmsg').textContent='자동 복사가 막혔어요. 칸을 길게 눌러 전체 선택 → 복사하세요.'}
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){$('cmsg').textContent='복사했어요.'},fb);else fb()}}
 function exportText(base){var out=(base||Q).filter(function(q){var f=S.f[q.k]||{};return inWrong(q.k)||f.conf||memoOf(q.k)});
-  return out.map(function(q,i){var a=S.a[q.k]||{},f=S.f[q.k]||{},tags=[];if(inWrong(q.k))tags.push('틀림 '+a.w+'회'+(a.ok?' (마지막엔 맞힘)':''));if(f.conf)tags.push('헷갈림');
+  return out.map(function(q,i){var a=S.a[q.k]||{},f=S.f[q.k]||{},tags=[];if(wasWrong(q.k))tags.push('틀림 '+a.w+'회'+(a.ok?' (마지막엔 맞힘)':''));if(f.conf)tags.push('헷갈림');
     return '=== '+(i+1)+'. '+q.sec+' ['+q.area+'] ('+q.prof+') ===\n'+(q.year?'기출: '+q.year+'\n':'')+(tags.length?'표시: '+tags.join(' / ')+'\n':'')+'문제: '+q.stem+(q.imgs&&q.imgs.length?' [사진 있음]':'')+'\n'+q.choices.map(function(c,j){return (j+1)+'. '+c}).join('\n')+
       '\n정답: '+(q.ans.join(',')||'-')+(memoOf(q.k)?'\n내 메모: '+memoOf(q.k):'')+(q.basis?'\n해설: '+q.basis:'')+(q.exps&&q.exps.length?'\n선지해설:\n'+q.exps.map(function(e,j){return (j+1)+'. '+e}).join('\n'):'')}).join('\n\n')}
 function scopeName(){var p=[];if(F.prof)p.push(F.prof);if(F.sec)p.push(F.sec);if(F.area)p.push(F.area);if(F.type)p.push(F.type==='주'?'주관식':'객관식');if(F.rep)p.push('킹야 필터');if(F.st)p.push($('fSt').options[$('fSt').selectedIndex].text);if(F.chip){var c=document.querySelector('#chips .chip[data-v="'+F.chip+'"]');if(c)p.push(c.textContent.trim())}if(F.q)p.push('검색: '+F.q);return p.length?p.join(' · '):'전체(필터 없음)'}
