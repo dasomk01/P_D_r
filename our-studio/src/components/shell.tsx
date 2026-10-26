@@ -14,7 +14,7 @@ const NAV = [
   { href: "/studio", label: "제작실", en: "Studio" },
   { href: "/calendar", label: "캘린더", en: "Calendar" },
   { href: "/library", label: "자료 보관함", en: "Library" },
-  { href: "/characters", label: "캐릭터 설정집", en: "Characters" },
+  { href: "/characters", label: "그림체 설정집", en: "Style bible" },
   { href: "/settings", label: "설정·백업", en: "Settings" },
 ];
 

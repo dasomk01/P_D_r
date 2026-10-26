@@ -5,7 +5,7 @@ import { useLive } from "@/lib/live";
 import { getActivity, getAssets, getContents, getIdeas, getPlaces, getVotes, voteCounts } from "@/lib/queries";
 import { addDays, formatKDate, kstToday, timeAgo } from "@/lib/dates";
 import { PROJECT_IDS, STATUS_LABEL } from "@/lib/constants";
-import { recommendNext } from "@/lib/recommend";
+import { recommendNext, recommendationHref } from "@/lib/recommend";
 import type { Activity, Content, IdeaStatus, ProjectId } from "@/lib/types";
 import { useStudio } from "@/components/studio-context";
 import { AssetImage } from "@/components/asset-image";
@@ -134,7 +134,7 @@ export default function Dashboard() {
                       <li key={i} className="flex items-baseline gap-3 text-sm">
                         <span className="display w-4 text-rose-deep">{i + 1}</span>
                         <Link
-                          href={r.idea ? `/ideas/${r.idea.id}` : `/archive/places/${r.place!.id}`}
+                          href={recommendationHref(r)}
                           className="flex-1 truncate hover:underline"
                         >
                           {r.title}

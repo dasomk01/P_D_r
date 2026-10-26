@@ -86,6 +86,8 @@ export interface UploadMeta {
   content_id?: string | null;
   character_id?: string | null;
   license?: string;
+  variant?: "feed" | "reels" | null;
+  pinned?: boolean;
 }
 
 /** 파일을 Storage 에 올리고 assets 행을 만듭니다. 사진이면 썸네일도 함께 저장. */
@@ -135,6 +137,8 @@ export async function uploadAsset(file: File, meta: UploadMeta): Promise<Asset> 
       idea_id: meta.idea_id ?? null,
       content_id: meta.content_id ?? null,
       character_id: meta.character_id ?? null,
+      variant: meta.variant ?? null,
+      pinned: meta.pinned ?? false,
     })
     .select()
     .single();

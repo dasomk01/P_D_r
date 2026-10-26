@@ -81,6 +81,7 @@ async function contactSheet(title: string, items: { no: number; blob: Blob | nul
 }
 
 export async function exportZip(opts: { title: string; versionNo: number; data: ContentData; assets: Map<string, Asset> }) {
+  if (opts.data.kind === "toon") return exportToonZip(opts.title, opts.versionNo, opts.data, opts.assets);
   const zip = new JSZip();
   const items: { no: number; blob: Blob | null; title: string }[] = [];
   const credits: string[] = [];
@@ -104,4 +105,33 @@ export async function exportZip(opts: { title: string; versionNo: number; data: 
   zip.file("credits.txt", `${opts.title} · v${opts.versionNo}\n\n${credits.join("\n")}\n`);
   const blob = await zip.generateAsync({ type: "blob" });
   saveBlob(blob, `${slug(opts.title)}-v${opts.versionNo}.zip`);
+}
+
+/** 인스타툰: feed/01.png… + reels/01.png… (같은 컷 번호), 캡션 1개 + 해시태그 5개 */
+async function exportToonZip(title: string, versionNo: number, d: import("@/lib/types").ToonData, assets: Map<string, Asset>) {
+  const zip = new JSZip();
+  const credits: string[] = [];
+  for (const [folder, key] of [
+    ["feed", "asset_id"],
+    ["reels", "reel_asset_id"],
+  ] as const) {
+    const items: { no: number; blob: Blob | null; title: string }[] = [];
+    for (const c of d.cuts) {
+      const id = c[key] ?? null;
+      const a = id ? assets.get(id) : undefined;
+      let blob: Blob | null = null;
+      if (a) {
+        blob = await downloadBlob(a.storage_path);
+        const ext = a.file_name.split(".").pop()?.toLowerCase() || "png";
+        zip.file(`${folder}/${String(c.no).padStart(2, "0")}.${ext}`, blob);
+      }
+      credits.push(`${folder} ${c.no}: ${a ? `${a.file_name} — ${a.origin === "ai_generated" ? "AI 생성" : a.origin}` : "(이미지 없음)"}`);
+      items.push({ no: c.no, blob, title: c.scene });
+    }
+    zip.file(`${folder}-preview.jpg`, await contactSheet(`${title} · ${folder}`, items));
+  }
+  zip.file("caption.txt", `${d.caption}\n\n${d.hashtags.filter(Boolean).join(" ")}\n`);
+  zip.file("script.txt", captionFile(title, d));
+  zip.file("credits.txt", `${title} · v${versionNo}\n\n${credits.join("\n")}\n`);
+  saveBlob(await zip.generateAsync({ type: "blob" }), `${slug(title)}-v${versionNo}.zip`);
 }

@@ -10,6 +10,7 @@ import { STATUS_LABEL } from "@/lib/constants";
 import { formatDateTime, kstToday } from "@/lib/dates";
 import { publicText, validateTravel } from "@/lib/content-template";
 import { scanPrivacy } from "@/lib/privacy";
+import { validateToonScript, VARIANTS, type ToonQcReport, type Variant } from "@/lib/toon-spec";
 import { recentDuplicates } from "@/lib/recommend";
 import { matchArchive } from "@/lib/archive-match";
 import type { Asset, Content, ContentData, ContentStatus, ToonData, TravelData } from "@/lib/types";
@@ -62,6 +63,7 @@ export default function ContentPage() {
   const [revBody, setRevBody] = useState("");
   const [revPage, setRevPage] = useState<string>("");
   const [aiNotes, setAiNotes] = useState<string | null>(null);
+  const [previewVariant, setPreviewVariant] = useState<Variant>("feed");
 
   // 서버의 현재 버전이 바뀌면(상대방 저장 포함) 편집 중이 아닐 때만 갱신
   const serverJson = current ? JSON.stringify(current.data) : "";
@@ -91,9 +93,12 @@ export default function ContentPage() {
   const issues =
     shown.kind === "travel"
       ? validateTravel(shown, usableIds)
-      : scanPrivacy(publicText(shown), proj?.settings.sensitive_terms ?? []).map((f) => `익명성: ${f.message} — “${f.match}”`);
+      : [
+          ...validateToonScript(shown),
+          ...scanPrivacy(publicText(shown), proj?.settings.sensitive_terms ?? []).map((f) => `익명성: ${f.message} — “${f.match}”`),
+        ];
   const dupes = recentDuplicates(`${content.title} ${content.keywords.join(" ")}`, data.siblings, kstToday(), content.id);
-  const units = previewUnits(shown, assetMap);
+  const units = previewUnits(shown, assetMap, previewVariant);
 
   async function save(newVersion: boolean) {
     setBusy("save");
@@ -143,7 +148,11 @@ export default function ContentPage() {
         plan.place_ids = [...new Set([...(draft as TravelData).place_ids, ...plan.place_ids])];
       }
       if (plan.kind === "toon" && draft!.kind === "toon") {
-        plan.cuts = plan.cuts.map((c, i) => ({ ...c, asset_id: (draft as ToonData).cuts[i]?.asset_id ?? null }));
+        plan.cuts = plan.cuts.map((c, i) => ({
+          ...c,
+          asset_id: (draft as ToonData).cuts[i]?.asset_id ?? null,
+          reel_asset_id: (draft as ToonData).cuts[i]?.reel_asset_id ?? null,
+        }));
       }
       setDraft(plan);
       setAiNotes(json.summary ?? null);
@@ -339,6 +348,8 @@ export default function ContentPage() {
               )}
             </div>
 
+            {shown.kind === "toon" && !viewing && <ToonQcPanel contentId={content.id} dirty={dirty} onDone={() => reload()} />}
+
             <div className="card space-y-3 p-5">
               <p className="eyebrow">AI 제작 보조</p>
               {ai.features.travel_plan ? (
@@ -383,7 +394,19 @@ export default function ContentPage() {
         <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
           <div>
             <div className="mb-3 flex items-center justify-between">
-              <p className="eyebrow">전체 페이지 미리보기 · v{viewing ? viewing.version_no : current.version_no}</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="eyebrow">전체 페이지 미리보기 · v{viewing ? viewing.version_no : current.version_no}</p>
+                {shown.kind === "toon" &&
+                  (["feed", "reels"] as Variant[]).map((v) => (
+                    <button
+                      key={v}
+                      onClick={() => setPreviewVariant(v)}
+                      className={`rounded-full border px-2.5 py-0.5 text-xs ${previewVariant === v ? "border-navy bg-navy text-ivory" : "border-line text-muted"}`}
+                    >
+                      {VARIANTS[v].label}
+                    </button>
+                  ))}
+              </div>
               <select className="input !w-auto !py-1 !text-xs" value={viewNo ?? current.version_no} onChange={(e) => setViewNo(Number(e.target.value))} aria-label="미리볼 버전">
                 {data.versions.map((v) => (
                   <option key={v.id} value={v.version_no}>
@@ -395,7 +418,7 @@ export default function ContentPage() {
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {units.map((u, i) => (
-                <PageTile key={u.no} unit={u} onClick={() => setZoom(i)} />
+                <PageTile key={u.no} unit={u} onClick={() => setZoom(i)} tall={shown.kind === "toon" && previewVariant === "reels"} />
               ))}
             </div>
             {shown.kind === "travel" && (
@@ -703,6 +726,72 @@ function DownloadPanel({
         ))}
       </div>
       <p className="text-xs text-muted">마지막 수정 {formatDateTime(v.updated_at)}</p>
+    </div>
+  );
+}
+
+function ToonQcPanel({ contentId, dirty, onDone }: { contentId: string; dirty: boolean; onDone: () => void }) {
+  const [busy, setBusy] = useState(false);
+  const [report, setReport] = useState<(ToonQcReport & { vision_available: boolean }) | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  return (
+    <div className="card space-y-3 p-5" data-testid="toon-qc">
+      <p className="eyebrow">이미지 자동 검수</p>
+      <p className="text-xs leading-relaxed text-muted">
+        컷마다 피드·릴스 이미지가 다 있는지, 정확한 크기(1080×1350 / 1080×1920)와 PNG 인지, 컷 순서·캡션·해시태그 5개·익명성을 검사합니다. 그림체·잘린 글자·콜라주
+        흔적은 서버 이미지 판독(Claude 키)이 있으면 함께 검사하고, 없으면 ChatGPT 나 사람이 확인합니다.
+      </p>
+      <Button
+        size="sm"
+        className="w-full"
+        busy={busy}
+        disabled={dirty}
+        onClick={async () => {
+          setBusy(true);
+          setError(null);
+          try {
+            const res = await fetch("/api/toon/qc", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ contentId, recheck: true }) });
+            const json = await res.json();
+            if (!res.ok) throw new Error(json.error ?? res.statusText);
+            setReport(json);
+            onDone();
+          } catch (e) {
+            setError(e instanceof Error ? e.message : String(e));
+          } finally {
+            setBusy(false);
+          }
+        }}
+      >
+        이미지 검수 실행
+      </Button>
+      {dirty && <p className="text-xs text-warn">저장한 뒤에 검수할 수 있어요.</p>}
+      <ErrorNote error={error} />
+      {report && (
+        <div className="space-y-2 text-sm" data-testid="qc-report">
+          {report.complete ? (
+            <p className="text-ok">✓ {report.cuts}컷 × 2세트 완료{report.needs_review.length ? ` (눈으로 확인 필요 ${report.needs_review.length}칸)` : ""}</p>
+          ) : (
+            <p className="text-warn">다시 만들 칸 {report.redo.length}개 · 대본 문제 {report.script_issues.length}개</p>
+          )}
+          {report.redo.length > 0 && (
+            <ul className="space-y-1 text-xs text-danger">
+              {report.redo.map((r) => (
+                <li key={`${r.cut_no}-${r.variant}`}>
+                  · 컷 {r.cut_no} {VARIANTS[r.variant].label} — {r.reason}
+                </li>
+              ))}
+            </ul>
+          )}
+          {report.script_issues.length > 0 && (
+            <ul className="space-y-1 text-xs text-warn">
+              {report.script_issues.map((i) => (
+                <li key={i}>· {i}</li>
+              ))}
+            </ul>
+          )}
+          {!report.vision_available && <p className="text-[0.7rem] text-muted">서버 이미지 판독 미연결 — 그림체·잘린 글자는 눈으로 확인해 주세요.</p>}
+        </div>
+      )}
     </div>
   );
 }

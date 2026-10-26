@@ -9,6 +9,8 @@ import { emptyToon, emptyTravel, validateTravel, publicText } from "../content-t
 import { scanPrivacy } from "../privacy";
 import { kstToday } from "../dates";
 import { TOON_SYSTEM, TRAVEL_SYSTEM } from "../ai/prompts";
+import { slotStatus, styleGuideText, validateToonScript } from "../toon-spec";
+import { registerToonTools } from "./toon-tools";
 import type {
   Asset,
   Character,
@@ -36,6 +38,14 @@ Typical flow when asked to make content:
 2. get_next_up(project) — what to make next (respect the order), or get_idea / list_ideas.
 3. For korea-trip: search_archive(region or topic) and get_place for details. Material marked OUR_EXPERIENCE is first-hand; RESEARCHED is not — never present researched facts as personal experience. Never reveal visit dates or who visited.
 4. save_content_draft — saves a DRAFT for the two creators to review in the studio. It never publishes anything. Fix any issues it returns and save again with content_id.
+
+MED SCHOOL TOON episodes (images, not just scripts):
+a. get_next_toon_task — ONE task. action=resume → continue that content_id (never create a duplicate). action=start → new episode from the idea.
+b. get_project_rules(med-toon) + get_style_bible — look at the reference images and match the rabbit/bear exactly every time.
+c. save_content_draft(project=med-toon, idea_id or content_id, cuts…, caption, exactly 5 hashtags). Cut count is free.
+d. For EVERY cut draw two separate still images: feed 1080×1350 PNG and reels 1080×1920 PNG (same dialogue/story). One cut = one independent image; never draw a multi-panel collage and crop it; reels are NOT video.
+e. upload_cut_image for each image (pass the generated file as "image").
+f. run_toon_qc → redo only the slots listed in "redo"; check needs_review slots with get_cut_images and report_cut_review.
 Write tools change shared data; only call them when the user asked for it.`;
 
 function json(data: unknown) {
@@ -132,8 +142,15 @@ export function buildServer(userId: string, origin: string): McpServer {
           speech_style,
           rules,
         })),
-        drawing_style: proj.settings.style ?? "",
-        note: "등록된 실명·금지어 목록은 보안상 공개하지 않습니다. save_content_draft 가 자동으로 검사합니다.",
+        style_guide: styleGuideText(proj.settings.style_guide, proj.settings.style ?? ""),
+        output_spec: {
+          cuts: "이야기에 맞게 자유 (컷 1개 = 독립 이미지 1장, 콜라주 후 자르기 금지)",
+          feed: "4:5, 정확히 1080×1350 PNG, 컷마다 1장",
+          reels: "9:16, 정확히 1080×1920 PNG, 컷마다 1장 (동영상 아님)",
+          caption: "1개",
+          hashtags: "정확히 5개",
+        },
+        note: "그림 그리기 전에 get_style_bible 로 대표 이미지를 꼭 보세요. 등록된 실명·금지어 목록은 보안상 공개하지 않습니다 — 저장·검수 때 자동으로 검사합니다.",
       });
     },
   );
@@ -157,18 +174,31 @@ export function buildServer(userId: string, origin: string): McpServer {
       const counts: Record<string, number> = {};
       for (const v of votes) counts[v.idea_id] = (counts[v.idea_id] ?? 0) + 1;
       const rec = recommendNext({ projectKind: project === "korea-trip" ? "travel" : "toon", ideas, votes: counts, places, contents, limit: limit ?? 8 });
-      return json(
-        rec.map((r, i) => ({
+      if (rec.length === 0) {
+        const by: Record<string, number> = {};
+        for (const i of ideas) by[i.status] = (by[i.status] ?? 0) + 1;
+        return json({
+          items: [],
+          why_empty: ideas.length === 0 ? "이 프로젝트에 아이디어가 없습니다." : "모든 아이디어가 승인 완료되었거나 사람 검토(검토 대기) 중입니다.",
+          ideas_by_status: by,
+          waiting_for_human_review: contents.filter((c) => c.status === "in_review").map((c) => c.title),
+        });
+      }
+      return json({
+        items: rec.map((r, i) => ({
           order: i + 1,
           source: r.source,
           reason: r.reason,
           title: r.title,
+          content_id: r.content?.id,
+          content_status: r.content?.status,
           idea_id: r.idea?.id,
           idea_memo: r.idea?.memo,
           idea_tags: r.idea?.tags,
           place_id: r.place?.id,
         })),
-      );
+        note: "source=continue 는 이미 제작 중인 콘텐츠입니다 — 새로 만들지 말고 content_id 로 이어서 작업하세요.",
+      });
     },
   );
 
@@ -304,12 +334,24 @@ export function buildServer(userId: string, origin: string): McpServer {
         load<ContentVersion>(sb.from("content_versions").select("*").eq("content_id", content_id).eq("version_no", content.current_version_no).single()),
         load<Comment[]>(sb.from("comments").select("*").eq("target_type", "content").eq("target_id", content_id).order("created_at")),
       ]);
+      let image_slots: unknown = undefined;
+      if (ver.data.kind === "toon") {
+        const ids = ver.data.cuts.flatMap((c) => [c.asset_id, c.reel_asset_id]).filter(Boolean) as string[];
+        const assets = ids.length ? await load<Asset[]>(sb.from("assets").select("id,qc").in("id", ids)) : [];
+        const m = new Map(assets.map((a) => [a.id, a]));
+        image_slots = ver.data.cuts.map((c) => ({
+          cut_no: c.no,
+          feed: c.asset_id ? slotStatus(m.get(c.asset_id)) : "missing",
+          reels: c.reel_asset_id ? slotStatus(m.get(c.reel_asset_id)) : "missing",
+        }));
+      }
       return json({
         id: content.id,
         project: content.project_id,
         title: content.title,
         status: content.status,
         version: ver.version_no,
+        image_slots,
         approved_and_locked: ver.locked,
         data: ver.data,
         open_revision_requests: comments.filter((c) => c.kind === "revision_request" && !c.resolved).map((c) => ({ page: c.page_no, request: c.body })),
@@ -396,7 +438,7 @@ export function buildServer(userId: string, origin: string): McpServer {
       description:
         "Save a content DRAFT to the studio for the creators to review (status: 검토 대기). Never publishes. Without content_id a new content is created; with content_id a new version is added (approved versions are never overwritten). " +
         "korea-trip: pass exactly 7 pages (English headline/body), English caption, exactly 5 hashtags, optional route and facts with official source URLs. " +
-        "med-toon: pass synopsis and cuts with dialogue (Korean). Returns rule/privacy issues to fix — if any, fix them and save again with the same content_id.",
+        "med-toon: pass synopsis and cuts with dialogue (Korean; cut count is up to the story), one caption and exactly 5 hashtags — then upload images per cut with upload_cut_image. With idea_id an existing in-progress content for that idea is continued instead of duplicated. Returns rule/privacy issues to fix — if any, fix them and save again with the same content_id.",
       inputSchema: {
         project: PROJECT,
         title: z.string().min(1).max(200),
@@ -422,6 +464,17 @@ export function buildServer(userId: string, origin: string): McpServer {
     async (a) => {
       let content: Content | null = null;
       let prev: ContentVersion | null = null;
+      let reused = false;
+      if (!a.content_id && a.idea_id) {
+        // 같은 아이디어로 이미 만들고 있는 콘텐츠가 있으면 새로 만들지 않고 이어서 저장
+        const existing = await load<Content[]>(
+          sb.from("contents").select("*").eq("idea_id", a.idea_id).neq("status", "approved").order("updated_at", { ascending: false }).limit(1),
+        );
+        if (existing[0]) {
+          a.content_id = existing[0].id;
+          reused = true;
+        }
+      }
       if (a.content_id) {
         content = await load<Content | null>(sb.from("contents").select("*").eq("id", a.content_id).maybeSingle());
         if (!content) return json({ error: "content not found" });
@@ -455,7 +508,15 @@ export function buildServer(userId: string, origin: string): McpServer {
       } else {
         const t: ToonData = prev?.data.kind === "toon" ? structuredClone(prev.data) : emptyToon(0);
         if (a.synopsis !== undefined) t.synopsis = a.synopsis;
-        if (a.cuts) t.cuts = a.cuts.map((c, i) => ({ no: i + 1, scene: c.scene, lines: c.lines, notes: c.notes ?? "", asset_id: t.cuts[i]?.asset_id ?? null }));
+        if (a.cuts)
+          t.cuts = a.cuts.map((c, i) => ({
+            no: i + 1,
+            scene: c.scene,
+            lines: c.lines,
+            notes: c.notes ?? "",
+            asset_id: t.cuts[i]?.asset_id ?? null,
+            reel_asset_id: t.cuts[i]?.reel_asset_id ?? null,
+          }));
         if (a.caption !== undefined) t.caption = a.caption;
         if (a.hashtags) t.hashtags = a.hashtags.map((h) => (h.startsWith("#") ? h : `#${h}`));
         t.anonymity_checked = false;
@@ -472,7 +533,8 @@ export function buildServer(userId: string, origin: string): McpServer {
               title: a.title,
               idea_id: a.idea_id ?? null,
               keywords: a.keywords ?? [],
-              status: "in_review",
+              // 툰은 이미지가 다 갖춰져 검수를 통과할 때 검토 대기로 넘어감 (run_toon_qc)
+              status: a.project === "med-toon" ? "in_production" : "in_review",
               current_version_no: 1,
               created_by: userId,
               updated_by: userId,
@@ -491,7 +553,7 @@ export function buildServer(userId: string, origin: string): McpServer {
               current_version_no: no,
               title: a.title,
               ...(a.keywords ? { keywords: a.keywords } : {}),
-              status: content.status === "approved" ? "revising" : "in_review",
+              status: content.status === "approved" ? "revising" : a.project === "med-toon" ? (content.status === "revising" ? "revising" : "in_production") : "in_review",
               updated_by: userId,
             })
             .eq("id", content.id)
@@ -505,7 +567,10 @@ export function buildServer(userId: string, origin: string): McpServer {
         issues = validateTravel(data).filter((i) => !i.includes("출처 확인이 안 된"));
       } else {
         const proj = await load<Project>(sb.from("projects").select("settings").eq("id", "med-toon").single());
-        issues = scanPrivacy(publicText(data), proj.settings.sensitive_terms ?? []).map((f) => `익명성: ${f.message} — “${f.match}”`);
+        issues = [
+          ...validateToonScript(data),
+          ...scanPrivacy(publicText(data), proj.settings.sensitive_terms ?? []).map((f) => `익명성: ${f.message} — “${f.match}”`),
+        ];
       }
       const siblings = await load<Content[]>(sb.from("contents").select("*").eq("project_id", a.project));
       const dupes = recentDuplicates(`${a.title} ${(a.keywords ?? []).join(" ")}`, siblings, kstToday(), content.id).map((d) => d.item.title);
@@ -514,8 +579,16 @@ export function buildServer(userId: string, origin: string): McpServer {
         saved: true,
         content_id: content.id,
         version: a.content_id ? content.current_version_no + 1 : 1,
-        status: "검토 대기 — 두 사람이 사이트에서 검토·승인합니다 (게시되지 않음)",
+        status:
+          a.project === "med-toon"
+            ? "제작 중 — 컷 이미지를 모두 올리고 run_toon_qc 를 통과하면 검토 대기로 넘어갑니다 (게시되지 않음)"
+            : "검토 대기 — 두 사람이 사이트에서 검토·승인합니다 (게시되지 않음)",
+        continued_existing_content: reused || undefined,
         issues_to_fix: issues,
+        next_step:
+          data.kind === "toon"
+            ? `이제 컷 ${data.cuts.length}개마다 피드(1080×1350)·릴스(1080×1920) PNG 를 각각 그려 upload_cut_image 로 저장하세요.`
+            : undefined,
         similar_recent_contents: dupes,
         url: link(`/studio/${content.id}`),
       });
@@ -566,5 +639,6 @@ export function buildServer(userId: string, origin: string): McpServer {
     },
   );
 
+  registerToonTools(server, { sb, userId, link });
   return server;
 }
