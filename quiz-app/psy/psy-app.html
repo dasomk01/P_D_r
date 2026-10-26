@@ -116,7 +116,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
     <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" id="shuf" aria-pressed="false">섞기</button>
   </div>
   <div class="tools">
-    <button class="btn" id="bSync">기록 새로고침</button><button class="btn" id="bBak">기록 백업</button><button class="btn" id="bRes">백업 불러오기</button><button class="btn" id="bExp">오답·헷갈림·메모 내보내기</button>
+    <button class="btn" id="bSync">기록 새로고침</button><button class="btn" id="bBak">기록 백업</button><button class="btn" id="bRes">백업 불러오기</button><button class="btn" id="bExpF">지금 보는 범위만 내보내기</button><button class="btn" id="bExp">오답·헷갈림·메모 내보내기(전체)</button>
   </div>
   <hr class="sep">
   <div class="navbar">
@@ -256,11 +256,13 @@ function copyBox(title,text,note){sheet('<h2>'+esc(title)+'</h2><div class="msg"
   $('cbox').value=text;$('cls').onclick=closeSheet;
   $('ccopy').onclick=function(){var b=$('cbox');function fb(){b.focus();b.select();$('cmsg').textContent='자동 복사가 막혔어요. 칸을 길게 눌러 전체 선택 → 복사하세요.'}
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){$('cmsg').textContent='복사했어요.'},fb);else fb()}}
-function exportText(){var out=Q.filter(function(q){var f=S.f[q.k]||{};return inWrong(q.k)||f.conf||memoOf(q.k)});
+function exportText(base){var out=(base||Q).filter(function(q){var f=S.f[q.k]||{};return inWrong(q.k)||f.conf||memoOf(q.k)});
   return out.map(function(q,i){var a=S.a[q.k]||{},f=S.f[q.k]||{},tags=[];if(inWrong(q.k))tags.push('틀림 '+a.w+'회'+(a.ok?' (마지막엔 맞힘)':''));if(f.conf)tags.push('헷갈림');
     return '=== '+(i+1)+'. '+q.sec+' ['+q.area+'] ('+q.prof+') ===\n'+(q.year?'기출: '+q.year+'\n':'')+(tags.length?'표시: '+tags.join(' / ')+'\n':'')+'문제: '+q.stem+(q.imgs&&q.imgs.length?' [사진 있음]':'')+'\n'+q.choices.map(function(c,j){return (j+1)+'. '+c}).join('\n')+
       '\n정답: '+(q.ans.join(',')||'-')+(memoOf(q.k)?'\n내 메모: '+memoOf(q.k):'')+(q.basis?'\n해설: '+q.basis:'')+(q.exps&&q.exps.length?'\n선지해설:\n'+q.exps.map(function(e,j){return (j+1)+'. '+e}).join('\n'):'')}).join('\n\n')}
-$('bExp').onclick=function(){var t=exportText();copyBox('오답·헷갈림·메모 내보내기',t||'아직 틀리거나 헷갈림·메모를 남긴 문제가 없어요.',(t?t.split('\n=== ').length:0)+'문항 · 복사해서 AI 대화창이나 메모장에 붙여넣으세요.')};
+function scopeName(){var p=[];if(F.prof)p.push(F.prof);if(F.sec)p.push(F.sec);if(F.area)p.push(F.area);if(F.type)p.push(F.type==='주'?'주관식':'객관식');if(F.rep)p.push('킹야 필터');if(F.st)p.push($('fSt').options[$('fSt').selectedIndex].text);if(F.chip){var c=document.querySelector('#chips .chip[data-v="'+F.chip+'"]');if(c)p.push(c.textContent.trim())}if(F.q)p.push('검색: '+F.q);return p.length?p.join(' · '):'전체(필터 없음)'}
+$('bExpF').onclick=function(){var t=exportText(Q.filter(pass)),nm=scopeName();copyBox('내보내기 · '+nm,t?('[범위: '+nm+']\n\n'+t):'',t?(t.split('\n=== ').length+'문항 · 지금 걸어 둔 필터 안의 오답노트·헷갈림·메모만 모았어요.'):'이 범위에는 아직 틀리거나 헷갈림·메모를 남긴 문제가 없어요.')};
+$('bExp').onclick=function(){var t=exportText();copyBox('오답·헷갈림·메모 내보내기(전체)',t||'아직 틀리거나 헷갈림·메모를 남긴 문제가 없어요.',(t?t.split('\n=== ').length:0)+'문항 · 복사해서 AI 대화창이나 메모장에 붙여넣으세요.')};
 $('bBak').onclick=function(){copyBox('기록 백업',JSON.stringify({app:APP,at:new Date().toISOString(),s:S}),'이 글을 복사해 두면 나중에 “백업 불러오기”로 되살릴 수 있어요.')};
 $('bRes').onclick=function(){sheet('<h2>백업 불러오기</h2><div class="msg" id="rmsg">“기록 백업”에서 복사한 글을 붙여넣고 불러오기를 누르세요. 지금 기록과 합쳐져요.</div><textarea id="rbox"></textarea><div class="tools"><button class="btn pri" id="rgo">불러오기</button><button class="btn" id="cls">닫기</button></div>');
   $('cls').onclick=closeSheet;$('rgo').onclick=function(){try{var o=JSON.parse($('rbox').value);merge(o.s||o);changed();refilter(true);$('rmsg').textContent='불러왔어요.'}catch(e){$('rmsg').textContent='백업 글 형식이 아니에요. 처음부터 끝까지 그대로 붙여넣었는지 확인해 주세요.'}}};
