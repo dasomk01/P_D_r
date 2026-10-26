@@ -35,6 +35,18 @@ import glob
 EXP={}
 for p in sorted(glob.glob(D+'/yexp_*.py')): EXP.update(importlib.import_module(os.path.basename(p)[:-3]).EXP)
 
+try:
+  from ycf import CF   # 카드키 → {연도: 출제 교수}
+except ImportError: CF={}
+def cfnote(k,prof):
+  m=CF.get(k) or {}
+  g=collections.OrderedDict()
+  for y in sorted(m): g.setdefault(m[y] or '미상',[]).append(y)
+  if not g: return None
+  t='✍️ 출제: '+' / '.join(p+(' 교수님' if p!='미상' else '')+' ('+'·'.join(ys)+')' for p,ys in g.items())
+  if any(p not in (prof,'미상') for p in g): t+=' — 올해 담당 '+prof+' 교수님과 다른 교수님 출제 포함'
+  return t
+
 def yama():
   cards=[];fam=collections.defaultdict(list)
   for m in YMODS:
@@ -62,6 +74,8 @@ def yama():
     parts.append('📚 학습지 해설: '+ex['wb'] if ex.get('wb') else '📚 학습지 해설 요약: '+c['basis'])
     basis='\n\n'.join(parts)
     sec,prof=PRE[c['sec']][:2] if c['sec'] in PRE else importlib.import_module(YSEC[c['sec']]).SEC
+    cn=cfnote(k,prof)
+    if cn: notes=[cn]+notes
     out[c['sec']].append(dict(k='psy-'+k,area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
       year=c['ys'][0],type='객',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
       stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=[],vis=[],notes=notes,basis=basis,exps=[],ai=''))
