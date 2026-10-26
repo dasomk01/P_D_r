@@ -18,6 +18,18 @@ export interface Member {
   created_at: string;
 }
 
+export interface StyleGuide {
+  face: string;
+  proportions: string;
+  palette: string;
+  line: string;
+  bubble: string;
+  font: string;
+  background: string;
+  account: string;
+  dont: string;
+}
+
 export interface Project {
   id: ProjectId;
   name: string;
@@ -31,6 +43,7 @@ export interface Project {
     hashtags?: number;
     sensitive_terms?: string[];
     style?: string;
+    style_guide?: Partial<StyleGuide>;
     cuts_default?: number;
     [k: string]: unknown;
   };
@@ -181,7 +194,35 @@ export interface Asset {
   idea_id: string | null;
   content_id: string | null;
   character_id: string | null;
+  /** 툰 컷 이미지: 피드(4:5) / 릴스(9:16) */
+  variant: "feed" | "reels" | null;
+  qc: ImageQc | null;
+  /** 그림체 설정집 대표 이미지 */
+  pinned: boolean;
+  sort_order: number;
   created_at: string;
+}
+
+export interface QcPart {
+  ok: boolean;
+  issues: string[];
+  at?: string;
+  by?: string;
+}
+
+/** 이미지 한 장의 검수 결과 (assets.qc) */
+export interface ImageQc {
+  width?: number;
+  height?: number;
+  format?: string;
+  /** 크기·비율·형식 등 자동 검사 */
+  structural?: QcPart;
+  /** 그림체·잘린 글자·콜라주 여부 등 이미지 판독 (Claude, 키가 있을 때) */
+  vision?: QcPart;
+  /** ChatGPT 가 직접 보고 보고한 결과 */
+  model_review?: QcPart;
+  /** 사람이 사이트에서 표시한 결과 */
+  human?: QcPart;
 }
 
 export interface Character {
@@ -262,7 +303,10 @@ export interface ToonCut {
   no: number;
   scene: string;
   lines: ToonLine[];
+  /** 피드용 4:5 1080×1350 PNG */
   asset_id: string | null;
+  /** 릴스용 9:16 1080×1920 PNG (동영상 아님) */
+  reel_asset_id?: string | null;
   notes: string;
 }
 

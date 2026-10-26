@@ -8,7 +8,7 @@ import { useLive, must } from "@/lib/live";
 import { getContents, getIdeas, getPlaces, getVotes, voteCounts } from "@/lib/queries";
 import { PRIORITY_LABEL, STATUS_FLOW, STATUS_LABEL } from "@/lib/constants";
 import { findSimilar } from "@/lib/similarity";
-import { recommendNext, recentDuplicates } from "@/lib/recommend";
+import { recommendNext, recentDuplicates, recommendationHref } from "@/lib/recommend";
 import { kstToday, timeAgo } from "@/lib/dates";
 import type { Comment, Idea, IdeaStatus, ProjectId } from "@/lib/types";
 import { useStudio } from "@/components/studio-context";
@@ -299,7 +299,7 @@ export function IdeaBoard() {
                 {recs.map((r, i) => (
                   <li key={i} className="border-b hairline pb-3">
                     <Link
-                      href={r.idea ? `/ideas/${r.idea.id}` : `/archive/places/${r.place!.id}`}
+                      href={recommendationHref(r)}
                       className="flex gap-3 text-sm hover:underline"
                     >
                       <span className="display text-lg leading-none text-rose-deep">{i + 1}</span>

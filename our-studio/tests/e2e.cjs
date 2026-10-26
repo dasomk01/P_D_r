@@ -319,8 +319,9 @@ async function shot(page, name, full = true) {
       await A.page.waitForSelector('[data-testid="issues"] >> text=등록된 금지어');
       ok(await A.page.isVisible('[data-testid="issues"] >> text=학교'), "익명성 검수: 금지어·학교명·학번 감지");
       await cut.locator('input[placeholder="대사"]').fill("오늘 밤새면 다 외울 수 있어!");
-      await A.page.waitForSelector("text=✓ 문제 없음");
-      ok(true, "익명성 문제 해결 시 통과");
+      await A.page.waitForFunction(() => !document.querySelector('[data-testid="issues"]')?.textContent?.includes("익명성"));
+      ok(true, "익명성 문제 해결 시 익명성 경고 사라짐");
+      ok(await A.page.isVisible('[data-testid="issues"] >> text=정확히 5개'), "툰도 해시태그 정확히 5개 규칙 검수");
       await A.page.click('button:has-text("v1 저장")');
       await A.page.waitForSelector("text=저장 안 됨", { state: "detached" });
       await shot(A.page, "11-toon-editor");

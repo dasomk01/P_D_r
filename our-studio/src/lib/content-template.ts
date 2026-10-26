@@ -36,11 +36,11 @@ export function emptyTravel(format = "당일치기"): TravelData {
   };
 }
 
-export function emptyToon(cuts = 6): ToonData {
+export function emptyToon(cuts = 4): ToonData {
   return {
     kind: "toon",
     synopsis: "",
-    cuts: Array.from({ length: cuts }, (_, i) => ({ no: i + 1, scene: "", lines: [], asset_id: null, notes: "" })),
+    cuts: Array.from({ length: cuts }, (_, i) => ({ no: i + 1, scene: "", lines: [], asset_id: null, reel_asset_id: null, notes: "" })),
     caption: "",
     hashtags: [],
     anonymity_checked: false,
@@ -93,7 +93,7 @@ export function captionFile(title: string, d: ContentData): string {
 }
 
 /** 버전 비교용: 페이지/컷 단위 텍스트 */
-export function unitTexts(d: ContentData): { label: string; text: string; asset_id: string | null }[] {
+export function unitTexts(d: ContentData): { label: string; text: string; asset_id: string | null; reel_asset_id?: string | null }[] {
   if (d.kind === "travel") {
     return [
       ...d.pages.map((p) => ({ label: `${p.no}. ${p.role}`, text: `${p.headline}\n${p.body}`, asset_id: p.asset_id })),
@@ -106,6 +106,7 @@ export function unitTexts(d: ContentData): { label: string; text: string; asset_
       label: `컷 ${c.no}`,
       text: `${c.scene}\n${c.lines.map((l) => `${l.speaker}: ${l.text}`).join("\n")}`,
       asset_id: c.asset_id,
+      reel_asset_id: c.reel_asset_id ?? null,
     })),
     { label: "Caption", text: `${d.caption}\n${d.hashtags.join(" ")}`, asset_id: null },
   ];

@@ -120,7 +120,7 @@ const call = async (client, name, args) => JSON.parse((await client.callTool({ n
     ok(rules.characters.length === 2 && !JSON.stringify(rules).includes("김철수"), "툰 규칙·캐릭터 제공, 금지어 목록은 노출 안 함");
 
     const next = await call(client, "get_next_up", { project: "korea-trip" });
-    ok(next[0].source === "next", `다음 제작 추천 1순위: ${next[0].title}`);
+    ok(["continue", "next"].includes(next.items[0].source), `다음 제작 추천 1순위: ${next.items[0].title} (${next.items[0].source})`);
 
     const arch = await call(client, "search_archive", { query: "강릉 2박 3일" });
     const p0 = arch.places[0];

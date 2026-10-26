@@ -11,7 +11,7 @@ export interface PreviewUnit {
   asset?: Asset;
 }
 
-export function previewUnits(d: ContentData, assets: Map<string, Asset>): PreviewUnit[] {
+export function previewUnits(d: ContentData, assets: Map<string, Asset>, variant: "feed" | "reels" = "feed"): PreviewUnit[] {
   if (d.kind === "travel") {
     return d.pages.map((p) => ({ no: p.no, label: p.role, title: p.headline, body: p.body, asset: p.asset_id ? assets.get(p.asset_id) : undefined }));
   }
@@ -20,12 +20,16 @@ export function previewUnits(d: ContentData, assets: Map<string, Asset>): Previe
     label: `컷 ${c.no}`,
     title: c.scene,
     body: c.lines.map((l) => `${l.speaker}: ${l.text}`).join("\n"),
-    asset: c.asset_id ? assets.get(c.asset_id) : undefined,
+    asset: (() => {
+      const id = variant === "reels" ? c.reel_asset_id : c.asset_id;
+      return id ? assets.get(id) : undefined;
+    })(),
   }));
 }
 
 /** 4:5 페이지 미리보기. 완성 이미지가 없으면 문구로 레이아웃만 보여줌 */
-export function PageTile({ unit, onClick, active }: { unit: PreviewUnit; onClick?: () => void; active?: boolean }) {
+export function PageTile({ unit, onClick, active, tall }: { unit: PreviewUnit; onClick?: () => void; active?: boolean; tall?: boolean }) {
+  const ratio = tall ? "aspect-[9/16]" : "ratio-45";
   return (
     <button
       type="button"
@@ -34,9 +38,9 @@ export function PageTile({ unit, onClick, active }: { unit: PreviewUnit; onClick
       data-testid="page-tile"
     >
       {unit.asset ? (
-        <AssetImage asset={unit.asset} className="ratio-45 w-full" />
+        <AssetImage asset={unit.asset} className={`${ratio} w-full`} />
       ) : (
-        <div className="ratio-45 flex w-full flex-col justify-end bg-navy p-3 text-ivory">
+        <div className={`${ratio} flex w-full flex-col justify-end bg-navy p-3 text-ivory`}>
           <p className="text-[0.55rem] tracking-[0.2em] text-ivory/60">{unit.label.toUpperCase()}</p>
           <p className="display line-clamp-3 text-base leading-tight">{unit.title || "—"}</p>
           <p className="mt-1 line-clamp-3 text-[0.62rem] leading-snug text-ivory/70">{unit.body}</p>
