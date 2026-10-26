@@ -27,6 +27,9 @@ import type {
   TravelData,
 } from "../types";
 
+/** 배포마다 달라지는 서버 버전 — ChatGPT 등 클라이언트가 서버 변경을 알아챌 수 있게 */
+export const MCP_VERSION = `1.1.0+${(process.env.VERCEL_GIT_COMMIT_SHA ?? "dev").slice(0, 7)}`;
+
 const PROJECT = z.enum(["korea-trip", "med-toon"]).describe("korea-trip = KOREA TRIP 여행 캐러셀, med-toon = MED SCHOOL TOON 인스타툰");
 
 const INSTRUCTIONS = `OUR STUDIO is the private workspace of two creators who run two Instagram accounts:
@@ -103,7 +106,7 @@ const cutSchema = z.object({
 
 export function buildServer(userId: string, origin: string): McpServer {
   const sb = adminClient();
-  const server = new McpServer({ name: "OUR STUDIO", version: "1.0.0" }, { instructions: INSTRUCTIONS });
+  const server = new McpServer({ name: "OUR STUDIO", version: MCP_VERSION }, { instructions: INSTRUCTIONS });
   const link = (path: string) => `${origin}${path}`;
 
   const load = async <T>(q: PromiseLike<{ data: unknown; error: { message: string } | null }>): Promise<T> => {
