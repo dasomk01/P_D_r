@@ -35,9 +35,9 @@ import glob
 EXP={}
 for p in sorted(glob.glob(D+'/yexp_*.py')): EXP.update(importlib.import_module(os.path.basename(p)[:-3]).EXP)
 
-try:
-  from ycf import CF   # 카드키 → {연도: 출제 교수}
-except ImportError: CF={}
+CF={}   # 카드키 → {연도: 출제 교수}  (ycf.py 의 CF, ycf_*.py 의 CF2)
+for p in sorted(glob.glob(D+'/ycf*.py')):
+  m=importlib.import_module(os.path.basename(p)[:-3]); CF.update(getattr(m,'CF',{})); CF.update(getattr(m,'CF2',{}))
 def cfnote(k,prof):
   m=CF.get(k) or {}
   g=collections.OrderedDict()
