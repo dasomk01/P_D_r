@@ -30,6 +30,10 @@
 - 솜에드(Somed): 강의록·STT는 `get_lesson_materials(date, period)`, 학습지는 `정신의학` 학습지(id `7a75f08e-b3c8-403f-aa4e-e58fe479b837`, 목차 확정, 380쪽).
 - 티야방: Google Docs `1icF0qNtNhgyGeGOSWDEDr6FCsZ1SBKwGgyH4zj0upSo` (수업별 표, 담당자가 채움).
 
+## 10/27 추가
+- 정영철 물질 관련 및 중독성 장애(`q25_subst`/`y_subst` sub 303–326, `yexp_subst`, 출제 교수 `ycf_subst`). 2–3교시 자료 없음, 4–6교시 Somed 미등록.
+- 확인 필요: 물질 2017 객17, 2013 객10, 2014 객22.
+
 ## 10/26 추가
 - 정재희 1교시 수면각성장애(`q23_sleep`, 야마 slp 364–378), 2교시 약물치료·물리적 치료(`q24_drug`, 야마 rxp 379–380) – `y_sleep`/`yexp_sleep`. 3·4교시 자료 없음.
 - 확인 필요: 수면위생 2023 객7(답란 ③, 해설 ④).
