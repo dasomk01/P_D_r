@@ -47,6 +47,12 @@ def cfnote(k,prof):
   if any(p not in (prof,'미상') for p in g): t+=' — 올해 담당 '+prof+' 교수님과 다른 교수님 출제 포함'
   return t
 
+# 그림 문항: yimg_*.py 의 IMG = {카드키: ['img/파일.jpg', ...]} → data URI 로 넣는다
+import base64
+IMG={}
+for p in sorted(glob.glob(D+'/yimg_*.py')): IMG.update(importlib.import_module(os.path.basename(p)[:-3]).IMG)
+def imgs(k): return ['data:image/jpeg;base64,'+base64.b64encode(open(D+'/'+f,'rb').read()).decode() for f in IMG.get(k,[])]
+
 def yama():
   cards=[];fam=collections.defaultdict(list)
   for m in YMODS:
@@ -54,7 +60,7 @@ def yama():
       yl='%d %s'%(y,n)
       if stem is None:                       # 바로 앞 해와 문제·선지가 같은 해
         fam[f][-1]['ys'].append(yl);continue
-      excl=not ans
+      excl=not ans and bool(ch)              # 선지 없는 주관식은 정답을 해설에 두고 자가채점
       for c in fam[f]:
         if not excl and same(c,stem,ch,ans): c['ys'].append(yl);break
       else:
@@ -77,8 +83,8 @@ def yama():
     cn=cfnote(k,prof)
     if cn: notes=[cn]+notes
     out[c['sec']].append(dict(k='psy-'+k,area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
-      year=c['ys'][0],type='객',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
-      stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=[],vis=[],notes=notes,basis=basis,exps=[],ai=''))
+      year=c['ys'][0],type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
+      stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=imgs(k),vis=[],notes=notes,basis=basis,exps=[],ai=''))
   return out
 
 Y=yama()
@@ -104,7 +110,7 @@ for m in MODS:
   for ys,(_,_,pm) in PRE.items():
     if pm==m: items+=Y[ys]
 for i in items:
-  if i['area']=='야마' and not i.get('excl') and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
+  if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
 keys=[i['k'] for i in items]; dup=[k for k,c in collections.Counter(keys).items() if c>1]
 print(len(items),collections.Counter(i['area'] for i in items),'errs',errs,'dup',dup)
 ym=[i for i in items if i['area']=='야마']
@@ -114,4 +120,5 @@ ny=[i for i in items if i['area']!='야마']
 print(collections.Counter(i['ans'][0] for i in ny))
 long=[i['k'] for i in ny if len(i['choices'][i['ans'][0]-1])>1.6*max(len(c) for j,c in enumerate(i['choices']) if j!=i['ans'][0]-1)]
 print('answer-much-longer',long)
+print('그림',sum(bool(i['imgs']) for i in items),'주관식',[i['k'] for i in ym if not i['choices']],'IMG키없음',[k for k in IMG if 'psy-y-'+k[2:] not in keys and 'psy-'+k not in keys])
 print(build(items,'정신의학 문풀','psy-app',D+'/psy-app.html'))
