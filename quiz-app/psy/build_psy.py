@@ -7,7 +7,7 @@ from tyb import TYB
 import hashlib,random
 MODS=['q1_intro','q2_interview','q3_class','q4_scz1','q5_scz2','q6_anx','q7_ocd','q8_scz3','q9b_scz4','q9_ptsd','q10_scz5','q11_child1','q12_adhd','q13_eat','q14_som','q15_pd','q19_dis','q16_sex','q18_geri','q17_mood','q20_child3','q21_child4','q22_psysoc','q23_sleep','q24_drug','q25_subst']
 # 야마(기출): y_*.py. 구역 → 붙일 수업 모듈(그 수업 문제 뒤에 넣는다)
-YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB','y_fixA','y_fmt','y_pre_emg']
+YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB','y_fixA','y_fmt','y_pre_emg','y_pre_cog']
 YSEC={'iv':'q2_interview','cl':'q3_class','scz1':'q4_scz1','scz2':'q5_scz2','scz3':'q8_scz3','sczt':'q9b_scz4','anx':'q6_anx','ocd':'q7_ocd','ptsd':'q9_ptsd',
   'scz5':'q10_scz5','nd1':'q11_child1','nd2':'q12_adhd','tic':'q20_child3','eat':'q13_eat','som':'q14_som','psm':'q14_som',
   'pd':'q15_pd','dis':'q19_dis','sex':'q16_sex','geri':'q18_geri','dep':'q17_mood','bip':'q17_mood','canx':'q21_child4','cdep':'q21_child4','celim':'q21_child4','ccd':'q21_child4','cetc':'q21_child4','cnd':'q11_child1','cadhd':'q12_adhd','ctic':'q20_child3','cpt':'q2_interview','pst':'q22_psysoc','slp':'q23_sleep','rxp':'q24_drug','sub':'q25_subst'}
@@ -23,8 +23,10 @@ YSRC={'iv':'학습지 「정신과적 면담 및 평가」 243–251쪽','cl':'�
 PRE={'emg':('정신과적 응급 (야마 · 수업 전)','박태원','q25_subst'),
      'comm':('지역사회정신의학 (야마 · 수업 전)','박종일','q25_subst'),
      'law':('정신과 영역의 법적 문제 (야마 · 수업 전)','박종일','q25_subst'),
+     'cog':('신경인지장애 (야마 · 수업 전)','박종일','q18_geri'),
+     'med':('신체질환에 동반되는 정신질환 (야마 · 수업 전)','박종일','q18_geri'),
      'hist':('정신의학 총론: 역사·발달·정상 개념 (야마 · 수업 전)','미정','q25_subst')}
-YSRC.update(emg='학습지 「정신과적 응급」 145–166쪽(새 학습지)',comm='학습지 「지역사회정신의학」 59–61쪽(새 학습지)',
+YSRC.update(cog='학습지 「신경인지장애」 25–54쪽(새 학습지)',med='학습지 「신체질환에 동반되는 정신질환」 4–8쪽(새 학습지)',emg='학습지 「정신과적 응급」 145–166쪽(새 학습지)',comm='학습지 「지역사회정신의학」 59–61쪽(새 학습지)',
   law='학습지 「정신과 영역에서의 법적인 문제들」 62–66쪽(새 학습지)',
   hist='학습지 「정신의학의 역사」 67–68쪽 · 「인간 정신의 발달」 69–71쪽 · 「정신병리」 72–76쪽(새 학습지)')
 

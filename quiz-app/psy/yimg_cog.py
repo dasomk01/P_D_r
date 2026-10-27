@@ -1,5 +1,6 @@
 # 그림 문항(학습지 페이지 이미지에서 잘라냄) — 신경인지장애 MRI
+# 2020 객46은 2025 객38 카드에 합쳐진 같은 사진이라 2025 것만 붙임(img/cog-mri-2020-46.jpg 도 보관).
 IMG = {
     'y-cg-amri-2025': ['img/cog-mri-2025-34.jpg'],
-    'y-cg-svd-2025': ['img/cog-mri-2025-38.jpg', 'img/cog-mri-2020-46.jpg'],
+    'y-cg-svd-2025': ['img/cog-mri-2025-38.jpg'],
 }
