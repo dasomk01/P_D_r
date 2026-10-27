@@ -7,7 +7,7 @@ from tyb import TYB
 import hashlib,random
 MODS=['q1_intro','q2_interview','q3_class','q4_scz1','q5_scz2','q6_anx','q7_ocd','q8_scz3','q9b_scz4','q9_ptsd','q10_scz5','q11_child1','q12_adhd','q13_eat','q14_som','q15_pd','q19_dis','q16_sex','q18_geri','q17_mood','q20_child3','q21_child4','q22_psysoc','q23_sleep','q24_drug','q25_subst']
 # 야마(기출): y_*.py. 구역 → 붙일 수업 모듈(그 수업 문제 뒤에 넣는다)
-YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB']
+YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB','y_fixA']
 YSEC={'iv':'q2_interview','cl':'q3_class','scz1':'q4_scz1','scz2':'q5_scz2','scz3':'q8_scz3','sczt':'q9b_scz4','anx':'q6_anx','ocd':'q7_ocd','ptsd':'q9_ptsd',
   'scz5':'q10_scz5','nd1':'q11_child1','nd2':'q12_adhd','tic':'q20_child3','eat':'q13_eat','som':'q14_som','psm':'q14_som',
   'pd':'q15_pd','dis':'q19_dis','sex':'q16_sex','geri':'q18_geri','dep':'q17_mood','bip':'q17_mood','canx':'q21_child4','cdep':'q21_child4','celim':'q21_child4','ccd':'q21_child4','cetc':'q21_child4','cnd':'q11_child1','cadhd':'q12_adhd','ctic':'q20_child3','cpt':'q2_interview','pst':'q22_psysoc','slp':'q23_sleep','rxp':'q24_drug','sub':'q25_subst'}
