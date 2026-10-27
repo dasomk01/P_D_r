@@ -7,7 +7,7 @@ from tyb import TYB
 import hashlib,random
 MODS=['q1_intro','q2_interview','q3_class','q4_scz1','q5_scz2','q6_anx','q7_ocd','q8_scz3','q9b_scz4','q9_ptsd','q10_scz5','q11_child1','q12_adhd','q13_eat','q14_som','q15_pd','q19_dis','q16_sex','q18_geri','q17_mood','q20_child3','q21_child4','q22_psysoc','q23_sleep','q24_drug','q25_subst']
 # 야마(기출): y_*.py. 구역 → 붙일 수업 모듈(그 수업 문제 뒤에 넣는다)
-YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB','y_fixA','y_fmt']
+YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB','y_fixA','y_fmt','y_pre_emg']
 YSEC={'iv':'q2_interview','cl':'q3_class','scz1':'q4_scz1','scz2':'q5_scz2','scz3':'q8_scz3','sczt':'q9b_scz4','anx':'q6_anx','ocd':'q7_ocd','ptsd':'q9_ptsd',
   'scz5':'q10_scz5','nd1':'q11_child1','nd2':'q12_adhd','tic':'q20_child3','eat':'q13_eat','som':'q14_som','psm':'q14_som',
   'pd':'q15_pd','dis':'q19_dis','sex':'q16_sex','geri':'q18_geri','dep':'q17_mood','bip':'q17_mood','canx':'q21_child4','cdep':'q21_child4','celim':'q21_child4','ccd':'q21_child4','cetc':'q21_child4','cnd':'q11_child1','cadhd':'q12_adhd','ctic':'q20_child3','cpt':'q2_interview','pst':'q22_psysoc','slp':'q23_sleep','rxp':'q24_drug','sub':'q25_subst'}
@@ -20,7 +20,13 @@ YSRC={'iv':'학습지 「정신과적 면담 및 평가」 243–251쪽','cl':'�
   'dep':'학습지 「우울장애」 341–362쪽','bip':'학습지 「양극성 관련 장애」 326–340쪽',
   'canx':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cdep':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','celim':'학습지 「배설장애」 102–105쪽(새 학습지)','ccd':'학습지 「파괴적, 충동조절 및 품행장애」 106–112쪽(새 학습지)','cetc':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cnd':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cadhd':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','ctic':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cpt':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지) 중 심리검사 문항','pst':'학습지 「정신사회적 치료」 206–218쪽(새 학습지)','slp':'학습지 「수면각성장애」 364–378쪽(새 학습지)','rxp':'학습지 「약물치료 및 물리적 치료법」 379–380쪽(새 학습지)','sub':'학습지 「물질 관련 및 중독성 장애」 303–326쪽(새 학습지)'}
 # 아직 수업 전인 야마 구역: (섹션명, 교수, 뒤에 붙일 수업 모듈)
-PRE={}
+PRE={'emg':('정신과적 응급 (야마 · 수업 전)','박태원','q25_subst'),
+     'comm':('지역사회정신의학 (야마 · 수업 전)','박종일','q25_subst'),
+     'law':('정신과 영역의 법적 문제 (야마 · 수업 전)','박종일','q25_subst'),
+     'hist':('정신의학 총론: 역사·발달·정상 개념 (야마 · 수업 전)','미정','q25_subst')}
+YSRC.update(emg='학습지 「정신과적 응급」 145–166쪽(새 학습지)',comm='학습지 「지역사회정신의학」 59–61쪽(새 학습지)',
+  law='학습지 「정신과 영역에서의 법적인 문제들」 62–66쪽(새 학습지)',
+  hist='학습지 「정신의학의 역사」 67–68쪽 · 「인간 정신의 발달」 69–71쪽 · 「정신병리」 72–76쪽(새 학습지)')
 
 def N(t): return re.sub(r'[\s\W_]+','',t.lower())
 def R(a,b): return difflib.SequenceMatcher(None,N(a),N(b)).ratio()
@@ -44,7 +50,7 @@ def cfnote(k,prof):
   for y in sorted(m): g.setdefault(m[y] or '미상',[]).append(y)
   if not g: return None
   t='✍️ 출제: '+' / '.join(p+(' 교수님' if p!='미상' else '')+' ('+'·'.join(ys)+')' for p,ys in g.items())
-  if any(p not in (prof,'미상') for p in g): t+=' — 올해 담당 '+prof+' 교수님과 다른 교수님 출제 포함'
+  if prof!='미정' and any(p not in (prof,'미상') for p in g): t+=' — 올해 담당 '+prof+' 교수님과 다른 교수님 출제 포함'
   return t
 
 # 그림 문항: yimg_*.py 의 IMG = {카드키: ['img/파일.jpg', ...]} → data URI 로 넣는다
