@@ -274,8 +274,12 @@ function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object
 var DB=null,UID=null,pt=null,dirty=false;
 function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
 function push(){if(!DB||!UID||!dirty)return;dirty=false;
+  // 다른 기기·다른 탭이 먼저 저장한 기록(더 최신 t)을 덮어쓰지 않도록 서버 것을 먼저 합친 뒤 저장
+  Promise.all([DB.doc('st/'+UID).get(),DB.doc('memo/'+UID).get()]).then(function(r){
+    var s=r[0]&&r[0].exists?r[0].data():null,m=r[1]&&r[1].exists?r[1].data():null;
+    if(s)merge({a:s.a,f:s.f});if(m)merge({m:m.m});lsSet(LK,S)},function(){}).then(function(){
   var st={a:S.a,f:S.f,updatedAt:new Date().toISOString()},mm={m:S.m,updatedAt:st.updatedAt};
-  Promise.all([DB.doc('st/'+UID).set(st),DB.doc('memo/'+UID).set(mm)]).then(function(){$('sync').textContent='계정에 저장됨 · 모든 기기 연결'},function(){dirty=true;$('sync').textContent='계정 저장 실패 · 이 기기에는 저장됨'})}
+  return Promise.all([DB.doc('st/'+UID).set(st),DB.doc('memo/'+UID).set(mm)])}).then(function(){$('sync').textContent='계정에 저장됨 · 모든 기기 연결'},function(){dirty=true;$('sync').textContent='계정 저장 실패 · 이 기기에는 저장됨'})}
 function pull(){if(!DB||!UID)return Promise.resolve();$('sync').textContent='계정 기록 연결 중…';
   return Promise.all([DB.doc('st/'+UID).get(),DB.doc('memo/'+UID).get()]).then(function(r){
     var s=r[0]&&r[0].exists?r[0].data():null,m=r[1]&&r[1].exists?r[1].data():null;
