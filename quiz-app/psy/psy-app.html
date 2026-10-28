@@ -73,7 +73,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 .acts .chip{font-size:14px;padding:6px 13px}
 .memo{margin-top:14px}
 .memo label{display:block;font-size:13px;color:var(--mute);margin-bottom:4px;font-weight:600}
-.memo textarea{width:100%;min-height:84px;padding:10px 12px;font-size:15px;resize:vertical}
+.memo textarea{width:100%;min-height:220px;max-height:75vh;padding:12px 14px;font-size:15px;line-height:1.6;resize:vertical;overflow-y:auto}
 .memo .saved{font-size:12px;color:var(--mute);min-height:1em}
 .bottomnav{display:flex;gap:8px;justify-content:space-between;margin-top:14px}
 .empty{color:var(--mute);text-align:center;padding:30px 10px}
@@ -222,7 +222,7 @@ function render(){stats();var i=idx(),v=$('view');
   var o=$('tOut');if(o)o.onclick=function(){flag(k,'out',true)};
   var rd=$('redo');if(rd)rd.onclick=function(){delete SES[k];delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
-  var m=$('memo'),mt=null;m.oninput=function(){clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
+  var m=$('memo'),mt=null,fit=function(){m.style.height='auto';m.style.height=Math.min(Math.max(m.scrollHeight+4,220),innerHeight*.75)+'px'};fit();m.oninput=function(){fit();clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
 }
 // 다시 풀기: 기록(틀린 횟수)은 남기고 화면만 처음 상태로
 // 다회독: 예전에 고른 답은 화면에 보이지 않음. 이번에 열어서 푼 것(SES)만 표시하고, 기록(S.a: 틀린 횟수 등)은 계속 쌓인다
