@@ -30,6 +30,12 @@
 - 솜에드(Somed): 강의록·STT는 `get_lesson_materials(date, period)`, 학습지는 `정신의학` 학습지(id `7a75f08e-b3c8-403f-aa4e-e58fe479b837`, 목차 확정, 380쪽).
 - 티야방: Google Docs `1icF0qNtNhgyGeGOSWDEDr6FCsZ1SBKwGgyH4zj0upSo` (수업별 표, 담당자가 채움).
 
+## 10/28 추가
+- 1교시 정영철 물질 2(`q26_subst2`, 알코올 원인·금단 치료·재활·항갈망제 → 마약류 법적 분류·대마 THC/CBD·환각제, STT 「1교시 정영철.txt」). 2–3교시 Somed 자료 없음.
+- 4교시 박종일 신체질환에 동반되는 정신질환(`q27_med`), 5교시 섬망(`q28_delir`), 6교시 알츠하이머병에 의한 치매(`q29_ad`).
+- 야마 연결: PRE에서 med 해제 → YSEC med→q27_med. `y_pre_cog.py`의 cog 구역을 문항 내용으로 나눔: dlr(섬망: cg-deltx·case9·case10·delmg·orient·ddel)→q28_delir, adz(알츠하이머·치매 일반: amri·case11·case12·early·mem·mta·path·ache·achemech·nt·nmda·dd·cdr·adf·aging)→q29_ad, 남은 cog(혈관성 svd·루이소체 dlb·dlbtx)는 「신경인지장애 – 혈관성·루이소체 등 (야마 · 수업 전)」. 다른 수업 전 구역(emg·comm·law·hist)은 q29_ad 뒤로.
+- 티야방: 10/28 1교시 조수안, 5교시 임채원(4교시 신체질환 내용 포함), 6교시 양서은 반영. 2·3교시(이도연·임채원 정영철분)·4교시는 아직 빈 칸.
+
 ## 10/27 추가
 - 정영철 물질 관련 및 중독성 장애(`q25_subst`/`y_subst` sub 303–326, `yexp_subst`, 출제 교수 `ycf_subst`). 2–3교시 자료 없음, 4–6교시 Somed 미등록.
 - 확인 필요: 물질 2017 객17, 2013 객10, 2014 객22.
