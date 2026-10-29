@@ -5,7 +5,7 @@ from mk import build
 from fix_choices import FIX,EXPFIX
 from tyb import TYB
 import hashlib,random
-MODS=['q1_intro','q2_interview','q3_class','q4_scz1','q5_scz2','q6_anx','q7_ocd','q8_scz3','q9b_scz4','q9_ptsd','q10_scz5','q11_child1','q12_adhd','q13_eat','q14_som','q15_pd','q19_dis','q16_sex','q18_geri','q17_mood','q20_child3','q21_child4','q22_psysoc','q23_sleep','q24_drug','q25_subst','q26_subst2','q27_med','q28_delir','q29_ad','q30_cog3']
+MODS=['q1_intro','q2_interview','q3_class','q4_scz1','q5_scz2','q6_anx','q7_ocd','q8_scz3','q9b_scz4','q9_ptsd','q10_scz5','q11_child1','q12_adhd','q13_eat','q14_som','q15_pd','q19_dis','q16_sex','q18_geri','q17_mood','q20_child3','q21_child4','q22_psysoc','q23_sleep','q24_drug','q25_subst','q26_subst2','q27_med','q28_delir','q29_ad','q30_cog3','q31_law']
 # 야마(기출): y_*.py. 구역 → 붙일 수업 모듈(그 수업 문제 뒤에 넣는다)
 YMODS=['y_iv','y_cl','y_scz','y_anx','y_ocd','y_ptsd','y_nd','y_eat','y_pd','y_dis','y_sex','y_geri','y_mood','y_child4','y_child5','y_psysoc','y_sleep','y_subst','y_fixB','y_fixA','y_fmt','y_pre_emg','y_pre_cog']
 YSEC={'iv':'q2_interview','cl':'q3_class','scz1':'q4_scz1','scz2':'q5_scz2','scz3':'q8_scz3','sczt':'q9b_scz4','anx':'q6_anx','ocd':'q7_ocd','ptsd':'q9_ptsd',
@@ -20,12 +20,10 @@ YSRC={'iv':'학습지 「정신과적 면담 및 평가」 243–251쪽','cl':'�
   'dep':'학습지 「우울장애」 341–362쪽','bip':'학습지 「양극성 관련 장애」 326–340쪽',
   'canx':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cdep':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','celim':'학습지 「배설장애」 102–105쪽(새 학습지)','ccd':'학습지 「파괴적, 충동조절 및 품행장애」 106–112쪽(새 학습지)','cetc':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cnd':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cadhd':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','ctic':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지)','cpt':'학습지 「소아청소년 정신의학」 113–144쪽(새 학습지) 중 심리검사 문항','pst':'학습지 「정신사회적 치료」 206–218쪽(새 학습지)','slp':'학습지 「수면각성장애」 364–378쪽(새 학습지)','rxp':'학습지 「약물치료 및 물리적 치료법」 379–380쪽(새 학습지)','sub':'학습지 「물질 관련 및 중독성 장애」 303–326쪽(새 학습지)'}
 # 아직 수업 전인 야마 구역: (섹션명, 교수, 뒤에 붙일 수업 모듈)
-PRE={'emg':('정신과적 응급 (야마 · 수업 전)','박태원','q30_cog3'),
-     'comm':('지역사회정신의학 (야마 · 수업 전)','박종일','q30_cog3'),
-     'law':('정신과 영역의 법적 문제 (야마 · 수업 전)','박종일','q30_cog3'),
-     'hist':('정신의학 총론: 역사·발달·정상 개념 (야마 · 수업 전)','미정','q30_cog3')}
+PRE={'emg':('정신과적 응급 (야마 · 수업 전)','박태원','q31_law'),
+     'hist':('정신의학 총론: 역사·발달·정상 개념 (야마 · 수업 전)','미정','q31_law')}
 # 10/28 수업한 구역: 신체질환 동반(med) → 4교시, 섬망(dlr) → 5교시, 알츠하이머·치매 일반(adz) → 6교시
-YSEC.update(med='q27_med',dlr='q28_delir',adz='q29_ad',cog='q30_cog3')
+YSEC.update(med='q27_med',dlr='q28_delir',adz='q29_ad',cog='q30_cog3',law='q31_law',comm='q31_law')
 YSRC.update(cog='학습지 「신경인지장애」 25–54쪽(새 학습지)',dlr='학습지 「신경인지장애」 25–54쪽(새 학습지) 중 섬망 문항',adz='학습지 「신경인지장애」 25–54쪽(새 학습지) 중 알츠하이머·치매 문항',med='학습지 「신체질환에 동반되는 정신질환」 4–8쪽(새 학습지)',emg='학습지 「정신과적 응급」 145–166쪽(새 학습지)',comm='학습지 「지역사회정신의학」 59–61쪽(새 학습지)',
   law='학습지 「정신과 영역에서의 법적인 문제들」 62–66쪽(새 학습지)',
   hist='학습지 「정신의학의 역사」 67–68쪽 · 「인간 정신의 발달」 69–71쪽 · 「정신병리」 72–76쪽(새 학습지)')
