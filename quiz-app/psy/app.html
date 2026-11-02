@@ -277,20 +277,27 @@ $('bRes').onclick=function(){sheet('<h2>백업 불러오기</h2><div class="msg"
 
 /* ---------- 저장·계정 동기화 ---------- */
 function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object.keys(src).forEach(function(k){var v=src[k];if(!v)return;var c=S[x][k];if(!c||(v.t||0)>(c.t||0))S[x][k]=v})})}
-var DB=null,UID=null,pt=null,dirty=false;
+var DB=null,UID=null,pt=null,dirty=false,busy=false,again=false,fails=0;
 function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
-function push(){if(!DB||!UID||!dirty)return;dirty=false;
+// 메모는 문서 하나에 256KB까지라 4개 문서로 나눠 저장(memo/UID, memo/UID~1~3). 기록(st)은 한 문서.
+var MB=4;function mdoc(i){return 'memo/'+UID+(i?'~'+i:'')}
+function mbucket(k){var h=0;for(var i=0;i<k.length;i++)h=(h*31+k.charCodeAt(i))>>>0;return h%MB}
+function readAll(){var ps=[DB.doc('st/'+UID).get()];for(var i=0;i<MB;i++)ps.push(DB.doc(mdoc(i)).get());
+  return Promise.all(ps).then(function(r){var s=r[0]&&r[0].exists?r[0].data():null,any=false;if(s)merge({a:s.a,f:s.f});
+    for(var i=1;i<r.length;i++){var m=r[i]&&r[i].exists?r[i].data():null;if(m){any=true;merge({m:m.m})}}lsSet(LK,S);return {s:s,m:any}})}
+function writeAll(){var ts=new Date().toISOString(),parts=[];for(var i=0;i<MB;i++)parts.push({});
+  Object.keys(S.m).forEach(function(k){parts[mbucket(k)][k]=S.m[k]});
+  // 같은 문서에 동시에 여러 번 쓰면 거절되므로 하나씩 차례로 쓴다
+  var p=DB.doc('st/'+UID).set({a:S.a,f:S.f,updatedAt:ts});
+  parts.forEach(function(m,i){p=p.then(function(){return DB.doc(mdoc(i)).set({m:m,updatedAt:ts})})});return p}
+function push(){if(!DB||!UID||!dirty)return;if(busy){again=true;return}busy=true;dirty=false;again=false;
   // 다른 기기·다른 탭이 먼저 저장한 기록(더 최신 t)을 덮어쓰지 않도록 서버 것을 먼저 합친 뒤 저장
-  Promise.all([DB.doc('st/'+UID).get(),DB.doc('memo/'+UID).get()]).then(function(r){
-    var s=r[0]&&r[0].exists?r[0].data():null,m=r[1]&&r[1].exists?r[1].data():null;
-    if(s)merge({a:s.a,f:s.f});if(m)merge({m:m.m});lsSet(LK,S)},function(){}).then(function(){
-  var st={a:S.a,f:S.f,updatedAt:new Date().toISOString()},mm={m:S.m,updatedAt:st.updatedAt};
-  return Promise.all([DB.doc('st/'+UID).set(st),DB.doc('memo/'+UID).set(mm)])}).then(function(){$('sync').textContent='계정에 저장됨 · 모든 기기 연결'},function(){dirty=true;$('sync').textContent='계정 저장 실패 · 이 기기에는 저장됨'})}
+  readAll().catch(function(){}).then(writeAll).then(function(){fails=0;busy=false;$('sync').textContent='계정에 저장됨 · 모든 기기 연결';if(again||dirty){dirty=true;push()}},
+    function(e){busy=false;dirty=true;fails++;$('sync').textContent='계정 저장 실패'+(e&&e.code?' ('+e.code+')':'')+' · 다시 시도 중';
+      if(fails<6){clearTimeout(pt);pt=setTimeout(push,2000*fails)}})}
 function pull(){if(!DB||!UID)return Promise.resolve();$('sync').textContent='계정 기록 연결 중…';
-  return Promise.all([DB.doc('st/'+UID).get(),DB.doc('memo/'+UID).get()]).then(function(r){
-    var s=r[0]&&r[0].exists?r[0].data():null,m=r[1]&&r[1].exists?r[1].data():null;
-    if(s)merge({a:s.a,f:s.f});if(m)merge({m:m.m});lsSet(LK,S);refilter(true);$('sync').textContent='계정에 저장됨 · 모든 기기 연결';
-    if(!s||!m||Object.keys(S.a).length)dirty=true,push()},function(){$('sync').textContent='계정 연결 실패 · 이 기기에만 저장'})}
+  return readAll().then(function(r){refilter(true);$('sync').textContent='계정에 저장됨 · 모든 기기 연결';
+    if(!r.s||!r.m||Object.keys(S.a).length){dirty=true;push()}},function(){$('sync').textContent='계정 연결 실패 · 이 기기에만 저장'})}
 $('bSync').onclick=function(){if(DB)pull();else{S=lsGet(LK)||S;refilter(true)}};
 window.addEventListener('pagehide',function(){lsSet(LK,S);push()});
 if(window.claude&&window.claude.use){Promise.all([window.claude.use('db'),window.claude.use('user')]).then(function(r){
