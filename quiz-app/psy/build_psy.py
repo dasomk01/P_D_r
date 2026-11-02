@@ -131,4 +131,10 @@ print(collections.Counter(i['ans'][0] for i in ny))
 long=[i['k'] for i in ny if len(i['choices'][i['ans'][0]-1])>1.6*max(len(c) for j,c in enumerate(i['choices']) if j!=i['ans'][0]-1)]
 print('answer-much-longer',long)
 print('그림',sum(bool(i['imgs']) for i in items),'주관식',[i['k'] for i in ym if not i['choices']],'IMG키없음',[k for k in IMG if 'psy-y-'+k[2:] not in keys and 'psy-'+k not in keys])
+# 형성평가 모아 풀기: 🤍/💜형성평가 문항, 키가 -fh 로 끝나는 문항, 「형성평가에도 출제」 표시 문항, fhset.py 의 FHKEYS
+FHKEYS=set()
+if os.path.exists(D+'/fhset.py'): FHKEYS=set(importlib.import_module('fhset').FHKEYS)
+for i in items:
+  if re.match(r'^(🤍|💜)형성평가',i['stem']) or i['k'].endswith('-fh') or i['k'][4:] in FHKEYS or any('형성평가에도 출제' in n for n in i['notes']): i['fh']=True
+print('형성평가',sum(1 for i in items if i.get('fh')))
 print(build(items,'정신의학 문풀','psy-app',D+'/psy-app.html'))

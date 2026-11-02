@@ -113,7 +113,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
   </div>
   <div style="margin-top:8px"><input type="search" id="fQ" placeholder="검색 (지문·정답·연도 예: 2023 객12)" aria-label="검색"></div>
   <div class="chips" id="chips">
-    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" id="shuf" aria-pressed="false">섞기</button>
+    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" data-v="fh">🤍💜 형성평가</button><button class="chip" id="shuf" aria-pressed="false">섞기</button>
   </div>
   <div class="tools">
     <button class="btn" id="bSync">기록 새로고침</button><button class="btn" id="bBak">기록 백업</button><button class="btn" id="bRes">백업 불러오기</button><button class="btn" id="bExpF">지금 보는 범위만 내보내기</button><button class="btn" id="bExp">오답·헷갈림·메모 내보내기(전체)</button>
@@ -169,7 +169,7 @@ function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
   var fl=q.fl||{};
   switch(F.st){case'inscope':if(fl.oos||f.oos)return false;break;case'tyb':if(!fl.tyb)return false;break;case'nowarn':if(fl.warn)return false;break;case'chk':if(!fl.chk)return false;break;case'inc':if(!fl.inc)return false;break;case'ydiff':if(!fl.ydiff)return false;break;
     case'img':if(!q.imgs||!q.imgs.length)return false;break;case'noimg':if(q.imgs&&q.imgs.length)return false;break;case'myerr':if(!f.err)return false;break;case'myoos':if(!f.oos)return false;break}
-  switch(F.chip){case'new':if(solved(a))return false;break;case'wrong':if(!inWrong(k))return false;break;case'conf':if(!f.conf)return false;break;case'memo':if(!memoOf(k))return false;break}
+  switch(F.chip){case'new':if(solved(a))return false;break;case'wrong':if(!inWrong(k))return false;break;case'conf':if(!f.conf)return false;break;case'memo':if(!memoOf(k))return false;break;case'fh':if(!(q.fl&&q.fl.fh))return false;break}
   if(F.q){var t=(q.year+' '+q.meta+' '+q.stem+' '+q.choices.join(' ')+' '+q.ans.map(function(n){return q.choices[n-1]||''}).join(' ')+' '+q.sec+' '+(q.notes||[]).join(' ')+' '+memoOf(k)).toLowerCase();
     var ws=F.q.toLowerCase().split(/\s+/).filter(Boolean);for(var i=0;i<ws.length;i++)if(t.indexOf(ws[i])<0)return false}
   return true}
