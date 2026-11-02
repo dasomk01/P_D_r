@@ -98,7 +98,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="wrap">
   <h1 id="ttl">__TITLE__</h1>
   <div class="stats" id="stats"></div>
-  <div class="sync" id="sync">이 기기에 저장 중</div>
+  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 __BUILD__</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
   <div class="grid">
     <select id="fProf" aria-label="교수"></select>
     <select id="fSec" aria-label="섹션"></select>
@@ -141,6 +141,7 @@ var S=lsGet(LK)||{a:{},f:{},m:{}};['a','f','m'].forEach(function(x){S[x]=S[x]||{
 var U=lsGet(UK)||{};
 var $=function(id){return document.getElementById(id)};
 function now(){return Date.now()}
+var tt=null;function toast(m){var e=document.getElementById('toast');if(!e)return;e.textContent=m;e.style.opacity='1';clearTimeout(tt);tt=setTimeout(function(){e.style.opacity='0'},1800)}
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
 /* ---------- 필터 ---------- */
@@ -222,8 +223,9 @@ function render(){stats();var i=idx(),v=$('view');
   $('tConf').onclick=function(){var f=S.f[k]||{};if(!f.conf&&f.out){f.out=false;S.f[k]=f}flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
   var o=$('tOut');if(o)o.onclick=function(){
     // 오답노트 보기에서 빼면 그 문제는 목록에서 바로 사라지고 다음 문제로 넘어간다(전에는 화면에 남아 안 빠진 것처럼 보였음)
-    var i=idx(),f=S.f[k]||{};f.out=true;f.t=now();S.f[k]=f;changed();
-    if(!pass(q)){var nx=L[i+1]||L[i-1];cur=nx?nx.k:null}refilter(true)};
+    var i=idx(),f=S.f[k]||{};f.out=true;f.t=now();S.f[k]=f;lsSet(LK,S);dirty=true;clearTimeout(pt);push();
+    if(!pass(q)){var nx=L[i+1]||L[i-1];cur=nx?nx.k:null}refilter(true);
+    var w=0;Q.forEach(function(x){if(inWrong(x.k))w++});toast('오답노트에서 뺐어요 · 남은 '+w+'문제')};
   var rd=$('redo');if(rd)rd.onclick=function(){delete SES[k];delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
   var m=$('memo'),mt=null,fit=function(){m.style.height='auto';m.style.height=Math.min(Math.max(m.scrollHeight+4,220),innerHeight*.75)+'px'};fit();m.oninput=function(){fit();clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
