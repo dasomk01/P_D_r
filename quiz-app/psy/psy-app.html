@@ -160,7 +160,8 @@ function syncCtl(){$('fProf').value=F.prof;secOpts();$('fSec').value=F.sec;$('fA
 function solved(a){return !!(a&&(a.c!=null||a.self))}
 // 오답노트 = 틀린 적 있음 또는 🟡헷갈림 (빼기 누르면 제외)
 function wasWrong(k){var a=S.a[k];return !!(a&&a.w>0)}
-function inWrong(k){var f=S.f[k]||{};return !!((wasWrong(k)||f.conf)&&!f.out)}
+// 오답노트 = 틀린 문제 + 🟡헷갈림 + 메모 단 문제 (「오답노트에서 빼기」로 제외)
+function inWrong(k){var f=S.f[k]||{};return !!((wasWrong(k)||f.conf||memoOf(k).trim())&&!f.out)}
 function memoOf(k){var m=S.m[k];return m&&m.x?m.x:''}
 function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
   if(F.prof&&q.prof!==F.prof)return false;if(F.sec&&q.sec!==F.sec)return false;if(F.area&&q.area!==F.area)return false;if(F.type&&q.type!==F.type)return false;
