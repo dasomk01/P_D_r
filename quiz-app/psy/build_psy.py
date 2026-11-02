@@ -109,12 +109,13 @@ for m in MODS:
       r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(5)); r.shuffle(idx)
       ch=[ch[i] for i in idx]; exps=[exps[i] for i in idx]; ans=idx.index(ans-1)+1
     tf=ch==['참','거짓']                      # 형성평가 참/거짓 문항은 2지, 순서 고정
-    if not tf and (len(ch)!=5 or len(exps)!=5 or not 1<=ans<=5) or tf and (len(exps)!=2 or ans not in (1,2)): errs.append((k,len(ch),len(exps),ans))
+    subj=not ch                               # 서술형 형성평가: 선지 없이 자가채점(정답은 해설)
+    if not subj and not tf and (len(ch)!=5 or len(exps)!=5 or not 1<=ans<=5) or tf and (len(exps)!=2 or ans not in (1,2)): errs.append((k,len(ch),len(exps),ans))
     tb=TYB.get(k)
     if tb: basis='📌 티야방('+tb[0]+'): '+tb[1]+'\n\n'+basis
     if '티야방' in src and not tb: tb=('',)
     items.append(dict(k='psy-'+k,area=area,prof=prof,sec=sec,meta=('📌티야방 · ' if tb else '')+'근거: '+src,tyb=bool(tb),
-      year='',type='객',rep=1,stem=stem,choices=ch,ans=[ans],imgs=[],vis=[],notes=qn,basis=basis,exps=exps,ai=''))
+      year='',type='주' if subj else '객',rep=1,stem=stem,choices=ch,ans=[] if subj else [ans],imgs=[],vis=[],notes=qn,basis=basis,exps=exps,ai=''))
   for ys,ym in YSEC.items():
     if ym==m: items+=Y[ys]
   for ys,(_,_,pm) in PRE.items():
