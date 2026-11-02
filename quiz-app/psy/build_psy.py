@@ -90,7 +90,7 @@ def yama():
     cn=cfnote(k,prof)
     if cn: notes=[cn]+notes
     if k in FHNOTE: notes=notes+[FHNOTE[k]]
-    out[c['sec']].append(dict(k='psy-'+k,area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
+    out[c['sec']].append(dict(k='psy-'+k,fam=c['f'],area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
       year=c['ys'][0],type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
       stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=imgs(k),vis=[],notes=notes,basis=basis,exps=[],ai=''))
   return out

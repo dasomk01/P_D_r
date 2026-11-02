@@ -11,7 +11,7 @@ def build(items,title,appkey,out):
       inc=bool(o.get('excl') or any('복원' in n for n in warn)),ydiff=any(('연도' in n or '년도' in n) and '선지' in n for n in notes),
       oos=bool(o.get('oos')),tyb=bool(o.get('tyb')),fh=bool(o.get('fh')))
     meta=re.sub(r'^👑+ 킹+야 · \d+회 \([^)]*\)','',o.get('meta',''))
-    Q.append(dict(k=o.get('k') or o['id'],area=o['area'],prof=o.get('prof',''),sec=o.get('sec',''),meta=meta,year=o.get('year',''),
+    Q.append(dict(k=o.get('k') or o['id'],fam=o.get('fam',''),area=o['area'],prof=o.get('prof',''),sec=o.get('sec',''),meta=meta,year=o.get('year',''),
       type=o.get('type','객'),rep=o.get('rep',1),repyears=o.get('repyears',''),stem=o['stem'],choices=o['choices'],
       ans=[] if o.get('excl') else o.get('ans',[]),imgs=o.get('imgs',[]),vis=o.get('vis',[]),notes=notes,basis=o.get('basis',''),
       exps=o.get('exps',[]),ai=o.get('ai',''),pick=(len(o.get('ans',[])) if len(o.get('ans',[]))>1 and re.search(r'지시하는 수만큼|모두 고르시오|\((두|세) 가지\)',o['stem']) else 0),fl={k:1 for k,v in fl.items() if v}))
