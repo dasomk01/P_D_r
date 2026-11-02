@@ -220,7 +220,10 @@ function render(){stats();var i=idx(),v=$('view');
   var r=$('reveal');if(r)r.onclick=function(){var x=S.a[k]||{w:0,n:0};x.c=null;x.self=0;x.pend=1;x.t=now();S.a[k]=x;SES[k]={pend:1};changed();render()};
   var so=$('selfOk'),sb=$('selfBad');if(so)so.onclick=function(){self(q,true)};if(sb)sb.onclick=function(){self(q,false)};
   $('tConf').onclick=function(){var f=S.f[k]||{};if(!f.conf&&f.out){f.out=false;S.f[k]=f}flag(k,'conf')};$('tErr').onclick=function(){flag(k,'err')};$('tOos').onclick=function(){flag(k,'oos')};
-  var o=$('tOut');if(o)o.onclick=function(){flag(k,'out',true)};
+  var o=$('tOut');if(o)o.onclick=function(){
+    // 오답노트 보기에서 빼면 그 문제는 목록에서 바로 사라지고 다음 문제로 넘어간다(전에는 화면에 남아 안 빠진 것처럼 보였음)
+    var i=idx(),f=S.f[k]||{};f.out=true;f.t=now();S.f[k]=f;changed();
+    if(!pass(q)){var nx=L[i+1]||L[i-1];cur=nx?nx.k:null}refilter(true)};
   var rd=$('redo');if(rd)rd.onclick=function(){delete SES[k];delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
   var m=$('memo'),mt=null,fit=function(){m.style.height='auto';m.style.height=Math.min(Math.max(m.scrollHeight+4,220),innerHeight*.75)+'px'};fit();m.oninput=function(){fit();clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
