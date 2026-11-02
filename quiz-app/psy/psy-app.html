@@ -98,7 +98,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="wrap">
   <h1 id="ttl">정신의학 문풀</h1>
   <div class="stats" id="stats"></div>
-  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/03 01:29</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
+  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/03 03:36</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
   <div class="grid">
     <select id="fProf" aria-label="교수"></select>
     <select id="fSec" aria-label="섹션"></select>
@@ -225,7 +225,11 @@ function render(){stats();var i=idx(),v=$('view');
     // 오답노트 보기에서 빼면 그 문제는 목록에서 바로 사라지고 다음 문제로 넘어간다(전에는 화면에 남아 안 빠진 것처럼 보였음)
     var i=idx(),f=S.f[k]||{};f.out=true;f.t=now();S.f[k]=f;lsSet(LK,S);dirty=true;clearTimeout(pt);push();
     if(!pass(q)){var nx=L[i+1]||L[i-1];cur=nx?nx.k:null}refilter(true);
-    var w=0;Q.forEach(function(x){if(inWrong(x.k))w++});toast('오답노트에서 뺐어요 · 남은 '+w+'문제')};
+    var w=0;Q.forEach(function(x){if(inWrong(x.k))w++});toast('오답노트에서 뺐어요 · 남은 '+w+'문제');
+    dlog('out '+k+' local='+!!(S.f[k]&&S.f[k].out)+' inWrong='+inWrong(k)+' chip='+F.chip+' busy='+busy);
+    // 몇 초 뒤 서버에 실제로 남았는지 확인해서 알려 준다
+    if(DB&&UID)setTimeout(function(){DB.doc('st/'+UID).get().then(function(r){var d=r&&r.exists?r.data():null,ok=!!(d&&d.f&&d.f[k]&&d.f[k].out);
+      dlog('verify '+k+' server='+ok+' local='+!!(S.f[k]&&S.f[k].out));dflush();toast(ok?'✓ 계정에 저장 확인':'⚠ 계정 저장 안 됨 – 다시 저장 시도');if(!ok){dirty=true;push()}},function(e){dlog('verify fail '+(e&&e.code));dflush()})},6000)};
   var rd=$('redo');if(rd)rd.onclick=function(){delete SES[k];delete PK[k];render()};
   $('prev2').onclick=go.bind(null,-1);$('next2').onclick=go.bind(null,1);
   var m=$('memo'),mt=null,fit=function(){m.style.height='auto';m.style.height=Math.min(Math.max(m.scrollHeight+4,220),innerHeight*.75)+'px'};fit();m.oninput=function(){fit();clearTimeout(mt);$('memoSt').textContent='입력 중…';mt=setTimeout(function(){var x=m.value.trim();if(x)S.m[k]={x:m.value,t:now()};else S.m[k]={x:'',t:now()};changed();stats();$('memoSt').textContent='저장됨'},600)};
@@ -278,6 +282,9 @@ $('bRes').onclick=function(){sheet('<h2>백업 불러오기</h2><div class="msg"
 /* ---------- 저장·계정 동기화 ---------- */
 function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object.keys(src).forEach(function(k){var v=src[k];if(!v)return;var c=S[x][k];if(!c||(v.t||0)>(c.t||0))S[x][k]=v})})}
 var DB=null,UID=null,pt=null,dirty=false,busy=false,again=false,fails=0;
+// 진단 기록: 최근 40개 동작을 st/<UID>~log 에 남겨 Claude가 읽을 수 있게(오답노트 빼기 문제 추적)
+var DBG=[];function dlog(m){DBG.push(new Date().toISOString().slice(11,19)+' '+m);if(DBG.length>40)DBG.shift()}
+function dflush(){if(!DB||!UID)return;DB.doc('st/'+UID+'~log').set({v:'11/03 03:36',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
 function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
 // 메모는 문서 하나에 256KB까지라 4개 문서로 나눠 저장(memo/UID, memo/UID~1~3). 기록(st)은 한 문서.
 var MB=4;function mdoc(i){return 'memo/'+UID+(i?'~'+i:'')}
@@ -290,12 +297,12 @@ function writeAll(){var ts=new Date().toISOString(),parts=[];for(var i=0;i<MB;i+
   // 같은 문서에 동시에 여러 번 쓰면 거절되므로 하나씩 차례로 쓴다
   var p=DB.doc('st/'+UID).set({a:S.a,f:S.f,updatedAt:ts});
   parts.forEach(function(m,i){p=p.then(function(){return DB.doc(mdoc(i)).set({m:m,updatedAt:ts})})});return p}
-function push(){if(!DB||!UID||!dirty)return;if(busy){again=true;return}busy=true;dirty=false;again=false;
+function push(){if(!DB||!UID||!dirty){dlog('push skip db='+!!DB+' uid='+!!UID+' dirty='+dirty);return}if(busy){again=true;dlog('push busy->again');return}busy=true;dirty=false;again=false;dlog('push start');
   // 다른 기기·다른 탭이 먼저 저장한 기록(더 최신 t)을 덮어쓰지 않도록 서버 것을 먼저 합친 뒤 저장
-  readAll().catch(function(){}).then(writeAll).then(function(){fails=0;busy=false;$('sync').textContent='계정에 저장됨 · 모든 기기 연결';if(again||dirty){dirty=true;push()}},
-    function(e){busy=false;dirty=true;fails++;$('sync').textContent='계정 저장 실패'+(e&&e.code?' ('+e.code+')':'')+' · 다시 시도 중';
+  readAll().catch(function(e){dlog('read fail '+(e&&e.code))}).then(writeAll).then(function(){fails=0;busy=false;dlog('push ok');dflush();$('sync').textContent='계정에 저장됨 · 모든 기기 연결';if(again||dirty){dirty=true;push()}},
+    function(e){busy=false;dirty=true;fails++;dlog('push fail '+(e&&(e.code+' '+e.message)));$('sync').textContent='계정 저장 실패'+(e&&e.code?' ('+e.code+')':'')+' · 다시 시도 중';
       if(fails<6){clearTimeout(pt);pt=setTimeout(push,2000*fails)}})}
-function pull(){if(!DB||!UID)return Promise.resolve();$('sync').textContent='계정 기록 연결 중…';
+function pull(){if(!DB||!UID)return Promise.resolve();dlog('pull');$('sync').textContent='계정 기록 연결 중…';
   return readAll().then(function(r){refilter(true);$('sync').textContent='계정에 저장됨 · 모든 기기 연결';
     if(!r.s||!r.m||Object.keys(S.a).length){dirty=true;push()}},function(){$('sync').textContent='계정 연결 실패 · 이 기기에만 저장'})}
 $('bSync').onclick=function(){if(DB)pull();else{S=lsGet(LK)||S;refilter(true)}};
