@@ -27,7 +27,7 @@ PREFAM={'dhleft':'bppv','epleyord':'bppv','epleypic':'bppv','hroll':'bppv','hrol
 EXP={};CLS={}
 for p in sorted(glob.glob(D+'/yexp_*.py')):
   m=importlib.import_module(os.path.basename(p)[:-3]); EXP.update(getattr(m,'EXP',{})); CLS.update(getattr(m,'CLS',{}))
-TYB={}   # 📌 티야방 – 이과 공유 문서가 생기면 tyb.py 에 TYB={키:(담당자,멘트)}
+TYB={}   # 📌 티야방: tyb.py 의 TYB={키 또는 'fam:묶음':(담당자,멘트)}
 if os.path.exists(D+'/tyb.py'): TYB=importlib.import_module('tyb').TYB
 IMG={}
 for p in sorted(glob.glob(D+'/yimg_*.py')): IMG.update(importlib.import_module(os.path.basename(p)[:-3]).IMG)
@@ -72,7 +72,7 @@ def yama():
     notes=list(dict.fromkeys(c['notes']))
     if len(c['ys'])>1: notes=['같은 문제(문제·선지 거의 동일): '+' · '.join(c['ys'][1:])]+notes
     if c['excl']: notes=notes+['학습지 정답 그대로는 채점하지 않고, 확인되면 반영할게요.']
-    tb=TYB.get(k);ex=EXP.get(k,{});cls=ex.get('cls') or CLS.get(c['f'])
+    tb=TYB.get(k) or TYB.get('fam:'+c['f']);ex=EXP.get(k,{});cls=ex.get('cls') or CLS.get(c['f'])
     parts=['📌 티야방('+tb[0]+'): '+tb[1]] if tb else []
     if cls: parts.append('🎓 올해 수업 기준: '+cls)
     parts.append('📚 학습지 해설: '+ex['wb'] if ex.get('wb') else '📚 학습지 해설 요약: '+c['basis'])
