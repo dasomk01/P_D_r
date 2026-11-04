@@ -2,6 +2,7 @@
 import importlib,sys,json,collections,os,re,difflib,glob,hashlib,random,base64
 D=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,D)
 from mk import build
+from tq_tyb import TQ   # 티야방 내용을 문제로 만든 티야
 from fix_choices import FIX
 from fix_choices2 import FIX as _F2
 FIX.update(_F2)
@@ -88,14 +89,15 @@ Y=yama()
 items=[];errs=[]
 for m in MODS:
   M=importlib.import_module(m); sec,prof=M.SEC
-  for t in M.Q:
+  for t in M.Q+TQ.get(m,[]):
     area,k,stem,ch,ans,basis,exps,src=t[:8]; qn=list(t[8]) if len(t)>8 else []
     ch=FIX.get(k,ch)
     r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(5)); r.shuffle(idx)
     ch=[ch[i] for i in idx]; exps=[exps[i] for i in idx]; ans=idx.index(ans-1)+1
     if len(ch)!=5 or len(exps)!=5 or not 1<=ans<=5: errs.append((k,len(ch),len(exps),ans))
     tb=TYB.get(k)
-    if tb: basis='📌 티야방('+tb[0]+'): '+tb[1]+'\n\n'+basis
+    if not tb and src.startswith('티야방'): tb=(src.split()[1],'')
+    if tb and tb[1]: basis='📌 티야방('+tb[0]+'): '+tb[1]+'\n\n'+basis
     items.append(dict(k='ent-'+k,area=area,prof=prof,sec=sec,meta=('📌티야방 · ' if tb else '')+'근거: '+src,tyb=bool(tb),
       year='',type='객',rep=1,stem=stem,choices=ch,ans=[ans],imgs=[],vis=[],notes=qn,basis=basis,exps=exps,ai=''))
   for ys,ym in YSEC.items():

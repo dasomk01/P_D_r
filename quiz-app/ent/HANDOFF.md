@@ -23,6 +23,7 @@
 | `yexp_ent.py` | 🎓 올해 수업 기준(STT) – 묶음별 CLS / 카드별 EXP |
 | `yimg_ent.py`, `img/`, `crop.py` | 그림 문항: 카드키 → 학습지 쪽에서 자른 그림 |
 | `tyb.py` | 📌 티야방 표시 |
+| `tq_tyb.py` | 티야방 내용을 문제로 만든 티야(TQ={수업 모듈:[튜플]}, 근거가 「티야방 …」이면 자동 📌) |
 | `NOTES_src.md` | 자료(강의록·STT fileId) 목록 |
 
 ## 남은 일 / 메모
