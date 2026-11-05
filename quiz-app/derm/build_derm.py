@@ -33,7 +33,7 @@ LECT = [
 ]
 LMAP = {c: (n, p) for c, n, p in LECT}
 # 수업을 마친(올해 강의록·STT를 반영한) 수업 코드 → 티야·탈야 모듈. 비어 있으면 그 칸은 '수업 전'.
-QMOD = {}   # 예: {'L0503': 'q0503_struct'}
+QMOD = {'L0503': 'qf0503', 'L0504': 'qf0504', 'L0505': 'qf0505'}   # 지금은 형성평가만(티야는 추가 예정)
 
 YMODS = sorted(os.path.basename(p)[:-3] for p in glob.glob(D + '/y[0-9]*.py'))
 
@@ -118,13 +118,14 @@ for code, _, _ in LECT:
     for t in M.Q:
       area, k, stem, ch, ans, basis, exps, src = t[:8]; qn = list(t[8]) if len(t) > 8 else []
       r = random.Random(int(hashlib.md5(k.encode()).hexdigest(), 16)); idx = list(range(5)); r.shuffle(idx)
-      if ch:
+      fhq = bool(re.match(r'^(🤍|💜)형성평가', stem))   # 형성평가는 원래 선지 순서·개수 그대로
+      if ch and not fhq:
         if len(ch) != 5 or len(exps) != 5 or not 1 <= ans <= 5: errs.append(k)
         ch = [ch[i] for i in idx]; exps = [exps[i] for i in idx]; ans = idx.index(ans - 1) + 1
       tb = TYB.get(k)
       if tb: basis = '📌 티야방(' + tb[0] + '): ' + tb[1] + '\n\n' + basis
       items.append(dict(k='derm-' + k, area=area, prof=prof, sec=sec, meta=('📌티야방 · ' if tb else '') + '근거: ' + src, tyb=bool(tb),
-        year='', type='객' if ch else '주', rep=1, stem=stem, choices=ch, ans=[ans] if ch else [], imgs=[], vis=[], notes=qn, basis=basis, exps=exps, ai=''))
+        year='', type='객' if ch else '주', rep=1, stem=stem, choices=ch, ans=[ans] if ch else [], imgs=imgs(k), vis=[], notes=qn, basis=basis, exps=exps, ai=''))
   items += Y.get(code, [])
 for i in items:
   if i['area'] == '야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans']) > len(i['choices'])): errs.append(i['k'])
@@ -136,6 +137,7 @@ print('야마', len(ym), '킹야(2회)', sum(i['rep'] == 2 for i in ym), '킹킹
       '확인필요(채점X)', len([i for i in ym if i.get('excl')]), '⚠', sum(any(n.startswith('⚠') for n in i['notes']) for i in ym),
       '그림', sum(bool(i['imgs']) for i in items), '주관식', sum(not i['choices'] for i in ym))
 print('IMG키없음', [k for k in IMG if 'derm-' + k not in keys])
+print('형성평가', sum(bool(i.get('fh')) for i in items))
 print(collections.Counter(i['sec'] for i in items))
 ny = [i for i in items if i['area'] != '야마' and i['choices']]
 print('answer-much-longer', [i['k'] for i in ny if len(i['choices'][i['ans'][0]-1]) > 1.6 * max(len(c) for j, c in enumerate(i['choices']) if j != i['ans'][0]-1)])

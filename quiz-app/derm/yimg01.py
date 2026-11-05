@@ -106,4 +106,8 @@ IMG = {
     'y-hs-2021': ['img/hs-2021.jpg'],  # 부속기
     'y-aa-2022': ['img/aa-2022.jpg'],  # 부속기
     'y-aga-tx-2017': ['img/aga-2017.jpg'],  # 2017 객14 – 297쪽
+    'fh-0503-1': ['img/fh-sc.jpg'],  # 형성평가 캡처
+    'fh-0504-1': ['img/fh-wheal1.jpg'],  # 형성평가 캡처
+    'fh-0504-2': ['img/fh-taj.jpg'],  # 형성평가 캡처
+    'fh-0505-1': ['img/fh-wheal2.jpg'],  # 형성평가 캡처
 }
