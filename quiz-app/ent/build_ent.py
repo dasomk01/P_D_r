@@ -7,7 +7,7 @@ from fix_choices import FIX
 from fix_choices2 import FIX as _F2
 FIX.update(_F2)
 # 티야(올해 수업 STT·강의록 기반 5지선다) 모듈 – 수업 순서
-MODS=['q1_struct','q2_hear','q3_vext','q4_mid','q5_oto','q6_snhl','q7_vest']
+MODS=['q1_struct','q2_hear','q3_vext','q4_mid','q5_oto','q6_snhl','q7_vest','q8_fn']
 # 야마(학습지 기출 원문·정답) 모듈 – 순서 중요(문제 None 은 같은 묶음의 바로 앞 카드에 합친다)
 YMODS=['y_dev','y_aud','y_vest','y_sym','y_ext','y_cong','y_aom','y_com','y_tbf','y_inner','y_hl','y_vdx','y_fn']
 # 야마 구역 → 붙일 수업(그 수업 티야 뒤에 넣는다)
@@ -22,7 +22,8 @@ YSRC={'dev':W+'「귀의 발생과 구조」 5–28쪽','aud':W+'「청각기관
   'hlx':W+'「난청의 조기진단」 173–179쪽','hlr':W+'「난청의 재활」 180–190쪽','vdx':W+'「전정질환의 치료와 재활」 191–214쪽',
   'bppv':W+'「전정질환의 치료와 재활」 191–214쪽 중 BPPV 문항','fn':W+'「안면신경질환」 215–228쪽'}
 # 아직 수업 전인 야마: (섹션명, 교수, 뒤에 붙일 수업 모듈). 11/4 STT: 「BPPV는 내일부터」 – 안면신경도 그 뒤.
-PRE={'bppv':('BPPV(이석증) (야마 · 수업 전)','여차동','q7_vest'),'fn':('안면신경질환 (야마 · 수업 전)','여차동','q7_vest')}
+PRE={}   # 11/5 BPPV·안면신경 수업 → 모두 수업 섹션으로 옮김
+YSEC.update(bppv='q8_fn',fn='q8_fn')
 PREFAM={'dhleft':'bppv','epleyord':'bppv','epleypic':'bppv','hroll':'bppv','hroll11':'bppv','hroll13':'bppv'}  # vdx 안의 BPPV 묶음
 # 🎓 올해 수업 기준 해설(선택): yexp_*.py 의 EXP={카드키:{'cls':..,'wb':..}} / 묶음별 CLS={묶음:..}
 EXP={};CLS={}
@@ -119,7 +120,7 @@ print('그림',sum(bool(i['imgs']) for i in items),'주관식',len([i for i in y
 # 형성평가 칩: fhset.py 의 FHKEYS(앞 'ent-' 뺀 키) + 「형성평가」 표시
 FHKEYS=set(importlib.import_module('fhset').FHKEYS) if os.path.exists(D+'/fhset.py') else set()
 for i in items:
-  if i['k'][4:] in FHKEYS or '형성평가' in i['stem'][:8] or any('형성평가' in n for n in i['notes']) or '중간평가' in i['meta']: i['fh']=True
+  if i['k'][4:] in FHKEYS or '형성평가' in i['stem'][:8] or any('형성평가' in n for n in i['notes']) or '중간평가' in i['meta'] or '형성평가' in i['meta']: i['fh']=True
 print('형성평가',sum(1 for i in items if i.get('fh')))
 if os.environ.get('DUMP'): json.dump(items,open(os.environ['DUMP'],'w'),ensure_ascii=False)
 print(build(items,'이비인후과 문풀','ent-app',D+'/ent-app.html'))
