@@ -28,4 +28,16 @@ IMG = {
     'y-sjs-drug-2017': ['img/sjs-drug-2017.jpg'],  # 2017 객11 – 77쪽
     'y-urt-ac-2017': ['img/urt-ac-2017.jpg'],  # 2017 객12 – 77쪽
     'y-urt-chol-2017': ['img/urt-chol-2017.jpg'],  # 2017 객13 – 78쪽
+    'y-bcc-nose-2025': ['img/bcc-nose-2025.jpg'],  # 2025 객36 조직·코 – 86쪽
+    'y-mal-bx-2025': ['img/mal-bx-2025.jpg'],  # 2025 객37 선지별 사진 – 87쪽
+    'y-pws-2025': ['img/pws-2025.jpg'],  # 2025 객38 – 88쪽
+    'y-mal-bx-2023': ['img/mal-bx-2023.jpg'],  # 2023 객38 선지별 사진 – 88–89쪽
+    'y-pws-2023': ['img/pws-2023.jpg'],  # 2023 객40 – 90쪽
+    'y-mal-bx-2022': ['img/mal-bx-2022.jpg'],  # 2022 객35 선지별 사진 – 90–91쪽
+    'y-bcc-nose-2022': ['img/bcc-nose-2022.jpg'],  # 2022 객37 – 91쪽
+    'y-ka-2021': ['img/ka-2021.jpg'],  # 2021 객39 – 93쪽
+    'y-hutch-2020': ['img/hutch-2020.jpg'],  # 2020 객38 – 93쪽
+    'y-alm-2019': ['img/alm-2019.jpg'],  # 2019 객38 – 95쪽
+    'y-ih-2018': ['img/ih-2018.jpg'],  # 2018 객37 – 97쪽
+    'y-aga-2025': ['img/aga-2025.jpg'],  # 2025 객30 – 86쪽
 }
