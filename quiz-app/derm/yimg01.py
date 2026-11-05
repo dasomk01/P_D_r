@@ -13,4 +13,19 @@ IMG = {
     'y-sd-tx-2019': ['img/sd-tx-2019.jpg'],  # 2019 객12(해설란 사진) – 47쪽
     'y-diaper-2018': ['img/diaper-2018.jpg'],  # 2018 객12 – 48쪽
     'y-ad-edu-2017': ['img/ad-edu-2017.jpg'],  # 2017 객7 – 50쪽
+    'y-ten-px-2025': ['img/ten-2025.jpg'],  # 2025 객13 – 66쪽
+    'y-urt-chr-2025': ['img/urt-chr-2025.jpg'],  # 2025 객14 – 66쪽
+    'y-ten-px-2023': ['img/ten-2023.jpg'],  # 2023 객15 – 67쪽
+    'y-ten-px-2022': ['img/sjs-cbz-2022.jpg'],  # 2022 객13 – 69쪽
+    'y-urt-chr-2022': ['img/urt-chr-2022.jpg'],  # 2022 객14 – 69쪽
+    'y-ten-dx-2021': ['img/ten-dx-2021.jpg'],  # 2021 객11(강의 사진) – 70쪽
+    'y-urt-derm-2021': ['img/urt-derm-2021.jpg'],  # 2021 객12 – 70쪽
+    'y-fde-2021': ['img/fde-2021.jpg'],  # 2021 객13 – 71쪽
+    'y-urt-chol-2021': ['img/urt-chol-2021.jpg'],  # 2021 객14 – 71쪽
+    'y-exd-2020': ['img/exd-2020.jpg'],  # 2020 객22(복원자 사진) – 72쪽
+    'y-ten-dx-2020': ['img/ten-dx-2020.jpg'],  # 2020 객24 – 73쪽
+    'y-fde-2020': ['img/fde-2020.jpg'],  # 2020 객25 – 73쪽
+    'y-sjs-drug-2017': ['img/sjs-drug-2017.jpg'],  # 2017 객11 – 77쪽
+    'y-urt-ac-2017': ['img/urt-ac-2017.jpg'],  # 2017 객12 – 77쪽
+    'y-urt-chol-2017': ['img/urt-chol-2017.jpg'],  # 2017 객13 – 78쪽
 }
