@@ -92,4 +92,18 @@ IMG = {
     'y-bp-2020': ['img/bp-2020.jpg'],  # 2020 객26 – 278쪽
     'y-hsv-2019': ['img/hsv-2019.jpg'],  # 2019 객23 – 280쪽
     'y-bp-str-2017': ['img/bp-2017.jpg'],  # 2017 객1 – 281쪽
+    'y-acne-2025': ['img/acne-2025.jpg'],  # 부속기
+    'y-acne-2023': ['img/acne-2023.jpg'],  # 부속기
+    'y-acne-2022': ['img/acne-2022.jpg'],  # 부속기
+    'y-acne-2021': ['img/acne-2021.jpg'],  # 부속기
+    'y-ros-2025': ['img/ros-2025.jpg'],  # 부속기
+    'y-ros-2023': ['img/ros-2023.jpg'],  # 부속기
+    'y-ros-2022': ['img/ros-2022.jpg'],  # 부속기
+    'y-ros-2021': ['img/ros-2021.jpg'],  # 부속기
+    'y-hs-2025': ['img/hs-2025.jpg'],  # 부속기
+    'y-hs-2023': ['img/hs-2023.jpg'],  # 부속기
+    'y-hs-2022': ['img/hs-2022.jpg'],  # 부속기
+    'y-hs-2021': ['img/hs-2021.jpg'],  # 부속기
+    'y-aa-2022': ['img/aa-2022.jpg'],  # 부속기
+    'y-aga-tx-2017': ['img/aga-2017.jpg'],  # 2017 객14 – 297쪽
 }
