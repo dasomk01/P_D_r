@@ -79,11 +79,13 @@ def yama():
       else:
         c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC)
         fam[f].append(c); cards.append(c)
-  out = collections.defaultdict(list)
+  out = collections.defaultdict(list); used = set()
   for c in cards:
     allys = [y for d in fam[c['f']] for y in d['ys']]
     rep = len({y.split()[0] for y in allys})
     k = 'y-' + c['f'] + '-' + c['ys'][0].split()[0]
+    if k in used: k += '-' + re.sub(r'\D', '', c['ys'][0].split()[1])   # 같은 해 같은 묶음에 다른 문제가 둘이면 번호를 붙인다
+    used.add(k)
     sec, prof = secname(c['sec'])
     notes = c['notes']
     if len(c['ys']) > 1: notes = ['같은 문제(문제·선지 거의 동일): ' + ' · '.join(c['ys'][1:])] + notes
