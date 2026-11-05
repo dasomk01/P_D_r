@@ -37,4 +37,5 @@ _D = {  # 카드키: 파일 이름(img/ 안)  – 학습지 쪽
  'y-epleyord-2018':'epleyord-2018', 'y-epleypic-2016':'epleypic-2016',  # p208–209
  'y-rhs-2023':'rhs-2023',          # p217
 }
+_D['fh1105-2']='fh1105-2'   # 11/5 형성평가 2번 청력도(원문 캡처)
 IMG = {k: ['img/'+v+'.jpg'] for k, v in _D.items()}

@@ -94,14 +94,15 @@ for m in MODS:
   for t in M.Q+TQ.get(m,[])+FQ.get(m,[]):
     area,k,stem,ch,ans,basis,exps,src=t[:8]; qn=list(t[8]) if len(t)>8 else []
     ch=FIX.get(k,ch)
-    r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(5)); r.shuffle(idx)
+    r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(5))
+    if '원문' not in src: r.shuffle(idx)   # 형성평가 원문은 선지 순서 그대로
     ch=[ch[i] for i in idx]; exps=[exps[i] for i in idx]; ans=idx.index(ans-1)+1
     if len(ch)!=5 or len(exps)!=5 or not 1<=ans<=5: errs.append((k,len(ch),len(exps),ans))
     tb=TYB.get(k)
     if not tb and src.startswith('티야방'): tb=(src.split()[1],'')
     if tb and tb[1]: basis='📌 티야방('+tb[0]+'): '+tb[1]+'\n\n'+basis
     items.append(dict(k='ent-'+k,area=area,prof=prof,sec=sec,meta=('📌티야방 · ' if tb else '')+'근거: '+src,tyb=bool(tb),
-      year='',type='객',rep=1,stem=stem,choices=ch,ans=[ans],imgs=[],vis=[],notes=qn,basis=basis,exps=exps,ai=''))
+      year='',type='객',rep=1,stem=stem,choices=ch,ans=[ans],imgs=imgs(k),vis=[],notes=qn,basis=basis,exps=exps,ai=''))
   for ys,ym in YSEC.items():
     if ym==m: items+=Y[ys]
   for ys,(_,_,pm) in PRE.items():
