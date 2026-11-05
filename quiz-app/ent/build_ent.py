@@ -3,6 +3,7 @@ import importlib,sys,json,collections,os,re,difflib,glob,hashlib,random,base64
 D=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,D)
 from mk import build
 from tq_tyb import TQ   # 티야방 내용을 문제로 만든 티야
+from fq_fh import FQ    # 형성평가(중간평가) 복원 문항
 from fix_choices import FIX
 from fix_choices2 import FIX as _F2
 FIX.update(_F2)
@@ -90,7 +91,7 @@ Y=yama()
 items=[];errs=[]
 for m in MODS:
   M=importlib.import_module(m); sec,prof=M.SEC
-  for t in M.Q+TQ.get(m,[]):
+  for t in M.Q+TQ.get(m,[])+FQ.get(m,[]):
     area,k,stem,ch,ans,basis,exps,src=t[:8]; qn=list(t[8]) if len(t)>8 else []
     ch=FIX.get(k,ch)
     r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(5)); r.shuffle(idx)
