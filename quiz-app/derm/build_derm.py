@@ -33,7 +33,7 @@ LECT = [
 ]
 LMAP = {c: (n, p) for c, n, p in LECT}
 # 수업을 마친(올해 강의록·STT를 반영한) 수업 코드 → 티야·탈야 모듈. 비어 있으면 그 칸은 '수업 전'.
-QMOD = {'L0503': 'qf0503', 'L0504': 'qf0504', 'L0505': 'qf0505'}   # 지금은 형성평가만(티야는 추가 예정)
+QMOD = {'L0503': ['qf0503', 'q0503'], 'L0504': ['qf0504', 'q0504'], 'L0505': ['qf0505']}
 
 YMODS = sorted(os.path.basename(p)[:-3] for p in glob.glob(D + '/y[0-9]*.py'))
 
@@ -114,8 +114,8 @@ items = []; errs = []
 for code, _, _ in LECT:
   sec, prof = secname(code)
   if code in QMOD:
-    M = importlib.import_module(QMOD[code])
-    for t in M.Q:
+    mods = QMOD[code] if isinstance(QMOD[code], list) else [QMOD[code]]
+    for t in [t for m in mods for t in importlib.import_module(m).Q]:
       area, k, stem, ch, ans, basis, exps, src = t[:8]; qn = list(t[8]) if len(t) > 8 else []
       r = random.Random(int(hashlib.md5(k.encode()).hexdigest(), 16)); idx = list(range(5)); r.shuffle(idx)
       fhq = bool(re.match(r'^(🤍|💜)형성평가', stem))   # 형성평가는 원래 선지 순서·개수 그대로
