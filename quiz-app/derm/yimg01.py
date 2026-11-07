@@ -110,4 +110,5 @@ IMG = {
     'fh-0504-1': ['img/fh-wheal1.jpg'],  # 형성평가 캡처
     'fh-0504-2': ['img/fh-taj.jpg'],  # 형성평가 캡처
     'fh-0505-1': ['img/fh-wheal2.jpg'],  # 형성평가 캡처
+    'fh-0603-1': ['img/fh-tc.jpg'],  # 형성평가 캡처
 }
