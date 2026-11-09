@@ -112,4 +112,7 @@ IMG = {
     'fh-0505-1': ['img/fh-wheal2.jpg'],  # 형성평가 캡처
     'fh-0603-1': ['img/fh-tc.jpg'],  # 형성평가 캡처
     'fh-0901-1': ['img/fh-pso.jpg'],  # 형성평가 캡처
+    'fh-1109-1': ['img/lms-q1.jpg'],  # 종합 형성평가 캡처
+    'fh-1109-4': ['img/lms-q4.jpg'],
+    'fh-1109-5': ['img/lms-q5.jpg'],
 }
