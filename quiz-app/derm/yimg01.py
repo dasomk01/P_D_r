@@ -117,4 +117,6 @@ IMG = {
     'fh-1109-5': ['img/lms-q5.jpg'],
     'fh-1110-1': ['img/fh-vitk.jpg'],  # 형성평가 캡처
     'fh-1110-2': ['img/fh-ssss.jpg'],
+    'fh-1110-3': ['img/fh-ecz5.jpg'],  # 형성평가 캡처(사진 ①–⑤)
+    'fh-1110-4': ['img/fh-chol.jpg'],
 }
