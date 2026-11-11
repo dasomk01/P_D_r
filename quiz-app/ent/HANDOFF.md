@@ -28,6 +28,6 @@
 | `NOTES_src.md` | 자료(강의록·STT fileId) 목록 |
 
 ## 남은 일 / 메모
-- 티야방: 구글 문서 「4. 피부및시청각학」(https://docs.google.com/document/d/1bjZhv2j6BEW2zZszwgnGvcpacEEnFG8jhPwL3j9L1dQ) 이비인후과 탭 → `tyb.py`. 키는 티야 키 또는 `fam:묶음`(야마 묶음 전체). 지금 반영: 11/3 5교시(양은성, 11/5 업데이트분 포함), 11/4 5교시(오아라). 나머지 칸이 채워지면 추가.
+- 티야방: 구글 문서 「4. 피부및시청각학」(https://docs.google.com/document/d/1bjZhv2j6BEW2zZszwgnGvcpacEEnFG8jhPwL3j9L1dQ) 이비인후과 탭 → `tyb.py`. 키는 티야 키 또는 `fam:묶음`(야마 묶음 전체). 11/11 기준 이과 칸 전부 반영(11/3 5·6교시, 11/4 1–6교시, 11/5 1교시). 새 문항은 tq_tyb.py. 나머지 칸이 채워지면 추가.
 - 그림이 없는 야마 일부(예: 2019–2012 Epley 순서 일부, 2014·2013 head roll, ci-2020, aomtx-2023 등 합쳐진 해의 그림)는 원문 글만 있음.
 - 형성평가 칩: 11/4 4교시 중간평가 해설을 바탕으로 한 s5-18 하나. 형성평가 문항 원문을 받으면 `fhset.py` 의 FHKEYS 에 추가.
