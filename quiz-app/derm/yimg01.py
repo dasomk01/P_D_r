@@ -119,4 +119,6 @@ IMG = {
     'fh-1110-2': ['img/fh-ssss.jpg'],
     'fh-1110-3': ['img/fh-ecz5.jpg'],  # 형성평가 캡처(사진 ①–⑤)
     'fh-1110-4': ['img/fh-chol.jpg'],
+    'fh-1111-2': ['img/fh-tumor8.jpg'],  # 강의록 283쪽 수업 퀴즈 사진(①–⑧)
+    'fh-1111-3': ['img/fh-tumor8.jpg'],
 }
