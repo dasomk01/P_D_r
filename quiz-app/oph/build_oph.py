@@ -27,7 +27,7 @@ LECT = [
 ]
 LMAP = {c: (n, p) for c, n, p in LECT}
 # 수업을 마친(올해 강의록·STT를 반영한) 수업 코드 → 티야·형성평가 모듈
-QMOD = {'L1205': ['q1205']}
+QMOD = {'L1205': ['qf1205', 'q1205']}
 WAIT = set()
 
 YMODS = sorted(os.path.basename(p)[:-3] for p in glob.glob(D + '/y[0-9]*.py'))
