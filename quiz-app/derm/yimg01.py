@@ -121,4 +121,5 @@ IMG = {
     'fh-1110-4': ['img/fh-chol.jpg'],
     'fh-1111-2': ['img/fh-tumor8.jpg'],  # 강의록 283쪽 수업 퀴즈 사진(①–⑧)
     'fh-1111-3': ['img/fh-tumor8.jpg'],
+    'fh-1112-1': ['img/fh-scab.jpg'],  # 남경화 감염 강의록 34쪽 수업 퀴즈(현미경 사진)
 }
