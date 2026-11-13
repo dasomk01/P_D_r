@@ -39,4 +39,30 @@ IMG = {
     'y-tests-2018': ['img/gonio-2018.jpg'], # 76쪽 주24 – 슬라이드 제목(정답)은 잘라냄
     'y-hyph-2020': ['img/hyph-2020.jpg'],   # 73쪽 (복원자가 구한 비슷한 사진)
     'y-hyph-2019': ['img/hyph-2019.jpg'],   # 74쪽 (복원자가 구한 비슷한 사진)
+    # 결막·공막 단원(244–263쪽) – 정답이 드러나는 교과서 그림 캡션은 잘라냄
+    'y-vkc-2022': ['img/cj-vkc-2022.jpg'],
+    'y-vkc-2021': ['img/cj-vkc-2021.jpg'],
+    'y-vkc-2020': ['img/cj-vkc-2020.jpg'],
+    'y-vkc-2018': ['img/cj-vkc-2018.jpg'],
+    'y-vkc-2017': ['img/cj-vkc-2017.jpg'],
+    'y-vkc-2016': ['img/cj-vkc-2016.jpg'],
+    'y-sei-2022': ['img/cj-sei-2022.jpg'],
+    'y-sei-2021': ['img/cj-sei-2021.jpg'],
+    'y-scl-2021': ['img/cj-nsc-2021.jpg'],
+    'y-scl-2020': ['img/cj-nsc-2020.jpg'],
+    'y-scl-2019': ['img/cj-nsc-2019.jpg'],
+    'y-sch-2021': ['img/cj-sch-2021.jpg'],
+    'y-sch-2018': ['img/cj-sch-2018.jpg'],
+    'y-ekc-2018': ['img/cj-ekc-2018.jpg'],
+    'y-ekc-2016': ['img/cj-ekc-2016.jpg'],
+    'y-pter-2018': ['img/cj-pter-2018.jpg'],
+    'y-pter-2017': ['img/cj-pter-2017.jpg'],
+    'y-pter-2016': ['img/cj-pter-2016.jpg'],
+    'y-pter-2015': ['img/cj-pter-2015.jpg'],
+    'y-lym-2018': ['img/cj-lym-2018.jpg'],
+    'y-lym-2017': ['img/cj-lym-2017.jpg'],
+    'y-tab-2016': ['img/cj-tab-2016.jpg'],
+    'y-cfb-2015': ['img/cj-cfb-2015.jpg'],
+    'y-alg-2014': ['img/cj-alg-2014.jpg'],
+    'y-pap-2013': ['img/cj-pap-2013.jpg'],
 }
