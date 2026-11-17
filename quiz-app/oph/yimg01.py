@@ -140,4 +140,43 @@ IMG = {
     'y-uv-ppvdraw-2017': ['img/uv-ppvdraw-2017.jpg'],# 2017 주18 – 146쪽
     'y-uv-vkh-2016': ['img/uv-vkh-2016.jpg'],        # 2016 객18 – 147쪽
     'y-uv-vkh-2018': ['img/uv-vkh-2019.jpg'],        # 2018 객2 – 2019 객22와 같은 사진(143쪽)
+    # 망막 단원(학습지 162–192쪽)
+    'y-nvd-2022': ['img/ret-nvd-2022.jpg'],          # 2022 객36 – 162쪽
+    'y-crao-2022': ['img/ret-crao-2022.jpg'],        # 2022 객37 – 162쪽
+    'y-dr-2022': ['img/ret-dr-2022.jpg'],            # 2022 객38 그림1·2 – 163쪽
+    'y-uv-rd-2022': ['img/ret-rd-2022.jpg'],         # 2022 객39 안저 + 수술 – 163쪽
+    'y-armd-2022': ['img/ret-armd-2022.jpg'],        # 2022 객40 – 164쪽
+    'y-ret-hem-2021': ['img/ret-prh-2021.jpg'],      # 2021 객8 – 164쪽
+    'y-crao-2021': ['img/ret-crao-2021.jpg'],        # 2021 객10 – 165쪽
+    'y-dr-2021': ['img/ret-dr-2021.jpg'],            # 2021 객11 – 165쪽
+    'y-armd-2021': ['img/ret-armd-2021.jpg'],        # 2021 객12 – 166쪽
+    'y-ret-hem-2020': ['img/ret-srh-2020.jpg'],      # 2020 객13 – 167쪽
+    'y-crao-2020': ['img/ret-crao-2020.jpg'],        # 2020 객14 – 168쪽
+    'y-dr-2020': ['img/ret-dr-2020.jpg'],            # 2020 객15 – 168쪽
+    'y-armd-2020': ['img/ret-armd-2020.jpg'],        # 2020 객16 우안·좌안 – 169쪽
+    'y-ret-hem-2019': ['img/ret-prh-2019.jpg'],      # 2019 객25(학습지는 비슷한 사진) – 170쪽
+    'y-crao-2019': ['img/ret-crao-2019.jpg'],        # 2019 객27 – 170쪽
+    'y-armd-2019': ['img/ret-armd-2019.jpg'],        # 2019 객28 – 171쪽
+    'y-ret-hem-2018': ['img/ret-hem5-2018.jpg'],     # 2018 객4 사진 ①~⑤ – 171쪽
+    'y-brvo-2018': ['img/ret-brvo-2018.jpg'],        # 2018 객5 – 172쪽
+    'y-armd-2018': ['img/ret-armd-2019.jpg'],        # 2018 객7 – 2019 객28과 같은 사진(173쪽)
+    'y-crao-2018': ['img/ret-crao-2018.jpg'],        # 2018 주3 화살표 – 174쪽
+    'y-ret-hem-2017': ['img/ret-hem5-2017.jpg'],     # 2017 객5 사진 ①~⑤ – 175쪽
+    'y-brvo-2017': ['img/ret-brvo-2017a.jpg', 'img/ret-brvo-2017b.jpg'],  # 2017 객6 안저·OCT – 175–176쪽
+    'y-crao-2017': ['img/ret-crao-2017.jpg'],        # 2017 객7 – 176쪽
+    'y-dr-2017': ['img/ret-dr-2017.jpg'],            # 2017 객8 그림1·2 – 177쪽
+    'y-csc-2017': ['img/ret-csc-2017a.jpg', 'img/ret-csc-2017b.jpg'],     # 2017 객10 안저·형광·OCT – 178쪽
+    'y-ret-hem-2017-6': ['img/ret-hem5r-2017.jpg'],  # 2017 R6 사진 ①~⑤ – 179쪽
+    'y-crvo-2016': ['img/ret-crvo-2016.jpg'],        # 2016 객20 안저·OCT – 180쪽
+    'y-crao-2016': ['img/ret-crao-2016.jpg'],        # 2016 객22 – 181쪽
+    'y-crvo-2015': ['img/ret-crvo-2015.jpg'],        # 2015 객27 안저·OCT – 182쪽
+    'y-crao-2014': ['img/ret-crao-2014.jpg'],        # 2014 객23 – 183쪽
+    'y-crvo-2014': ['img/ret-crvo-2014.jpg'],        # 2014 객24 안저 – 184쪽
+    'y-csc-2014': ['img/ret-csc-2014.jpg'],          # 2014 객26 – 185쪽
+    'y-armd-2014': ['img/ret-armd-2014.jpg'],        # 2014 객27 안저·OCT – 185쪽
+    'y-armd-2013': ['img/ret-armd-2013.jpg'],        # 2013 객25 안저·OCT – 186쪽
+    'y-armd-2012': ['img/ret-armd-2012.jpg'],        # 2012 객38 – 188쪽
+    'y-crao-2012': ['img/ret-crvo-2012.jpg'],        # 2012 객39 – 188쪽
+    'y-crvo-2011': ['img/ret-crvo-2011.jpg'],        # 2011 객32 – 191쪽
+    'y-armd-2011': ['img/ret-armd-2011.jpg'],        # 2011 객34 – 192쪽
 }
