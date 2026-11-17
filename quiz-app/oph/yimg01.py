@@ -107,4 +107,25 @@ IMG = {
     'y-vpath-2012': ['img/neuro-path-2012.jpg'],     # 2012 주11 – 64쪽
     # 11/16 이행진 형성평가(시신경 신경안과 강의록 100쪽)
     'fh-1116-4': ['img/fh-1116-4.jpg'],
+    # 수정체 단원(학습지 294–299쪽)
+    'y-black-2022': ['img/lens-black-2022.jpg'],     # 2022 객17 – 294쪽
+    'y-phaco-2021': ['img/lens-phaco-2021.jpg'],     # 2021 객29 – 295쪽
+    'y-phaco-2020': ['img/lens-phaco-2020.jpg'],     # 2020 객35 – 296쪽
+    'y-phaco-2019': ['img/lens-phaco-2019.jpg'],     # 2019 객19 – 297쪽
+    'y-mature-2018': ['img/lens-mature-2018.jpg'],   # 2018 R9·10 – 297쪽
+    'y-pco-2018': ['img/lens-pco-2018.jpg'],         # 2018 R11 – 298쪽
+    'y-mature-2017': ['img/lens-mature-2017.jpg'],   # 2017 R9 – 298쪽
+    'y-pco-2017': ['img/lens-pco-2017.jpg'],         # 2017 R10 – 299쪽
+    'y-pco-2016': ['img/lens-pco-2016.jpg'],         # 2016 주8 – 299쪽
+    # 녹내장 단원(학습지 91–98쪽)
+    'y-acg-dx-2021': ['img/glc-acg-2021.jpg'],       # 2021 객5 – 91쪽
+    'y-disc-2021': ['img/glc-disc-2021.jpg'],        # 2021 객38 – 91쪽
+    'y-rt-acg-2020': ['img/glc-acg-2020.jpg'],       # 2020 객36 – 92쪽
+    'y-rt-ntg-2020': ['img/glc-ntg-2020.jpg'],       # 2020 객37 안저·시야 – 92쪽
+    'y-rt-cong-2020': ['img/glc-cong-2020.jpg'],     # 2020 객38 – 93쪽
+    'y-nvg-case-2019': ['img/glc-nvg-2019.jpg'],     # 2019 객11 – 93쪽
+    'y-acg-tx-2017': ['img/glc-acg-2017.jpg'],       # 2017 객17 – 94쪽
+    'y-cong-2017': ['img/glc-cong-2017.jpg'],        # 2017 객18 – 95쪽
+    'y-acg-tx-2016': ['img/glc-acg-2016.jpg'],       # 2016 객13 – 96쪽
+    'y-dh-2015': ['img/glc-dh-2015.jpg'],            # 2015 객20 – 98쪽
 }
