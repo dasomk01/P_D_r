@@ -179,4 +179,16 @@ IMG = {
     'y-crao-2012': ['img/ret-crvo-2012.jpg'],        # 2012 객39 – 188쪽
     'y-crvo-2011': ['img/ret-crvo-2011.jpg'],        # 2011 객32 – 191쪽
     'y-armd-2011': ['img/ret-armd-2011.jpg'],        # 2011 객34 – 192쪽
+    # 눈꺼풀 단원(학습지 208–214쪽)
+    'y-entropion-photo-2018': ['img/lid-entro-2018.jpg'],   # 2018 주11 강의록 그림(= 2017 주3) – 208쪽
+    'y-epib-photo-2018': ['img/lid-epib-2018.jpg'],         # 2018 주12(학습지는 비슷한 사진) – 208쪽
+    'y-ectropion-photo-2018': ['img/lid-ectro-2018.jpg'],   # 2018 주13(비슷한 사진) – 208쪽
+    'y-bell-photo-2018': ['img/lid-bell-2018.jpg'],         # 2018 주14(= 2017 주6) – 209쪽
+    'y-frontalis-2018': ['img/lid-frontalis-2018.jpg', 'img/lid-frontalis-2017.jpg'],  # 2018 주15 사진 + 2017 주7 강의록 그림 – 209·211쪽
+    'y-chalazion-photo-2017': ['img/lid-chal-2017.jpg'],    # 2017 주2(교과서 사진 대체) – 209쪽
+    'y-lid-margin-2016': ['img/lid-margin-2016.jpg'],       # 2016 주3 – 212쪽
+    'y-bell-photo-2016': ['img/lid-bell-2016.jpg'],         # 2016 주6 – 213쪽
+    'y-asian-lid-2016-15': ['img/lid-asian-2016.jpg'],      # 2016 주15 – 213쪽
+    'y-meibom-2015': ['img/lid-meibom-2015.jpg'],           # 2015 객6 – 213쪽
+    'y-epiblepharon-2015': ['img/lid-epib-2015.jpg'],       # 2015 객7 – 214쪽
 }
