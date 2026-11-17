@@ -128,4 +128,16 @@ IMG = {
     'y-cong-2017': ['img/glc-cong-2017.jpg'],        # 2017 객18 – 95쪽
     'y-acg-tx-2016': ['img/glc-acg-2016.jpg'],       # 2016 객13 – 96쪽
     'y-dh-2015': ['img/glc-dh-2015.jpg'],            # 2015 객20 – 98쪽
+    # 포도막·유리체 단원(학습지 140–147쪽)
+    'y-uv-as-2021': ['img/uv-as-2021.jpg'],          # 2021 객7 천장관절 X선 + 앞방 – 140쪽
+    'y-uv-rd-2021': ['img/uv-rd-2021.jpg'],          # 2021 객13 안저 + 수술 – 140쪽
+    'y-uv-ppv-2020': ['img/uv-ppv-2020.jpg'],        # 2020 객17 – 141쪽
+    'y-uv-vkh-2019': ['img/uv-vkh-2019.jpg'],        # 2019 객22(= 2018 객2) 안저·OCT – 143쪽
+    'y-uv-behcet2-2019': ['img/uv-behcet-2019.jpg'], # 2019 객23 – 142쪽
+    'y-b27-fill-2018': ['img/uv-asxray-2018.jpg'],   # 2018 주2 – 143쪽
+    'y-uv-ppv-2018': ['img/uv-ppv-2018.jpg'],        # 2018 주5 – 144쪽
+    'y-b27-fill-2017': ['img/uv-asxray-2017.jpg'],   # 2017 주17 – 145쪽
+    'y-uv-ppvdraw-2017': ['img/uv-ppvdraw-2017.jpg'],# 2017 주18 – 146쪽
+    'y-uv-vkh-2016': ['img/uv-vkh-2016.jpg'],        # 2016 객18 – 147쪽
+    'y-uv-vkh-2018': ['img/uv-vkh-2019.jpg'],        # 2018 객2 – 2019 객22와 같은 사진(143쪽)
 }
