@@ -28,7 +28,7 @@ LECT = [
 LMAP = {c: (n, p) for c, n, p in LECT}
 # 수업을 마친(올해 강의록·STT를 반영한) 수업 코드 → 티야·형성평가 모듈
 QMOD = {'L1205': ['qf1205', 'q1205'], 'L1301': ['qf1301', 'q1301'], 'L1303': ['qf1303', 'q1303'],
-        'L1601': ['qf1601', 'q1601'], 'L1603': ['qf1603', 'q1603'], 'L1604': ['q1604'],
+        'L1601': ['qf1601', 'q1601'], 'L1603': ['qf1603', 'q1603'], 'L1604': ['qf1604', 'q1604'],
         'L1701': ['q1701'], 'L1702': ['q1702'], 'L1704': ['qf1704', 'q1704']}
 WAIT = set()
 
@@ -143,7 +143,7 @@ print('IMG키없음', [k for k in IMG if 'oph-' + k not in keys])
 print('사진문항인데그림없음', [i['k'] for i in items if re.search(r'\((사진|그림)', i['stem']) and not i['imgs']])
 print('형성평가', sum(bool(i.get('fh')) for i in items))
 print(collections.Counter(i['sec'] for i in items))
-ny = [i for i in items if i['area'] != '야마' and i['choices']]
+ny = [i for i in items if i['area'] != '야마' and i['choices'] and not i.get('fh')]   # 형성평가는 교수님 원문이라 제외
 print('answer-much-longer', [i['k'] for i in ny if len(i['choices'][i['ans'][0]-1]) > 1.6 * max(len(c) for j, c in enumerate(i['choices']) if j != i['ans'][0]-1)])
 if os.environ.get('DUMP'): json.dump([dict(k=i['k'], y=i['year'], r=i['repyears'], s=i['stem'][:50]) for i in ym], open(os.environ['DUMP'], 'w'), ensure_ascii=False, indent=0)
 print(build(items, '안과 문풀', 'oph-app', D + '/oph-app.html'))
