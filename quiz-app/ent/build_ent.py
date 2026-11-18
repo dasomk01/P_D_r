@@ -94,10 +94,10 @@ for m in MODS:
   for t in M.Q+TQ.get(m,[])+FQ.get(m,[]):
     area,k,stem,ch,ans,basis,exps,src=t[:8]; qn=list(t[8]) if len(t)>8 else []
     ch=FIX.get(k,ch)
-    r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(5))
+    r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(len(ch)))
     if '원문' not in src: r.shuffle(idx)   # 형성평가 원문은 선지 순서 그대로
     ch=[ch[i] for i in idx]; exps=[exps[i] for i in idx]; ans=idx.index(ans-1)+1
-    if len(ch)!=5 or len(exps)!=5 or not 1<=ans<=5: errs.append((k,len(ch),len(exps),ans))
+    if not (len(ch)==5 or '원문' in src and len(ch)==4) or len(exps)!=len(ch) or not 1<=ans<=len(ch): errs.append((k,len(ch),len(exps),ans))
     tb=TYB.get(k)
     if not tb and src.startswith('티야방'): tb=(src.split()[1],'')
     if tb and tb[1]: basis='📌 티야방('+tb[0]+'): '+tb[1]+'\n\n'+basis
