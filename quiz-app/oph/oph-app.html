@@ -99,7 +99,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="wrap">
   <h1 id="ttl">안과 문풀</h1>
   <div class="stats" id="stats"></div>
-  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/18 16:01</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
+  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/19 04:07</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
   <div class="grid">
     <select id="fProf" aria-label="교수"></select>
     <select id="fSec" aria-label="섹션"></select>
@@ -143,6 +143,7 @@ var U=lsGet(UK)||{};
 var $=function(id){return document.getElementById(id)};
 function now(){return Date.now()}
 var tt=null;function toast(m){var e=document.getElementById('toast');if(!e)return;e.textContent=m;e.style.opacity='1';clearTimeout(tt);tt=setTimeout(function(){e.style.opacity='0'},1800)}
+function lab(q){var a=q.area||'';if(a==='형성평가'){var m=/^(🤍|💜)/.exec(q.stem||'');return (m?m[1]:'🤍')+'형성평가'}if(a==='야마'&&q.rep>=3)return '👑👑 킹킹야';if(a==='야마'&&q.rep===2)return '👑 킹야';return a}
 function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 
 /* ---------- 필터 ---------- */
@@ -196,7 +197,7 @@ function render(){stats();var i=idx(),v=$('view');
   if(i<0){v.innerHTML='<div class="card empty">조건에 맞는 문제가 없어요. 위 필터나 칩을 바꿔 보세요.</div>';return}
   var q=L[i],k=q.k,a=SES[k]||null,f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend)),multi=hasAns&&q.pick>1,pk=PK[k]||[],mine=function(n){return a&&(Array.isArray(a.c)?a.c.indexOf(n)>=0:a.c===n)};
   var h='<article class="card'+(done?' done':'')+'">';
-  h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
+  h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area==='형성평가'?lab(q):q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
   (q.notes||[]).forEach(function(n){h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
   if(f.err)h+='<div class="note">⚑ 내가 문제오류로 표시함</div>';if(f.oos)h+='<div class="note oos">내가 범위외로 표시함</div>';
@@ -268,7 +269,7 @@ function sheet(h){$('sheetBox').innerHTML=h;$('sheet').hidden=false}
 function closeSheet(){$('sheet').hidden=true}
 $('sheet').onclick=function(e){if(e.target.id==='sheet')closeSheet()};
 $('bList').onclick=function(){var h='<h2>목록 · '+L.length+'문항</h2><ul class="list">';
-  L.forEach(function(q,i){var a=S.a[q.k];h+='<li data-k="'+esc(q.k)+'"'+(q.k===cur?' class="cur"':'')+'><span class="n">'+(i+1)+'</span><span class="t"><span class="dot'+(solved(a)?(a.ok?' ok':' bad'):'')+'"></span>'+esc(q.stem.slice(0,70))+(q.stem.length>70?'…':'')+'<div class="s">'+esc((q.area||'')+' · '+q.sec+(q.year?' · '+q.year:''))+(memoOf(q.k)?' · 📝 '+esc(memoOf(q.k).slice(0,30)):'')+'</div></span></li>'});
+  L.forEach(function(q,i){var a=S.a[q.k];h+='<li data-k="'+esc(q.k)+'"'+(q.k===cur?' class="cur"':'')+'><span class="n">'+(i+1)+'</span><span class="t"><span class="dot'+(solved(a)?(a.ok?' ok':' bad'):'')+'"></span>'+esc(q.stem.slice(0,70))+(q.stem.length>70?'…':'')+'<div class="s">'+esc(lab(q)+' · '+q.sec+(q.year?' · '+q.year:''))+(memoOf(q.k)?' · 📝 '+esc(memoOf(q.k).slice(0,30)):'')+'</div></span></li>'});
   h+='</ul><div class="tools"><button class="btn" id="cls">닫기</button></div>';sheet(h);
   [].forEach.call(document.querySelectorAll('.list li'),function(li){li.onclick=function(){cur=li.getAttribute('data-k');saveUI();closeSheet();render()}});
   $('cls').onclick=closeSheet;var c=document.querySelector('.list li.cur');if(c)c.scrollIntoView({block:'center'})};
@@ -293,7 +294,7 @@ function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object
 var DB=null,UID=null,pt=null,dirty=false,busy=false,again=false,fails=0;
 // 진단 기록: 최근 40개 동작을 ost/<UID>/x/log 에 남겨 Claude가 읽을 수 있게(오답노트 빼기 문제 추적)
 var DBG=[];function dlog(m){DBG.push(new Date().toISOString().slice(11,19)+' '+m);if(DBG.length>40)DBG.shift()}
-function dflush(){if(!DB||!UID)return;DB.doc('ost/'+UID+'/x/log').set({v:'11/18 16:01',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
+function dflush(){if(!DB||!UID)return;DB.doc('ost/'+UID+'/x/log').set({v:'11/19 04:07',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
 function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
 // 메모는 문서 하나에 256KB까지라 4개 문서로 나눠 저장(omemo/UID, omemo/UID/p/1~3 – 각자 자기 하위 경로). 기록(st)은 한 문서.
 var MB=4;function mdoc(i){return 'omemo/'+UID+(i?'/p/'+i:'')}
