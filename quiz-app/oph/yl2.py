@@ -1,4 +1,4 @@
-# 야마 선지별 해설이 올해 수업(q*.py 근거)에 나오는지: True/False
+# 야마 선지별 해설이 올해 수업(q*.py 근거)에 나오는지: True/False (11/19 수업 반영)
 L = {
  ('exam', 2025, '객9'): [True, True, True, True, True],
  ('exam', 2023, '객9'): [True, True, True, True, False],
@@ -25,8 +25,8 @@ L = {
  ('tests', 2015, '객4'): [True, True, True, True, True],
  ('tests', 2012, '객24'): [True, True, True, True, True],
  ('tests', 2010, '객22'): [True, True, False, True, True],
- ('hyph', 2020, '객6'): [False, False, False, False, False],
- ('hyph', 2019, '객8'): [False, False, False, False, False],
+ ('hyph', 2020, '객6'): [True, True, True, True, True],
+ ('hyph', 2019, '객8'): [True, True, True, True, True],
  ('glc', 2025, '객11'): [True, True, True, True, True],
  ('nvg', 2025, '객12'): [True, True, True, True, False],
  ('acg', 2023, '객12'): [True, True, True, True, True],

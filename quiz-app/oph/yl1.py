@@ -1,4 +1,4 @@
-# 야마 선지별 해설이 올해 수업(q*.py 근거)에 나오는지: True/False
+# 야마 선지별 해설이 올해 수업(q*.py 근거)에 나오는지: True/False (11/19 수업 반영)
 L = {
  ('vkc', 2025, '객14'): [True, True, True, True, False],
  ('vkc', 2022, '객12'): [True, True, True, True, True],
@@ -28,8 +28,8 @@ L = {
  ('red', 2011, '객18'): [True, True, True, True, True],
  ('pter', 2015, '객13'): [True, True, False, True, True],
  ('pter', 2013, '객20'): [True, False, False, True, False],
- ('cfb', 2015, '객33'): [False, True, False, True, True],
- ('chem', 2012, '객28'): [True, False, False, False, False],
+ ('cfb', 2015, '객33'): [True, True, False, True, True],
+ ('chem', 2012, '객28'): [True, True, True, True, False],
  ('hsk', 2025, '객13'): [True, True, True, True, True],
  ('hsk', 2015, '주1'): [True, True, True, True, True, True, True, True, True, True, True, True],
  ('hsk', 2014, '객14'): [True, True, True, True, True],
@@ -48,13 +48,13 @@ L = {
  ('kf', 2025, '객20'): [True, True, True, True, True],
  ('kc', 2022, '객18'): [True, False, True, True, True],
  ('kc', 2019, '객20'): [True, True, True, True, True],
- ('expo', 2014, '객18'): [True, False, False, True, True],
- ('nldo', 2025, '객26'): [False, False, False, False, False],
- ('dacryo', 2025, '객27'): [False, False, True, False, False],
- ('lac-tx', 2023, '객25'): [False, False, False, True, False],
- ('dacryo', 2023, '객26'): [False, False, False, False, False],
+ ('expo', 2014, '객18'): [True, True, False, True, True],
+ ('nldo', 2025, '객26'): [True, True, True, True, True],
+ ('dacryo', 2025, '객27'): [True, True, True, True, True],
+ ('lac-tx', 2023, '객25'): [True, True, True, True, True],
+ ('dacryo', 2023, '객26'): [True, True, True, True, False],
  ('orbit-bone', 2015, '객11'): [False, False, False, False, False],
- ('orbit-vasc', 2025, '객28'): [False, False, False, False, False],
- ('ted', 2023, '객27'): [False, False, False, False, False],
- ('cellulitis', 2023, '객28'): [False, False, False, False, False],
+ ('orbit-vasc', 2025, '객28'): [False, False, True, True, True],
+ ('ted', 2023, '객27'): [True, True, True, True, True],
+ ('cellulitis', 2023, '객28'): [True, False, False, False, False],
 }
