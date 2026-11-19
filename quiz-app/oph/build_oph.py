@@ -64,22 +64,25 @@ YX = {}   # 야마 선지별 해설: (묶음, 연도, 번호) → [선지별]  y
 for p in sorted(glob.glob(D + '/yx[0-9]*.py')): YX.update(importlib.import_module(os.path.basename(p)[:-3]).X)
 YK = {}   # 선지별 해설 근거: wb=학습지, lec=올해 수업, kn=수업 외 지식  yk*.py
 for p in sorted(glob.glob(D + '/yk[0-9]*.py')): YK.update(importlib.import_module(os.path.basename(p)[:-3]).K)
-TAG = {'lec': ' 🎓올해 수업', 'kn': ' 🧠수업 외 지식(학습지·올해 수업에 근거 없음)'}
+YL = {}   # 선지별 해설이 올해 수업에 나오는지(True/False)  yl*.py
+for p in sorted(glob.glob(D + '/yl[0-9]*.py')): YL.update(importlib.import_module(os.path.basename(p)[:-3]).L)
 def yexps(key, e0, n):
-  x = YX.get(key)
-  if not x: return ysplit(e0, n)
-  t = YK.get(key) or ['wb'] * len(x)
-  return [s + TAG.get(g, '') for s, g in zip(x, t)]
+  x = YX.get(key) or ysplit(e0, n)
+  if not x: return []
+  k = YK.get(key) or ['wb'] * len(x); l = YL.get(key)
+  if not l: return x
+  return [s + (' 🎓올해 수업' if inl else ' 🧠수업 외 지식(학습지·올해 수업 모두 없음)' if g == 'kn' else ' 📚학습지에만(올해 수업엔 없음)') for s, g, inl in zip(x, k, l)]
+
 def ysplit(exp, n):
-  # 학습지 해설에 ①~ⓝ이 차례로 다 있으면 선지별로 나눈다
+  # 학습지 해설에 ①~ⓝ이 차례로 한 번씩 다 있으면 선지별로 나눈다
   exp = (exp or '').replace('[요약] ', ''); pos = []; st = 0
-  if any(exp.count(c) != 1 for c in '①②③④⑤⑥⑦⑧⑨'[:n]): return []   # 번호가 두 번 이상 나오면(다른 목록) 자동 분리 안 함
+  if any(exp.count(c) != 1 for c in '①②③④⑤⑥⑦⑧⑨'[:n]): return []
   for i in range(n):
     j = exp.find('①②③④⑤⑥⑦⑧⑨'[i], st)
     if j < 0: return []
     pos.append(j); st = j + 1
   seg = [exp[p + 1:(pos[i + 1] if i + 1 < n else len(exp))].strip(' .·,;:-–') for i, p in enumerate(pos)]
-  if len(seg[-1]) > 90 and '. ' in seg[-1]: seg[-1] = seg[-1][:seg[-1].index('. ') + 1]   # 마지막 선지 뒤에 붙은 공통 해설은 떼어냄
+  if len(seg[-1]) > 90 and '. ' in seg[-1]: seg[-1] = seg[-1][:seg[-1].index('. ') + 1]   # 마지막 선지 뒤 공통 해설은 떼어냄
   return seg if all(seg) else []
 
 def yama():
