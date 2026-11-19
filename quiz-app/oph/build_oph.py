@@ -65,11 +65,13 @@ for p in sorted(glob.glob(D + '/yx[0-9]*.py')): YX.update(importlib.import_modul
 def ysplit(exp, n):
   # 학습지 해설에 ①~ⓝ이 차례로 다 있으면 선지별로 나눈다
   exp = (exp or '').replace('[요약] ', ''); pos = []; st = 0
+  if any(exp.count(c) != 1 for c in '①②③④⑤⑥⑦⑧⑨'[:n]): return []   # 번호가 두 번 이상 나오면(다른 목록) 자동 분리 안 함
   for i in range(n):
     j = exp.find('①②③④⑤⑥⑦⑧⑨'[i], st)
     if j < 0: return []
     pos.append(j); st = j + 1
   seg = [exp[p + 1:(pos[i + 1] if i + 1 < n else len(exp))].strip(' .·,;:-–') for i, p in enumerate(pos)]
+  if len(seg[-1]) > 90 and '. ' in seg[-1]: seg[-1] = seg[-1][:seg[-1].index('. ') + 1]   # 마지막 선지 뒤에 붙은 공통 해설은 떼어냄
   return seg if all(seg) else []
 
 def yama():
