@@ -60,6 +60,18 @@ def secname(code):
   n, p = LMAP[code]
   return (n if code in QMOD else n + (WAITL if code in WAIT else PRE)), p
 
+YX = {}   # 야마 선지별 해설: (묶음, 연도, 번호) → [선지별]  yx*.py
+for p in sorted(glob.glob(D + '/yx[0-9]*.py')): YX.update(importlib.import_module(os.path.basename(p)[:-3]).X)
+def ysplit(exp, n):
+  # 학습지 해설에 ①~ⓝ이 차례로 다 있으면 선지별로 나눈다
+  exp = (exp or '').replace('[요약] ', ''); pos = []; st = 0
+  for i in range(n):
+    j = exp.find('①②③④⑤⑥⑦⑧⑨'[i], st)
+    if j < 0: return []
+    pos.append(j); st = j + 1
+  seg = [exp[p + 1:(pos[i + 1] if i + 1 < n else len(exp))].strip(' .·,;:-–') for i, p in enumerate(pos)]
+  return seg if all(seg) else []
+
 def yama():
   cards = []; fam = collections.defaultdict(list); srcs = {}
   for m in YMODS:
@@ -79,7 +91,7 @@ def yama():
             if x not in c['notes']: c['notes'].append(x)
           break
       else:
-        c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC)
+        c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC, x0=(f, y, n), e0=exp)
         fam[f].append(c); cards.append(c)
   out = collections.defaultdict(list); used = set()
   for c in cards:
@@ -109,7 +121,7 @@ def yama():
     basis = '\n\n'.join(parts) or '📚 학습지 해설 없음'
     out[c['sec']].append(dict(k='oph-' + k, fam=c['f'], area='야마', prof=prof, sec=sec, meta='근거: ' + c['src'], tyb=bool(tb),
       year=c['ys'][0], type='객' if c['ch'] else '주', rep=rep, repyears=' · '.join(y for y in allys if y != c['ys'][0]) if rep > 1 else '',
-      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=[], ai=''))
+      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=(YX.get(c['x0']) or ysplit(c['e0'], len(c['ch']))) if c['ch'] else [], ai=''))
   return out
 
 Y = yama()
