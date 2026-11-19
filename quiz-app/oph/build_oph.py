@@ -62,6 +62,14 @@ def secname(code):
 
 YX = {}   # 야마 선지별 해설: (묶음, 연도, 번호) → [선지별]  yx*.py
 for p in sorted(glob.glob(D + '/yx[0-9]*.py')): YX.update(importlib.import_module(os.path.basename(p)[:-3]).X)
+YK = {}   # 선지별 해설 근거: wb=학습지, lec=올해 수업, kn=수업 외 지식  yk*.py
+for p in sorted(glob.glob(D + '/yk[0-9]*.py')): YK.update(importlib.import_module(os.path.basename(p)[:-3]).K)
+TAG = {'lec': ' 🎓올해 수업', 'kn': ' 🧠수업 외 지식(학습지·올해 수업에 근거 없음)'}
+def yexps(key, e0, n):
+  x = YX.get(key)
+  if not x: return ysplit(e0, n)
+  t = YK.get(key) or ['wb'] * len(x)
+  return [s + TAG.get(g, '') for s, g in zip(x, t)]
 def ysplit(exp, n):
   # 학습지 해설에 ①~ⓝ이 차례로 다 있으면 선지별로 나눈다
   exp = (exp or '').replace('[요약] ', ''); pos = []; st = 0
@@ -123,7 +131,7 @@ def yama():
     basis = '\n\n'.join(parts) or '📚 학습지 해설 없음'
     out[c['sec']].append(dict(k='oph-' + k, fam=c['f'], area='야마', prof=prof, sec=sec, meta='근거: ' + c['src'], tyb=bool(tb),
       year=c['ys'][0], type='객' if c['ch'] else '주', rep=rep, repyears=' · '.join(y for y in allys if y != c['ys'][0]) if rep > 1 else '',
-      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=(YX.get(c['x0']) or ysplit(c['e0'], len(c['ch']))) if c['ch'] else [], ai=''))
+      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=yexps(c['x0'], c['e0'], len(c['ch'])) if c['ch'] else [], ai=''))
   return out
 
 Y = yama()
