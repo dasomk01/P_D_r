@@ -203,4 +203,18 @@ IMG = {
     'y-cellulitis-photo-2018': ['img/orb-cell-2018.jpg', 'img/orb-cell-2017.jpg'],    # 2018 주19 + 2017 주11 – 235·236쪽
     'y-cellulitis-cause-2016': ['img/orb-cell-2016.jpg'],    # 2016 주10 – 236쪽(비슷한 사진)
     'y-ted-dx-2015': ['img/orb-ted-2015.jpg'],    # 2015 객9 – 237쪽
+    # 전신·외상 단원(학습지 108–130쪽)
+    'y-sys-kf-2022': ['img/sys-kf-2022.jpg'],
+    'y-sys-sarc-2022': ['img/sys-sarc-2022.jpg'],
+    'y-sys-sarc-2021': ['img/sys-sarc-2021.jpg'],
+    'y-sys-kf-2020': ['img/sys-kf-2020.jpg'],
+    'y-sys-as-2020': ['img/sys-as-2020.jpg'],
+    'y-sys-sarc-2020': ['img/sys-sarc-2020.jpg'],
+    'y-sys-kf-2018': ['img/sys-kf-2018.jpg'],
+    'y-sys-kf-2016': ['img/sys-kf-2016.jpg'],
+    'y-sys-case-2015': ['img/sys-marfan-2015.jpg'],
+    'y-iofb-2022': ['img/trm-iofb-2022.jpg'],
+    'y-orbit-fx-2021': ['img/trm-orbit-2021.jpg'],
+    'y-lac-desc-2018': ['img/trm-lac-2018.jpg'],
+    'y-trm-hyph-2011': ['img/trm-hyph-2011.jpg'],
 }
