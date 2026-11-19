@@ -57,6 +57,8 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 .ch{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;font:inherit;font-size:16px;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;word-break:keep-all;overflow-wrap:anywhere}
 .ch .no{font-family:var(--f-num);color:var(--mute);font-size:14px;flex:none;width:18px;padding-top:2px}
 .ch span:last-child{min-width:0}
+.ch .cx{display:block;margin-top:7px;padding-top:7px;border-top:1px dashed var(--line);font-size:14px;line-height:1.5;color:var(--mute)}
+.ch.right .cx,.ch.wrong .cx{color:var(--fg)}
 .ch.right{border-color:var(--ok);background:var(--ok-soft)}
 .ch.wrong{border-color:var(--bad);background:var(--bad-soft)}
 .ch.mine{box-shadow:inset 0 0 0 1px currentColor}
@@ -206,7 +208,7 @@ function render(){stats();var i=idx(),v=$('view');
   (q.vis||[]).forEach(function(t){h+='<div class="vis">'+esc(t)+'</div>'});
   if(q.choices.length){h+='<div class="choices">';q.choices.forEach(function(c,j){var n=j+1,cl='ch';
       if(done&&hasAns){if(q.ans.indexOf(n)>=0)cl+=' right';else if(mine(n))cl+=' wrong'}if(done&&mine(n))cl+=' mine';if(!done&&multi&&pk.indexOf(n)>=0)cl+=' sel';
-      h+='<button class="'+cl+'" data-n="'+n+'"'+(done?' disabled':'')+'><span class="no">'+'①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬'.charAt(j)+'</span><span>'+esc(c)+'</span></button>'});h+='</div>'}
+      h+='<button class="'+cl+'" data-n="'+n+'"'+(done?' disabled':'')+'><span class="no">'+'①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬'.charAt(j)+'</span><span>'+esc(c)+(done&&q.exps&&q.exps[j]?'<span class="cx">'+esc(q.exps[j])+'</span>':'')+'</span></button>'});h+='</div>'}
   if(F.chip==='fam'&&q.fam&&FAM[q.fam].length>1){var sib=FAM[q.fam].filter(function(x){return x!==q});
     h+='<details class="fam"><summary>🔁 같은 묶음 다른 해 '+sib.length+'문제 보기 (정답 포함)</summary>'+sib.map(function(x){
       return '<div class="famq"><div class="meta">'+esc(x.year)+'</div>'+(x.stem!==q.stem?'<div class="stem">'+esc(x.stem)+'</div>':'<div class="meta">(문제 문장 같음)</div>')+
@@ -219,7 +221,7 @@ function render(){stats();var i=idx(),v=$('view');
     else h+='<div class="result">'+(hasAns?'정답 '+q.ans.join(', ')+'번':'정답을 확인하고 맞았는지 골라 주세요')+'</div>'+(a&&a.self?'':'<div class="acts"><button class="chip" id="selfOk">⭕ 맞았어요</button><button class="chip" id="selfBad">❌ 틀렸어요</button></div>');
     h+='<div class="exp">';if(q.ai)h+='<div class="ai">'+esc(q.ai)+'</div>';
     if(q.basis)h+='<h3>해설</h3>'+esc(q.basis);
-    if(q.exps&&q.exps.length)h+='<h3>선지별 해설</h3><ol>'+q.exps.map(function(e){return '<li>'+esc(e)+'</li>'}).join('')+'</ol>';
+    if(q.exps&&q.exps.length&&!q.choices.length)h+='<h3>선지별 해설</h3><ol>'+q.exps.map(function(e){return '<li>'+esc(e)+'</li>'}).join('')+'</ol>';
     h+='</div>'}
   h+='<div class="acts"><button class="chip" id="tConf" aria-pressed="'+!!f.conf+'">🟡 헷갈림</button>'+(done?'<button class="chip" id="redo">↺ 다시 풀기</button>':'')+(inWrong(k)?'<button class="chip" id="tOut">오답노트에서 빼기</button>':'')+'<button class="chip" id="tErr" aria-pressed="'+!!f.err+'">⚑ 문제오류</button><button class="chip" id="tOos" aria-pressed="'+!!f.oos+'">범위외</button></div>';
   h+='<div class="memo"><label for="memo">내 메모 · 뭐가 헷갈렸는지, 외울 포인트</label><textarea id="memo" placeholder="예: 3번이랑 헷갈림. A는 급성, B는 만성!">'+esc(memoOf(k))+'</textarea><div class="saved" id="memoSt"></div></div>';
