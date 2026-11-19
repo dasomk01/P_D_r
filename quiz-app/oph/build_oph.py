@@ -31,7 +31,8 @@ QMOD = {'L1205': ['qf1205', 'q1205'], 'L1301': ['qf1301', 'q1301'], 'L1303': ['q
         'L1601': ['qf1601', 'q1601'], 'L1603': ['qf1603', 'q1603'], 'L1604': ['qf1604', 'q1604'],
         'L1701': ['q1701'], 'L1702': ['q1702'], 'L1704': ['qf1704', 'q1704'],
         'L1801': ['q1801'], 'L1803': ['q1803'], 'L1805': ['q1805'],
-        'L1901': ['q1901'], 'L1902': ['q1902']}
+        'L1901': ['q1901'], 'L1902': ['q1902'],
+        'L1903': ['qf1903', 'q1903'], 'L1904': ['qf1904', 'q1904']}
 WAIT = set()
 
 YMODS = sorted(os.path.basename(p)[:-3] for p in glob.glob(D + '/y[0-9]*.py'))
@@ -155,7 +156,7 @@ for code, _, _ in LECT:
       tb = TYB.get(k)
       if tb: basis = '📌 티야방(' + tb[0] + '): ' + tb[1] + '\n\n' + basis
       items.append(dict(k='oph-' + k, area=area, prof=prof, sec=sec, meta=('📌티야방 · ' if tb else '') + '근거: ' + src, tyb=bool(tb),
-        year='', type='객' if ch else '주', rep=1, stem=stem, choices=ch, ans=[ans] if ch else [], imgs=imgs(k), vis=[], notes=qn, basis=basis, exps=exps, ai=''))
+        year='', type='객' if ch else '주', rep=1, stem=stem, choices=ch, ans=(list(ans) if isinstance(ans, list) else [ans]) if ch else [], imgs=imgs(k), vis=[], notes=qn, basis=basis, exps=exps, ai=''))
   items += Y.get(code, [])
 for i in items:
   if i['area'] == '야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans']) > len(i['choices'])): errs.append(i['k'])

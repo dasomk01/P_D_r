@@ -191,4 +191,6 @@ IMG = {
     'y-asian-lid-2016-15': ['img/lid-asian-2016.jpg'],      # 2016 주15 – 213쪽
     'y-meibom-2015': ['img/lid-meibom-2015.jpg'],           # 2015 객6 – 213쪽
     'y-epiblepharon-2015': ['img/lid-epib-2015.jpg'],       # 2015 객7 – 214쪽
+    'fh-1119-1': ['img/fh-1119-1.jpg'],   # 11/19 안외상 퀴즈 – 강의록 41쪽
+    'fh-1119-4': ['img/fh-1119-4.jpg'],   # 11/19 전신 퀴즈 – 강의록 58쪽
 }
