@@ -50,7 +50,7 @@ K = {
  ('diopter', 2013, '객8'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('acc-elem', 2013, '객14'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('hyper', 2012, '객9'): ['wb', 'wb', 'wb', 'wb', 'wb'],
- ('ref-term', 2011, '객5'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('ref-term', 2011, '객6'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('acc-ox', 2011, '객7'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('hyper', 2011, '객8'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('struct', 2022, '객1'): ['lec', 'wb', 'kn', 'wb', 'wb'],

@@ -93,7 +93,7 @@ L = {
  ('acc-elem', 2013, '객14'): [True, True, True, True, True],
  ('acc-ox', 2012, '객8'): [True, False, True, True, True],
  ('hyper', 2012, '객9'): [False, True, True, True, False],
- ('ref-term', 2011, '객5'): [True, True, False, False, True],
+ ('ref-term', 2011, '객6'): [True, True, False, False, True],
  ('acc-ox', 2011, '객7'): [True, False, True, True, True],
  ('hyper', 2011, '객8'): [False, True, True, True, False],
 }
