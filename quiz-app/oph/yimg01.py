@@ -193,4 +193,14 @@ IMG = {
     'y-epiblepharon-2015': ['img/lid-epib-2015.jpg'],       # 2015 객7 – 214쪽
     'fh-1119-1': ['img/fh-1119-1.jpg'],   # 11/19 안외상 퀴즈 – 강의록 41쪽
     'fh-1119-4': ['img/fh-1119-4.jpg'],   # 11/19 전신 퀴즈 – 강의록 58쪽
+    # 눈물·안와 단원(학습지 227–237쪽)
+    'y-dacryo-photo-2018': ['img/lac-dacryo-2018.jpg'],    # 2018 주16 – 227쪽
+    'y-dcg-2018': ['img/lac-dcg-2018.jpg', 'img/lac-dcg-2017.jpg'],    # 2018 주17 + 2017 주9 – 227·228쪽
+    'y-silicone-photo-2018': ['img/lac-silicone-2017.jpg'],    # 2018 주18 + 2017 주10 – 228쪽
+    'y-dacryo-chronic-2017': ['img/lac-chronic-2017.jpg'],    # 2017 주8 – 228쪽
+    'y-dacryo-seq-2016': ['img/lac-dacryo-2016.jpg'],    # 2016 주7 – 229쪽(비슷한 사진)
+    'y-dacryo-seq-2015': ['img/lac-dacryo-2015.jpg'],    # 2015 객10 – 229쪽
+    'y-cellulitis-photo-2018': ['img/orb-cell-2018.jpg', 'img/orb-cell-2017.jpg'],    # 2018 주19 + 2017 주11 – 235·236쪽
+    'y-cellulitis-cause-2016': ['img/orb-cell-2016.jpg'],    # 2016 주10 – 236쪽(비슷한 사진)
+    'y-ted-dx-2015': ['img/orb-ted-2015.jpg'],    # 2015 객9 – 237쪽
 }

@@ -1,0 +1,21 @@
+# yx5 카드의 선지별 핵심 사실이 올해 수업(q*.py·qf*.py, 11/19 q1901·q1902 포함)에 나오는지: True/False
+L = {
+ ('dacryo', 2022, '객31'): [True, True, True, True, True],
+ ('nldo-adult', 2022, '객30'): [False, True, False, True, False],
+ ('nldo', 2020, '객23'): [True, True, True, True, True],
+ ('dacryo-seq', 2015, '객10'): [True, True, True, True, False],
+ ('nldo-cong', 2014, '객12'): [True, True, True, True, False],
+ ('nldo-adult', 2013, '객2'): [False, True, True, False, True],
+ ('nldo-tx', 2013, '객3'): [True, True, True, True, True],
+ ('nldo-cong', 2012, '객6'): [True, True, True, True, False],
+ ('nldo-cong', 2011, '객5'): [True, True, True, True, False],
+ ('ted', 2023, '객27'): [True, True, True, True, True],
+ ('ted-va', 2022, '객29'): [False, False, False, True, True],
+ ('cellulitis-cause', 2022, '객32'): [False, False, False, False, True],
+ ('proptosis', 2020, '객25'): [False, False, False, False, True],
+ ('orb-adnexa', 2019, '객4'): [True, True, False, True, True],
+ ('ted-dx', 2015, '객9'): [True, False, False, True, False],
+ ('ted2', 2014, '객43'): [True, True, True, True, True],
+ ('ted2', 2012, '객5'): [True, True, True, True, True],
+ ('ted2', 2011, '객4'): [True, True, True, True, True],
+}

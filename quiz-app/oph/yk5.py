@@ -1,0 +1,21 @@
+# 야마 선지별 해설 근거(yx5 카드): wb=학습지 해설, kn=수업 외 지식
+K = {
+ ('dacryo', 2022, '객31'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('nldo-adult', 2022, '객30'): ['kn', 'wb', 'wb', 'wb', 'kn'],
+ ('nldo', 2020, '객23'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('dacryo-seq', 2015, '객10'): ['wb', 'wb', 'wb', 'wb', 'kn'],
+ ('nldo-cong', 2014, '객12'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('nldo-adult', 2013, '객2'): ['kn', 'wb', 'wb', 'wb', 'wb'],
+ ('nldo-tx', 2013, '객3'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('nldo-cong', 2012, '객6'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('nldo-cong', 2011, '객5'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('ted', 2023, '객27'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('ted-va', 2022, '객29'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('cellulitis-cause', 2022, '객32'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('proptosis', 2020, '객25'): ['wb', 'kn', 'kn', 'kn', 'wb'],
+ ('orb-adnexa', 2019, '객4'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('ted-dx', 2015, '객9'): ['wb', 'kn', 'kn', 'kn', 'kn'],
+ ('ted2', 2014, '객43'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('ted2', 2012, '객5'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+ ('ted2', 2011, '객4'): ['wb', 'wb', 'wb', 'wb', 'wb'],
+}
