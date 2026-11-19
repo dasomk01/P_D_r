@@ -1,12 +1,12 @@
-# 야마 선지별 해설 근거: wb=학습지 해설, lec=올해 수업(티야 근거), kn=수업 외 지식
+# 야마 선지별 해설 근거: wb=학습지 해설, lec=올해 수업(티야 근거), kn=수업 외 지식 (다른 해 학습지 해설에 있는 3건은 wb로 정정)
 K = {
  ('hering', 2021, '객18'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('strab', 2021, '객19'): ['wb', 'wb', 'lec', 'lec', 'wb'],
  ('ambly', 2021, '객20'): ['lec', 'lec', 'lec', 'wb', 'kn'],
- ('phoria', 2020, '객27'): ['wb', 'lec', 'kn', 'lec', 'kn'],
- ('phoria', 2019, '객38'): ['wb', 'lec', 'kn', 'lec', 'kn'],
+ ('phoria', 2020, '객27'): ['wb', 'lec', 'kn', 'lec', 'wb'],
+ ('phoria', 2019, '객38'): ['wb', 'lec', 'kn', 'lec', 'wb'],
  ('iet-case', 2016, '객8'): ['kn', 'lec', 'wb', 'wb', 'wb'],
- ('acc-tx', 2016, '객9'): ['wb', 'wb', 'wb', 'lec', 'kn'],
+ ('acc-tx', 2016, '객9'): ['wb', 'wb', 'wb', 'lec', 'wb'],
  ('strab-ox', 2015, '객22'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('cn-innerv', 2014, '객2'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('eom-act', 2014, '객33'): ['wb', 'wb', 'wb', 'wb', 'wb'],
@@ -59,7 +59,7 @@ K = {
  ('struct', 2019, '객3'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('adnexa', 2017, '객2'): ['wb', 'wb', 'wb', 'wb', 'wb'],
  ('struct', 2016, '객1'): ['wb', 'wb', 'wb', 'wb', 'wb'],
- ('adnexa', 2016, '객2'): ['wb', 'kn', 'wb', 'wb', 'kn'],
+ ('adnexa', 2016, '객2'): ['wb', 'wb', 'wb', 'wb', 'kn'],
  ('accom', 2015, '객1'): ['wb', 'lec', 'wb', 'lec', 'wb'],
  ('regen', 2015, '객3'): ['lec', 'kn', 'wb', 'kn', 'kn'],
 }
