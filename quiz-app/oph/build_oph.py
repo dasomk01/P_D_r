@@ -161,6 +161,7 @@ for code, _, _ in LECT:
 for i in items:
   if i['area'] == '야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans']) > len(i['choices'])): errs.append(i['k'])
   if re.match(r'^(🤍|💜)형성평가', i['stem']) or any('형성평가' in n for n in i['notes']): i['fh'] = True
+  if i['area'] != '야마' and any(n.startswith('국시 기출') for n in i['notes']): i['fh'] = i['ks'] = True   # 수업 중 국시 기출 슬라이드 → 형성평가처럼 표시
 keys = [i['k'] for i in items]; dup = [k for k, c in collections.Counter(keys).items() if c > 1]
 ym = [i for i in items if i['area'] == '야마']
 print(len(items), dict(collections.Counter(i['area'] for i in items)), 'errs', errs, 'dup', dup, 'bad sec', bad)
@@ -169,7 +170,7 @@ print('야마', len(ym), '킹야(2회)', sum(i['rep'] == 2 for i in ym), '킹킹
       '그림', sum(bool(i['imgs']) for i in items), '주관식', sum(not i['choices'] for i in ym))
 print('IMG키없음', [k for k in IMG if 'oph-' + k not in keys])
 print('사진문항인데그림없음', [i['k'] for i in items if re.search(r'\((사진|그림)', i['stem']) and not i['imgs']])
-print('형성평가', sum(bool(i.get('fh')) for i in items))
+print('형성평가', sum(bool(i.get('fh')) and not i.get('ks') for i in items), '국시', sum(bool(i.get('ks')) for i in items))
 print(collections.Counter(i['sec'] for i in items))
 ny = [i for i in items if i['area'] != '야마' and i['choices'] and not i.get('fh')]   # 형성평가는 교수님 원문이라 제외
 print('answer-much-longer', [i['k'] for i in ny if len(i['choices'][i['ans'][0]-1]) > 1.6 * max(len(c) for j, c in enumerate(i['choices']) if j != i['ans'][0]-1)])
