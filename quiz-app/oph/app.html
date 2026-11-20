@@ -74,6 +74,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .acts .chip{font-size:14px;padding:6px 13px}
 .memo{margin-top:14px}
+.mans{margin-top:14px;padding:12px 14px;border:2px solid #8b6fd6;border-radius:12px;background:rgba(139,111,214,.10);font-size:15px;line-height:1.6}.mans b{display:block;margin-bottom:4px;color:#8b6fd6}
 .memo label{display:block;font-size:13px;color:var(--mute);margin-bottom:4px;font-weight:600}
 .fam{margin:12px 0;padding:10px 12px;border:1px solid var(--line);border-radius:12px}.fam summary{cursor:pointer;font-weight:600}.famq{margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)}.famch{margin:6px 0 0;padding-left:24px}.famch li.ok{font-weight:700;color:var(--accent)}
 .memo textarea{width:100%;min-height:220px;max-height:75vh;padding:12px 14px;font-size:15px;line-height:1.6;resize:vertical;overflow-y:auto}
@@ -201,7 +202,7 @@ function render(){stats();var i=idx(),v=$('view');
   var h='<article class="card'+(done?' done':'')+'">';
   h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area==='형성평가'||(q.fl&&q.fl.ks)?lab(q):q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
-  (q.notes||[]).forEach(function(n){h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
+  (q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)return;h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
   if(f.err)h+='<div class="note">⚑ 내가 문제오류로 표시함</div>';if(f.oos)h+='<div class="note oos">내가 범위외로 표시함</div>';
   h+='<div class="stem">'+esc(q.stem)+'</div>';
   if(q.imgs&&q.imgs.length)h+='<div class="imgs">'+q.imgs.map(function(s){return '<img src="'+esc(s)+'" alt="문제 사진" loading="lazy">'}).join('')+'</div>';
@@ -224,7 +225,7 @@ function render(){stats();var i=idx(),v=$('view');
     if(q.exps&&q.exps.length&&!q.choices.length)h+='<h3>선지별 해설</h3><ol>'+q.exps.map(function(e){return '<li>'+esc(e)+'</li>'}).join('')+'</ol>';
     h+='</div>'}
   h+='<div class="acts"><button class="chip" id="tConf" aria-pressed="'+!!f.conf+'">🟡 헷갈림</button>'+(done?'<button class="chip" id="redo">↺ 다시 풀기</button>':'')+(inWrong(k)?'<button class="chip" id="tOut">오답노트에서 빼기</button>':'')+'<button class="chip" id="tErr" aria-pressed="'+!!f.err+'">⚑ 문제오류</button><button class="chip" id="tOos" aria-pressed="'+!!f.oos+'">범위외</button></div>';
-  h+='<div class="memo"><label for="memo">내 메모 · 뭐가 헷갈렸는지, 외울 포인트</label><textarea id="memo" placeholder="예: 3번이랑 헷갈림. A는 급성, B는 만성!">'+esc(memoOf(k))+'</textarea><div class="saved" id="memoSt"></div></div>';
+  (q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)h+='<div class="mans"><b>💬 내 메모에 대한 답</b>'+esc(n.replace(/^💬 메모 답 – /,''))+'</div>'});h+='<div class="memo"><label for="memo">내 메모 · 뭐가 헷갈렸는지, 외울 포인트</label><textarea id="memo" placeholder="예: 3번이랑 헷갈림. A는 급성, B는 만성!">'+esc(memoOf(k))+'</textarea><div class="saved" id="memoSt"></div></div>';
   h+='<div class="bottomnav"><button class="btn" id="prev2"'+(i<=0?' disabled':'')+'>이전</button><button class="btn pri" id="next2"'+(i>=L.length-1?' disabled':'')+'>다음</button></div>';
   h+='</article>';v.innerHTML=h;
   [].forEach.call(v.querySelectorAll('.ch'),function(b){b.onclick=function(){var n=+b.getAttribute('data-n');if(!multi)return answer(q,n);var p=(PK[k]||[]).slice(),j=p.indexOf(n);if(j>=0)p.splice(j,1);else p.push(n);PK[k]=p;render()}});
