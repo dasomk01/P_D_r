@@ -83,6 +83,7 @@ def ysplit(exp, n):
   if len(seg[-1]) > 90 and '. ' in seg[-1]: seg[-1] = seg[-1][:seg[-1].index('. ') + 1]   # 마지막 선지 뒤 공통 해설은 떼어냄
   return seg if all(seg) else []
 
+CARDS = []
 def yama():
   cards = []; fam = collections.defaultdict(list); srcs = {}
   for m in YMODS:
@@ -102,8 +103,9 @@ def yama():
             if x not in c['notes']: c['notes'].append(x)
           break
       else:
-        c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC, x0=(f, y, n), e0=exp)
+        c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC, x0=(f, y, n), e0=exp, m=m)
         fam[f].append(c); cards.append(c)
+  CARDS[:] = cards
   out = collections.defaultdict(list); used = set()
   for c in cards:
     allys = [y for d in fam[c['f']] for y in d['ys']]
@@ -169,4 +171,9 @@ print(collections.Counter(i['sec'] for i in items))
 ny = [i for i in items if i['area'] != '야마' and i['choices'] and not i.get('fh')]
 print('answer-much-longer', [i['k'] for i in ny if len(i['choices'][i['ans'][0]-1]) > 1.6 * max(len(c) for j, c in enumerate(i['choices']) if j != i['ans'][0]-1)])
 if os.environ.get('DUMP'): json.dump([dict(k=i['k'], y=i['year'], r=i['repyears'], s=i['stem'][:50]) for i in ym], open(os.environ['DUMP'], 'w'), ensure_ascii=False, indent=0)
+if os.environ.get('JOBS'):
+  jb = collections.defaultdict(list)
+  for c in CARDS:
+    if c['ch'] and not c['excl'] and c['x0'] not in YX: jb[c['m']].append(dict(key=list(c['x0']), sec=c['sec'], ys=c['ys'], stem=c['stem'], ch=c['ch'], ans=c['ans'], exp=c['e0'], notes=c['notes'], auto=bool(ysplit(c['e0'], len(c['ch'])))))
+  json.dump(jb, open(os.environ['JOBS'], 'w'), ensure_ascii=False, indent=1)
 print(build(items, '피부과 문풀', 'derm-app', D + '/derm-app.html'))
