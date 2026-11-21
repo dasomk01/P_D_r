@@ -58,6 +58,31 @@ def secname(code):
   n, p = LMAP[code]
   return (n if code in QMOD else n + PRE), p
 
+YX = {}   # 야마 선지별 해설: (묶음, 연도, 번호) → [선지별]  yx*.py
+for p in sorted(glob.glob(D + '/yx[0-9]*.py')): YX.update(importlib.import_module(os.path.basename(p)[:-3]).X)
+YK = {}   # 선지별 해설 근거: wb=학습지, lec=올해 수업, kn=수업 외 지식  yk*.py
+for p in sorted(glob.glob(D + '/yk[0-9]*.py')): YK.update(importlib.import_module(os.path.basename(p)[:-3]).K)
+YL = {}   # 선지별 해설이 올해 수업에 나오는지(True/False)  yl*.py
+for p in sorted(glob.glob(D + '/yl[0-9]*.py')): YL.update(importlib.import_module(os.path.basename(p)[:-3]).L)
+def yexps(key, e0, n):
+  x = YX.get(key) or ysplit(e0, n)
+  if not x: return []
+  k = YK.get(key) or ['wb'] * len(x); l = YL.get(key)
+  if not l: return x
+  return [s + (' 🎓올해 수업' if inl else ' 🧠수업 외 지식(학습지·올해 수업 모두 없음)' if g == 'kn' else ' 📚학습지에만(올해 수업엔 없음)') for s, g, inl in zip(x, k, l)]
+
+def ysplit(exp, n):
+  # 학습지 해설에 ①~ⓝ이 차례로 한 번씩 다 있으면 선지별로 나눈다
+  exp = (exp or '').replace('[요약] ', ''); pos = []; st = 0
+  if any(exp.count(c) != 1 for c in '①②③④⑤⑥⑦⑧⑨'[:n]): return []
+  for i in range(n):
+    j = exp.find('①②③④⑤⑥⑦⑧⑨'[i], st)
+    if j < 0: return []
+    pos.append(j); st = j + 1
+  seg = [exp[p + 1:(pos[i + 1] if i + 1 < n else len(exp))].strip(' .·,;:-–') for i, p in enumerate(pos)]
+  if len(seg[-1]) > 90 and '. ' in seg[-1]: seg[-1] = seg[-1][:seg[-1].index('. ') + 1]   # 마지막 선지 뒤 공통 해설은 떼어냄
+  return seg if all(seg) else []
+
 def yama():
   cards = []; fam = collections.defaultdict(list); srcs = {}
   for m in YMODS:
@@ -77,7 +102,7 @@ def yama():
             if x not in c['notes']: c['notes'].append(x)
           break
       else:
-        c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC)
+        c = dict(sec=sec, f=f, ys=[yl], stem=stem, ch=ch, ans=ans, exps=[(yl, exp)] if exp else [], notes=list(notes), excl=excl, pf={str(y): prof}, src=M.SRC, x0=(f, y, n), e0=exp)
         fam[f].append(c); cards.append(c)
   out = collections.defaultdict(list); used = set()
   for c in cards:
@@ -105,7 +130,7 @@ def yama():
     basis = '\n\n'.join(parts) or '📚 학습지 해설 없음'
     out[c['sec']].append(dict(k='derm-' + k, fam=c['f'], area='야마', prof=prof, sec=sec, meta='근거: ' + c['src'], tyb=bool(tb),
       year=c['ys'][0], type='객' if c['ch'] else '주', rep=rep, repyears=' · '.join(y for y in allys if y != c['ys'][0]) if rep > 1 else '',
-      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=[], ai=''))
+      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=yexps(c['x0'], c['e0'], len(c['ch'])) if c['ch'] else [], ai=''))
   return out
 
 Y = yama()
@@ -125,11 +150,12 @@ for code, _, _ in LECT:
       tb = TYB.get(k)
       if tb: basis = '📌 티야방(' + tb[0] + '): ' + tb[1] + '\n\n' + basis
       items.append(dict(k='derm-' + k, area=area, prof=prof, sec=sec, meta=('📌티야방 · ' if tb else '') + '근거: ' + src, tyb=bool(tb),
-        year='', type='객' if ch else '주', rep=1, stem=stem, choices=ch, ans=[ans] if ch else [], imgs=imgs(k), vis=[], notes=qn, basis=basis, exps=exps, ai=''))
+        year='', type='객' if ch else '주', rep=1, stem=stem, choices=ch, ans=(list(ans) if isinstance(ans, list) else [ans]) if ch else [], imgs=imgs(k), vis=[], notes=qn, basis=basis, exps=exps, ai=''))
   items += Y.get(code, [])
 for i in items:
   if i['area'] == '야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans']) > len(i['choices'])): errs.append(i['k'])
   if re.match(r'^(🤍|💜)형성평가', i['stem']) or any('형성평가' in n for n in i['notes']): i['fh'] = True
+  if i['area'] != '야마' and any(n.startswith('국시 기출') for n in i['notes']): i['fh'] = i['ks'] = True   # 수업 중 국시 기출 슬라이드 → 형성평가처럼 표시
 keys = [i['k'] for i in items]; dup = [k for k, c in collections.Counter(keys).items() if c > 1]
 ym = [i for i in items if i['area'] == '야마']
 print(len(items), dict(collections.Counter(i['area'] for i in items)), 'errs', errs, 'dup', dup, 'bad sec', bad)
@@ -137,9 +163,10 @@ print('야마', len(ym), '킹야(2회)', sum(i['rep'] == 2 for i in ym), '킹킹
       '확인필요(채점X)', len([i for i in ym if i.get('excl')]), '⚠', sum(any(n.startswith('⚠') for n in i['notes']) for i in ym),
       '그림', sum(bool(i['imgs']) for i in items), '주관식', sum(not i['choices'] for i in ym))
 print('IMG키없음', [k for k in IMG if 'derm-' + k not in keys])
-print('형성평가', sum(bool(i.get('fh')) for i in items))
+print('사진문항인데그림없음', [i['k'] for i in items if re.search(r'\((사진|그림)', i['stem']) and not i['imgs']])
+print('형성평가', sum(bool(i.get('fh')) and not i.get('ks') for i in items), '국시', sum(bool(i.get('ks')) for i in items))
 print(collections.Counter(i['sec'] for i in items))
-ny = [i for i in items if i['area'] != '야마' and i['choices']]
+ny = [i for i in items if i['area'] != '야마' and i['choices'] and not i.get('fh')]
 print('answer-much-longer', [i['k'] for i in ny if len(i['choices'][i['ans'][0]-1]) > 1.6 * max(len(c) for j, c in enumerate(i['choices']) if j != i['ans'][0]-1)])
 if os.environ.get('DUMP'): json.dump([dict(k=i['k'], y=i['year'], r=i['repyears'], s=i['stem'][:50]) for i in ym], open(os.environ['DUMP'], 'w'), ensure_ascii=False, indent=0)
 print(build(items, '피부과 문풀', 'derm-app', D + '/derm-app.html'))
