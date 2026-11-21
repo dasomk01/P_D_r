@@ -19,8 +19,8 @@ for i,(p,tp,k,ti,d,ex) in enumerate(T,1):
   ch='' if photo else '<ol>'+''.join('<li><b>%s</b> %s</li>'%(C[j],E(c)) for j,c in enumerate(t[3]))+'</ol>'
   ims=''.join(('<img class="big" src="%s">' if k=='fh-1111-2' else '<img src="%s">')%img(f) for f in IMG.get(k,[])) if not (k=='fh-1111-3') else '<p class="m">(사진은 12번과 같음)</p>'
   a=''.join(C[x-1] for x in ans(t)); at=' · '.join(t[3][x-1].strip() for x in ans(t) if not photo)
-  b.append('%s<div class="q"><div class="t"><span class="n">%d</span>%s</div><div class="m">%s · %s</div><p>%s</p>%s%s<div class="a"><b>정답 %s</b> %s<br>%s</div></div>'%(hd,i,E(ti),tag,d,E(stem),ims,ch,a,E(at),E(ex)))
-rows=''.join('<tr><td>%d</td><td>%s</td><td>%s</td><td><b>%s</b></td><td>%s</td></tr>'%(i,p,E(ti.split(' = ')[0].split(' → ')[0]),''.join(C[x-1] for x in ans(Q[k])),E(ti.split(' = ')[-1] if ' = ' in ti else ti.split(' → ')[-1])) for i,(p,tp,k,ti,d,ex) in enumerate(T,1))
+  b.append('%s<div class="q"><div class="t"><span class="n">%d</span>%s</div><div class="m">%s · %s</div><p>%s</p>%s%s<div class="a"><b>정답 %s %s</b><br>%s</div></div>'%(hd,i,E(ti),tag,d,E(stem),ims,ch,a,E(at),E(ex)))
+rows=''.join('<tr><td>%d</td><td>%s</td><td>%s</td><td><b>%s</b></td></tr>'%(i,p,E(ti),''.join(C[x-1] for x in ans(Q[k]))) for i,(p,tp,k,ti,d,ex) in enumerate(T,1))
 H='''<!doctype html><html><head><meta charset="utf-8"><style>
 @page{size:A4;margin:10mm 9mm}
 body{font-family:"Noto Sans CJK KR","Noto Sans KR",sans-serif;font-size:8.6pt;line-height:1.38;color:#111;margin:0}
@@ -34,7 +34,7 @@ h3{font-size:9.4pt;margin:5px 0 2px;color:#5a3fa8;break-after:avoid}
 ol{list-style:none;padding:0;margin:2px 0}li{margin:0}
 img{max-width:100%;max-height:38mm;width:auto;display:block;margin:3px auto}img.big{max-height:72mm}
 .a{background:#f2f8f2;border-left:3px solid #3a9a4a;padding:2px 5px;margin-top:3px;font-size:8.2pt}
-.ans{break-inside:avoid}table{border-collapse:collapse;width:100%;font-size:8pt}td,th{border:1px solid #ccc;padding:1px 4px}th{background:#eee}
+.ans{break-inside:avoid}table{border-collapse:collapse;width:100%;font-size:8pt}td,th{border:1px solid #ccc;padding:1px 4px}th{background:#eee}td:nth-child(1),td:nth-child(2),td:nth-child(4),th{white-space:nowrap}
 </style></head><body><h1>피부과 형성평가 정리본</h1><div class="sub">23문항 · 🤍 수업 끝 퀴즈 18 · 💜 11/9 종합 형성평가 5 · 🏥 국시 기출 0 · 교수님·주제별 · 2026-11-21</div>
-<div class="cols">'''+''.join(b)+'<div class="ans"><h2>정답표</h2><table><tr><th>#</th><th>교수</th><th>문항</th><th>정답</th><th>내용</th></tr>'+rows+'</table></div></div></body></html>'
+<div class="cols">'''+''.join(b)+'<div class="ans"><h2>정답표</h2><table><tr><th>번호</th><th>교수</th><th>문제 제목</th><th>정답</th></tr>'+rows+'</table></div></div></body></html>'
 open(D+'/fh_doc/fh.html','w').write(H)
