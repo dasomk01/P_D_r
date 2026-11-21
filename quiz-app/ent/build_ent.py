@@ -50,6 +50,16 @@ def cfnote(cf,prof):
   if any(p not in (prof,'미상') for p in g): t+=' — 올해 담당 '+prof+' 교수님과 다른 교수님 출제 포함'
   return t
 
+# 야마 선지별 해설: yx_*.py 의 X = {(묶음, 연도, '번호'): [(해설, 근거), ...]}  근거 c=올해 수업(강의록·STT), w=학습지 해설에만, k=수업 외 지식
+YX={}
+for p in sorted(glob.glob(D+'/yx_*.py')): YX.update(importlib.import_module(os.path.basename(p)[:-3]).X)
+TAG={'c':' 🎓올해 수업','w':' 📚학습지에만(올해 수업엔 없음)','k':' 🧠수업 외 지식(학습지·올해 수업 모두 없음)'}
+def yexps(c):
+  y,n=c['ys'][0].split(); x=YX.get((c['f'],int(y),n))
+  if not x: return []
+  if len(x)!=len(c['ch']): print('YX 선지 수 불일치',c['f'],y,n); return []
+  return [t+TAG[g] for t,g in x]
+
 def yama():
   cards=[];fam=collections.defaultdict(list)
   for m in YMODS:
@@ -63,7 +73,7 @@ def yama():
       for c in fam[f]:
         if not excl and same(c,stem,ch,ans): c['ys'].append(yl); c['cf'][str(y)]=prof; c['notes']+=list(notes or []); break
       else:
-        c=dict(sec=PREFAM.get(f,sec),f=f,ys=[yl],stem=stem,ch=ch,ans=ans,basis=basis,notes=list(notes or []),excl=excl,cf={str(y):prof})
+        c=dict(m=m,sec=PREFAM.get(f,sec),f=f,ys=[yl],stem=stem,ch=ch,ans=ans,basis=basis,notes=list(notes or []),excl=excl,cf={str(y):prof})
         fam[f].append(c);cards.append(c)
   out=collections.defaultdict(list);seen=set()
   for c in cards:
@@ -84,7 +94,7 @@ def yama():
     if cn: notes=[cn]+notes
     out[c['sec']].append(dict(k='ent-'+k,fam=c['f'],area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
       year=c['ys'][0],type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
-      stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=imgs(k),vis=[],notes=notes,basis='\n\n'.join(parts),exps=[],ai=''))
+      stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=imgs(k),vis=[],notes=notes,basis='\n\n'.join(parts),exps=yexps(c),ai='',ymod=c['m']))
   return out
 
 Y=yama()
@@ -95,6 +105,7 @@ for m in MODS:
     area,k,stem,ch,ans,basis,exps,src=t[:8]; qn=list(t[8]) if len(t)>8 else []
     ch=FIX.get(k,ch)
     r=random.Random(int(hashlib.md5(k.encode()).hexdigest(),16)); idx=list(range(len(ch)))
+    if area=='형성평가' and not stem.startswith(('🤍','💜')): stem='🤍형성평가 '+stem   # 🤍 수업 끝 퀴즈, 💜 과정별·전체
     if '원문' not in src: r.shuffle(idx)   # 형성평가 원문은 선지 순서 그대로
     ch=[ch[i] for i in idx]; exps=[exps[i] for i in idx]; ans=idx.index(ans-1)+1
     if not (len(ch)==5 or '원문' in src and len(ch)==4) or len(exps)!=len(ch) or not 1<=ans<=len(ch): errs.append((k,len(ch),len(exps),ans))
@@ -114,15 +125,17 @@ lost=[s for s in Y if s not in YSEC and s not in PRE]
 print(len(items),collections.Counter(i['area'] for i in items),'errs',errs,'dup',dup,'구역누락',lost)
 ym=[i for i in items if i['area']=='야마']
 print('야마',len(ym),'킹야(2회)',sum(i['rep']==2 for i in ym),'킹킹야(3회+)',sum(i['rep']>=3 for i in ym),'확인필요',len([i for i in ym if i.get('excl')]))
-ny=[i for i in items if i['area']!='야마']
+ny=[i for i in items if i['area'] not in ('야마','형성평가')]
 print('정답위치',sorted(collections.Counter(i['ans'][0] for i in ny).items()))
 long=[i['k'] for i in ny if len(i['choices'][i['ans'][0]-1])>1.6*max(len(c) for j,c in enumerate(i['choices']) if j!=i['ans'][0]-1)]
 print('answer-much-longer',len(long),long)
+ym_=[i for i in ym if i['choices'] and not i.get('excl')]
+print('야마 선지별 해설',sum(bool(i['exps']) for i in ym if i['choices']),'/',sum(1 for i in ym if i['choices']))
 print('그림',sum(bool(i['imgs']) for i in items),'주관식',len([i for i in ym if not i['choices']]),'IMG키없음',[k for k in IMG if 'ent-'+k not in keys])
-# 형성평가 칩: fhset.py 의 FHKEYS(앞 'ent-' 뺀 키) + 「형성평가」 표시
-FHKEYS=set(importlib.import_module('fhset').FHKEYS) if os.path.exists(D+'/fhset.py') else set()
+# 형성평가 칩: 🤍(수업 끝 퀴즈)·💜(과정별·전체) 형성평가 원문 + 수업 중 국시 기출(노트가 「국시 기출」로 시작) → 🏥
 for i in items:
-  if i['k'][4:] in FHKEYS or '형성평가' in i['stem'][:8] or any('형성평가' in n for n in i['notes']) or '중간평가' in i['meta'] or '형성평가' in i['meta']: i['fh']=True
-print('형성평가',sum(1 for i in items if i.get('fh')))
+  if i['area']=='형성평가': i['fh']=True
+  if i['area']!='야마' and any(n.startswith('국시 기출') for n in i['notes']): i['fh']=i['ks']=True
+print('형성평가',sum(bool(i.get('fh')) and not i.get('ks') for i in items),'국시',sum(bool(i.get('ks')) for i in items))
 if os.environ.get('DUMP'): json.dump(items,open(os.environ['DUMP'],'w'),ensure_ascii=False)
 print(build(items,'이비인후과 문풀','ent-app',D+'/ent-app.html'))
