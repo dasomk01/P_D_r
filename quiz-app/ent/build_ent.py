@@ -121,6 +121,9 @@ for m in MODS:
 for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
 from yimg_ent import NOTE as _IN
+from memo_ans import A as _MA
+for i in items:
+  if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
 for i in items:
   if i['k'][4:] in _IN: i['notes']=list(i['notes'])+[_IN[i['k'][4:]]]
 keys=[i['k'] for i in items]; dup=[k for k,c in collections.Counter(keys).items() if c>1]
@@ -139,6 +142,7 @@ print('그림',sum(bool(i['imgs']) for i in items),'주관식',len([i for i in y
 for i in items:
   if i['area']=='형성평가': i['fh']=True
   if i['area']!='야마' and any(n.startswith('국시 기출') for n in i['notes']): i['fh']=i['ks']=True
+print('메모 답',sum(any(n.startswith('💬 메모 답') for n in i['notes']) for i in items),'/',len(_MA),'키없음',[k for k in _MA if 'ent-'+k not in keys])
 print('형성평가',sum(bool(i.get('fh')) and not i.get('ks') for i in items),'국시',sum(bool(i.get('ks')) for i in items))
 if os.environ.get('DUMP'): json.dump(items,open(os.environ['DUMP'],'w'),ensure_ascii=False)
 print(build(items,'이비인후과 문풀','ent-app',D+'/ent-app.html'))

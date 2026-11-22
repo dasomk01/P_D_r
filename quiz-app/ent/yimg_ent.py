@@ -27,8 +27,8 @@ _D = {  # 카드키: 파일 이름(img/ 안)  – 학습지 쪽
  'y-ssbil-2017':'ssbil-2017',      # p161
  'y-ctd-2016':'ctd-2016',          # p164
  'y-weber-2013':'weber-2013',      # p169
- 'y-cielec-2025':'cielec-2025', 'y-surgaid-2025':'surgaid-2025', 'y-surgaid-2025-객24':'surgaid-2025-24', 'y-surgaid-2025-객25':'surgaid-2025-25',  # p181–183
- 'y-cielec-2023':'cielec-2023', 'y-cielec-2022':'cielec-2022', 'y-ci2-2021':'ci2-2021',  # p184–185
+ 'y-cielec-2025':'cielec-2025-L', 'y-surgaid-2025':'surgaid-2025', 'y-surgaid-2025-객24':'surgaid-2025-24', 'y-surgaid-2025-객25':'surgaid-2025-25',  # p181–183
+ 'y-cielec-2023':'cielec-2023-L', 'y-cielec-2022':'cielec-2022-L', 'y-ci2-2021':'ci2-2021',  # p184–185
  'y-aidpic-2019':'aidpic', 'y-aidpic-2018':'aidpic', 'y-aidpic-2019-주4':'aidpic',  # p186
  'y-dhleft-2025':'dhleft-2025', 'y-menigen-2023':'menigen-2023', 'y-menidx-2023':'menidx-2023', 'y-dhleft-2022':'dhleft-2022',  # p192–197
  'y-menitx-2022':'menitx-2022', 'y-vntx-2022':'vntx-2022',  # p198–199
