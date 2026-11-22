@@ -15,7 +15,7 @@ _D = {  # 카드키: 파일 이름(img/ 안)  – 학습지 쪽
  'y-paf-2021':'paf-2021', 'y-paf-2020':'paf-2020',  # p101
  'y-atr-2020':'cong-2020', 'y-baha-2018':'baha-2018',  # p102–103
  'y-omeobs-2025':'omeobs-2025', 'y-omedown-2025':'omedown-2025',  # p106
- 'y-aomtx-2025':'aomtx-2025', 'y-aoe23-2023':'aoe23-2023',  # p107
+ 'y-aomtx-2025':'aomtx-2023', 'y-aoe23-2023':'aoe23-2023',  # p107
  'y-ome5m-2022':'ome5m-2022', 'y-aombug-2022':'aombug-2022', 'y-ome2m-2021':'ome2m-2021',  # p110–112
  'y-aom2y-2018':'aom2y-2018',      # p113
  'y-mastx-2025':'mastx-2025', 'y-midmass-2023':'midmass-2023', 'y-congc-2023':'congc-2023',  # p127–129

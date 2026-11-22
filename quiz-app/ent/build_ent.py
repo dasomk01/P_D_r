@@ -122,6 +122,20 @@ for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
 from yimg_ent import NOTE as _IN
 from ansfix import F as _AF
+import glob as _g
+_AU=[e for f in sorted(_g.glob(D+'/audit/g*.json')) for e in json.load(open(f))]
+for e in _AU:
+  for i in items:
+    if i['k'][4:]!=e['key']: continue
+    ft=e.get('fix_text')
+    if ft and i['choices'] and 1<=ft['choice']<=len(i['choices']):
+      c=i['choices'][ft['choice']-1]; i['choices'][ft['choice']-1]=c.replace(ft['from'],ft['to']) if ft['from'] in c else c
+    hm=e['confidence'] in ('high','medium')
+    if hm and e['type'] in ('wrong','multi','excl-resolved') and e.get('proposed') and i['choices']:
+      if sorted(e['proposed'])!=sorted(i['ans']): i['ans']=list(e['proposed']); i['excl']=False; i['notes']=['✏️ 정답 수정(11/22 강의록 전수 점검): '+'·'.join('①②③④⑤'[n-1] for n in e['proposed'])+(' (복수정답 – 모두 골라야 정답)' if len(e['proposed'])>1 else '')]+list(i['notes'])
+    if hm and e['type']=='none' and i['choices']:
+      i['ans']=[]; i['excl']=True; i['notes']=['✏️ 맞는 답이 없는 문항(11/22 강의록 전수 점검) – 채점 안 함']+list(i['notes'])
+    i['notes']=list(i['notes'])+['🔎 강의록 점검('+e['confidence']+'): '+e['reason_ko']]
 for i in items:
   if i['k'][4:] in _AF:
     i['ans'],_r=_AF[i['k'][4:]]; i['excl']=False; i['notes']=['✏️ 정답 수정(강의록·수업 기준): '+_r]+list(i['notes'])

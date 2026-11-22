@@ -1,0 +1,16 @@
+[
+ {"key":"y-aombug-2022","current":[],"proposed":[2],"type":"excl-resolved","confidence":"high",
+  "reason_ko":"이경 사진은 강의록 7장 p.11 AOM 사진과 동일한 급성 중이염. 원인균 1위는 S. pneumoniae → ②. 📖 7장 p.10 「① Streptococcus pneumoniae (가장 많음)」, S. aureus·Pseudomonas는 「드물게 발견되는 원인균」. 🎙 이은정 11/4 「원인균 세 가지, Streptococcal pneumonia, hemophilus influenza, 모락셀라 카타랄리스」"},
+ {"key":"y-tbf-2021","current":[4],"proposed":[4,5],"type":"multi","confidence":"medium",
+  "reason_ko":"종골절에서 안면신경마비가 더 잦다(④)는 틀림(📖 9장 p.10 「종골절의 20% 정도」 vs 「횡골절 환자의 50%」). 그런데 ⑤ 뇌척수액 유출 확인에 MRI도 강의록과 다름: 📖 9장 p.13 halo sign·「유출액에서 당을 분석」·「수용성 조영제를 이용한 CT조영술이 최근 많이 사용됨」. 🎙 이은정 11/4 「글루코스 스틱을 찍어봅니다」·CT cisternography. → ④⑤ 복수정답."},
+ {"key":"y-ots-2021","current":[1],"proposed":null,"type":"typo","confidence":"high",
+  "reason_ko":"정답 ①은 그대로. 선지 ⑤의 「정신상태」는 강의록 「전신 상태」의 오기. 📖 10장 p.15 보청기를 권하는 경우 「① 수술을 받기에 전신 상태가 좋지 않을 때 … ④ 환자가 수술을 원하지 않을 때」",
+  "fix_text":{"choice":5,"from":"수술을 원하지 않거나 정신상태가 좋지 않을 때 보청기로 청력재활을 할 수 있다.","to":"수술을 원하지 않거나 전신상태가 좋지 않을 때 보청기로 청력재활을 할 수 있다."}},
+ {"key":"y-mastx-2025","current":[5],"proposed":null,"type":"typo","confidence":"medium",
+  "reason_ko":"정답 ⑤는 유지. 다만 「고실절개술」은 강의록에 없는 용어이고, 같은 문제 2023 객19 정답은 「유양동 삭개술 및 고실성형술」. 📖 8장 p.101 「(6) 고실성형술과 유양돌기 절제술 tympanoplasty with mastoidectomy」 → ⑤는 고실성형술의 복원 오기로 보임(학습지 원문도 「고실절개술」이라 복원 단계 오류).",
+  "fix_text":{"choice":5,"from":"고실절개술 + 유양동삭개술","to":"고실성형술 + 유양동삭개술"}},
+ {"key":"y-baro-2013","current":[2],"proposed":null,"type":"typo","confidence":"medium",
+  "reason_ko":"정답 ②(가,나)는 맞음(📖 7장 p.58 「② 코가 막히지 않도록 비강점막수축제를 복용하거나 비강 내에 분무함」「③ 껌을 씹거나 침을 자주 삼켜」). 단 선지 ①과 ③이 모두 「가,다」로 중복 복원됨(원래 선지 불명)."},
+ {"key":"y-aomtx-2025","current":[2],"proposed":null,"type":"typo","confidence":"high",
+  "reason_ko":"그림 파일(img/aomtx-2025.jpg)이 깨져 있어(초록·보라 노이즈) 고막이 안 보임. 정답 ②는 본문(심한 이통+39.2℃)만으로 유지 가능(📖 7장 p.12 삼출기 「이통이 심해지고 발열 등의 전신증상」, p.22 「효과적인 일차 항생제: Amoxicillin, ampicillin」). 같은 문제 img/aomtx-2023.jpg(정상 표시)로 교체 권장."}
+]

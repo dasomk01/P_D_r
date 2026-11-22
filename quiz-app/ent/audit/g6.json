@@ -1,0 +1,9 @@
+[
+  {"key": "y-nyst-2012", "current": [2], "proposed": [5], "type": "wrong", "confidence": "medium",
+   "reason_ko": "「나」(메니에르병은 병의 상태에 따라 안진 방향이 변할 수 있다)도 맞음 → 가·나·다·라 모두 옳아 ⑤. 📖 16장 p.11 「안진의 방향이 병변의 측별 구분에 도움을 주지는 못함 – 안진의 방향이 환자에 따라 일정한 방향으로 나타나지는 않기 때문」, 🎙 여차동 11/4(6교시) 「급성 발작일 때는 병측으로 안진이 생기고요. 이게 급성기가 지나면 안정기가 되면 안진이 반대로 바뀝니다」. 다(좌측 PC 시계방향 상향성)·라(우측 LC 우측 roll 향지성, 📖 16장 p.42 「내림프 결석… 방향은 향지성」)는 학습지대로 맞음."},
+  {"key": "y-fn16-2016", "current": [2], "proposed": [2, 4], "type": "multi", "confidence": "medium",
+   "reason_ko": "④ 「양측 이마 주름이 잡히지 않으면 핵상마비 의심」도 틀림. 핵상(운동핵 상부) 병변은 이마 주름이 보존됨. 📖 19장 p.7 「운동핵 상부 병변의 경우 – 상부 안면은 양측의 지배를 받기 때문에, 상부 안면근의 마비는 없으면서 하부 안면근 마비만 발생함」, 🎙 여차동 11/5 「이마 주름이 생기면 센트럴 타입… 페리페럴 타입은 이마의 주름까지 완전히 다 안 생겨야」. 원문 ④가 「잡히는 경우」였을 가능성(복원 오류)도 있음."},
+  {"key": "y-dhleft-2022", "current": [5], "proposed": [5], "type": "typo", "confidence": "medium",
+   "reason_ko": "②와 ③이 완전히 같음(학습지 p.197 원본도 동일하게 복원됨). 같은 문제 2025 객11의 ③은 「supine head roll test. left lateral BPPV. Epley maneuver」. 정답 ⑤는 그대로(📖 16장 p.30 「후반규관에 병변이 있을 때 병변 쪽에서 Hallpike 자세」, 🎙 여차동 11/5 「포스트 세미서큘러 캐널은 에플리 메뉴버」).",
+   "fix_text": {"choice": 3, "from": "Supine head roll test - left lateral BPPV - barbeque maneuver", "to": "Supine head roll test - left lateral BPPV - Epley maneuver"}}
+]

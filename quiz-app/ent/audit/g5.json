@@ -1,0 +1,133 @@
+[
+ {
+  "key": "y-ssbil-2017",
+  "current": [
+   1
+  ],
+  "proposed": [
+   3
+  ],
+  "type": "wrong",
+  "confidence": "high",
+  "reason_ko": "③이 틀린 문장. 📖 12장 p.81 '입원치료가 원칙이며…' 문구에 X 표시, 🎙 여차동 11/4 5교시 '입원치료 원칙 아닙니다… 효과는 동일'. 시험적 고실개방술은 외상·exertion 후 누공 의심 시에만(p.81). ①은 청력도상 양측 심도 SNHL(골도 화살표=무반응)이고 📖 p.76 '17%는 양측성'이므로 맞는 문장."
+ },
+ {
+  "key": "y-ssbil-2014",
+  "current": [
+   1
+  ],
+  "proposed": [
+   4
+  ],
+  "type": "wrong",
+  "confidence": "high",
+  "reason_ko": "2017 객20·2015 객15와 같은 문제(④번 선지가 입원치료 문장). 📖 12장 p.81 '입원치료가 원칙' X 표시 + 🎙 여차동 11/4 '입원치료 원칙 아닙니다'. 청력도는 골도 무반응(화살표) 양측 심도 SNHL이라 혼합성 아님 → ① 맞는 문장. 정답은 ④('입원치료가 원칙…')."
+ },
+ {
+  "key": "y-ssdef-2019",
+  "current": [
+   2
+  ],
+  "proposed": null,
+  "type": "none",
+  "confidence": "medium",
+  "reason_ko": "ㄷ '주 치료는 스테로이드와 항바이러스제'는 🎙 여차동 11/4 5교시 '항바이러스제… 가이드라인에는 이런 거 쓰지 말라'로 틀림. ㄹ(MRI로 청신경종 배제)은 맞음(📖 12장 p.79 'gadolinium 조영 MRI'). ㄴ은 🎙 11/4 6교시 '전정신경염은 난청이 동반되지가 않아야'로 틀림 → 정답 ㄱ,ㄹ인데 선지에 없음."
+ },
+ {
+  "key": "y-ssdef-2018",
+  "current": [
+   5
+  ],
+  "proposed": null,
+  "type": "none",
+  "confidence": "medium",
+  "reason_ko": "나 '치료는 스테로이드와 항바이러스제'는 🎙 여차동 11/4 5교시 '가이드라인에서는 그런 약들은 쓰지 말라'로 틀림 → 모두 맞음(⑤) 불가. 다(BPPV·전정신경염 동반)는 🎙 11/4 6교시 '전정신경염은 난청이 동반되지가 않아야'로 틀림 → 정답 가,라인데 선지에 없음."
+ },
+ {
+  "key": "y-ssdef-2021",
+  "current": [
+   1
+  ],
+  "proposed": [
+   2
+  ],
+  "type": "wrong",
+  "confidence": "medium",
+  "reason_ko": "나 '전정신경염이나 BPPV에서 함께 발생할 수 있다'는 🎙 여차동 11/4 6교시 '전정신경염은 난청이 동반되지가 않아야 되겠죠… 난청이 있으면 메니에르나 어지럼 동반 돌발성 난청을 의심'과 맞지 않음. 가(MRI 청신경종 배제)·다(3개 연속 주파수 30dB, 📖 12장 p.76)만 맞음 → ②(가,다). 같은 보기를 2019에서는 틀린 보기로 채점함."
+ },
+ {
+  "key": "y-nihl-2013",
+  "current": [
+   3
+  ],
+  "proposed": [
+   3,
+   4
+  ],
+  "type": "multi",
+  "confidence": "high",
+  "reason_ko": "③ 📖 12장 p.61 '소음에 가장 쉽게 손상되는 부위가 난원창에서 10mm 부위의 와우 Corti기'. ④ 📖 12장 p.58 '주 병리소견 : 와우의 외유모세포 손상'. 둘 다 맞는 문장이라 복수정답."
+ },
+ {
+  "key": "y-presby-2025",
+  "current": [
+   1,
+   3,
+   5
+  ],
+  "proposed": [
+   1,
+   5
+  ],
+  "type": "wrong",
+  "confidence": "medium",
+  "reason_ko": "③ '전음성 난청이 있어도 진단 가능'은 🎙 여차동 11/4 4교시 '전음성 난청이 없어야 됩니다. 최소한의… 10db 이하'와 반대. 📖 12장 p.31 기준은 '③ 최소한의 전음성 난청 (10dB 이하)'. 조건 없이 '있어도 가능'이라 했으므로 틀린 보기로 보는 것이 맞음 → ①·⑤만 정답."
+ },
+ {
+  "key": "y-abr-2017",
+  "current": [
+   5
+  ],
+  "proposed": [
+   5
+  ],
+  "type": "typo",
+  "confidence": "high",
+  "reason_ko": "문제 지문은 📖 14장 p.7 '신생아 선별청력검사의 조건'과 같고, 선별검사는 '자동화청성뇌간반응 automated auditory brainstem response; AABR'(📖 p.7, 🎙 여차동 11/4 6교시 '자동화 청성뇌간반응… 스크리닝'). 'electrically evoked ABR(EABR)'은 인공와우 전기자극 검사라 선지를 그대로 두면 정답이 없음 → 선지 오타.",
+  "fix_text": {
+   "choice": 5,
+   "from": "electrically evoked auditory brainstem response(EABR)",
+   "to": "automated auditory brainstem response(AABR)"
+  }
+ },
+ {
+  "key": "y-surgaid-2025-객25",
+  "current": [],
+  "proposed": [
+   3
+  ],
+  "type": "excl-resolved",
+  "confidence": "medium",
+  "reason_ko": "청력도: 양측 기도 약 65–100dB, 골도 무반응 수준의 양측 고도–심도 감각신경성 난청. 📖 15장 p.19 '양측 귀에 고도의 감각신경성 난청이 있고, 보청기로 적절한 기간 동안 청력재활을 하여도 효과가 없을 경우' → C(인공와우)."
+ },
+ {
+  "key": "y-ssbell-2011",
+  "current": [],
+  "proposed": null,
+  "type": "wrong",
+  "confidence": "medium",
+  "reason_ko": "주관식 해설 정답이 '스테로이드, 항바이러스제'. 그러나 🎙 여차동 11/4 5교시: 돌발성 난청은 '쓸 수 있는 치료가 스테로이드밖에 없습니다… 항바이러스제… 가이드라인에서는 쓰지 말라'. 두 질환에 공통으로 쓰는 약으로는 스테로이드만 인정 → 해설에서 항바이러스제를 빼거나 '돌발성 난청에는 가이드라인상 쓰지 않음'을 붙여야 함."
+ },
+ {
+  "key": "y-ctd-2016",
+  "current": [
+   1
+  ],
+  "proposed": [
+   1
+  ],
+  "type": "unanswerable",
+  "confidence": "medium",
+  "reason_ko": "첨부 그림(img/ctd-2016.jpg)은 골도 표시가 없는 양측 기도 청력도로, 우측은 고음 급추락형이라 '우측 전도성 난청'으로 볼 수 없음. 정답은 지문 괄호('우측 전도성 난청')로만 정할 수 있어 그림이 맞지 않음(그림 교체·삭제 필요). 정답 ①은 괄호 기준으로 유지."
+ }
+]
