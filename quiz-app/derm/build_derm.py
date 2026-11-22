@@ -89,6 +89,13 @@ def ysplit(exp, n):
   if len(seg[-1]) > 90 and '. ' in seg[-1]: seg[-1] = seg[-1][:seg[-1].index('. ') + 1]   # 마지막 선지 뒤 공통 해설은 떼어냄
   return seg if all(seg) else []
 
+# 경화 별표질환 야마: 남경화 강의록 ★(손그림 별·놀란 책 스티커·노랑 별/동그라미) 슬라이드에 나온 질환의 야마 묶음 → 칩 '⭐ 경화 별표질환 야마'
+KSTAR = {'L0505': 'uv sunscreen sunburn', 'L0901': 'pso pr pso-tx pr-dx pso-agg erythroderma lp',
+  'L0902': 'vit igh vit-tx ster-hypo scleredema an dm-skin albinism', 'L1001': 'imp ssss',
+  'L1002': 'ftest tcap tv tinea-po', 'L1103': 'lep tb', 'L1203': 'hz moll',
+  'L1204': 'syph syph-test syph-fu scab scab-dx lice'}
+KSTAR = {(c, f) for c, v in KSTAR.items() for f in v.split()}
+
 CARDS = []
 def yama():
   cards = []; fam = collections.defaultdict(list); srcs = {}
@@ -138,7 +145,7 @@ def yama():
     basis = '\n\n'.join(parts) or '📚 학습지 해설 없음'
     out[c['sec']].append(dict(k='derm-' + k, fam=c['f'], area='야마', prof=prof, sec=sec, meta='근거: ' + c['src'], tyb=bool(tb),
       year=c['ys'][0], type='객' if c['ch'] else '주', rep=rep, repyears=' · '.join(y for y in allys if y != c['ys'][0]) if rep > 1 else '',
-      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=yexps(c['x0'], c['e0'], len(c['ch'])) if c['ch'] else [], ai=''))
+      stem=c['stem'], choices=c['ch'], ans=c['ans'], excl=c['excl'], imgs=imgs(k), vis=[], notes=notes, basis=basis, exps=yexps(c['x0'], c['e0'], len(c['ch'])) if c['ch'] else [], ai='', kst=(c['sec'], c['f']) in KSTAR))
   return out
 
 Y = yama()
@@ -172,6 +179,7 @@ print('야마', len(ym), '킹야(2회)', sum(i['rep'] == 2 for i in ym), '킹킹
       '그림', sum(bool(i['imgs']) for i in items), '주관식', sum(not i['choices'] for i in ym))
 print('IMG키없음', [k for k in IMG if 'derm-' + k not in keys])
 print('사진문항인데그림없음', [i['k'] for i in items if re.search(r'\((사진|그림)', i['stem']) and not i['imgs']])
+print('경화 별표질환 야마', sum(bool(i.get('kst')) for i in items))
 print('형성평가', sum(bool(i.get('fh')) and not i.get('ks') for i in items), '국시', sum(bool(i.get('ks')) for i in items))
 print(collections.Counter(i['sec'] for i in items))
 ny = [i for i in items if i['area'] != '야마' and i['choices'] and not i.get('fh')]

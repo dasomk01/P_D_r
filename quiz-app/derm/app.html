@@ -117,7 +117,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
   </div>
   <div style="margin-top:8px"><input type="search" id="fQ" placeholder="검색 (지문·정답·연도 예: 2023 객12)" aria-label="검색"></div>
   <div class="chips" id="chips">
-    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" data-v="fh">🤍💜 형성평가·🏥국시</button><button class="chip" data-v="kh">🔥 경화뿌시기</button><button class="chip" data-v="fam">🔁 비슷한 문제 합쳐 보기</button><button class="chip" id="shuf" aria-pressed="false">섞기</button><button class="chip" id="rvAll" aria-pressed="false">👀 정답 다 보기</button>
+    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" data-v="fh">🤍💜 형성평가·🏥국시</button><button class="chip" data-v="kh">🔥 경화뿌시기</button><button class="chip" data-v="kst">⭐ 경화 별표질환 야마</button><button class="chip" data-v="fam">🔁 비슷한 문제 합쳐 보기</button><button class="chip" id="shuf" aria-pressed="false">섞기</button><button class="chip" id="rvAll" aria-pressed="false">👀 정답 다 보기</button>
   </div>
   <div class="tools">
     <button class="btn" id="bSync">기록 새로고침</button><button class="btn" id="bBak">기록 백업</button><button class="btn" id="bRes">백업 불러오기</button><button class="btn" id="bExpF">지금 보는 범위만 내보내기</button><button class="btn" id="bExp">오답·헷갈림·메모 내보내기(전체)</button>
@@ -177,7 +177,7 @@ function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
   var fl=q.fl||{};
   switch(F.st){case'inscope':if(fl.oos||f.oos)return false;break;case'tyb':if(!fl.tyb)return false;break;case'nowarn':if(fl.warn)return false;break;case'chk':if(!fl.chk)return false;break;case'inc':if(!fl.inc)return false;break;case'ydiff':if(!fl.ydiff)return false;break;
     case'img':if(!q.imgs||!q.imgs.length)return false;break;case'noimg':if(q.imgs&&q.imgs.length)return false;break;case'myerr':if(!f.err)return false;break;case'myoos':if(!f.oos)return false;break}
-  switch(F.chip){case'new':if(solved(a))return false;break;case'wrong':if(!inWrong(k))return false;break;case'conf':if(!f.conf)return false;break;case'memo':if(!memoOf(k))return false;break;case'fh':if(!(q.fl&&q.fl.fh))return false;break;case'fam':if(q.fam&&FAM[q.fam][0]!==q)return false;break;case'kh':if(q.area!=='경화뿌시기')return false;break}
+  switch(F.chip){case'new':if(solved(a))return false;break;case'wrong':if(!inWrong(k))return false;break;case'conf':if(!f.conf)return false;break;case'memo':if(!memoOf(k))return false;break;case'fh':if(!(q.fl&&q.fl.fh))return false;break;case'fam':if(q.fam&&FAM[q.fam][0]!==q)return false;break;case'kh':if(q.area!=='경화뿌시기')return false;break;case'kst':if(!(q.fl&&q.fl.kst))return false;break}
   if(F.q){var t=(q.year+' '+q.meta+' '+q.stem+' '+q.choices.join(' ')+' '+q.ans.map(function(n){return q.choices[n-1]||''}).join(' ')+' '+q.sec+' '+(q.notes||[]).join(' ')+' '+memoOf(k)).toLowerCase();
     var ws=F.q.toLowerCase().split(/\s+/).filter(Boolean);for(var i=0;i<ws.length;i++)if(t.indexOf(ws[i])<0)return false}
   return true}
@@ -200,7 +200,7 @@ function render(){stats();var i=idx(),v=$('view');
   if(i<0){v.innerHTML='<div class="card empty">조건에 맞는 문제가 없어요. 위 필터나 칩을 바꿔 보세요.</div>';return}
   var q=L[i],k=q.k,a=SES[k]||null,f=S.f[k]||{},hasAns=!!(q.ans&&q.ans.length&&q.choices.length),done=!!(a&&(a.c!=null||a.self||a.pend)),multi=hasAns&&q.pick>1,pk=PK[k]||[],mine=function(n){return a&&(Array.isArray(a.c)?a.c.indexOf(n)>=0:a.c===n)},rv=typeof RV!=='undefined'&&RV&&!done,sh=done||rv;
   var h='<article class="card'+(done?' done':'')+'">';
-  h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area==='형성평가'||q.area==='경화뿌시기'||(q.fl&&q.fl.ks)?lab(q):q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
+  h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area==='형성평가'||q.area==='경화뿌시기'||(q.fl&&q.fl.ks)?lab(q):q.area)+'</span>':'')+(q.fl&&q.fl.kst?'<span class="pill area">⭐ 경화 별표질환</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
   (q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)return;h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
   if(f.err)h+='<div class="note">⚑ 내가 문제오류로 표시함</div>';if(f.oos)h+='<div class="note oos">내가 범위외로 표시함</div>';
