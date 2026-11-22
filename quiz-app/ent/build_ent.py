@@ -121,6 +121,10 @@ for m in MODS:
 for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
 from yimg_ent import NOTE as _IN
+from ansfix import F as _AF
+for i in items:
+  if i['k'][4:] in _AF:
+    i['ans'],_r=_AF[i['k'][4:]]; i['excl']=False; i['notes']=['✏️ 정답 수정(강의록·수업 기준): '+_r]+list(i['notes'])
 from memo_ans import A as _MA
 for i in items:
   if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
