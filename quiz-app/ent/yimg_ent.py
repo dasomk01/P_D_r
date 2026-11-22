@@ -53,7 +53,7 @@ _D.update({  # 11/22 그림 누락 보충 – 학습지 쪽에서 자름(같은 
  'y-presby-2016':'aud-presby-2016', 'y-comhl-2019':'aud-comhl-2019', 'y-nihl-2013':'aud-nihl-2013',
  # 🔥 차동뿌시기
  'cd-01':'aud-cd-01', 'cd-07':'aud-cd-07', 'cd-13':'aud-cd-13', 'cd-20':'aud-cd-20', 'cd-28':'aud-cd-28',
- 'cd-30':'fh1104-2', 'cd-31':'fh1104-8', 'cd-32':'fh1104-9', 'cd-33':'moe-2021',
+ 'cd-41':'aud-cd-41', 'cd-30':'fh1104-2', 'cd-31':'fh1104-8', 'cd-32':'fh1104-9', 'cd-33':'moe-2021',
 })
 IMG = {k: ['img/'+v+'.jpg'] for k, v in _D.items()}
 
