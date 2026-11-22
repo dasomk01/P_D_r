@@ -170,7 +170,7 @@ function wasWrong(k){var a=S.a[k];return !!(a&&a.w>0)}
 function inWrong(k){var f=S.f[k]||{};return !!((wasWrong(k)||f.conf||memoOf(k).trim())&&!f.out)}
 function memoOf(k){var m=S.m[k];return m&&m.x?m.x:''}
 // 같은 묶음(킹야·킹킹야에서 선지·문장이 조금 달라 따로 둔 카드)을 한 장으로 모아 보기
-var FAM={};Q.forEach(function(q){if(q.fam)(FAM[q.fam]=FAM[q.fam]||[]).push(q)});
+var FAM={};Q.forEach(function(q){if(q.fam)(FAM[q.fam]=FAM[q.fam]||[]).push(q)});Object.keys(FAM).forEach(function(f){FAM[f].sort(function(x,y){return (parseInt(y.year)||0)-(parseInt(x.year)||0)})});
 function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
   if(F.prof&&q.prof!==F.prof)return false;if(F.sec&&q.sec!==F.sec)return false;if(F.area&&q.area!==F.area)return false;if(F.type&&q.type!==F.type)return false;
   if(F.rep){var r=q.rep||1;if(F.rep==='3'&&r<3)return false;if(F.rep==='2'&&r!==2)return false;if(F.rep==='23'&&r<2)return false;if(F.rep==='1'&&r!==1)return false}
