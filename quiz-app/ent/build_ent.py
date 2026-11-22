@@ -138,7 +138,7 @@ for e in _AU:
     i['notes']=list(i['notes'])+['🔎 강의록 점검('+e['confidence']+'): '+e['reason_ko']]
 for i in items:
   if i['k'][4:] in _AF:
-    i['ans'],_r=_AF[i['k'][4:]]; i['excl']=False; i['notes']=['✏️ 정답 수정(강의록·수업 기준): '+_r]+list(i['notes'])
+    i['ans'],_r=_AF[i['k'][4:]]; i['excl']=not i['ans']; i['notes']=[n for n in i['notes'] if not n.startswith(('✏️ 정답 수정(11/22','✏️ 맞는 답이 없는'))]; i['notes']=[('✏️ 정답 수정(강의록·수업 기준): ' if i['ans'] else '⚖️ 해석이 갈려 채점 안 함: ')+_r]+list(i['notes'])
 from memo_ans import A as _MA
 for i in items:
   if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
