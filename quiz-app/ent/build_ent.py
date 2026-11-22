@@ -8,7 +8,7 @@ from fix_choices import FIX
 from fix_choices2 import FIX as _F2
 FIX.update(_F2)
 # 티야(올해 수업 STT·강의록 기반 5지선다) 모듈 – 수업 순서
-MODS=['q1_struct','q2_hear','q3_vext','q4_mid','q5_oto','q6_snhl','q7_vest','q8_fn']
+MODS=['cd_boom','q1_struct','q2_hear','q3_vext','q4_mid','q5_oto','q6_snhl','q7_vest','q8_fn']
 # 야마(학습지 기출 원문·정답) 모듈 – 순서 중요(문제 None 은 같은 묶음의 바로 앞 카드에 합친다)
 YMODS=['y_dev','y_aud','y_vest','y_sym','y_ext','y_cong','y_aom','y_com','y_tbf','y_inner','y_hl','y_vdx','y_fn']
 # 야마 구역 → 붙일 수업(그 수업 티야 뒤에 넣는다)
