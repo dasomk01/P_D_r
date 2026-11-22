@@ -120,6 +120,9 @@ for m in MODS:
     if pm==m: items+=Y[ys]
 for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
+from yimg_ent import NOTE as _IN
+for i in items:
+  if i['k'][4:] in _IN: i['notes']=list(i['notes'])+[_IN[i['k'][4:]]]
 keys=[i['k'] for i in items]; dup=[k for k,c in collections.Counter(keys).items() if c>1]
 lost=[s for s in Y if s not in YSEC and s not in PRE]
 print(len(items),collections.Counter(i['area'] for i in items),'errs',errs,'dup',dup,'구역누락',lost)
