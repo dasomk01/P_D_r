@@ -60,6 +60,7 @@ def yexps(c):
   if len(x)!=len(c['ch']): print('YX 선지 수 불일치',c['f'],y,n); return []
   return [t+TAG[g] for t,g in x]
 
+def _yd(y): return '연도 미상 '+y[5:] if y.startswith('2000 ') else y   # 연도 2000 = 학습지에 「20??」로만 적힌 문항
 def yama():
   cards=[];fam=collections.defaultdict(list)
   for m in YMODS:
@@ -83,7 +84,7 @@ def yama():
     if k in seen: k+='-'+c['ys'][0].split()[1]
     seen.add(k)
     notes=list(dict.fromkeys(c['notes']))
-    if len(c['ys'])>1: notes=['같은 문제(문제·선지 거의 동일): '+' · '.join(c['ys'][1:])]+notes
+    if len(c['ys'])>1: notes=['같은 문제(문제·선지 거의 동일): '+' · '.join(_yd(y) for y in c['ys'][1:])]+notes
     if c['excl']: notes=notes+['학습지 정답 그대로는 채점하지 않고, 확인되면 반영할게요.']
     tb=TYB.get(k) or TYB.get('fam:'+c['f']);ex=EXP.get(k,{});cls=ex.get('cls') or CLS.get(c['f'])
     parts=['📌 티야방('+tb[0]+'): '+tb[1]] if tb else []
@@ -93,7 +94,7 @@ def yama():
     cn=cfnote(c['cf'],prof)
     if cn: notes=[cn]+notes
     out[c['sec']].append(dict(k='imi-'+k,fam=c['f'],area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
-      year=c['ys'][0],type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(y for y in allys if y!=c['ys'][0]) if rep>1 else '',
+      year=_yd(c['ys'][0]),type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(_yd(y) for y in allys if y!=c['ys'][0]) if rep>1 else '',
       stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=imgs(k),vis=[],notes=notes,basis='\n\n'.join(parts),exps=yexps(c),ai='',ymod=c['m']))
   return out
 

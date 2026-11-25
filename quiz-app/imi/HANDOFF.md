@@ -8,7 +8,7 @@
 - 빌드: `python3 build_imi.py` → `imi-app.html` (errs·dup·구역누락·answer-much-longer 모두 비어야 함)
 
 ## 지금 상태 (11/25)
-- 반영된 단원(`done.txt`): u01_la(9/2 정연준) – 티야 40 · 야마 6 · 출제경향 예상 6. 나머지 단원은 단원별 에이전트가 작업 중(`BRIEF.md` 기준).
+- 반영된 단원(`done.txt`): u01_la(9/2 정연준) 티야 40·야마 6·출제경향 6 / u12_cxr(10/21 진공용) 티야 24·야마 44(그림 25, 채점 제외 3: 2019 객57·2018 객21·2016 객81). 연도 2000 = 학습지 「20??」(앱엔 「연도 미상」). 나머지 단원은 단원별 에이전트가 작업 중(`BRIEF.md` 기준).
 - 빌드: 개발 중 `python3 build_imi.py`(모든 단원 파일), publish 용 `PUBLISH=1 python3 build_imi.py`(done.txt 단원만).
 - 수업·자료: `NOTES_src.md` (u01–u20 slug·code·STT·강의록 fileId, 빠진 자료).
 
