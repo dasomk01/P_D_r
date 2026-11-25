@@ -14,3 +14,5 @@ u02_wound
 u19_ngt
 u05_inj
 u03_burn
+u15_axr
+u06_trans
