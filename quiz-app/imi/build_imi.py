@@ -18,6 +18,8 @@ from order import ORDER
 for _u in ORDER:
   try: _s=importlib.import_module('sec_'+_u)
   except ModuleNotFoundError: continue
+  _bad=[m for m in _s.MODS+_s.YMODS if not os.path.exists(D+'/'+m+'.py')]
+  if _bad: print('⏳ 작업 중 단원 건너뜀',_u,_bad); continue
   MODS+=_s.MODS; YMODS+=_s.YMODS; YSEC.update(_s.YSEC); YSRC.update({k:W+v for k,v in _s.YSRC.items()})
   PRE.update(getattr(_s,'PRE',{})); PREFAM.update(getattr(_s,'PREFAM',{}))
 MODS=[m for m in ['q00_trend'] if os.path.exists(D+'/'+m+'.py')]+MODS   # 📈 출제경향 예상문제 맨 앞
