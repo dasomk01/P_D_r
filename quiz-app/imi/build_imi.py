@@ -2,11 +2,6 @@
 import importlib,sys,json,collections,os,re,difflib,glob,hashlib,random,base64
 D=os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0,D)
 from mk import build
-from tq_tyb import TQ   # 티야방 내용을 문제로 만든 티야
-from fq_fh import FQ    # 형성평가(중간평가) 복원 문항
-from fix_choices import FIX
-from fix_choices2 import FIX as _F2
-FIX.update(_F2)
 # 티야(올해 수업 STT·강의록 기반 5지선다) 모듈 – 수업 순서. 각 모듈: SEC=(섹션명,교수), Q=[튜플]
 MODS=[]
 # 야마(학습지 기출 원문·정답) 모듈 – 순서 중요(문제 None 은 같은 묶음의 바로 앞 카드에 합친다)
@@ -17,9 +12,20 @@ W='학습지 「2026 임상의학입문 1-2 학습지」 '
 YSRC={}
 PRE={}      # 수업 전 야마: 구역 → (섹션명, 교수, 뒤에 붙일 수업 모듈)
 PREFAM={}   # 묶음 단위로 다른 구역에 보내기
-for _m in ('sections',):   # sections.py 가 있으면 위 표를 채운다
-  try: _s=importlib.import_module(_m); MODS=_s.MODS; YMODS=_s.YMODS; YSEC=_s.YSEC; YSRC={k:W+v for k,v in _s.YSRC.items()}; PRE=getattr(_s,'PRE',{}); PREFAM=getattr(_s,'PREFAM',{})
-  except ModuleNotFoundError: pass
+TQ={};FQ={};FIX={}
+# 단원별 모듈 sec_<slug>.py 를 ORDER 순서로 모은다: SECMODS=[티야 모듈…], YMODS=[야마 모듈…], YSEC={구역:붙일 수업 모듈}, YSRC={구역:'「단원」 쪽'}
+from order import ORDER
+for _u in ORDER:
+  try: _s=importlib.import_module('sec_'+_u)
+  except ModuleNotFoundError: continue
+  MODS+=_s.MODS; YMODS+=_s.YMODS; YSEC.update(_s.YSEC); YSRC.update({k:W+v for k,v in _s.YSRC.items()})
+  PRE.update(getattr(_s,'PRE',{})); PREFAM.update(getattr(_s,'PREFAM',{}))
+MODS=[m for m in ['q00_trend'] if os.path.exists(D+'/'+m+'.py')]+MODS   # 📈 출제경향 예상문제 맨 앞
+def _merge(pat,name):
+  o={}
+  for p in sorted(glob.glob(D+'/'+pat)): o.update(getattr(importlib.import_module(os.path.basename(p)[:-3]),name,{}))
+  return o
+FQ=_merge('fq_*.py','FQ'); FIX=_merge('fix_*.py','FIX'); TQ=_merge('tq_*.py','TQ')
 # 🎓 올해 수업 기준 해설(선택): yexp_*.py 의 EXP={카드키:{'cls':..,'wb':..}} / 묶음별 CLS={묶음:..}
 EXP={};CLS={}
 for p in sorted(glob.glob(D+'/yexp_*.py')):
@@ -114,8 +120,7 @@ for m in MODS:
     if pm==m: items+=Y[ys]
 for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
-from yimg_imi import NOTE as _IN
-from ansfix import F as _AF
+_IN=_merge('yimg_*.py','NOTE'); _AF=_merge('ansfix_*.py','F')
 import glob as _g
 _AU=[e for f in sorted(_g.glob(D+'/audit/g*.json')) for e in json.load(open(f))]
 for e in _AU:
@@ -133,7 +138,7 @@ for e in _AU:
 for i in items:
   if i['k'][4:] in _AF:
     i['ans'],_r=_AF[i['k'][4:]]; i['excl']=not i['ans']; i['notes']=[n for n in i['notes'] if not n.startswith(('✏️ 정답 수정(11/22','✏️ 맞는 답이 없는'))]; i['notes']=[('✏️ 정답 수정(강의록·수업 기준): ' if i['ans'] else '⚖️ 해석이 갈려 채점 안 함: ')+_r]+list(i['notes'])
-from memo_ans import A as _MA
+_MA=_merge('memo_ans*.py','A')
 for i in items:
   if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
 for i in items:
@@ -157,4 +162,4 @@ for i in items:
 print('메모 답',sum(any(n.startswith('💬 메모 답') for n in i['notes']) for i in items),'/',len(_MA),'키없음',[k for k in _MA if 'imi-'+k not in keys])
 print('형성평가',sum(bool(i.get('fh')) and not i.get('ks') for i in items),'국시',sum(bool(i.get('ks')) for i in items))
 if os.environ.get('DUMP'): json.dump(items,open(os.environ['DUMP'],'w'),ensure_ascii=False)
-print(build(items,'임상의학입문 문풀','imi-app',D+'/imi-app.html'))
+print(build(items,'임상의학입문 문풀','imi-app',os.environ.get('OUT',D+'/imi-app.html')))
