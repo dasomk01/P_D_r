@@ -8,18 +8,21 @@
 - 빌드: `python3 build_imi.py` → `imi-app.html` (errs·dup·구역누락·answer-much-longer 모두 비어야 함)
 
 ## 지금 상태 (11/25)
-- 빈 앱 publish. 티야 0 · 야마 0.
-- 자료 목록: `NOTES_src.md` (수업 10칸, 빠진 자료 명시).
+- 반영된 단원(`done.txt`): u01_la(9/2 정연준) – 티야 40 · 야마 6 · 출제경향 예상 6. 나머지 단원은 단원별 에이전트가 작업 중(`BRIEF.md` 기준).
+- 빌드: 개발 중 `python3 build_imi.py`(모든 단원 파일), publish 용 `PUBLISH=1 python3 build_imi.py`(done.txt 단원만).
+- 수업·자료: `NOTES_src.md` (u01–u20 slug·code·STT·강의록 fileId, 빠진 자료).
 
 ## 파일
 | 파일 | 역할 |
 |---|---|
 | `app.html`, `mk.py` | 이과 앱 템플릿(👀 키만 `imi-rv`)·빌더 |
-| `build_imi.py` | 빌드. 구역 표(MODS·YMODS·YSEC·YSRC·PRE·PREFAM)는 `sections.py` 에 둔다(없으면 빈 앱) |
+| `build_imi.py`, `order.py`, `done.txt` | 빌드. 단원별 `sec_<slug>.py`(MODS·YMODS·YSEC·YSRC)를 order.py 순서로 모음. 보조 파일은 glob 으로 합침: `yx_*`, `yimg_*`(IMG·NOTE), `yexp_*`, `fq_*`(FQ), `fix_*`(FIX), `tq_*`(TQ), `ansfix_*`(F), `memo_ans*`(A) |
+| `q00_trend.py`, `trend_<slug>.py`, `출제경향_<slug>.md` | 📈 출제경향: 교수님 STT 원문·시각(md) → 예상문제(영역 「출제경향」, 📈 칩) |
+| `BRIEF.md` | 단원 작업 규칙(형식·근거 우선순위·검증·보고) |
 | `q*_*.py` | 티야: `SEC=(섹션,교수)`, `Q=[(영역,키,문제,[선지5],정답번호,해설,[선지별해설5],근거)]` 정답은 1번 자리, 빌드에서 md5 시드로 섞음 |
 | `y_*.py` / `yx_*.py` | 야마 원문·정답 / 선지별 해설 (이과 앱과 같은 형식) |
-| `fq_fh.py` | 🤍 형성평가 원문 `FQ={수업모듈:[튜플]}` |
-| `tq_tyb.py`, `tyb.py`, `fix_choices*.py`, `ansfix.py`, `memo_ans.py`, `yimg_imi.py`, `yexp_imi.py` | 이과 앱과 같은 역할(지금은 비어 있음) |
+| `fq_<slug>.py` | 🤍 형성평가 원문 `FQ={수업모듈:[튜플]}` |
+| `tyb.py`, `crop.py` | 📌 티야방(비어 있음) / 학습지 쪽 이미지에서 그림 자르기 |
 
 ## 남은 일
 - 수업별 티야·야마 채우기(10/21 진공용부터).
