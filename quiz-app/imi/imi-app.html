@@ -102,7 +102,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="wrap">
   <h1 id="ttl">임상의학입문 문풀</h1>
   <div class="stats" id="stats"></div>
-  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/26 02:22</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
+  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/26 02:33</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
   <div class="grid">
     <select id="fProf" aria-label="교수"></select>
     <select id="fSec" aria-label="섹션"></select>
@@ -202,7 +202,8 @@ function render(){stats();var i=idx(),v=$('view');
   var h='<article class="card'+(done?' done':'')+'">';
   h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area==='형성평가'||(q.fl&&q.fl.ks)?lab(q):q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
-  (q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)return;h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
+  var _open=done||rv,_hid=0;(q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)return;if(!_open&&!/^(✍️ 출제|같은 문제)/.test(n)){_hid++;return}h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
+  if(_hid)h+='<div class="meta">🔒 점검·주의 노트 '+_hid+'개는 풀고 나면 보여요</div>';
   if(f.err)h+='<div class="note">⚑ 내가 문제오류로 표시함</div>';if(f.oos)h+='<div class="note oos">내가 범위외로 표시함</div>';
   h+='<div class="stem">'+esc(q.stem)+'</div>';
   if(q.imgs&&q.imgs.length)h+='<div class="imgs">'+q.imgs.map(function(s){return '<img src="'+esc(s)+'" alt="문제 사진" loading="lazy">'}).join('')+'</div>';
@@ -300,7 +301,7 @@ function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object
 var DB=null,UID=null,pt=null,dirty=false,busy=false,again=false,fails=0;
 // 진단 기록: 최근 40개 동작을 st/<UID>~log 에 남겨 Claude가 읽을 수 있게(오답노트 빼기 문제 추적)
 var DBG=[];function dlog(m){DBG.push(new Date().toISOString().slice(11,19)+' '+m);if(DBG.length>40)DBG.shift()}
-function dflush(){if(!DB||!UID)return;DB.doc('st/'+UID+'~log').set({v:'11/26 02:22',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
+function dflush(){if(!DB||!UID)return;DB.doc('st/'+UID+'~log').set({v:'11/26 02:33',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
 function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
 // 메모는 문서 하나에 256KB까지라 4개 문서로 나눠 저장(memo/UID, memo/UID~1~3). 기록(st)은 한 문서.
 var MB=4;function mdoc(i){return 'memo/'+UID+(i?'~'+i:'')}
