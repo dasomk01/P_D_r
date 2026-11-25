@@ -6,3 +6,5 @@ u14_splint
 u04_blood
 u07_labintro
 u17_drain
+u18_motor
+u20_reflex
