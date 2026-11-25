@@ -8,3 +8,6 @@ u07_labintro
 u17_drain
 u18_motor
 u20_reflex
+u08_gyn
+u09_eye
+u02_wound
