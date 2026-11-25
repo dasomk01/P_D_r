@@ -100,7 +100,7 @@ def yama():
     cn=cfnote(c['cf'],prof)
     if cn: notes=[cn]+notes
     out[c['sec']].append(dict(k='imi-'+k,fam=c['f'],area='야마',prof=prof,sec=sec,meta='근거: '+YSRC[c['sec']],tyb=bool(tb),
-      year=_yd(c['ys'][0]),type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(_yd(y) for y in allys if y!=c['ys'][0]) if rep>1 else '',
+      yrs=list(dict.fromkeys('연도 미상' if y.startswith('2000 ') else y.split()[0] for y in c['ys'])),year=_yd(c['ys'][0]),type='객' if c['ch'] else '주',rep=rep,repyears=' · '.join(_yd(y) for y in allys if y!=c['ys'][0]) if rep>1 else '',
       stem=c['stem'],choices=c['ch'],ans=c['ans'],excl=c['excl'],imgs=imgs(k),vis=[],notes=notes,basis='\n\n'.join(parts),exps=yexps(c),ai='',ymod=c['m']))
   return out
 
