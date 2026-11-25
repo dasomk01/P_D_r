@@ -22,12 +22,16 @@ for _u in ORDER:
   if _bad: print('⏳ 작업 중 단원 건너뜀',_u,_bad); continue
   MODS+=_s.MODS; YMODS+=_s.YMODS; YSEC.update(_s.YSEC); YSRC.update({k:W+v for k,v in _s.YSRC.items()})
   PRE.update(getattr(_s,'PRE',{})); PREFAM.update(getattr(_s,'PREFAM',{}))
-MODS=[m for m in ['q00_trend'] if os.path.exists(D+'/'+m+'.py')]+MODS   # 📈 출제경향 예상문제 맨 앞
 def _merge(pat,name):
   o={}
   for p in sorted(glob.glob(D+'/'+pat)): o.update(getattr(importlib.import_module(os.path.basename(p)[:-3]),name,{}))
   return o
 FQ=_merge('fq_*.py','FQ'); FIX=_merge('fix_*.py','FIX'); TQ=_merge('tq_*.py','TQ')
+# 출제 언급 근거 문제(trend_<slug>.py)도 티야 – 그 단원 마지막 수업 티야 뒤에 넣는다(영역 '티야')
+for _u in ORDER:
+  if os.path.exists(D+'/trend_'+_u+'.py') and os.path.exists(D+'/sec_'+_u+'.py'):
+    _ms=importlib.import_module('sec_'+_u).MODS
+    if _ms and _ms[-1] in MODS: TQ.setdefault(_ms[-1],[]).extend([('티야',)+tuple(x[1:]) for x in importlib.import_module('trend_'+_u).Q])
 # 🎓 올해 수업 기준 해설(선택): yexp_*.py 의 EXP={카드키:{'cls':..,'wb':..}} / 묶음별 CLS={묶음:..}
 EXP={};CLS={}
 for p in sorted(glob.glob(D+'/yexp_*.py')):
@@ -139,8 +143,20 @@ for e in _AU:
       i['ans']=[]; i['excl']=True; i['notes']=['✏️ 맞는 답이 없는 문항(11/22 강의록 전수 점검) – 채점 안 함']+list(i['notes'])
     i['notes']=list(i['notes'])+['🔎 강의록 점검('+e['confidence']+'): '+e['reason_ko']]
 for i in items:
-  if i['k'][4:] in _AF:
-    i['ans'],_r=_AF[i['k'][4:]]; i['excl']=not i['ans']; i['notes']=[n for n in i['notes'] if not n.startswith(('✏️ 정답 수정(11/22','✏️ 맞는 답이 없는'))]; i['notes']=[('✏️ 정답 수정(강의록·수업 기준): ' if i['ans'] else '⚖️ 해석이 갈려 채점 안 함: ')+_r]+list(i['notes'])
+  if i['k'][4:] in _AF:   # 답은 바꾸지 않는다 – 학습지 정답 그대로 두고 ⚠️ 주의 표시 + 의견
+    _na,_r=_AF[i['k'][4:]]; _c='①②③④⑤⑥⑦'
+    _cur='·'.join(_c[n-1] for n in i['ans']) if i['ans'] else '없음(학습지 정답 칸 비어 있음)'
+    if _na:
+      i['notes']=list(i['notes'])+['⚠️ 정답 주의 – 학습지 정답 '+_cur+' 그대로 둠. 의견: '+'·'.join(_c[n-1] for n in _na)+'이(가) 맞아 보임. '+_r]
+    else:   # 해석이 갈림 → 답은 그대로, 채점만 제외
+      i['excl']=True; i['notes']=list(i['notes'])+['⚖️ 해석이 갈려 채점 안 함(학습지 정답 '+_cur+'). '+_r]
+    if i.get('exps'):   # 선지별 해설의 「정답」 표기를 학습지 기준으로 맞춘다
+      E=list(i['exps'])
+      for n,e in enumerate(E):
+        if e.startswith('정답') and n+1 not in i['ans']: E[n]='⚠️ 의견상 답'+e[2:]
+      for n in i['ans']:
+        if n-1<len(E) and not E[n-1].startswith(('정답','학습지 정답')): E[n-1]='📚 학습지 정답 – '+E[n-1]
+      i['exps']=E
 _MA=_merge('memo_ans*.py','A')
 for i in items:
   if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
