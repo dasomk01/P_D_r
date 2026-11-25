@@ -1,3 +1,6 @@
 u01_la
 u12_cxr
 u16_foley
+u13_preop
+u14_splint
+u04_blood
