@@ -64,7 +64,7 @@ VQ={
  ['정답 – 적혈구엔 HLA 없음','class II 표현','항원제시세포','항원제시세포','활성 T세포에 표현'],
  '야마변형: 2016 객44(imm-hla3) · '+H+' 슬라이드 4·5'),
 ('야마변형','imm-vb12','HLA 유전자 구역 중 class III 구역의 산물이 아닌 것은?',
- ['β2-microglobulin','보체 C2','보체 C4','보체 B인자(BF)','종양괴사인자(TNF)'],1,
+ ['β2-microglobulin','보체 C2','보체 C4','보체 B인자(BF)','종양괴사인자-α(TNF-α)'],1,
  '원래 야마(2015 객10)는 「class III가 장기이식에서 중요한 역할」이 틀린 설명임을 골랐다. 변형: class III 구역이 무엇을 만드는지 묻는다. 강의록: Class III – 보체(C2, C4, BF), 21-hydroxylase, Hsp70, TNF – 이식과 관련 없음 / class I = α 중쇄(44 kDa) + β2-microglobulin(12 kDa).',
  ['정답 – class I 분자의 경쇄','class III 보체','class III 보체','class III 보체','class III 산물'],
  '야마변형: 2015 객10(imm-hla3) · '+H+' 슬라이드 5'),
