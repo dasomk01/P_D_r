@@ -22,3 +22,9 @@ v_tf
 x_tf
 v_chem_b
 x_chem_b
+v_bl
+x_bl
+v_inj
+x_inj
+v_lab
+x_lab

@@ -41,7 +41,7 @@ XQ={'q09_eye':[
  ['정답 – 고혈압 + cotton wool spots + dot hemorrhage','RVO는 flame-shaped hemorrhage + cotton wool spots','DR은 dot hemorrhage + hard exudates','급성 유두부종은 blurred disc margin + retinal hemorrhages','녹내장성 시신경병증은 RNFL defect'],
  '탈야: '+_L+' 「진단하기 – Hypertensive retinopathy」 · '+_T+' 07:08·08:06'),
 ('탈야','eye-x06','안저 사진에서 출혈이나 유두 부종 없이 경계가 뚜렷한 망막맥락막 흉터(chorioretinal scar)가 보인다. 강의록 슬라이드 10장 중 해당하는 진단은?',
- ['톡소포자충증(Toxoplasmosis)','레이저 치료 후 망막정맥폐쇄','연령관련 황반변성','당뇨망막병증','만성 유두부종'],1,
+ ['톡소포자충증(Toxoplasmosis)','레이저 치료 후 망막정맥폐쇄','연령관련 황반변성','당뇨망막병증','만성 유두부종(Papilledema, chronic)'],1,
  '야마(정답·선지)에 한 번도 나오지 않은 슬라이드. 강의록 「진단하기 – Toxoplasmosis: Chorioretinal scar」. 흉터처럼 보이는 다른 슬라이드는 「RVO (after retinal laser photocoagulation) – Laser scar, Ghost vessel」(교수님: 막힌 혈관이 하얗게 보이고, 치료 목적으로 레이저를 쏜 자국). 교수님: 병명을 정확히 말하라고 요구하지 않고 정상과 비교해 이상한 부위를 찾는 것 – 시험은 강의록 10장 슬라이드 안에서.',
  ['정답 – chorioretinal scar','laser scar와 하얀 ghost vessel이 함께 보이는 슬라이드','macular exudates + subretinal hemorrhage','dot hemorrhage + hard exudates','blurred disc margin'],
  '탈야: '+_L+' 「진단하기 – Toxoplasmosis」·「RVO (after retinal laser photocoagulation)」 · '+_T+' 32:34·37:33'),
