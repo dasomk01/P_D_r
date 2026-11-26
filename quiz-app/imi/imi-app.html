@@ -102,7 +102,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 <div class="wrap">
   <h1 id="ttl">임상의학입문 문풀</h1>
   <div class="stats" id="stats"></div>
-  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/27 04:30</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
+  <div class="sync" id="sync">이 기기에 저장 중</div><div class="sync" id="ver">앱 버전 11/27 04:56</div><div id="toast" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg,#fff);padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50"></div>
   <div class="grid">
     <select id="fProf" aria-label="교수"></select>
     <select id="fSec" aria-label="섹션"></select>
@@ -118,7 +118,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
   </div>
   <div style="margin-top:8px"><input type="search" id="fQ" placeholder="검색 (지문·정답·연도 예: 2023 객12)" aria-label="검색"></div>
   <div class="chips" id="chips">
-    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" data-v="var">🔄 야마변형</button><button class="chip" data-v="off">🚀 탈야</button><button class="chip" data-v="fh">🤍💜 형성평가·🏥국시</button><button class="chip" data-v="fam">🔁 비슷한 문제 합쳐 보기</button><button class="chip" id="shuf" aria-pressed="false">섞기</button><button class="chip" id="rvAll" aria-pressed="false">👀 정답 다 보기</button>
+    <button class="chip" data-v="">전체</button><button class="chip" data-v="new">안 푼 것</button><button class="chip" data-v="wrong">오답노트</button><button class="chip" data-v="conf">헷갈림</button><button class="chip" data-v="memo">메모 있음</button><button class="chip" data-v="var">🔄 야마변형</button><button class="chip" data-v="off">🚀 탈야</button><button class="chip" data-v="fh">🤍💜 형성평가·🏥국시</button><button class="chip" data-v="fam">🔁 비슷한 문제 합쳐 보기</button><button class="chip" id="noOos" aria-pressed="false">📦 범위 외 빼고 보기</button><button class="chip" id="shuf" aria-pressed="false">섞기</button><button class="chip" id="rvAll" aria-pressed="false">👀 정답 다 보기</button>
   </div>
   <div class="tools">
     <button class="btn" id="bSync">기록 새로고침</button><button class="btn" id="bBak">기록 백업</button><button class="btn" id="bRes">백업 불러오기</button><button class="btn" id="bExpF">지금 보는 범위만 내보내기</button><button class="btn" id="bExp">오답·헷갈림·메모 내보내기(전체)</button>
@@ -163,10 +163,10 @@ if(!Q.some(function(q){return q.rep>1}))$('fRep').hidden=true;
 // 연도별 풀기: 야마 카드의 출제 연도(같은 문제로 합친 해 포함). 「티야」는 올해 수업 문제
 var YC={};Q.forEach(function(q){(q.yrs||[]).forEach(function(y){YC[y]=(YC[y]||0)+1})});
 opts($('fYear'),'전체 연도',[['T','티야·형성평가(올해 수업)']].concat(Object.keys(YC).sort(function(x,y){return x==='연도 미상'?1:y==='연도 미상'?-1:y.localeCompare(x)}).map(function(y){return[y,y+(y==='연도 미상'?'':'년')+' 기출 ('+YC[y]+')']})));
-var F={prof:'',sec:'',area:'',type:'',rep:'',yr:'',st:'',q:'',chip:'',shuf:false,seed:1};
+var F={prof:'',sec:'',area:'',type:'',rep:'',yr:'',st:'',q:'',chip:'',shuf:false,seed:1,noOos:false};
 Object.keys(F).forEach(function(k){if(U.f&&U.f[k]!=null)F[k]=U.f[k]});
 function syncCtl(){$('fProf').value=F.prof;secOpts();$('fSec').value=F.sec;$('fArea').value=F.area;$('fType').value=F.type;$('fRep').value=F.rep;$('fYear').value=F.yr;$('fSt').value=F.st;$('fQ').value=F.q;
-  [].forEach.call(document.querySelectorAll('#chips .chip[data-v]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===F.chip))});$('shuf').setAttribute('aria-pressed',String(!!F.shuf))}
+  [].forEach.call(document.querySelectorAll('#chips .chip[data-v]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===F.chip))});$('shuf').setAttribute('aria-pressed',String(!!F.shuf));$('noOos').setAttribute('aria-pressed',String(!!F.noOos))}
 function solved(a){return !!(a&&(a.c!=null||a.self))}
 // 오답노트 = 틀린 적 있음 또는 🟡헷갈림 (빼기 누르면 제외)
 function wasWrong(k){var a=S.a[k];return !!(a&&a.w>0)}
@@ -176,6 +176,7 @@ function memoOf(k){var m=S.m[k];return m&&m.x?m.x:''}
 // 같은 묶음(킹야·킹킹야에서 선지·문장이 조금 달라 따로 둔 카드)을 한 장으로 모아 보기
 var FAM={};Q.forEach(function(q){if(q.fam)(FAM[q.fam]=FAM[q.fam]||[]).push(q)});
 function pass(q){var k=q.k,f=S.f[k]||{},a=S.a[k];
+  if(F.noOos&&((q.fl&&q.fl.oos)||f.oos))return false;
   if(F.prof&&q.prof!==F.prof)return false;if(F.sec&&q.sec!==F.sec)return false;if(F.area&&q.area!==F.area)return false;if(F.type&&q.type!==F.type)return false;
   if(F.yr){if(F.yr==='T'){if(q.yrs&&q.yrs.length)return false}else if(!q.yrs||q.yrs.indexOf(F.yr)<0)return false}
   if(F.rep){var r=q.rep||1;if(F.rep==='3'&&r<3)return false;if(F.rep==='2'&&r!==2)return false;if(F.rep==='23'&&r<2)return false;if(F.rep==='1'&&r!==1)return false}
@@ -194,7 +195,7 @@ function saveUI(){lsSet(UK,{f:F,cur:cur})}
 function idx(){for(var i=0;i<L.length;i++)if(L[i].k===cur)return i;return -1}
 
 /* ---------- 상단 숫자 ---------- */
-function stats(){var n=0,ok=0,wrong=0,memo=0;Q.forEach(function(q){var a=S.a[q.k];if(solved(a)&&!q.oos){n++;if(a.ok)ok++}if(inWrong(q.k))wrong++;if(memoOf(q.k))memo++});
+function stats(){var n=0,ok=0,wrong=0,memo=0;Q.forEach(function(q){var a=S.a[q.k];if(solved(a)&&!(q.fl&&q.fl.oos)&&!((S.f[q.k]||{}).oos)){n++;if(a.ok)ok++}if(inWrong(q.k))wrong++;if(memoOf(q.k))memo++});
   var img=Q.filter(function(q){return q.imgs&&q.imgs.length}).length;
   $('stats').innerHTML='<span>전체<b>'+Q.length+'</b></span>'+(img?'<span>원본 그림<b>'+img+'</b>문항</span>':'')+'<span>푼 것<b>'+n+'</b></span><span>최근 정답<b>'+(n?Math.round(ok/n*100):0)+'%</b></span><span>오답노트<b>'+wrong+'</b></span><span>메모<b>'+memo+'</b></span>'}
 
@@ -274,6 +275,7 @@ var qt=null;$('fQ').oninput=function(){clearTimeout(qt);var v=this.value;qt=setT
 [].forEach.call(document.querySelectorAll('#chips .chip[data-v]'),function(b){b.onclick=function(){F.chip=b.getAttribute('data-v');syncCtl();refilter()}});
 var RV=false;try{RV=localStorage.getItem('imi-rv')==='1'}catch(e){}
 $('rvAll').setAttribute('aria-pressed',String(RV));$('rvAll').onclick=function(){RV=!RV;try{localStorage.setItem('imi-rv',RV?'1':'0')}catch(e){}this.setAttribute('aria-pressed',String(RV));render()};if(RV)try{render()}catch(e){}
+$('noOos').onclick=function(){F.noOos=!F.noOos;syncCtl();refilter()};
 $('shuf').onclick=function(){F.shuf=!F.shuf;F.seed=Math.floor(Math.random()*1e9)+1;syncCtl();refilter()};
 
 /* ---------- 시트(목록·백업·내보내기) ---------- */
@@ -293,7 +295,7 @@ function exportText(base){var out=(base||Q).filter(function(q){var f=S.f[q.k]||{
   return out.map(function(q,i){var a=S.a[q.k]||{},f=S.f[q.k]||{},tags=[];if(wasWrong(q.k))tags.push('틀림 '+a.w+'회'+(a.ok?' (마지막엔 맞힘)':''));if(f.conf)tags.push('헷갈림');
     return '=== '+(i+1)+'. '+q.sec+' ['+q.area+'] ('+q.prof+') ===\n'+(q.year?'기출: '+q.year+'\n':'')+(tags.length?'표시: '+tags.join(' / ')+'\n':'')+'문제: '+q.stem+(q.imgs&&q.imgs.length?' [사진 있음]':'')+'\n'+q.choices.map(function(c,j){return (j+1)+'. '+c}).join('\n')+
       '\n정답: '+(q.ans.join(',')||'-')+(memoOf(q.k)?'\n내 메모: '+memoOf(q.k):'')+(q.basis?'\n해설: '+q.basis:'')+(q.exps&&q.exps.length?'\n선지해설:\n'+q.exps.map(function(e,j){return (j+1)+'. '+e}).join('\n'):'')}).join('\n\n')}
-function scopeName(){var p=[];if(F.prof)p.push(F.prof);if(F.sec)p.push(F.sec);if(F.area)p.push(F.area);if(F.type)p.push(F.type==='주'?'주관식':'객관식');if(F.rep)p.push('킹야 필터');if(F.yr)p.push($('fYear').options[$('fYear').selectedIndex].text);if(F.st)p.push($('fSt').options[$('fSt').selectedIndex].text);if(F.chip){var c=document.querySelector('#chips .chip[data-v="'+F.chip+'"]');if(c)p.push(c.textContent.trim())}if(F.q)p.push('검색: '+F.q);return p.length?p.join(' · '):'전체(필터 없음)'}
+function scopeName(){var p=[];if(F.prof)p.push(F.prof);if(F.sec)p.push(F.sec);if(F.area)p.push(F.area);if(F.type)p.push(F.type==='주'?'주관식':'객관식');if(F.rep)p.push('킹야 필터');if(F.yr)p.push($('fYear').options[$('fYear').selectedIndex].text);if(F.st)p.push($('fSt').options[$('fSt').selectedIndex].text);if(F.chip){var c=document.querySelector('#chips .chip[data-v="'+F.chip+'"]');if(c)p.push(c.textContent.trim())}if(F.noOos)p.push('범위 외 제외');if(F.q)p.push('검색: '+F.q);return p.length?p.join(' · '):'전체(필터 없음)'}
 $('bExpF').onclick=function(){var t=exportText(Q.filter(pass)),nm=scopeName();copyBox('내보내기 · '+nm,t?('[범위: '+nm+']\n\n'+t):'',t?(t.split('\n=== ').length+'문항 · 지금 걸어 둔 필터 안의 오답노트·헷갈림·메모만 모았어요.'):'이 범위에는 아직 틀리거나 헷갈림·메모를 남긴 문제가 없어요.')};
 $('bExp').onclick=function(){var t=exportText();copyBox('오답·헷갈림·메모 내보내기(전체)',t||'아직 틀리거나 헷갈림·메모를 남긴 문제가 없어요.',(t?t.split('\n=== ').length:0)+'문항 · 복사해서 AI 대화창이나 메모장에 붙여넣으세요.')};
 $('bBak').onclick=function(){copyBox('기록 백업',JSON.stringify({app:APP,at:new Date().toISOString(),s:S}),'이 글을 복사해 두면 나중에 “백업 불러오기”로 되살릴 수 있어요.')};
@@ -306,7 +308,7 @@ function merge(o){['a','f','m'].forEach(function(x){var src=(o&&o[x])||{};Object
 var DB=null,UID=null,pt=null,dirty=false,busy=false,again=false,fails=0;
 // 진단 기록: 최근 40개 동작을 st/<UID>~log 에 남겨 Claude가 읽을 수 있게(오답노트 빼기 문제 추적)
 var DBG=[];function dlog(m){DBG.push(new Date().toISOString().slice(11,19)+' '+m);if(DBG.length>40)DBG.shift()}
-function dflush(){if(!DB||!UID)return;DB.doc('st/'+UID+'~log').set({v:'11/27 04:30',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
+function dflush(){if(!DB||!UID)return;DB.doc('st/'+UID+'~log').set({v:'11/27 04:56',ua:navigator.userAgent.slice(0,120),log:DBG.slice()}).catch(function(){})}
 function changed(){lsSet(LK,S);dirty=true;clearTimeout(pt);pt=setTimeout(push,2500)}
 // 메모는 문서 하나에 256KB까지라 4개 문서로 나눠 저장(memo/UID, memo/UID~1~3). 기록(st)은 한 문서.
 var MB=4;function mdoc(i){return 'memo/'+UID+(i?'~'+i:'')}
