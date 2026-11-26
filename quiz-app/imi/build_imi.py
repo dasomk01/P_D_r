@@ -136,7 +136,7 @@ for m in MODS:
     if pm==m: items+=Y[ys]
 for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
-_IN=_merge('yimg_*.py','NOTE'); _AF=_merge('ansfix_*.py','F')
+_IN=_merge('yimg_*.py','NOTE'); _AF=_merge('ansfix_*.py','F'); _AS=_merge('ansset_*.py','S')
 _NX={}   # notes_*.py 의 N={카드키:[노트…]} – 나중에 받은 자료로 단 점검 노트를 카드에 덧붙인다
 for _p in sorted(glob.glob(D+'/notes_*.py')):
   for _k,_v in importlib.import_module(os.path.basename(_p)[:-3]).N.items(): _NX.setdefault(_k,[]).extend(_v)
@@ -160,6 +160,16 @@ for i in items:
   if i['k'][4:] in _AF:   # 답은 바꾸지 않는다 – 학습지 정답 그대로 두고 ⚠️ 주의 표시 + 의견
     _na,_r=_AF[i['k'][4:]]; _c='①②③④⑤⑥⑦'
     _cur='·'.join(_c[n-1] for n in i['ans']) if i['ans'] else '없음(학습지 정답 칸 비어 있음)'
+    if _na and i['k'][4:] in _AS:   # 사용자가 직접 「답 바꿔」라고 한 카드만 실제로 바꾼다(ansset_*.py)
+      i['notes']=list(i['notes'])+['✏️ 정답 변경(사용자 요청 '+_AS[i['k'][4:]]+'): 학습지 정답 '+_cur+' → '+'·'.join(_c[n-1] for n in _na)+'. '+_r]
+      _old=list(i['ans']); i['ans']=list(_na); i['excl']=False
+      if i.get('exps'):
+        E=list(i['exps'])
+        for n,e in enumerate(E):
+          if n+1 in _na: E[n]='정답 – '+re.sub(r'\.? ?학습지 정답 \S는 ansfix로 \S로 고침','',re.sub(r'^(⚠️ 의견상 답|정답)\s*(\(ansfix\)|\(옳지 않음\))?\s*[–-]?\s*','',e))
+          elif n+1 in _old: E[n]='📚 학습지 정답이었음(바꿈) – '+re.sub(r'^(📚 학습지 정답|정답|학습지 정답(이었으나)?)\s*[–-]?\s*','',e)
+        i['exps']=E
+      continue
     if _na:
       i['notes']=list(i['notes'])+['⚠️ 정답 주의 – 학습지 정답 '+_cur+' 그대로 둠. 의견: '+'·'.join(_c[n-1] for n in _na)+'이(가) 맞아 보임. '+_r]
     else:   # 해석이 갈림 → 답은 그대로, 채점만 제외
