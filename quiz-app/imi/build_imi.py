@@ -136,6 +136,11 @@ for m in MODS:
 for i in items:
   if i['area']=='야마' and not i.get('excl') and i['choices'] and (not i['ans'] or max(i['ans'])>len(i['choices'])): errs.append(i['k'])
 _IN=_merge('yimg_*.py','NOTE'); _AF=_merge('ansfix_*.py','F')
+_NX={}   # notes_*.py 의 N={카드키:[노트…]} – 나중에 받은 자료로 단 점검 노트를 카드에 덧붙인다
+for _p in sorted(glob.glob(D+'/notes_*.py')):
+  for _k,_v in importlib.import_module(os.path.basename(_p)[:-3]).N.items(): _NX.setdefault(_k,[]).extend(_v)
+for i in items:
+  if i['k'][4:] in _NX: i['notes']=list(i['notes'])+_NX[i['k'][4:]]
 import glob as _g
 _AU=[e for f in sorted(_g.glob(D+'/audit/g*.json')) for e in json.load(open(f))]
 for e in _AU:
