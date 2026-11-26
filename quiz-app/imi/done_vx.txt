@@ -4,3 +4,5 @@ v_cxr
 x_cxr
 v_burn
 x_burn
+v_ngt
+x_ngt
