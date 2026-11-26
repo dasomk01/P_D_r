@@ -50,6 +50,16 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:16px 0}
 .meta{color:var(--accent);font-size:14px;margin-top:8px;font-weight:500}
 .note{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:7px 11px;font-size:13.5px;margin-top:8px}
 .note.oos{background:var(--chip);color:var(--mute)}
+.nmeta{color:var(--mute);font-size:13px;margin-top:6px}
+.nkey{border-radius:10px;padding:8px 12px;font-size:14.5px;margin-top:8px;line-height:1.5}
+.nkey.chg{background:var(--ok-soft);color:var(--fg);border:1px solid var(--ok)}
+.nkey.warn{background:var(--warn-soft);color:var(--fg);border:1px solid var(--warn)}
+.nkey.amb{background:var(--chip);color:var(--fg)}
+.nwhy{margin-top:4px;font-size:13px;color:var(--mute)}.nwhy summary{cursor:pointer;font-size:12.5px}
+.nbox{margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:13.5px}
+.nbox summary{cursor:pointer;color:var(--mute);font-size:13.5px;padding:2px 0}
+.nbox ul{margin:6px 0 2px;padding-left:18px}.nbox li{margin:7px 0;line-height:1.55}
+.nbox li.oos{color:var(--mute)}.nsrc{display:block;color:var(--mute);font-size:12px;margin-top:2px}
 .stem{font-size:17px;margin:14px 0 12px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere}
 .imgs img{display:block;max-width:100%;height:auto;margin:8px auto;border-radius:8px;border:1px solid var(--line)}
 .vis{background:var(--chip);border-radius:10px;padding:8px 11px;font-size:14px;white-space:pre-wrap;margin-bottom:8px}
@@ -195,6 +205,8 @@ function saveUI(){lsSet(UK,{f:F,cur:cur})}
 function idx(){for(var i=0;i<L.length;i++)if(L[i].k===cur)return i;return -1}
 
 /* ---------- 상단 숫자 ---------- */
+function nFmt(n){var t=esc(n);t=t.replace(/^(🔎[^:：]*[:：]|⚖️|⚠️ 정답 주의[^–]*–|📌[^:：]*[:：]|🖼 그림:|✏️)/,'<b>$1</b>');return t.replace(/\((근거[:：][^)]*)\)/g,'<span class="nsrc">$1</span>').replace(/ \/ (해석 B)/g,'<br>$1')}
+function nDet(r){r=(r||'').trim();return r?'<details class="nwhy"><summary>이유</summary>'+nFmt(r)+'</details>':''}
 function stats(){var n=0,ok=0,wrong=0,memo=0;Q.forEach(function(q){var a=S.a[q.k];if(solved(a)&&!(q.fl&&q.fl.oos)&&!((S.f[q.k]||{}).oos)){n++;if(a.ok)ok++}if(inWrong(q.k))wrong++;if(memoOf(q.k))memo++});
   var img=Q.filter(function(q){return q.imgs&&q.imgs.length}).length;
   $('stats').innerHTML='<span>전체<b>'+Q.length+'</b></span>'+(img?'<span>원본 그림<b>'+img+'</b>문항</span>':'')+'<span>푼 것<b>'+n+'</b></span><span>최근 정답<b>'+(n?Math.round(ok/n*100):0)+'%</b></span><span>오답노트<b>'+wrong+'</b></span><span>메모<b>'+memo+'</b></span>'}
@@ -208,7 +220,16 @@ function render(){stats();var i=idx(),v=$('view');
   var h='<article class="card'+(done?' done':'')+'">';
   h+='<div class="head"><span class="pill">'+(q.type==='주'?'주관식':'객관식')+'</span>'+(areas.length>1?'<span class="pill area">'+esc(q.area==='형성평가'||(q.fl&&q.fl.ks)?lab(q):q.area)+'</span>':'')+(q.rep>1?'<span class="pill king">'+(q.rep>=3?'👑👑 킹킹야':'👑 킹야')+' · '+q.rep+'회</span>':'')+'<span>'+esc(q.prof)+(q.sec?' · '+esc(q.sec):'')+'</span></div>';
   if(q.year||q.meta)h+='<div class="meta">'+esc(q.year?q.year+(q.repyears?' · 반복 '+q.repyears:''):q.meta)+'</div>';
-  var _open=done||rv,_hid=0;(q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)return;if(!_open&&!/^(✍️ 출제|같은 문제)/.test(n)){_hid++;return}h+='<div class="note'+(/범위\s?외/.test(n)?' oos':'')+'">'+esc(n)+'</div>'});
+  var _open=done||rv,_hid=0,_top=[],_chk=[];(q.notes||[]).forEach(function(n){if(n.indexOf('💬 메모 답')===0)return;
+    if(/^(✍️ 출제|같은 문제)/.test(n)){_top.push('<div class="nmeta">'+esc(n)+'</div>');return}
+    if(!_open){_hid++;return}
+    var m;
+    if(n.indexOf('✏️ 정답 변경')===0&&(m=n.match(/학습지 정답 (.+?) → ([^.\s]+)/))){_top.push('<div class="nkey chg"><b>✏️ 정답 바꿈</b> 학습지 '+esc(m[1])+' → <b>'+esc(m[2])+'</b>'+nDet(n.replace(/^[^:]*:\s*학습지 정답 .+? → [^.\s]+\.\s*/,''))+'</div>');return}
+    if(n.indexOf('⚠️ 정답 주의 – 학습지 정답')===0&&(m=n.match(/학습지 정답 (.+?) 그대로 둠\. 의견: (.+?)이\(가\)/))){_top.push('<div class="nkey warn"><b>⚠️ 학습지 답 의심</b> 학습지 '+esc(m[1])+' · 의견 <b>'+esc(m[2])+'</b>'+nDet(n.replace(/^.*?맞아 보임\.\s*/,''))+'</div>');return}
+    _chk.push(n)});
+  if(_open&&!(q.ans&&q.ans.length)&&q.choices&&q.choices.length&&_chk.some(function(n){return /^⚖️|채점/.test(n)}))_top.push('<div class="nkey amb"><b>⚖️ 답이 갈려 채점 안 함</b> – 아래 점검 노트에 해석 A·B</div>');
+  h+=_top.join('');
+  if(_chk.length)h+='<details class="nbox"><summary>🔎 점검 노트 '+_chk.length+'개</summary><ul>'+_chk.map(function(n){return '<li'+(/범위\s?외/.test(n)?' class="oos"':'')+'>'+nFmt(n)+'</li>'}).join('')+'</ul></details>';
   if(_hid)h+='<div class="meta">🔒 점검·주의 노트 '+_hid+'개는 풀고 나면 보여요</div>';
   if(f.err)h+='<div class="note">⚑ 내가 문제오류로 표시함</div>';if(f.oos)h+='<div class="note oos">내가 범위외로 표시함</div>';
   h+='<div class="stem">'+esc(q.stem)+'</div>';

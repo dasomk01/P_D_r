@@ -181,6 +181,20 @@ for i in items:
       for n in i['ans']:
         if n-1<len(E) and not E[n-1].startswith(('정답','학습지 정답')): E[n-1]='📚 학습지 정답 – '+E[n-1]
       i['exps']=E
+# ansset 의 (정답, 사유) 튜플 – ansfix 없이 사용자 요청으로 직접 바꾸는 카드(채점 제외였던 카드 포함)
+for i in items:
+  _v=_AS.get(i['k'][4:])
+  if not isinstance(_v,tuple): continue
+  _na,_why=_v; _c='①②③④⑤⑥⑦'
+  _cur='·'.join(_c[n-1] for n in i['ans']) if i['ans'] else '없음(채점 제외)'
+  _old=list(i['ans']); i['ans']=list(_na); i['excl']=False
+  i['notes']=[n for n in i['notes'] if not n.startswith('학습지 정답 그대로는 채점하지 않고')]+['✏️ 정답 변경(사용자 요청 11/26): 학습지 정답 '+_cur+' → '+'·'.join(_c[n-1] for n in _na)+'. '+_why]
+  if i.get('exps'):
+    E=list(i['exps'])
+    for n,e in enumerate(E):
+      if n+1 in _na and not e.startswith('정답'): E[n]='정답 – '+re.sub(r'^(⚠️ 의견상 답|⚖️[^–]*–|학습지 답)\s*[–-]?\s*','',e)
+      elif n+1 in _old: E[n]='📚 학습지 정답이었음(바꿈) – '+re.sub(r'^(📚 학습지 정답|정답|학습지 정답)\s*[–-]?\s*','',e)
+    i['exps']=E
 _MA=_merge('memo_ans*.py','A')
 for i in items:
   if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
