@@ -170,6 +170,16 @@ for i in items:
   if i['k'][4:] in _MA: i['notes']=list(i['notes'])+['💬 메모 답 – \n'+_MA[i['k'][4:]]]
 for i in items:
   if i['k'][4:] in _IN: i['notes']=list(i['notes'])+[_IN[i['k'][4:]]]
+# 사용자가 직접 준 문항(extra_*.json, 앱 형식) – 같은 날짜·교시 섹션의 티야 뒤에 끼운다. 섹션 이름·교수는 앱 것에 맞춘다.
+for _f in sorted(glob.glob(D+'/extra_*.json')):
+  for _x in json.load(open(_f)):
+    _pre=_x['sec'].split(' · ')[0]
+    _same=[n for n,i in enumerate(items) if i['sec'].startswith(_pre+' ')]
+    if _same: _x['sec']=items[_same[0]]['sec']; _x['prof']=items[_same[0]]['prof']
+    for _k,_v in dict(fam='',year='',type='객',rep=1,repyears='',imgs=[],vis=[],notes=[],ai='',yrs=[]).items(): _x.setdefault(_k,_v)
+    _x['meta']=('📝 사용자 추가 · ' if not _x['meta'].startswith('📝') else '')+_x['meta']
+    _t=[n for n in _same if items[n]['area']!='야마']
+    items.insert((_t[-1]+1) if _t else (_same[-1]+1 if _same else len(items)),_x)
 keys=[i['k'] for i in items]; dup=[k for k,c in collections.Counter(keys).items() if c>1]
 lost=[s for s in Y if s not in YSEC and s not in PRE]
 print(len(items),collections.Counter(i['area'] for i in items),'errs',errs,'dup',dup,'구역누락',lost)
