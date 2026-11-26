@@ -27,6 +27,14 @@ def _merge(pat,name):
   for p in sorted(glob.glob(D+'/'+pat)): o.update(getattr(importlib.import_module(os.path.basename(p)[:-3]),name,{}))
   return o
 FQ=_merge('fq_*.py','FQ'); FIX=_merge('fix_*.py','FIX'); TQ=_merge('tq_*.py','TQ')
+# 야마변형(v_<slug>.py VQ={수업모듈:[튜플]}, 영역 '야마변형') · 탈야(x_<slug>.py XQ={수업모듈:[튜플]}, 영역 '탈야') – 그 수업 티야 뒤에 붙는다
+for _p,_n in (('v_*.py','VQ'),('x_*.py','XQ')):
+  _ok=set(open(D+'/done_vx.txt').read().split()) if os.environ.get('PUBLISH') and os.path.exists(D+'/done_vx.txt') else None
+  for _f in sorted(glob.glob(D+'/'+_p)):
+    if _ok is not None and os.path.basename(_f)[:-3] not in _ok: continue
+    try: importlib.import_module(os.path.basename(_f)[:-3])
+    except Exception as _e: print('⏳ 작업 중 파일 건너뜀',os.path.basename(_f),type(_e).__name__); continue
+    for _m,_l in getattr(importlib.import_module(os.path.basename(_f)[:-3]),_n,{}).items(): TQ.setdefault(_m,[]).extend(_l)
 # 출제 언급 근거 문제(trend_<slug>.py)도 티야 – 그 단원 마지막 수업 티야 뒤에 넣는다(영역 '티야')
 for _u in ORDER:
   if os.path.exists(D+'/trend_'+_u+'.py') and os.path.exists(D+'/sec_'+_u+'.py'):
