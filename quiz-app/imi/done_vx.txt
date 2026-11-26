@@ -38,3 +38,5 @@ v_preop
 x_preop
 v_spl
 x_spl
+v_imm_a
+x_imm_a
