@@ -187,6 +187,15 @@ for _f in sorted(glob.glob(D+'/extra_*.json')):
     _t=[n for n in _same if items[n]['area']!='야마']
     _b=[n for n in _same if re.match(r'imi-[a-z]+-t01$',items[n]['k'])]   # 사용자 요청: 그 섹션의 출제언급 티야(…-t01) 앞
     items.insert(_b[0] if _b else ((_t[-1]+1) if _t else (_same[-1]+1 if _same else len(items))),_x)
+# 카드 단위 올해 수업범위 외(oos_*.py 의 O={카드키:이유}) – 같은 수업의 「… – 올해 수업범위 외」 구역으로 옮기고 정답률에서 뺀다. 답은 그대로.
+_OO=_merge('oos_*.py','O'); _oc=[]
+for i in list(items):
+  if i['k'][4:] in _OO and not i.get('oos'):
+    items.remove(i); i['oos']=1; i['meta']='📦 올해 수업범위 외 · 정답률 제외 ('+_OO[i['k'][4:]]+') · '+i['meta']; _oc.append(i)
+for i in _oc:
+  _s=i['sec']; i['sec']=_s+' – 올해 수업범위 외'
+  _ix=[n for n,j in enumerate(items) if j['sec'] in (_s,i['sec'])]
+  items.insert(_ix[-1]+1 if _ix else len(items),i)
 keys=[i['k'] for i in items]; dup=[k for k,c in collections.Counter(keys).items() if c>1]
 lost=[s for s in Y if s not in YSEC and s not in PRE]
 print(len(items),collections.Counter(i['area'] for i in items),'errs',errs,'dup',dup,'구역누락',lost)
