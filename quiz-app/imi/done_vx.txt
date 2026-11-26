@@ -42,3 +42,5 @@ v_imm_a
 x_imm_a
 v_chem_a
 x_chem_a
+v_chem_na
+x_chem_na
