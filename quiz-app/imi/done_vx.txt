@@ -2,3 +2,5 @@ v_axr
 x_axr
 v_cxr
 x_cxr
+v_burn
+x_burn
