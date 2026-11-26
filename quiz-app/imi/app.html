@@ -194,7 +194,7 @@ function saveUI(){lsSet(UK,{f:F,cur:cur})}
 function idx(){for(var i=0;i<L.length;i++)if(L[i].k===cur)return i;return -1}
 
 /* ---------- 상단 숫자 ---------- */
-function stats(){var n=0,ok=0,wrong=0,memo=0;Q.forEach(function(q){var a=S.a[q.k];if(solved(a)){n++;if(a.ok)ok++}if(inWrong(q.k))wrong++;if(memoOf(q.k))memo++});
+function stats(){var n=0,ok=0,wrong=0,memo=0;Q.forEach(function(q){var a=S.a[q.k];if(solved(a)&&!q.oos){n++;if(a.ok)ok++}if(inWrong(q.k))wrong++;if(memoOf(q.k))memo++});
   var img=Q.filter(function(q){return q.imgs&&q.imgs.length}).length;
   $('stats').innerHTML='<span>전체<b>'+Q.length+'</b></span>'+(img?'<span>원본 그림<b>'+img+'</b>문항</span>':'')+'<span>푼 것<b>'+n+'</b></span><span>최근 정답<b>'+(n?Math.round(ok/n*100):0)+'%</b></span><span>오답노트<b>'+wrong+'</b></span><span>메모<b>'+memo+'</b></span>'}
 
