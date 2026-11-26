@@ -6,3 +6,15 @@ v_burn
 x_burn
 v_ngt
 x_ngt
+v_la
+x_la
+v_wd
+x_wd
+v_fol
+x_fol
+v_drn
+x_drn
+v_mot
+x_mot
+v_rfx
+x_rfx
