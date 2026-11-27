@@ -473,13 +473,15 @@ export function EarGame() {
   } else {
     eyes = (
       <g fill="#1f2937">
-        <ellipse cx={162} cy={200} rx={8} ry={12} />
-        <ellipse cx={238} cy={200} rx={8} ry={12} />
-        <circle cx={165} cy={195} r={3} fill="#fff" />
-        <circle cx={241} cy={195} r={3} fill="#fff" />
+        <path d="M147 201 q15 -11 30 0 q-15 7 -30 0 z" fill="#fff" stroke="#1f2937" strokeWidth={2} />
+        <path d="M223 201 q15 -11 30 0 q-15 7 -30 0 z" fill="#fff" stroke="#1f2937" strokeWidth={2} />
+        <circle cx={163} cy={199} r={6} fill="#3b2314" />
+        <circle cx={237} cy={199} r={6} fill="#3b2314" />
+        <circle cx={165} cy={197} r={1.8} fill="#fff" />
+        <circle cx={239} cy={197} r={1.8} fill="#fff" />
       </g>
     );
-    mouth = <path d="M172 255 q28 28 56 0" fill="none" stroke="#1f2937" strokeWidth={5} strokeLinecap="round" />;
+    mouth = <path d="M176 262 q24 7 48 0" fill="none" stroke="#9f5b4b" strokeWidth={5} strokeLinecap="round" />;
   }
 
   return (
@@ -511,10 +513,39 @@ export function EarGame() {
           onPointerCancel={onUp}
         >
           <g transform={`translate(${headJitter.x} ${headJitter.y})`}>
+            {/* 몸: 흰 가운 + 하늘색 셔츠 + 남색 넥타이 */}
+            <rect x={176} y={295} width={48} height={60} fill={faceColor} stroke="#7c2d12" strokeWidth={3} />
+            <path d="M30 420 Q48 350 150 330 L200 372 L250 330 Q352 350 370 420 Z" fill="#fff" stroke="#94a3b8" strokeWidth={3} />
+            <path d="M152 330 L200 378 L248 330 L236 318 L200 352 L164 318 Z" fill="#c7d6ea" stroke="#94a3b8" strokeWidth={2} />
+            <path d="M150 330 L178 420 M250 330 L222 420" stroke="#cbd5e1" strokeWidth={3} />
+            <path d="M190 352 L210 352 L206 368 L194 368 Z" fill="#1e293b" />
+            <path d="M194 368 L206 368 L214 420 L186 420 Z" fill="#1e293b" />
+            <g fill="#fecaca">
+              <circle cx={198} cy={380} r={2} />
+              <circle cx={204} cy={394} r={2} />
+              <circle cx={195} cy={406} r={2} />
+              <circle cx={207} cy={414} r={2} />
+            </g>
             {renderEar("L")}
             {renderEar("R")}
-            <circle cx={200} cy={220} r={105} fill={faceColor} stroke="#7c2d12" strokeWidth={4} />
-            <path d="M120 150 q80 -90 160 0 q-40 -30 -80 -20 q-40 -10 -80 20 z" fill="#3f2a1d" />
+            <ellipse cx={200} cy={212} rx={100} ry={112} fill={faceColor} stroke="#7c2d12" strokeWidth={4} />
+            {/* 옆으로 넘긴 앞머리의 검은 머리 */}
+            <path
+              d="M100 214 C86 118 150 66 206 68 C276 70 322 120 304 214 L296 214 C294 186 288 166 272 156 C240 150 196 138 156 124 C140 140 122 168 112 214 Z"
+              fill="#111"
+            />
+            <g stroke="#4b5563" strokeWidth={2} fill="none" strokeLinecap="round" opacity={0.7}>
+              <path d="M150 92 q40 -14 90 4" />
+              <path d="M170 110 q50 10 90 40" />
+              <path d="M128 120 q-12 30 -16 60" />
+            </g>
+            {/* 일자 눈썹 */}
+            <g stroke="#111" strokeWidth={6} strokeLinecap="round">
+              <path d="M142 178 L180 172" />
+              <path d="M220 172 L258 178" />
+            </g>
+            {/* 코 */}
+            <path d="M198 214 q-8 22 2 26 q6 2 10 -2" fill="none" stroke="#c08a6e" strokeWidth={3} strokeLinecap="round" />
             {eyes}
             <ellipse cx={138} cy={238} rx={16} ry={9} fill="#fb7185" opacity={0.35 + maxRatio * 0.5} />
             <ellipse cx={262} cy={238} rx={16} ry={9} fill="#fb7185" opacity={0.35 + maxRatio * 0.5} />
