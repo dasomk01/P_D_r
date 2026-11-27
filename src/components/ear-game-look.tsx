@@ -26,7 +26,7 @@ export const OUTFIT_OPTIONS: { value: Outfit; label: string }[] = [
   { value: "knit", label: "니트" },
   { value: "tee", label: "티셔츠" },
 ];
-export const OUTFIT_COLORS = ["#9ca3af", "#1e3a8a", "#f5f5f4", "#16a34a", "#f59e0b", "#e11d48"];
+export const OUTFIT_COLORS = ["#3f3f46", "#9ca3af", "#1e3a8a", "#f5f5f4", "#16a34a", "#f59e0b", "#e11d48"];
 export const GLASSES_OPTIONS: { value: GlassesKind; label: string }[] = [
   { value: "none", label: "없음" },
   { value: "round", label: "동그란 안경" },
@@ -36,8 +36,8 @@ export const GLASSES_OPTIONS: { value: GlassesKind; label: string }[] = [
 const DEFAULT_LOOK: Look = {
   hair: "side",
   hairColor: "#111111",
-  outfit: "hoodie",
-  outfitColor: "#9ca3af",
+  outfit: "knit",
+  outfitColor: "#3f3f46",
   glasses: "none",
 };
 
