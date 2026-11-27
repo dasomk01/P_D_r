@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
+import { CharacterBody, CharacterGlasses, CharacterHair, LookPicker, useLook } from "./ear-game-look";
 
 type Side = "L" | "R";
 type Vec = { x: number; y: number };
@@ -198,6 +199,7 @@ export function EarGame() {
   const [combo, setCombo] = useState(0);
   const comboRef = useRef(0);
   const best = useSyncExternalStore(subscribeBest, readBest, () => 0);
+  const look = useLook();
 
   const pushPopup = useCallback((x: number, y: number, text: string, color: string) => {
     popups.current.push({ id: popupId.current++, x, y, text, color, born: performance.now() });
@@ -473,13 +475,15 @@ export function EarGame() {
   } else {
     eyes = (
       <g fill="#1f2937">
-        <ellipse cx={162} cy={200} rx={8} ry={12} />
-        <ellipse cx={238} cy={200} rx={8} ry={12} />
-        <circle cx={165} cy={195} r={3} fill="#fff" />
-        <circle cx={241} cy={195} r={3} fill="#fff" />
+        <path d="M147 201 q15 -11 30 0 q-15 7 -30 0 z" fill="#fff" stroke="#1f2937" strokeWidth={2} />
+        <path d="M223 201 q15 -11 30 0 q-15 7 -30 0 z" fill="#fff" stroke="#1f2937" strokeWidth={2} />
+        <circle cx={163} cy={199} r={6} fill="#3b2314" />
+        <circle cx={237} cy={199} r={6} fill="#3b2314" />
+        <circle cx={165} cy={197} r={1.8} fill="#fff" />
+        <circle cx={239} cy={197} r={1.8} fill="#fff" />
       </g>
     );
-    mouth = <path d="M172 255 q28 28 56 0" fill="none" stroke="#1f2937" strokeWidth={5} strokeLinecap="round" />;
+    mouth = <path d="M176 262 q24 7 48 0" fill="none" stroke="#9f5b4b" strokeWidth={5} strokeLinecap="round" />;
   }
 
   return (
@@ -511,14 +515,23 @@ export function EarGame() {
           onPointerCancel={onUp}
         >
           <g transform={`translate(${headJitter.x} ${headJitter.y})`}>
+            <CharacterBody look={look} skin={faceColor} />
             {renderEar("L")}
             {renderEar("R")}
-            <circle cx={200} cy={220} r={105} fill={faceColor} stroke="#7c2d12" strokeWidth={4} />
-            <path d="M120 150 q80 -90 160 0 q-40 -30 -80 -20 q-40 -10 -80 20 z" fill="#3f2a1d" />
+            <ellipse cx={200} cy={212} rx={100} ry={112} fill={faceColor} stroke="#7c2d12" strokeWidth={4} />
+            <CharacterHair look={look} />
+            {/* 일자 눈썹 */}
+            <g stroke={look.hairColor} strokeWidth={6} strokeLinecap="round">
+              <path d="M142 178 L180 172" />
+              <path d="M220 172 L258 178" />
+            </g>
+            {/* 코 */}
+            <path d="M198 214 q-8 22 2 26 q6 2 10 -2" fill="none" stroke="#c08a6e" strokeWidth={3} strokeLinecap="round" />
             {eyes}
             <ellipse cx={138} cy={238} rx={16} ry={9} fill="#fb7185" opacity={0.35 + maxRatio * 0.5} />
             <ellipse cx={262} cy={238} rx={16} ry={9} fill="#fb7185" opacity={0.35 + maxRatio * 0.5} />
             {mouth}
+            <CharacterGlasses kind={look.glasses} />
             {maxRatio > 0.55 && (
               <g fill="#38bdf8" opacity={clamp((maxRatio - 0.55) * 3, 0, 1)}>
                 <path d="M290 150 q8 14 0 20 q-8 -6 0 -20 z" />
@@ -586,6 +599,8 @@ export function EarGame() {
           </div>
         )}
       </div>
+
+      <LookPicker look={look} />
 
       <p className="mt-3 text-center text-xs text-zinc-500">
         양쪽 귀를 동시에 잡을 수도 있어요 (터치 두 손가락)
