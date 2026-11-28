@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
-import Link from "next/link";
 import { CharacterBody, CharacterGlasses, CharacterHair, LookPicker, useLook } from "./ear-game-look";
 
 type Side = "L" | "R";
@@ -489,11 +488,8 @@ export function EarGame() {
   return (
     <main className="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-6 select-none">
       <div className="mb-3 flex items-center justify-between">
-        <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200">
-          ← 홈
-        </Link>
         <h1 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">👂 귀찢기 게임</h1>
-        <span className="text-sm text-zinc-500">최고 {best}</span>
+        <span className="text-sm text-zinc-500">🏆 최고 {best}</span>
       </div>
 
       <div className="mb-2 flex items-center justify-between rounded-xl bg-white px-4 py-2 shadow-sm dark:bg-zinc-900">
