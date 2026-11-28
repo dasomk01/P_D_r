@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { CharacterBody, CharacterGlasses, CharacterHair, LookPicker, useLook } from "./ear-game-look";
+import { Leaderboard, SubmitScore, useRanking } from "./ear-game-ranking";
 
 type Side = "L" | "R";
 type Vec = { x: number; y: number };
@@ -199,6 +200,8 @@ export function EarGame() {
   const comboRef = useRef(0);
   const best = useSyncExternalStore(subscribeBest, readBest, () => 0);
   const look = useLook();
+  const { ranking, error: rankingError, setRanking } = useRanking();
+  const [myName, setMyName] = useState<string | null>(null);
 
   const pushPopup = useCallback((x: number, y: number, text: string, color: string) => {
     popups.current.push({ id: popupId.current++, x, y, text, color, born: performance.now() });
@@ -584,6 +587,13 @@ export function EarGame() {
                   점수 <b>{score}</b>
                   {score >= best && score > 0 ? " · 🎉 최고 기록!" : ` · 최고 ${best}`}
                 </p>
+                <SubmitScore
+                  score={score}
+                  onSubmitted={(next, name) => {
+                    if (next) setRanking(next);
+                    setMyName(name);
+                  }}
+                />
               </>
             )}
             <button
@@ -595,6 +605,8 @@ export function EarGame() {
           </div>
         )}
       </div>
+
+      <Leaderboard ranking={ranking} error={rankingError} highlight={myName} />
 
       <LookPicker look={look} />
 
